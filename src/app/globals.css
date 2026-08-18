@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-navy: #0f2744;
+  --color-amber: #d97706;
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+button,
+a,
+[role="button"] {
+  cursor: pointer;
+}
