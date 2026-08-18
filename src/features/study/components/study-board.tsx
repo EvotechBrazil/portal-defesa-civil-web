@@ -8,7 +8,7 @@ import {
   useReviewStudySession,
   useStudySession,
 } from "../hooks/use-study-session";
-import { ReviewRating, StudySessionView } from "../types/study.types";
+import { CurrentCardView, ReviewRating, StudySessionView } from "../types/study.types";
 import { Flashcard } from "./flashcard";
 import { RatingButtons } from "./rating-buttons";
 import { SessionSummary } from "./session-summary";
@@ -30,26 +30,39 @@ export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
   const [awaitingNext, setAwaitingNext] = useState(false);
   const [pending, setPending] = useState<StudySessionView | null>(null);
   const [displayed, setDisplayed] = useState<StudySessionView | null>(null);
+  const [backCard, setBackCard] = useState<CurrentCardView | null>(null);
+  const [isTurning, setIsTurning] = useState(false);
 
   useEffect(() => {
-    if (sessionQuery.data && !awaitingNext) {
+    if (sessionQuery.data && !awaitingNext && !isTurning) {
       setDisplayed(sessionQuery.data);
+      if (sessionQuery.data.card && !isFlipped) {
+        setBackCard(sessionQuery.data.card);
+      }
     }
-  }, [sessionQuery.data, awaitingNext]);
+  }, [awaitingNext, isFlipped, isTurning, sessionQuery.data]);
+
+  const flipToNext = useCallback((next: StudySessionView) => {
+    if (displayed?.card && next.card) {
+      setBackCard(displayed.card);
+      setIsTurning(true);
+    }
+    setDisplayed(next);
+    setPending(null);
+    setAwaitingNext(false);
+    setIsFlipped(false);
+  }, [displayed]);
 
   const showNext = useCallback(() => {
     if (!pending) {
       return;
     }
-    setDisplayed(pending);
-    setPending(null);
-    setAwaitingNext(false);
-    setIsFlipped(false);
-  }, [pending]);
+    flipToNext(pending);
+  }, [flipToNext, pending]);
 
   const handleRate = useCallback(
     (rating: ReviewRating) => {
-      if (!isFlipped || awaitingNext || reviewMutation.isPending) {
+      if (!isFlipped || awaitingNext || isTurning || reviewMutation.isPending) {
         return;
       }
       reviewMutation.mutate(rating, {
@@ -59,14 +72,11 @@ export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
             setAwaitingNext(true);
             return;
           }
-          setDisplayed(view);
-          setIsFlipped(false);
-          setAwaitingNext(false);
-          setPending(null);
+          flipToNext(view);
         },
       });
     },
-    [awaitingNext, isFlipped, keepTheoryOpen, reviewMutation],
+    [awaitingNext, flipToNext, isFlipped, isTurning, keepTheoryOpen, reviewMutation],
   );
 
   useEffect(() => {
@@ -141,13 +151,27 @@ export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
       </header>
 
       <Flashcard
-        key={displayed.card.id}
-        card={displayed.card}
+        frontCard={displayed.card}
+        backCard={backCard ?? displayed.card}
         isFlipped={isFlipped}
-        onFlip={() => setIsFlipped(true)}
+        onFlip={() => {
+          if (!isFlipped) {
+            setIsFlipped(true);
+            return;
+          }
+          if (awaitingNext) {
+            showNext();
+          }
+        }}
+        onFlipEnd={() => {
+          if (!isFlipped && displayed.card) {
+            setBackCard(displayed.card);
+            setIsTurning(false);
+          }
+        }}
       />
 
-      {!isFlipped ? (
+      {!isFlipped && !isTurning ? (
         <Button type="button" onClick={() => setIsFlipped(true)}>
           Mostrar resposta · espaço
         </Button>
@@ -161,7 +185,7 @@ export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
           </Button>
         </div>
       ) : (
-        <RatingButtons disabled={reviewMutation.isPending} onRate={handleRate} />
+        <RatingButtons disabled={reviewMutation.isPending || isTurning} onRate={handleRate} />
       )}
 
       {reviewMutation.isError ? (
