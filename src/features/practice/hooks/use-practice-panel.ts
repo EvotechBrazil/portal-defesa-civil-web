@@ -29,10 +29,23 @@ export function usePracticePanel(cardId: string) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const attemptRef = useRef<string | null>(null);
   const resumedId = useRef<string | null>(null);
+  const advanceTimer = useRef<number | null>(null);
+
+  // §11.3: callback assíncrono não pode sobreviver ao contexto que o criou.
+  // A guarda por attemptId já existe; faltava soltar o timer no unmount.
+  const cancelAdvance = useCallback(() => {
+    if (advanceTimer.current !== null) {
+      window.clearTimeout(advanceTimer.current);
+      advanceTimer.current = null;
+    }
+  }, []);
+
+  useEffect(() => cancelAdvance, [cancelAdvance]);
 
   const answerKeyQuery = usePracticeAnswerKey(cardId, phase === "answer_key");
 
   useEffect(() => {
+    cancelAdvance();
     setPhase("idle");
     setAttempt(null);
     setResult(null);
@@ -41,7 +54,7 @@ export function usePracticePanel(cardId: string) {
     setErrorMessage(null);
     attemptRef.current = null;
     resumedId.current = null;
-  }, [cardId]);
+  }, [cardId, cancelAdvance]);
 
   useEffect(() => {
     const current = historyQuery.data?.current;
@@ -61,6 +74,7 @@ export function usePracticePanel(cardId: string) {
     try {
       const next = await createMutation.mutateAsync();
       attemptRef.current = next.attemptId;
+      resumedId.current = next.attemptId;
       setAttempt(next);
       setResult(null);
       setStep(0);
@@ -77,10 +91,14 @@ export function usePracticePanel(cardId: string) {
   }, []);
 
   const backToIdle = useCallback(() => {
+    cancelAdvance();
+    attemptRef.current = null;
+    resumedId.current = null;
     setPhase("idle");
+    setAttempt(null);
     setResult(null);
     setLockedOptionId(null);
-  }, []);
+  }, [cancelAdvance]);
 
   const chooseOption = useCallback(
     async (optionId: string) => {
@@ -114,7 +132,9 @@ export function usePracticePanel(cardId: string) {
             ),
           };
         });
-        window.setTimeout(() => {
+        cancelAdvance();
+        advanceTimer.current = window.setTimeout(() => {
+          advanceTimer.current = null;
           if (attemptRef.current !== attemptId) {
             return;
           }
@@ -144,7 +164,7 @@ export function usePracticePanel(cardId: string) {
         setLockedOptionId(null);
       }
     },
-    [answerMutation, attempt, finishMutation, lockedOptionId, step],
+    [answerMutation, attempt, cancelAdvance, finishMutation, lockedOptionId, step],
   );
 
   const currentQuestion = attempt?.questions[step] ?? null;
