@@ -11,7 +11,7 @@ export function SessionsTimeline({ sessions }: { sessions: SessionLast30d[] }) {
       <p className="mt-1 text-sm text-slate-500">
         {sessions.length === 0
           ? "Nenhuma sessão neste período."
-          : `${sessions.length} sessão${sessions.length === 1 ? "" : "ões"} · ${totalReviews(sessions)} revisões`}
+          : `${sessions.length} ${sessions.length === 1 ? "sessão" : "sessões"} · ${totalReviews(sessions)} ${totalReviews(sessions) === 1 ? "revisão" : "revisões"}`}
       </p>
       <div className="mt-4 flex h-24 items-end gap-1">
         {days.map((day) => {
