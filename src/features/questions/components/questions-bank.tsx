@@ -61,7 +61,8 @@ export function QuestionsBank() {
       <header className="mb-6">
         <h1 className="text-2xl font-semibold text-navy">Banco de questões</h1>
         <p className="mt-2 text-slate-600">
-          109 questões verificadas. Estudo: clique para conferir. Gabarito: tudo aberto.
+          {meta?.total ?? "…"} questões no banco (plataforma + apostila oficial). Estudo: clique
+          para conferir. Gabarito: tudo aberto.
         </p>
       </header>
 
