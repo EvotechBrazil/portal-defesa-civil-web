@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { RegisterForm } from "@/features/auth/components/register-form";
 
 export default function Page() {
-  return <PlaceholderPage title="Criar conta" description="Tela de cadastro — implementação na Trilha A." />;
+  return <RegisterForm />;
 }

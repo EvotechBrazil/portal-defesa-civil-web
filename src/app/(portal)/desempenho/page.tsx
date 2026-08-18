@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { StatsPage } from "@/features/stats/components/stats-page";
 
 export default function Page() {
-  return <PlaceholderPage title="Desempenho" description="Onde estou mal? — implementação na Trilha E." />;
+  return <StatsPage />;
 }

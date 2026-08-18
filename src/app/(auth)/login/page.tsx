@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { LoginForm } from "@/features/auth/components/login-form";
 
 export default function Page() {
-  return <PlaceholderPage title="Entrar" description="Tela de login — implementação na Trilha A." />;
+  return <LoginForm />;
 }

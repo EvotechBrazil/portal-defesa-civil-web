@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { StudyStart } from "@/features/study/components/study-start";
 
 export default function Page() {
-  return <PlaceholderPage title="Estudar" description="Repetição espaçada — implementação na Trilha C." />;
+  return <StudyStart />;
 }

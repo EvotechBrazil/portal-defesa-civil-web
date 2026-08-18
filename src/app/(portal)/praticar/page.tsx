@@ -1,5 +1,10 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { Suspense } from "react";
+import { PracticePage } from "@/features/practice/components/practice-page";
 
 export default function Page() {
-  return <PlaceholderPage title="Praticar" description="Mini-prova da carta — implementação na Trilha D." />;
+  return (
+    <Suspense fallback={<p className="px-4 py-10 text-sm text-slate-500">Carregando prática…</p>}>
+      <PracticePage />
+    </Suspense>
+  );
 }

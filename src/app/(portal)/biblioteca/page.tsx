@@ -1,5 +1,5 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { CourseCatalog } from "@/features/catalog/components/course-catalog";
 
 export default function Page() {
-  return <PlaceholderPage title="Biblioteca" description="Catálogo do curso — implementação na Trilha B." />;
+  return <CourseCatalog />;
 }

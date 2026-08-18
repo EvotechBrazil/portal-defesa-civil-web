@@ -1,5 +1,10 @@
-import { PlaceholderPage } from "@/components/shared/placeholder-page";
+import { Suspense } from "react";
+import { VerifyEmailForm } from "@/features/auth/components/verify-email-form";
 
 export default function Page() {
-  return <PlaceholderPage title="Verificar e-mail" description="Confirmação de e-mail — implementação na Trilha A." />;
+  return (
+    <Suspense fallback={<p className="text-center text-sm text-slate-600">Carregando...</p>}>
+      <VerifyEmailForm />
+    </Suspense>
+  );
 }

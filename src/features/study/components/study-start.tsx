@@ -1,0 +1,53 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useDecks } from "../hooks/use-decks";
+import { useCreateStudySession } from "../hooks/use-study-session";
+import { CreateStudySessionForm } from "../schemas/study.schema";
+import { DeckSelectorPanel } from "./deck-selector";
+
+const INITIAL: CreateStudySessionForm = {
+  deckSelector: "ESSENTIAL",
+  bidir: true,
+  filter: "ALL",
+};
+
+export function StudyStart() {
+  const router = useRouter();
+  const decksQuery = useDecks();
+  const createSession = useCreateStudySession();
+  const [form, setForm] = useState<CreateStudySessionForm>(INITIAL);
+
+  if (decksQuery.isLoading) {
+    return <p className="px-4 py-10 text-sm text-slate-600">Carregando baralhos…</p>;
+  }
+  if (decksQuery.isError) {
+    return (
+      <p className="px-4 py-10 text-sm text-red-600">
+        Não foi possível carregar os baralhos. Confira se você está autenticado.
+      </p>
+    );
+  }
+
+  return (
+    <div>
+      <DeckSelectorPanel
+        decks={decksQuery.data?.data ?? []}
+        value={form}
+        isSubmitting={createSession.isPending}
+        onChange={setForm}
+        onStart={() => {
+          createSession.mutate(form, {
+            onSuccess: (view) => {
+              router.push(`/estudar/${view.sessionId}`);
+            },
+          });
+        }}
+      />
+      {createSession.isError ? (
+        <p className="px-4 text-sm text-red-600">Não foi possível abrir a sessão.</p>
+      ) : null}
+    </div>
+  );
+}
