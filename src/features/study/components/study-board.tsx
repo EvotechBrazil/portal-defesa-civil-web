@@ -141,6 +141,7 @@ export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
       </header>
 
       <Flashcard
+        key={displayed.card.id}
         card={displayed.card}
         isFlipped={isFlipped}
         onFlip={() => setIsFlipped(true)}
