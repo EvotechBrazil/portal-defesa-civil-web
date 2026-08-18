@@ -70,9 +70,16 @@ export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
   );
 
   useEffect(() => {
+    if (displayed?.finished) {
+      return;
+    }
     function handleKey(event: KeyboardEvent) {
+      // Elemento interativo em foco resolve o próprio Space/Enter. Sequestrar
+      // o evento aqui deixaria botões e links inalcançáveis pelo teclado.
       const target = event.target as HTMLElement | null;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) {
+      if (
+        target?.closest("input, textarea, select, button, a, [contenteditable], [role='button']")
+      ) {
         return;
       }
       if (event.key === " " || event.key === "Enter") {
@@ -95,7 +102,7 @@ export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [awaitingNext, handleRate, isFlipped, showNext]);
+  }, [awaitingNext, displayed?.finished, handleRate, isFlipped, showNext]);
 
   if (sessionQuery.isLoading) {
     return <p className="px-4 py-10 text-sm text-slate-600">Carregando sessão…</p>;
