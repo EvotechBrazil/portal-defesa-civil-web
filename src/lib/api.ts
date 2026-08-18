@@ -59,7 +59,13 @@ api.interceptors.response.use(
   (response) => response,
   async (error: AxiosError) => {
     const original = error.config as (InternalAxiosRequestConfig & { _retry?: boolean }) | undefined;
-    if (!original || error.response?.status !== 401 || original._retry) {
+    // As rotas de auth respondem 401 por credencial inválida, não por sessão
+    // expirada: refresh + redirect aqui apagaria a mensagem de erro do login.
+    const isAuthRoute = original?.url?.includes("/auth/") ?? false;
+    if (!original || isAuthRoute || error.response?.status !== 401 || original._retry) {
+      if (isAuthRoute) {
+        return Promise.reject(error);
+      }
       if (error.response?.status === 401 && typeof window !== "undefined") {
         clearSession();
         window.location.href = "/login";
@@ -68,13 +74,15 @@ api.interceptors.response.use(
     }
     original._retry = true;
     try {
-      refreshPromise = refreshPromise ?? refreshAccessToken();
+      // O reset vai no finally da própria promise: zerar depois do await
+      // abriria uma janela para um segundo refresh com o token já rotacionado.
+      refreshPromise ??= refreshAccessToken().finally(() => {
+        refreshPromise = null;
+      });
       const token = await refreshPromise;
-      refreshPromise = null;
       original.headers.Authorization = `Bearer ${token}`;
       return api(original);
     } catch (refreshError) {
-      refreshPromise = null;
       clearSession();
       if (typeof window !== "undefined") {
         window.location.href = "/login";
