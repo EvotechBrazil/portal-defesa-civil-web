@@ -7,21 +7,31 @@ import {
   BookOpen,
   CircleHelp,
   Layers,
+  Shield,
   Target,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { useAuthUser } from "@/features/auth/hooks/use-auth-user";
+import { useI18n } from "@/i18n/i18n-provider";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { href: "/estudar", label: "Cartas", icon: Layers },
-  { href: "/biblioteca", label: "Material", icon: BookOpen },
-  { href: "/questoes", label: "Questões", icon: CircleHelp },
-  { href: "/praticar", label: "Praticar", icon: Target },
-  { href: "/desempenho", label: "Desempenho", icon: BarChart3 },
+  { href: "/estudar", labelKey: "nav.cards", icon: Layers },
+  { href: "/biblioteca", labelKey: "nav.material", icon: BookOpen },
+  { href: "/questoes", labelKey: "nav.questions", icon: CircleHelp },
+  { href: "/praticar", labelKey: "nav.practice", icon: Target },
+  { href: "/desempenho", labelKey: "nav.performance", icon: BarChart3 },
 ];
 
 export function PortalHeader() {
   const pathname = usePathname();
+  const { t } = useI18n();
+  const user = useAuthUser();
+  const items =
+    user?.role === "ADMIN"
+      ? [...NAV, { href: "/admin/acessos", labelKey: "nav.access", icon: Shield }]
+      : NAV;
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-ink/90 text-paper backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
@@ -31,8 +41,8 @@ export function PortalHeader() {
         >
           Portal <span className="text-flare">Defesa Civil</span>
         </Link>
-        <nav className="flex min-w-0 flex-1 justify-center gap-1 overflow-x-auto text-sm">
-          {NAV.map((item) => {
+        <nav className="flex min-w-0 flex-1 justify-center gap-1 overflow-x-auto text-sm" aria-label={t("nav.primary")}>
+          {items.map((item) => {
             const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
             const Icon = item.icon;
             return (
@@ -47,12 +57,15 @@ export function PortalHeader() {
                 )}
               >
                 <Icon className="size-4" strokeWidth={1.75} aria-hidden />
-                <span className="hidden sm:inline">{item.label}</span>
+                <span className="hidden sm:inline">{t(item.labelKey)}</span>
               </Link>
             );
           })}
         </nav>
-        <ThemeToggle />
+        <div className="flex shrink-0 items-center gap-2">
+          <LanguageSwitcher />
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

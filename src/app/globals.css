@@ -122,3 +122,15 @@ a,
   transform: rotateY(180deg);
   border-color: #ea580c;
 }
+
+/* Parágrafo que é só ênfase é legenda, não título. É o caso da referência de
+   origem que o seed anexa ao verso das cartas de prova: ela complementa a
+   resposta e não pode competir com ela. Itálico, pequeno, sem negrito.
+   `:only-child` preserva o itálico inline no meio de uma frase. */
+.flashcard-face p:has(> em:only-child) {
+  margin-top: 0.85rem;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--mist);
+}

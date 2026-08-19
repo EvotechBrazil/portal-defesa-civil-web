@@ -1,7 +1,9 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
+import type { AuthUser } from "@/types/api.types";
 
 const TOKEN_KEY = "pdc_access_token";
 const REFRESH_KEY = "pdc_refresh_token";
+const USER_KEY = "pdc_user";
 const AUTH_COOKIE = "pdc_authenticated";
 
 export function getAccessToken(): string | null {
@@ -14,15 +16,38 @@ export function getRefreshToken(): string | null {
   return window.localStorage.getItem(REFRESH_KEY);
 }
 
-export function setSession(accessToken: string, refreshToken: string): void {
+export function setSession(
+  accessToken: string,
+  refreshToken: string,
+  user?: AuthUser,
+): void {
   window.localStorage.setItem(TOKEN_KEY, accessToken);
   window.localStorage.setItem(REFRESH_KEY, refreshToken);
+  if (user) {
+    window.localStorage.setItem(USER_KEY, JSON.stringify(user));
+  }
   document.cookie = `${AUTH_COOKIE}=1; path=/; max-age=${60 * 60 * 24 * 7}; samesite=lax`;
+}
+
+export function getStoredUser(): AuthUser | null {
+  if (typeof window === "undefined") return null;
+  const raw = window.localStorage.getItem(USER_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as AuthUser;
+  } catch {
+    return null;
+  }
+}
+
+export function setStoredUser(user: AuthUser): void {
+  window.localStorage.setItem(USER_KEY, JSON.stringify(user));
 }
 
 export function clearSession(): void {
   window.localStorage.removeItem(TOKEN_KEY);
   window.localStorage.removeItem(REFRESH_KEY);
+  window.localStorage.removeItem(USER_KEY);
   document.cookie = `${AUTH_COOKIE}=; path=/; max-age=0`;
 }
 

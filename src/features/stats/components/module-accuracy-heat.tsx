@@ -1,21 +1,25 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
+import { useI18n } from "@/i18n/i18n-provider";
 import type { ModuleAccuracy } from "../types/stats.types";
 
 export function ModuleAccuracyHeat({ modules }: { modules: ModuleAccuracy[] }) {
+  const { t } = useI18n();
   if (modules.length === 0) {
     return (
       <Card>
-        <h2 className="text-base font-semibold text-navy">Acurácia por módulo</h2>
-        <p className="mt-2 text-sm text-slate-500">Nenhum módulo neste curso.</p>
+        <h2 className="text-base font-semibold text-navy">{t("stats.accuracy")}</h2>
+        <p className="mt-2 text-sm text-slate-500">{t("stats.noModules")}</p>
       </Card>
     );
   }
 
   return (
     <Card>
-      <h2 className="text-base font-semibold text-navy">Acurácia por módulo</h2>
+      <h2 className="text-base font-semibold text-navy">{t("stats.accuracy")}</h2>
       <p className="mt-1 text-sm text-slate-500">
-        Vermelho pede reforço. Cinza ainda não foi praticado.
+        {t("stats.accuracyHint")}
       </p>
       <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
         {modules.map((module) => (
@@ -30,8 +34,8 @@ export function ModuleAccuracyHeat({ modules }: { modules: ModuleAccuracy[] }) {
             </p>
             <p className="text-xs opacity-80">
               {module.attempts === 0
-                ? "sem tentativas"
-                : `${module.attempts} tentativa${module.attempts === 1 ? "" : "s"}`}
+                ? t("stats.noAttempts")
+                : t("stats.attemptCount", { count: module.attempts })}
             </p>
           </li>
         ))}

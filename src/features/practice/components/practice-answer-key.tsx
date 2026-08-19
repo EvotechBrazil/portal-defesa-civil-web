@@ -1,14 +1,18 @@
+"use client";
+
 import { MarkdownView } from "@/components/shared/markdown-view";
+import { useI18n } from "@/i18n/i18n-provider";
 import { cn } from "@/lib/utils";
 import type { AnswerKeyQuestion } from "../types/practice.types";
 
 const KEYS = ["A", "B", "C", "D", "E"];
 
 export function PracticeAnswerKey({ questions }: { questions: AnswerKeyQuestion[] }) {
+  const { t } = useI18n();
   return (
     <div className="space-y-4">
       <h3 className="text-[11px] font-semibold uppercase tracking-[0.13em] text-amber-700">
-        Gabarito comentado
+        {t("practice.commentedKey")}
       </h3>
       {questions.map((question) => (
         <article key={question.questionId} className="rounded-lg border border-slate-200 p-3">
@@ -38,9 +42,9 @@ export function PracticeAnswerKey({ questions }: { questions: AnswerKeyQuestion[
           </ul>
           {question.chosenOptionId && !question.isCorrect ? (
             <p className="mt-2 text-xs text-slate-500">
-              você marcou:{" "}
+              {t("practice.youChose")}{" "}
               {question.options.find((option) => option.optionId === question.chosenOptionId)
-                ?.text ?? "alternativa inválida"}
+                ?.text ?? t("practice.invalidOption")}
             </p>
           ) : null}
           {question.explanationMd ? (

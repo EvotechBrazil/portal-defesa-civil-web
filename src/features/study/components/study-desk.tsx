@@ -3,12 +3,14 @@
 import { useEffect, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n/i18n-provider";
 import { baseById, CONTENT_BASES, DEFAULT_BASE_ID } from "../content-bases";
 import { useCreateStudySession } from "../hooks/use-study-session";
 import type { DeckSelector } from "../types/study.types";
 import { StudyBoard } from "./study-board";
 
 export function StudyDesk() {
+  const { t } = useI18n();
   const router = useRouter();
   const params = useSearchParams();
   const base = baseById(params.get("base") ?? DEFAULT_BASE_ID);
@@ -54,31 +56,31 @@ export function StudyDesk() {
     <div className="study-shell">
       <div className="mx-auto max-w-[680px] px-4 py-6">
         <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-flare">
-          Repetição espaçada · {deckSelector === "FULL" ? "cobertura integral" : "80/20"}
+          {t("study.spacedRepetition")} · {deckSelector === "FULL" ? t("study.coverageFull") : "80/20"}
         </p>
         <h1 className="mt-1 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight text-paper">
-          {deckSelector === "FULL" ? "Conteúdo completo" : "Essenciais · 80/20"}
+          {deckSelector === "FULL" ? t("study.full") : t("study.essential")}
         </h1>
         <p className="mt-2 max-w-[62ch] text-sm text-mist">
           {deckSelector === "FULL"
-            ? "Todas as cartas conceituais e todas as perguntas da base. Use para fechar lacunas depois de dominar o núcleo essencial."
-            : "Os conceitos de maior retorno: vire a carta, marque a dificuldade, leia a teoria e faça a mini-prova. Fácil volta pouco; difícil repete mais."}
+            ? t("study.fullDescription")
+            : t("study.essentialDescription")}
         </p>
 
         {base.id === DEFAULT_BASE_ID ? (
-          <div className="mt-5 grid gap-3 sm:grid-cols-2" aria-label="Modo de estudo">
+          <div className="mt-5 grid gap-3 sm:grid-cols-2" aria-label={t("study.modeLabel")}>
             <ModeChoice
               selected={deckSelector === "ESSENTIAL"}
-              eyebrow="Rota recomendada"
-              title="Essenciais · 80/20"
-              description="51 cartas conceituais de alto rendimento."
+              eyebrow={t("study.recommended")}
+              title={t("study.essential")}
+              description={t("study.essentialCount")}
               onSelect={() => selectMode("ESSENTIAL")}
             />
             <ModeChoice
               selected={deckSelector === "FULL"}
-              eyebrow="Cobertura integral"
-              title="Conteúdo completo"
-              description="51 conceitos + 133 perguntas da base: 184 cartas."
+              eyebrow={t("study.fullRoute")}
+              title={t("study.full")}
+              description={t("study.fullCount")}
               onSelect={() => selectMode("FULL")}
             />
           </div>
@@ -103,10 +105,10 @@ export function StudyDesk() {
                   item.status === "soon" && !active && "opacity-55",
                 )}
               >
-                <span className="block leading-tight">{item.title}</span>
+                <span className="block leading-tight">{contentBaseText(item.id, "title", t)}</span>
                 <span className="block text-[10px] uppercase tracking-[0.06em] opacity-80">
-                  {item.status === "soon" ? "Em breve · " : ""}
-                  {item.subtitle}
+                  {item.status === "soon" ? `${t("common.soon")} · ` : ""}
+                  {contentBaseText(item.id, "subtitle", t)}
                 </span>
               </button>
             );
@@ -116,18 +118,20 @@ export function StudyDesk() {
         <div className="mt-6">
           {base.status === "soon" ? (
             <div className="rounded-2xl border border-line bg-panel px-5 py-10 text-center">
-              <p className="text-lg font-semibold text-paper">{base.title}</p>
+              <p className="text-lg font-semibold text-paper">{contentBaseText(base.id, "title", t)}</p>
               <p className="mt-2 text-sm text-mist">
-                Em breve · {base.subtitle}. O baralho 80/20 entra no ar depois da aula.
+                {t("study.soonDeck", { subtitle: contentBaseText(base.id, "subtitle", t) })}
               </p>
             </div>
           ) : createSession.isPending && !sessionId ? (
             <p className="py-10 text-sm text-mist">
-              Montando o baralho {deckSelector === "FULL" ? "completo" : "essencial"}…
+              {t("study.buildingDeck", {
+                mode: deckSelector === "FULL" ? t("study.modeComplete") : t("study.modeEssential"),
+              })}
             </p>
           ) : createSession.isError ? (
             <p className="py-10 text-sm text-hard">
-              Não foi possível abrir as cartas. Recarregue.
+              {t("study.openError")}
             </p>
           ) : sessionId ? (
             <StudyBoard key={sessionId} sessionId={sessionId} />
@@ -136,6 +140,21 @@ export function StudyDesk() {
       </div>
     </div>
   );
+}
+
+function contentBaseText(
+  id: string,
+  field: "title" | "subtitle",
+  t: (key: string) => string,
+): string {
+  const baseKey: Record<string, string> = {
+    teorico: "theory",
+    "aula-1": "lesson1",
+    "aula-2": "lesson2",
+    "aula-3": "lesson3",
+    "aula-4": "lesson4",
+  };
+  return t(`content.base.${baseKey[id] ?? "theory"}.${field}`);
 }
 
 function ModeChoice({

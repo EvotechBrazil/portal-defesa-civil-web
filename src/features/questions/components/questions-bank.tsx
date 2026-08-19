@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/i18n/i18n-provider";
 import { useCourse } from "@/features/catalog/hooks/use-course";
 import { questionsFilterSchema } from "../schemas/questions-filter.schema";
 import { useQuestions } from "../hooks/use-questions";
@@ -13,6 +14,7 @@ import { QuestionItem } from "./question-item";
 const COURSE_SLUG = "defesa-civil-lgnd";
 
 export function QuestionsBank() {
+  const { t } = useI18n();
   const searchParams = useSearchParams();
   const parsed = questionsFilterSchema.safeParse({
     moduleCode: searchParams.get("moduleCode") ?? undefined,
@@ -59,10 +61,9 @@ export function QuestionsBank() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-10">
       <header className="mb-6">
-        <h1 className="text-2xl font-semibold text-navy">Banco de questões</h1>
+        <h1 className="text-2xl font-semibold text-navy">{t("questions.title")}</h1>
         <p className="mt-2 text-slate-600">
-          {meta?.total ?? "…"} questões no banco (plataforma + apostila oficial). Estudo: clique
-          para conferir. Gabarito: tudo aberto.
+          {t("questions.description", { count: meta?.total ?? "…" })}
         </p>
       </header>
 
@@ -78,12 +79,12 @@ export function QuestionsBank() {
       />
 
       <div className="mt-6">
-        {questionsQuery.isLoading ? <p className="text-slate-600">Carregando questões…</p> : null}
+        {questionsQuery.isLoading ? <p className="text-slate-600">{t("questions.loading")}</p> : null}
         {questionsQuery.isError ? (
-          <p className="text-red-600">Não foi possível carregar o banco de questões.</p>
+          <p className="text-red-600">{t("questions.error")}</p>
         ) : null}
         {!questionsQuery.isLoading && questions.length === 0 ? (
-          <p className="text-slate-600">Nenhuma questão encontrada para esses filtros.</p>
+          <p className="text-slate-600">{t("questions.empty")}</p>
         ) : null}
 
         <div className="space-y-4">
@@ -106,10 +107,14 @@ export function QuestionsBank() {
             onClick={() => setPage((current) => Math.max(1, current - 1))}
             className="bg-slate-700 hover:bg-slate-700/90"
           >
-            Anterior
+            {t("common.previous")}
           </Button>
           <p className="text-sm text-slate-600">
-            Página {meta.page} de {meta.pageCount} · {meta.total} questões
+            {t("questions.pagination", {
+              page: meta.page ?? page,
+              pageCount: meta.pageCount ?? 1,
+              total: meta.total ?? questions.length,
+            })}
           </p>
           <Button
             type="button"
@@ -117,11 +122,13 @@ export function QuestionsBank() {
             onClick={() => setPage((current) => current + 1)}
             className="bg-slate-700 hover:bg-slate-700/90"
           >
-            Próxima
+            {t("common.next")}
           </Button>
         </div>
       ) : meta ? (
-        <p className="mt-6 text-center text-sm text-slate-600">{meta.total} questões</p>
+        <p className="mt-6 text-center text-sm text-slate-600">
+          {t("questions.total", { total: meta.total ?? questions.length })}
+        </p>
       ) : null}
     </section>
   );

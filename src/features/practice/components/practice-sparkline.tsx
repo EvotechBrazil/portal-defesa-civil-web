@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n/i18n-provider";
 
 export interface SparklinePoint {
   correctCount: number;
@@ -6,6 +9,7 @@ export interface SparklinePoint {
 }
 
 export function PracticeSparkline({ points }: { points: SparklinePoint[] }) {
+  const { t } = useI18n();
   if (points.length === 0) {
     return null;
   }
@@ -13,7 +17,7 @@ export function PracticeSparkline({ points }: { points: SparklinePoint[] }) {
   return (
     <div
       className="flex h-8 items-end justify-center gap-1"
-      aria-label="Histórico das últimas tentativas"
+      aria-label={t("practice.historyAria")}
     >
       {points.map((point, index) => {
         const ratio = point.totalCount > 0 ? point.correctCount / point.totalCount : 0;

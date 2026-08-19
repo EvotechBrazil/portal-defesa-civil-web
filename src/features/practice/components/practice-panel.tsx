@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useI18n } from "@/i18n/i18n-provider";
 import { usePracticePanel } from "../hooks/use-practice-panel";
 import { PracticeAnswerKey } from "./practice-answer-key";
 import { PracticeIdle } from "./practice-idle";
@@ -20,13 +21,14 @@ export function PracticePanel({
   variant = "light",
   autoResume = true,
 }: PracticePanelProps) {
+  const { t } = useI18n();
   const panel = usePracticePanel(cardId, { autoResume });
   const dark = variant === "onDark";
 
   if (panel.isHistoryLoading) {
     return (
       <Card className={dark ? "border-line bg-panel text-paper" : undefined}>
-        <p className={dark ? "text-sm text-mist" : "text-sm text-slate-500"}>Carregando mini-prova…</p>
+        <p className={dark ? "text-sm text-mist" : "text-sm text-slate-500"}>{t("practice.loading")}</p>
       </Card>
     );
   }
@@ -34,7 +36,7 @@ export function PracticePanel({
   if (panel.isHistoryError) {
     return (
       <Card className={dark ? "border-line bg-panel text-paper" : undefined}>
-        <p className="text-sm text-hard">Não foi possível carregar o histórico desta carta.</p>
+        <p className="text-sm text-hard">{t("practice.historyError")}</p>
       </Card>
     );
   }
@@ -48,20 +50,20 @@ export function PracticePanel({
         <div>
           <p className={dark ? "text-sm font-semibold text-paper" : "text-sm font-semibold text-navy"}>
             {panel.phase === "running" && panel.attempt
-              ? `Tentativa em andamento — sem gabarito até o fim`
+              ? t("practice.running")
               : panel.phase === "done"
-                ? "Resultado da tentativa"
+                ? t("practice.result")
                 : panel.phase === "answer_key"
-                  ? "Gabarito — sem tentativa registrada"
-                  : "Mini-prova"}
+                  ? t("practice.keyNoAttempt")
+                  : t("practice.miniTest")}
           </p>
           {panel.phase === "running" && panel.attempt ? (
             <p className={dark ? "text-xs text-mist" : "text-xs text-slate-500"}>
-              questão {panel.step + 1} de {panel.attempt.total}
+              {t("practice.step", { current: panel.step + 1, total: panel.attempt.total })}
             </p>
           ) : panel.history.length > 0 ? (
             <p className={dark ? "text-xs text-mist" : "text-xs text-slate-500"}>
-              {panel.history.length} tentativa{panel.history.length > 1 ? "s" : ""} nesta carta
+              {t("practice.attemptsOnCard", { count: panel.history.length })}
             </p>
           ) : null}
         </div>
@@ -105,10 +107,10 @@ export function PracticePanel({
       {panel.phase === "answer_key" ? (
         <div className="space-y-4">
           {panel.isAnswerKeyLoading ? (
-            <p className="text-sm text-slate-500">Carregando gabarito…</p>
+            <p className="text-sm text-slate-500">{t("practice.keyLoading")}</p>
           ) : null}
           {panel.isAnswerKeyError ? (
-            <p className="text-sm text-red-600">Não foi possível carregar o gabarito.</p>
+            <p className="text-sm text-red-600">{t("practice.keyError")}</p>
           ) : null}
           {panel.answerKey.length > 0 ? (
             <PracticeAnswerKey questions={panel.answerKey} />
@@ -120,7 +122,7 @@ export function PracticePanel({
               onClick={panel.backToIdle}
               className="bg-slate-200 text-slate-800 hover:bg-slate-300"
             >
-              Voltar
+              {t("common.back")}
             </Button>
           </div>
         </div>

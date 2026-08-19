@@ -5,10 +5,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useI18n } from "@/i18n/i18n-provider";
 import { usePracticeCards, useRecentAttempts } from "../hooks/use-practice-queries";
 import { PracticePanel } from "./practice-panel";
 
 export function PracticePage() {
+  const { t } = useI18n();
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedId = searchParams.get("card") ?? "";
@@ -21,8 +23,8 @@ export function PracticePage() {
 
   const title = useMemo(() => {
     const selected = cardsQuery.data?.items.find((card) => card.id === selectedId);
-    return selected ? `${selected.code} · ${selected.front}` : "Praticar";
-  }, [cardsQuery.data, selectedId]);
+    return selected ? `${selected.code} · ${selected.front}` : t("practice.title");
+  }, [cardsQuery.data, selectedId, t]);
 
   function selectCard(cardId: string) {
     router.replace(`/praticar?card=${encodeURIComponent(cardId)}`);
@@ -39,8 +41,7 @@ export function PracticePage() {
       <header>
         <h1 className="text-2xl font-semibold text-navy">{title}</h1>
         <p className="mt-1 text-sm text-slate-600">
-          Mini-prova por carta. Questões e alternativas são embaralhadas a cada tentativa; o
-          gabarito só aparece no fim.
+          {t("practice.description")}
         </p>
       </header>
 
@@ -51,22 +52,22 @@ export function PracticePage() {
             onClick={() => router.replace("/praticar")}
             className="bg-slate-200 text-slate-800 hover:bg-slate-300"
           >
-            Trocar de carta
+            {t("practice.changeCard")}
           </Button>
           <PracticePanel cardId={selectedId} />
         </div>
       ) : (
         <>
           <Card className="space-y-3">
-            <h2 className="text-sm font-semibold text-navy">Tentativas recentes</h2>
+            <h2 className="text-sm font-semibold text-navy">{t("practice.recent")}</h2>
             {recentQuery.isLoading ? (
-              <p className="text-sm text-slate-500">Carregando histórico recente…</p>
+              <p className="text-sm text-slate-500">{t("practice.recentLoading")}</p>
             ) : null}
             {recentQuery.isError ? (
-              <p className="text-sm text-red-600">Não foi possível carregar as tentativas recentes.</p>
+              <p className="text-sm text-red-600">{t("practice.recentError")}</p>
             ) : null}
             {recentQuery.data && recentQuery.data.length === 0 ? (
-              <p className="text-sm text-slate-500">Nenhuma tentativa registrada ainda.</p>
+              <p className="text-sm text-slate-500">{t("practice.recentEmpty")}</p>
             ) : null}
             <ul className="divide-y divide-slate-100">
               {recentQuery.data?.map((item) => (
@@ -94,22 +95,22 @@ export function PracticePage() {
               <Input
                 value={searchInput}
                 onChange={(event) => setSearchInput(event.target.value)}
-                placeholder="Buscar por código ou enunciado da carta"
+                placeholder={t("practice.searchPlaceholder")}
                 className="max-w-md"
               />
               <Button type="submit" disabled={cardsQuery.isFetching}>
-                Buscar
+                {t("common.search")}
               </Button>
             </form>
 
             {cardsQuery.isLoading ? (
-              <p className="text-sm text-slate-500">Carregando cartas…</p>
+              <p className="text-sm text-slate-500">{t("practice.cardsLoading")}</p>
             ) : null}
             {cardsQuery.isError ? (
-              <p className="text-sm text-red-600">Não foi possível listar as cartas.</p>
+              <p className="text-sm text-red-600">{t("practice.cardsError")}</p>
             ) : null}
             {cardsQuery.data && cardsQuery.data.items.length === 0 ? (
-              <p className="text-sm text-slate-500">Nenhuma carta encontrada.</p>
+              <p className="text-sm text-slate-500">{t("practice.cardsEmpty")}</p>
             ) : null}
 
             <ul className="grid gap-2 sm:grid-cols-2">
@@ -121,11 +122,11 @@ export function PracticePage() {
                     className="flex h-full w-full cursor-pointer flex-col rounded-lg border border-slate-200 px-3 py-3 text-left transition hover:border-amber-400 hover:bg-amber-50/40"
                   >
                     <span className="text-xs uppercase tracking-wide text-slate-500">
-                      {card.deckKind === "ESSENTIAL" ? "Essencial" : "Prova"} · {card.code}
+                      {card.deckKind === "ESSENTIAL" ? t("practice.essential") : t("practice.exam")} · {card.code}
                     </span>
                     <span className="mt-1 font-medium text-navy">{card.front}</span>
                     <span className="mt-1 text-xs text-slate-500">
-                      {card.questionCount} questões
+                      {t("practice.questionCount", { count: card.questionCount })}
                     </span>
                   </button>
                 </li>
@@ -140,10 +141,10 @@ export function PracticePage() {
                   onClick={() => setPage((current) => Math.max(1, current - 1))}
                   className="bg-slate-200 text-slate-800 hover:bg-slate-300"
                 >
-                  Anterior
+                  {t("common.previous")}
                 </Button>
                 <span className="text-slate-500">
-                  página {cardsQuery.data.page} de {cardsQuery.data.pageCount}
+                  {t("common.pageOf", { page: cardsQuery.data.page, pageCount: cardsQuery.data.pageCount })}
                 </span>
                 <Button
                   type="button"
@@ -151,7 +152,7 @@ export function PracticePage() {
                   onClick={() => setPage((current) => current + 1)}
                   className="bg-slate-200 text-slate-800 hover:bg-slate-300"
                 >
-                  Próxima
+                  {t("common.next")}
                 </Button>
               </div>
             ) : null}

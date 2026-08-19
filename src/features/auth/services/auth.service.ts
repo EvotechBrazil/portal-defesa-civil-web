@@ -1,12 +1,31 @@
 import { api, setSession } from "@/lib/api";
 import type { ApiEnvelope } from "@/types/api.types";
 import type {
+  AccessRequestInput,
+  AccessRequestResult,
   LoginInput,
   LoginResult,
   RegisterInput,
   RegisterResult,
   VerifyEmailResult,
+  WhatsappCheckResult,
 } from "../types/auth.types";
+
+export async function checkWhatsapp(whatsapp: string): Promise<WhatsappCheckResult> {
+  const response = await api.post<ApiEnvelope<WhatsappCheckResult>>(
+    "/auth/check-whatsapp",
+    { whatsapp },
+  );
+  return response.data.data;
+}
+
+export async function requestAccess(input: AccessRequestInput): Promise<AccessRequestResult> {
+  const response = await api.post<ApiEnvelope<AccessRequestResult>>(
+    "/auth/access-requests",
+    input,
+  );
+  return response.data.data;
+}
 
 export async function registerAccount(input: RegisterInput): Promise<RegisterResult> {
   const response = await api.post<ApiEnvelope<RegisterResult>>("/auth/register", input);
@@ -16,7 +35,7 @@ export async function registerAccount(input: RegisterInput): Promise<RegisterRes
 export async function loginAccount(input: LoginInput): Promise<LoginResult> {
   const response = await api.post<ApiEnvelope<LoginResult>>("/auth/login", input);
   const result = response.data.data;
-  setSession(result.accessToken, result.refreshToken);
+  setSession(result.accessToken, result.refreshToken, result.user);
   return result;
 }
 

@@ -5,15 +5,9 @@ import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { MarkdownView } from "@/components/shared/markdown-view";
+import { useI18n } from "@/i18n/i18n-provider";
 import { CardArt, cardArt } from "../card-art";
 import { CurrentCardView, ReviewRating } from "../types/study.types";
-
-const LEVEL_LABEL: Record<CurrentCardView["state"]["level"], string> = {
-  NEW: "novo",
-  HARD: "difícil",
-  LEARNING: "aprendendo",
-  EASY: "fácil",
-};
 
 /** Distância que confirma a nota. Antes disso o arrasto só pré-visualiza. */
 const SWIPE_PX = 88;
@@ -39,17 +33,17 @@ interface FlashcardProps {
   onRate: (rating: ReviewRating) => void;
 }
 
-function faceLabel(card: CurrentCardView, side: "front" | "back"): string {
+function faceLabel(card: CurrentCardView, side: "front" | "back", t: (key: string) => string): string {
   if (card.deck === "EXAM") {
     if (card.direction === "REVERSE") {
-      return side === "front" ? "Resposta · inversa" : "Pergunta original";
+      return side === "front" ? t("study.face.reverseAnswer") : t("study.face.originalQuestion");
     }
-    return side === "front" ? "Questão de prova" : "Resposta correta";
+    return side === "front" ? t("study.face.examQuestion") : t("study.face.correctAnswer");
   }
   if (card.direction === "REVERSE") {
-    return side === "front" ? "Resposta · inversa" : "Conceito · inversa";
+    return side === "front" ? t("study.face.reverseAnswer") : t("study.face.reverseConcept");
   }
-  return side === "front" ? "Pergunta" : "Resposta";
+  return side === "front" ? t("study.face.question") : t("study.face.answer");
 }
 
 const CardFace = memo(function CardFace({
@@ -63,6 +57,7 @@ const CardFace = memo(function CardFace({
   art: CardArt | null;
   textHidden?: boolean;
 }) {
+  const { locale, t } = useI18n();
   const isBack = side === "back";
   const showArt = isBack && art;
   return (
@@ -70,7 +65,7 @@ const CardFace = memo(function CardFace({
       {showArt ? (
         <Image
           src={art.src}
-          alt={textHidden ? art.alt : ""}
+          alt={textHidden ? (locale === "pt-BR" ? art.alt : t("study.cardImageAlt", { code: card.code })) : ""}
           fill
           sizes="(max-width: 680px) 100vw, 680px"
           className="absolute inset-0 h-full w-full object-cover"
@@ -82,7 +77,7 @@ const CardFace = memo(function CardFace({
       {!textHidden ? (
         <>
           <p className="absolute top-4 left-5 z-10 text-[11px] font-semibold uppercase tracking-[0.16em] text-mist">
-            {faceLabel(card, side)}
+            {faceLabel(card, side, t)}
           </p>
           <p
             className={cn(
@@ -98,20 +93,18 @@ const CardFace = memo(function CardFace({
               showArt ? "items-end pb-14 pt-16" : "px-8 pt-10 pb-12",
             )}
           >
+            {/* As duas faces usam a mesma tipografia: a resposta só muda de cor
+                (o <strong> vira flare), nunca de tamanho ou alinhamento. */}
             <MarkdownView
               tone="onDark"
               markdown={isBack ? card.back : card.front}
-              className={
-                isBack
-                  ? "text-left text-[17px] leading-snug [&_p]:my-1 [&_p]:text-paper"
-                  : "text-[22px] font-semibold leading-snug [&_p]:my-1 [&_p]:text-paper"
-              }
+              className="text-[22px] font-semibold leading-snug [&_p]:my-1 [&_p]:text-paper"
             />
           </div>
           <p className="absolute bottom-4 left-0 right-0 z-10 text-center text-[12px] text-mist">
             {isBack
-              ? "Arraste ← fácil · arraste → difícil"
-              : "Toque para virar · arraste ← fácil · arraste → difícil"}
+              ? t("study.swipeBack")
+              : t("study.tapAndSwipe")}
           </p>
           <span
             className={cn(
@@ -122,7 +115,7 @@ const CardFace = memo(function CardFace({
               card.state.level === "NEW" && "border-white/20 text-mist",
             )}
           >
-            {LEVEL_LABEL[card.state.level]}
+            {t(`study.${card.state.level.toLowerCase()}`)}
           </span>
         </>
       ) : null}
@@ -149,6 +142,7 @@ export function Flashcard({
   onFlip,
   onRate,
 }: FlashcardProps) {
+  const { t } = useI18n();
   const dragRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const leftLabelRef = useRef<HTMLSpanElement>(null);
@@ -331,7 +325,7 @@ export function Flashcard({
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
         className="flashcard-scene relative w-full cursor-pointer text-left"
-        aria-label={isFlipped ? "Desvirar carta" : "Virar carta"}
+        aria-label={isFlipped ? t("study.unflip") : t("study.flip")}
         disabled={disabled}
       >
         <div
@@ -343,13 +337,13 @@ export function Flashcard({
             ref={leftLabelRef}
             className="absolute top-1/2 left-6 rounded-2xl border-[3px] border-transparent px-4 py-2 text-[26px] font-extrabold uppercase tracking-[0.08em] opacity-0"
           >
-            Fácil ←
+            {t("study.easy")} ←
           </span>
           <span
             ref={rightLabelRef}
             className="absolute top-1/2 right-6 rounded-2xl border-[3px] border-transparent px-4 py-2 text-[26px] font-extrabold uppercase tracking-[0.08em] opacity-0"
           >
-            → Difícil
+            → {t("study.hard")}
           </span>
         </div>
         <div ref={dragRef} className="flashcard-drag">
@@ -365,11 +359,11 @@ export function Flashcard({
           onClick={() => setArtTextHidden((current) => !current)}
           aria-label={
             artTextHidden
-              ? "Mostrar os textos da carta"
-              : "Ocultar os textos para visualizar a imagem"
+              ? t("study.showTexts")
+              : t("study.hideTexts")
           }
           aria-pressed={artTextHidden}
-          title={artTextHidden ? "Mostrar textos" : "Ver imagem sem textos"}
+          title={artTextHidden ? t("study.showTextsShort") : t("study.imageOnly")}
           disabled={disabled}
           className="absolute right-3 top-3 z-40 flex size-11 items-center justify-center rounded-full border border-white/25 bg-ink/75 text-white shadow-lg backdrop-blur-sm transition duration-200 hover:border-flare hover:bg-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flare disabled:cursor-not-allowed disabled:opacity-50"
         >

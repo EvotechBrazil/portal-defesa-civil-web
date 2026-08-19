@@ -4,6 +4,7 @@ import { FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { CourseModule } from "@/features/catalog/types/catalog.types";
+import { useI18n } from "@/i18n/i18n-provider";
 import type { QuestionBankMode } from "../types/questions.types";
 
 export interface QuestionFiltersProps {
@@ -27,6 +28,7 @@ export function QuestionFilters({
   onSearchSubmit,
   onModeChange,
 }: QuestionFiltersProps) {
+  const { t } = useI18n();
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     onSearchSubmit(search);
@@ -36,13 +38,13 @@ export function QuestionFilters({
     <div className="flex flex-col gap-4">
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:flex-row">
         <label className="flex min-w-48 flex-col gap-1 text-sm text-slate-600">
-          Módulo
+          {t("questions.module")}
           <select
             value={moduleCode}
             onChange={(event) => onModuleChange(event.target.value)}
             className="h-10 cursor-pointer rounded-md border border-slate-300 bg-white px-3 text-sm outline-none ring-amber-500 focus:ring-2"
           >
-            <option value="">Todos os módulos</option>
+            <option value="">{t("questions.allModules")}</option>
             {modules.map((module) => (
               <option key={module.id} value={module.code}>
                 {module.code} — {module.title} ({module.questionCount})
@@ -51,15 +53,15 @@ export function QuestionFilters({
           </select>
         </label>
         <label className="flex min-w-0 flex-1 flex-col gap-1 text-sm text-slate-600">
-          Busca
+          {t("questions.searchLabel")}
           <Input
             value={search}
             onChange={(event) => onSearchChange(event.target.value)}
-            placeholder="Buscar no enunciado"
+            placeholder={t("questions.searchPlaceholder")}
           />
         </label>
         <div className="flex items-end">
-          <Button type="submit">Buscar</Button>
+          <Button type="submit">{t("common.search")}</Button>
         </div>
       </form>
 
@@ -71,7 +73,7 @@ export function QuestionFilters({
             mode === "study" ? "bg-navy text-white" : "text-slate-600 hover:bg-slate-50"
           }`}
         >
-          Modo estudo
+          {t("questions.studyMode")}
         </button>
         <button
           type="button"
@@ -80,7 +82,7 @@ export function QuestionFilters({
             mode === "answer-key" ? "bg-navy text-white" : "text-slate-600 hover:bg-slate-50"
           }`}
         >
-          Modo gabarito
+          {t("questions.answerKeyMode")}
         </button>
       </div>
     </div>

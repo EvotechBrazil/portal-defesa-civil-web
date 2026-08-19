@@ -1,4 +1,7 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/i18n/i18n-provider";
 import type { HistoryItem } from "../types/practice.types";
 
 interface PracticeIdleProps {
@@ -20,27 +23,32 @@ export function PracticeIdle({
   onViewAnswerKey,
   variant = "light",
 }: PracticeIdleProps) {
+  const { t } = useI18n();
   const dark = variant === "onDark";
   const last = history[history.length - 1];
   return (
     <div className="space-y-3">
       <p className={dark ? "text-sm text-paper" : "text-sm text-slate-700"}>
-        <strong>{questionCount} questões</strong> sobre este ponto — leia a fundamentação e
-        depois responda.
+        {t("practice.idleIntro", { count: questionCount })}
       </p>
       <p className={dark ? "text-xs text-mist" : "text-xs text-slate-500"}>
         {last
-          ? `última tentativa: ${last.correctCount}/${last.totalCount} (${last.scorePct}%) · ${history.length} tentativa${history.length > 1 ? "s" : ""}`
-          : "nenhuma tentativa ainda"}
+          ? t("practice.lastAttempt", {
+              correct: last.correctCount,
+              total: last.totalCount,
+              score: last.scorePct,
+              count: history.length,
+            })
+          : t("practice.noAttempts")}
       </p>
       <div className="flex flex-wrap gap-2">
         {history.length === 0 && !locked ? (
           <Button type="button" disabled={isStarting} onClick={onStart}>
-            {isStarting ? "Preparando…" : "Iniciar avaliação · questões embaralhadas"}
+            {isStarting ? t("practice.preparing") : t("practice.start")}
           </Button>
         ) : (
           <p className={dark ? "text-xs text-mist" : "text-xs text-slate-500"}>
-            Avaliação encerrada. O gabarito já foi revelado e não pode ser refeita.
+            {t("practice.closed")}
           </p>
         )}
         <Button
@@ -53,7 +61,7 @@ export function PracticeIdle({
               : "bg-slate-200 text-slate-800 hover:bg-slate-300"
           }
         >
-          Ver gabarito
+          {t("practice.viewKey")}
         </Button>
       </div>
     </div>

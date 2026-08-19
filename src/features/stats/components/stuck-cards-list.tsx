@@ -1,15 +1,19 @@
+"use client";
+
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
+import { useI18n } from "@/i18n/i18n-provider";
 import type { StuckCard } from "../types/stats.types";
 
 export function StuckCardsList({ cards }: { cards: StuckCard[] }) {
+  const { formatDate, t } = useI18n();
   return (
     <Card>
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h2 className="text-base font-semibold text-navy">Cartas travadas</h2>
+          <h2 className="text-base font-semibold text-navy">{t("stats.stuckCards")}</h2>
           <p className="mt-1 text-sm text-slate-500">
-            Nível difícil com 3 ou mais revisões — é aqui que você está mal.
+            {t("stats.stuckHint")}
           </p>
         </div>
         {cards.length > 0 ? (
@@ -17,12 +21,12 @@ export function StuckCardsList({ cards }: { cards: StuckCard[] }) {
             href="/estudar"
             className="cursor-pointer text-sm font-medium text-navy underline-offset-2 hover:underline"
           >
-            Estudar
+            {t("stats.study")}
           </Link>
         ) : null}
       </div>
       {cards.length === 0 ? (
-        <p className="mt-4 text-sm text-slate-500">Nenhuma carta travada no momento.</p>
+        <p className="mt-4 text-sm text-slate-500">{t("stats.noStuckNow")}</p>
       ) : (
         <ul className="mt-4 divide-y divide-slate-100">
           {cards.map((card) => (
@@ -34,9 +38,11 @@ export function StuckCardsList({ cards }: { cards: StuckCard[] }) {
                 </span>
               </p>
               <p className="mt-1 text-xs text-slate-500">
-                Vista {card.seen} vezes
+                {t("stats.seen", { count: card.seen })}
                 {card.lastSeenAt
-                  ? ` · última em ${formatDate(card.lastSeenAt)}`
+                  ? ` · ${t("stats.lastSeen", {
+                      date: formatDate(card.lastSeenAt, { dateStyle: "short" }),
+                    })}`
                   : ""}
               </p>
             </li>
@@ -53,12 +59,4 @@ function previewMarkdown(markdown: string, max = 90): string {
     .replace(/\s+/g, " ")
     .trim();
   return plain.length > max ? `${plain.slice(0, max)}…` : plain;
-}
-
-function formatDate(iso: string): string {
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) {
-    return iso;
-  }
-  return date.toLocaleDateString("pt-BR");
 }

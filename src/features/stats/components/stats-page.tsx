@@ -7,19 +7,18 @@ import { StatsEmpty, StatsError, StatsLoading } from "./stats-status";
 import { StuckCardsList } from "./stuck-cards-list";
 import { useStats } from "../hooks/use-stats";
 import type { ModuleAccuracy, UserStats } from "../types/stats.types";
+import { useI18n } from "@/i18n/i18n-provider";
 
 export function StatsPage({ courseId }: { courseId?: string }) {
+  const { t } = useI18n();
   const { data, isLoading, isError, refetch, isFetching } = useStats(courseId);
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-8">
       <header className="mb-6">
-        <p className="text-sm font-medium uppercase tracking-wide text-amber">Desempenho</p>
-        <h1 className="mt-1 text-2xl font-semibold text-navy">Onde eu estou mal?</h1>
-        <p className="mt-2 max-w-2xl text-sm text-slate-600">
-          Acurácia por módulo, distribuição das cartas, o que está travado e o ritmo dos
-          últimos 30 dias.
-        </p>
+        <p className="text-sm font-medium uppercase tracking-wide text-amber">{t("stats.eyebrow")}</p>
+        <h1 className="mt-1 text-2xl font-semibold text-navy">{t("stats.title")}</h1>
+        <p className="mt-2 max-w-2xl text-sm text-slate-600">{t("stats.description")}</p>
       </header>
 
       {isLoading ? <StatsLoading /> : null}
@@ -35,7 +34,7 @@ export function StatsPage({ courseId }: { courseId?: string }) {
             <SessionsTimeline sessions={data.sessionsLast30d} />
           </div>
           {isFetching ? (
-            <p className="text-xs text-slate-400">Atualizando…</p>
+            <p className="text-xs text-slate-400">{t("stats.updating")}</p>
           ) : null}
         </div>
       ) : null}
@@ -50,21 +49,25 @@ function WeakSpotBanner({
   modules: ModuleAccuracy[];
   stuckCount: number;
 }) {
+  const { t } = useI18n();
   const weakest = weakestModule(modules);
   return (
     <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950">
       {weakest ? (
         <p>
-          Pior módulo: <strong>{weakest.code}</strong> — {weakest.accuracyPct}% em{" "}
-          {weakest.attempts} tentativa{weakest.attempts === 1 ? "" : "s"}.
+          {t("stats.weakest", {
+            code: weakest.code,
+            accuracy: weakest.accuracyPct,
+            attempts: weakest.attempts,
+          })}
         </p>
       ) : (
-        <p>Ainda não há tentativas de prática para apontar um módulo fraco.</p>
+        <p>{t("stats.noWeakest")}</p>
       )}
       <p className="mt-1">
         {stuckCount === 0
-          ? "Nenhuma carta travada (difícil com 3+ revisões)."
-          : `${stuckCount} carta${stuckCount === 1 ? "" : "s"} travada${stuckCount === 1 ? "" : "s"} pedem revisão.`}
+          ? t("stats.noStuck")
+          : t("stats.stuckCount", { count: stuckCount })}
       </p>
     </div>
   );

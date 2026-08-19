@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useI18n } from "@/i18n/i18n-provider";
 import { getApiErrorMessage } from "../services/practice.service";
 import type {
   FinishedAttempt,
@@ -16,6 +17,7 @@ import {
 const ADVANCE_MS = 260;
 
 export function usePracticePanel(cardId: string, options?: { autoResume?: boolean }) {
+  const { locale, t } = useI18n();
   const autoResume = options?.autoResume ?? true;
   const historyQuery = usePracticeHistory(cardId);
   const createMutation = useCreateAttempt(cardId);
@@ -32,6 +34,13 @@ export function usePracticePanel(cardId: string, options?: { autoResume?: boolea
   const attemptRef = useRef<string | null>(null);
   const resumedId = useRef<string | null>(null);
   const advanceTimer = useRef<number | null>(null);
+  const localizedError = useCallback(
+    (error: unknown) =>
+      locale === "pt-BR"
+        ? getApiErrorMessage(error, t("practice.operationError"))
+        : t("practice.operationError"),
+    [locale, t],
+  );
 
   // §11.3: callback assíncrono não pode sobreviver ao contexto que o criou.
   // A guarda por attemptId já existe; faltava soltar o timer no unmount.
@@ -74,7 +83,7 @@ export function usePracticePanel(cardId: string, options?: { autoResume?: boolea
 
   const start = useCallback(async () => {
     if (keyRevealed) {
-      setErrorMessage("Gabarito já revelado. Esta avaliação não pode ser refeita.");
+      setErrorMessage(t("practice.alreadyRevealed"));
       return;
     }
     setErrorMessage(null);
@@ -88,9 +97,9 @@ export function usePracticePanel(cardId: string, options?: { autoResume?: boolea
       setLockedOptionId(null);
       setPhase("running");
     } catch (error: unknown) {
-      setErrorMessage(getApiErrorMessage(error));
+      setErrorMessage(localizedError(error));
     }
-  }, [createMutation, keyRevealed]);
+  }, [createMutation, keyRevealed, localizedError, t]);
 
   const viewAnswerKey = useCallback(() => {
     setErrorMessage(null);
@@ -159,7 +168,7 @@ export function usePracticePanel(cardId: string, options?: { autoResume?: boolea
                 setLockedOptionId(null);
               })
               .catch((error: unknown) => {
-                setErrorMessage(getApiErrorMessage(error));
+                setErrorMessage(localizedError(error));
                 setLockedOptionId(null);
               });
             return;
@@ -168,11 +177,11 @@ export function usePracticePanel(cardId: string, options?: { autoResume?: boolea
           setLockedOptionId(null);
         }, ADVANCE_MS);
       } catch (error: unknown) {
-        setErrorMessage(getApiErrorMessage(error));
+        setErrorMessage(localizedError(error));
         setLockedOptionId(null);
       }
     },
-    [answerMutation, attempt, cancelAdvance, finishMutation, lockedOptionId, step],
+    [answerMutation, attempt, cancelAdvance, finishMutation, localizedError, lockedOptionId, step],
   );
 
   const currentQuestion = attempt?.questions[step] ?? null;

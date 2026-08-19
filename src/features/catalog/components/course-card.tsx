@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useI18n } from "@/i18n/i18n-provider";
 import { useEnroll } from "../hooks/use-enroll";
 import type { CourseListItem } from "../types/catalog.types";
 
@@ -11,13 +12,14 @@ export interface CourseCardProps {
 }
 
 export function CourseCard({ course }: CourseCardProps) {
+  const { t } = useI18n();
   const enroll = useEnroll();
 
   return (
     <Card className="flex flex-col gap-4">
       <div>
         <p className="text-xs font-medium tracking-wide text-amber uppercase">
-          {course.sourcePlatform ?? "Catálogo"}
+          {course.sourcePlatform ?? t("catalog.label")}
         </p>
         <h2 className="mt-1 text-xl font-semibold text-navy">{course.title}</h2>
         {course.description ? (
@@ -27,8 +29,8 @@ export function CourseCard({ course }: CourseCardProps) {
 
       <div className="rounded-lg bg-slate-50 px-3 py-2">
         <div className="mb-1 flex items-center justify-between text-xs text-slate-500">
-          <span>Progresso</span>
-          <span>{course.isEnrolled ? "em breve" : "matricule-se para acompanhar"}</span>
+          <span>{t("catalog.progress")}</span>
+          <span>{course.isEnrolled ? t("catalog.soon") : t("catalog.enrollToTrack")}</span>
         </div>
         <div className="h-2 overflow-hidden rounded-full bg-slate-200">
           <div className="h-full w-0 rounded-full bg-amber" />
@@ -38,7 +40,7 @@ export function CourseCard({ course }: CourseCardProps) {
       <div className="mt-auto flex flex-wrap gap-2">
         {course.isEnrolled ? (
           <Link href={`/curso/${course.slug}`}>
-            <Button type="button">Abrir curso</Button>
+            <Button type="button">{t("catalog.openCourse")}</Button>
           </Link>
         ) : (
           <Button
@@ -46,17 +48,17 @@ export function CourseCard({ course }: CourseCardProps) {
             disabled={enroll.isPending}
             onClick={() => enroll.mutate(course.slug)}
           >
-            {enroll.isPending ? "Matriculando…" : "Matricular-se"}
+            {enroll.isPending ? t("catalog.enrolling") : t("catalog.enroll")}
           </Button>
         )}
         <Link href={`/curso/${course.slug}`}>
           <Button type="button" className="bg-slate-700 hover:bg-slate-700/90">
-            Ver módulos
+            {t("catalog.viewModules")}
           </Button>
         </Link>
       </div>
       {enroll.isError ? (
-        <p className="text-sm text-red-600">Não foi possível matricular. Tente de novo.</p>
+        <p className="text-sm text-red-600">{t("catalog.enrollError")}</p>
       ) : null}
     </Card>
   );

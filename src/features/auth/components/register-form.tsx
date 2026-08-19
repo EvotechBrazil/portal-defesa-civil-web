@@ -2,93 +2,451 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useI18n } from "@/i18n/i18n-provider";
+import { useCheckWhatsapp } from "../hooks/use-check-whatsapp";
 import { useRegister } from "../hooks/use-register";
-import { registerSchema, type RegisterFormValues } from "../schemas/register.schema";
+import { useRequestAccess } from "../hooks/use-request-access";
+import { fileToDataUrl, formatWhatsapp } from "../lib/whatsapp";
+import {
+  checkWhatsappSchema,
+  registerSchema,
+  requestAccessSchema,
+  type CheckWhatsappFormValues,
+  type RegisterFormValues,
+  type RequestAccessFormValues,
+} from "../schemas/register.schema";
 import { getApiErrorMessage } from "../services/get-api-error-message";
+import type { WhatsappCheckStatus } from "../types/auth.types";
+
+type Step = "gate" | "register" | "request" | "status";
+
+const PHOTO_MAX_BYTES = 2 * 1024 * 1024;
 
 export function RegisterForm() {
+  const { locale, t } = useI18n();
+  const [step, setStep] = useState<Step>("gate");
+  const [status, setStatus] = useState<WhatsappCheckStatus | "REQUEST_SENT" | null>(
+    null,
+  );
+  const [whatsapp, setWhatsapp] = useState("");
+  const [photoError, setPhotoError] = useState<string | null>(null);
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
+
+  const check = useCheckWhatsapp();
   const registerAccount = useRegister();
-  const form = useForm<RegisterFormValues>({
+  const request = useRequestAccess();
+
+  const gateForm = useForm<CheckWhatsappFormValues>({
+    resolver: zodResolver(checkWhatsappSchema),
+    defaultValues: { whatsapp: "" },
+  });
+  const registerForm = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
-    defaultValues: { name: "", email: "", password: "" },
+    defaultValues: {
+      name: "",
+      lgndNumber: "",
+      manada: "",
+      city: "",
+      squad: "",
+      eventoFire: "",
+      email: "",
+      password: "",
+    },
+  });
+  const requestForm = useForm<RequestAccessFormValues>({
+    resolver: zodResolver(requestAccessSchema),
+    defaultValues: {
+      name: "",
+      lgndNumber: "",
+      manada: "",
+      email: "",
+      justification: "",
+    },
   });
 
-  function handleSubmit(values: RegisterFormValues) {
-    registerAccount.mutate(values);
+  function resetToGate() {
+    setStep("gate");
+    setStatus(null);
+    setWhatsapp("");
+    setPhotoFile(null);
+    setPhotoError(null);
+    gateForm.reset();
+    registerForm.reset();
+    requestForm.reset();
   }
+
+  function handleCheck(values: CheckWhatsappFormValues) {
+    check.mutate(values.whatsapp, {
+      onSuccess: (result) => {
+        setWhatsapp(result.whatsapp);
+        setStatus(result.status);
+        if (result.status === "ALLOWED") {
+          setStep("register");
+          return;
+        }
+        if (result.status === "NOT_ALLOWED" || result.status === "REJECTED") {
+          setStep("gate");
+          return;
+        }
+        setStep("status");
+      },
+    });
+  }
+
+  async function handleRegister(values: RegisterFormValues) {
+    setPhotoError(null);
+    if (!photoFile) {
+      setPhotoError(t("register.photoRequired"));
+      return;
+    }
+    if (photoFile.size > PHOTO_MAX_BYTES) {
+      setPhotoError(t("register.photoMax"));
+      return;
+    }
+    if (!/^image\/(jpeg|png|webp)$/.test(photoFile.type)) {
+      setPhotoError(t("register.photoType"));
+      return;
+    }
+    const photoBase64 = await fileToDataUrl(photoFile);
+    registerAccount.mutate({ ...values, whatsapp, photoBase64 });
+  }
+
+  function handleRequest(values: RequestAccessFormValues) {
+    request.mutate(
+      { ...values, whatsapp },
+      {
+        onSuccess: () => {
+          setStatus("REQUEST_SENT");
+          setStep("status");
+        },
+      },
+    );
+  }
+
+  const formatted = whatsapp ? formatWhatsapp(whatsapp) : "";
 
   return (
     <Card>
-      <h1 className="text-2xl font-semibold text-navy">Criar conta</h1>
-      <p className="mt-1 text-sm text-slate-600">
-        Cadastro aberto. Você vai receber um e-mail de verificação.
-      </p>
+      <h1 className="text-2xl font-semibold text-paper">{t("register.title")}</h1>
+      <p className="mt-1 text-sm text-mist">{t("register.description")}</p>
 
-      <form className="mt-6 space-y-4" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
-        <div className="space-y-1">
-          <label htmlFor="name" className="text-sm font-medium text-slate-700">
-            Nome
-          </label>
-          <Input id="name" autoComplete="name" {...form.register("name")} />
-          {form.formState.errors.name ? (
-            <p className="text-sm text-red-600">{form.formState.errors.name.message}</p>
-          ) : null}
-        </div>
-
-        <div className="space-y-1">
-          <label htmlFor="email" className="text-sm font-medium text-slate-700">
-            E-mail
-          </label>
-          <Input
-            id="email"
-            type="email"
-            autoComplete="email"
-            {...form.register("email")}
-          />
-          {form.formState.errors.email ? (
-            <p className="text-sm text-red-600">{form.formState.errors.email.message}</p>
-          ) : null}
-        </div>
-
-        <div className="space-y-1">
-          <label htmlFor="password" className="text-sm font-medium text-slate-700">
-            Senha
-          </label>
-          <Input
-            id="password"
-            type="password"
-            autoComplete="new-password"
-            {...form.register("password")}
-          />
-          {form.formState.errors.password ? (
-            <p className="text-sm text-red-600">{form.formState.errors.password.message}</p>
-          ) : null}
-        </div>
-
-        {registerAccount.isError ? (
-          <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
-            {getApiErrorMessage(
-              registerAccount.error,
-              "Não foi possível criar a conta. Tente novamente.",
-            )}
+      {step !== "gate" && formatted ? (
+        <div className="mt-4 flex items-center justify-between rounded-md border border-line bg-background px-3 py-2 text-sm">
+          <p>
+            {t("register.whatsapp")}: <span className="font-medium text-paper">{formatted}</span>
           </p>
-        ) : null}
+          <button
+            type="button"
+            className="text-flare underline"
+            onClick={resetToGate}
+          >
+            {t("register.change")}
+          </button>
+        </div>
+      ) : null}
 
-        <Button type="submit" className="w-full" disabled={registerAccount.isPending}>
-          {registerAccount.isPending ? "Criando conta..." : "Criar conta"}
-        </Button>
-      </form>
+      {step === "gate" ? (
+        <form
+          className="mt-6 space-y-4"
+          onSubmit={gateForm.handleSubmit(handleCheck)}
+          noValidate
+        >
+          <div className="space-y-1">
+            <label htmlFor="whatsapp" className="text-sm font-medium text-paper">
+              {t("register.whatsapp")}
+            </label>
+            <Input
+              id="whatsapp"
+              inputMode="tel"
+              autoComplete="tel"
+              placeholder="(43) 99999-9999"
+              {...gateForm.register("whatsapp")}
+            />
+            {gateForm.formState.errors.whatsapp ? (
+              <p className="text-sm text-red-600">
+                {t(gateForm.formState.errors.whatsapp.message ?? "")}
+              </p>
+            ) : null}
+          </div>
 
-      <p className="mt-4 text-center text-sm text-slate-600">
-        Já tem conta?{" "}
-        <Link href="/login" className="font-medium text-navy underline">
-          Entrar
+          {check.isError ? (
+            <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+              {locale === "pt-BR"
+                ? getApiErrorMessage(check.error, t("register.checkError"))
+                : t("register.checkError")}
+            </p>
+          ) : null}
+
+          {status === "NOT_ALLOWED" ? (
+            <div className="space-y-3 rounded-md border border-line bg-background px-3 py-3">
+              <p className="text-sm text-mist">
+                {t("register.notAllowed")}
+              </p>
+              <Button type="button" className="w-full" onClick={() => setStep("request")}>
+                {t("register.requestAccess")}
+              </Button>
+            </div>
+          ) : null}
+
+          {status === "REJECTED" ? (
+            <div className="space-y-3 rounded-md border border-line bg-background px-3 py-3">
+              <p className="text-sm text-mist">
+                {t("register.rejected")}
+              </p>
+              <Button type="button" className="w-full" onClick={() => setStep("request")}>
+                {t("register.requestAgain")}
+              </Button>
+            </div>
+          ) : null}
+
+          <Button type="submit" className="w-full" disabled={check.isPending}>
+              {check.isPending ? t("register.checking") : t("register.continue")}
+          </Button>
+        </form>
+      ) : null}
+
+      {step === "register" ? (
+        <form
+          className="mt-6 space-y-4"
+          onSubmit={registerForm.handleSubmit((values) => {
+            void handleRegister(values);
+          })}
+          noValidate
+        >
+          <Field
+            id="name"
+            label={t("auth.name")}
+            error={registerForm.formState.errors.name?.message ? t(registerForm.formState.errors.name.message) : undefined}
+          >
+            <Input id="name" autoComplete="name" {...registerForm.register("name")} />
+          </Field>
+          <Field
+            id="lgndNumber"
+            label={t("register.lgndNumber")}
+            error={registerForm.formState.errors.lgndNumber?.message ? t(registerForm.formState.errors.lgndNumber.message) : undefined}
+          >
+            <Input id="lgndNumber" {...registerForm.register("lgndNumber")} />
+          </Field>
+          <Field
+            id="manada"
+            label={t("register.pack")}
+            error={registerForm.formState.errors.manada?.message ? t(registerForm.formState.errors.manada.message) : undefined}
+          >
+            <Input id="manada" {...registerForm.register("manada")} />
+          </Field>
+          <Field
+            id="city"
+            label={t("register.city")}
+            error={registerForm.formState.errors.city?.message ? t(registerForm.formState.errors.city.message) : undefined}
+          >
+            <Input id="city" autoComplete="address-level2" {...registerForm.register("city")} />
+          </Field>
+          <Field
+            id="squad"
+            label={t("register.squad")}
+            error={registerForm.formState.errors.squad?.message ? t(registerForm.formState.errors.squad.message) : undefined}
+          >
+            <Input id="squad" {...registerForm.register("squad")} />
+          </Field>
+          <Field
+            id="eventoFire"
+            label={t("register.fireEvent")}
+            error={registerForm.formState.errors.eventoFire?.message ? t(registerForm.formState.errors.eventoFire.message) : undefined}
+          >
+            <Input
+              id="eventoFire"
+              placeholder={t("register.firePlaceholder")}
+              {...registerForm.register("eventoFire")}
+            />
+          </Field>
+          <div className="space-y-1">
+            <label htmlFor="photo" className="text-sm font-medium text-paper">
+              {t("register.photo")}
+            </label>
+            <Input
+              id="photo"
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              onChange={(event) => {
+                setPhotoError(null);
+                setPhotoFile(event.target.files?.[0] ?? null);
+              }}
+            />
+            {photoError ? <p className="text-sm text-red-600">{photoError}</p> : null}
+          </div>
+          <Field
+            id="email"
+            label={t("auth.email")}
+            error={registerForm.formState.errors.email?.message ? t(registerForm.formState.errors.email.message) : undefined}
+          >
+            <Input
+              id="email"
+              type="email"
+              autoComplete="email"
+              {...registerForm.register("email")}
+            />
+          </Field>
+          <Field
+            id="password"
+            label={t("auth.password")}
+            error={registerForm.formState.errors.password?.message ? t(registerForm.formState.errors.password.message) : undefined}
+          >
+            <Input
+              id="password"
+              type="password"
+              autoComplete="new-password"
+              {...registerForm.register("password")}
+            />
+          </Field>
+
+          {registerAccount.isError ? (
+            <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+              {locale === "pt-BR"
+                ? getApiErrorMessage(registerAccount.error, t("auth.register.error"))
+                : t("auth.register.error")}
+            </p>
+          ) : null}
+
+          <Button type="submit" className="w-full" disabled={registerAccount.isPending}>
+            {registerAccount.isPending ? t("auth.register.pending") : t("auth.createAccount")}
+          </Button>
+        </form>
+      ) : null}
+
+      {step === "request" ? (
+        <form
+          className="mt-6 space-y-4"
+          onSubmit={requestForm.handleSubmit(handleRequest)}
+          noValidate
+        >
+          <Field
+            id="request-name"
+            label={t("auth.name")}
+            error={requestForm.formState.errors.name?.message ? t(requestForm.formState.errors.name.message) : undefined}
+          >
+            <Input id="request-name" autoComplete="name" {...requestForm.register("name")} />
+          </Field>
+          <Field
+            id="request-lgnd"
+            label={t("register.requestLgnd")}
+            error={requestForm.formState.errors.lgndNumber?.message ? t(requestForm.formState.errors.lgndNumber.message) : undefined}
+          >
+            <Input id="request-lgnd" {...requestForm.register("lgndNumber")} />
+          </Field>
+          <Field
+            id="request-manada"
+            label={t("register.pack")}
+            error={requestForm.formState.errors.manada?.message ? t(requestForm.formState.errors.manada.message) : undefined}
+          >
+            <Input id="request-manada" {...requestForm.register("manada")} />
+          </Field>
+          <Field
+            id="request-email"
+            label={t("auth.email")}
+            error={requestForm.formState.errors.email?.message ? t(requestForm.formState.errors.email.message) : undefined}
+          >
+            <Input
+              id="request-email"
+              type="email"
+              autoComplete="email"
+              {...requestForm.register("email")}
+            />
+          </Field>
+          <div className="space-y-1">
+            <label htmlFor="justification" className="text-sm font-medium text-paper">
+              {t("register.justification")}
+            </label>
+            <Textarea
+              id="justification"
+              {...requestForm.register("justification")}
+            />
+            {requestForm.formState.errors.justification ? (
+              <p className="text-sm text-red-600">
+                {t(requestForm.formState.errors.justification.message ?? "")}
+              </p>
+            ) : null}
+          </div>
+
+          {request.isError ? (
+            <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+              {locale === "pt-BR"
+                ? getApiErrorMessage(request.error, t("register.requestError"))
+                : t("register.requestError")}
+            </p>
+          ) : null}
+
+          <Button type="submit" className="w-full" disabled={request.isPending}>
+            {request.isPending ? t("register.sending") : t("register.sendRequest")}
+          </Button>
+        </form>
+      ) : null}
+
+      {step === "status" ? (
+        <div className="mt-6 space-y-4">
+          {status === "PENDING" ? (
+            <p className="rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-900">
+              {t("register.pending")}
+            </p>
+          ) : null}
+          {status === "REGISTERED" ? (
+            <p className="rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+              {t("register.registered")}
+            </p>
+          ) : null}
+          {status === "REQUEST_SENT" ? (
+            <p className="rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+              {t("register.requestSent")}
+            </p>
+          ) : null}
+          {status === "REGISTERED" ? (
+            <Link
+              href="/login"
+              className="inline-flex w-full cursor-pointer items-center justify-center rounded-md bg-flare px-4 py-2 text-sm font-medium text-white"
+            >
+              {t("auth.verify.goLogin")}
+            </Link>
+          ) : (
+            <Button type="button" className="w-full" onClick={resetToGate}>
+              {t("common.back")}
+            </Button>
+          )}
+        </div>
+      ) : null}
+
+      <p className="mt-4 text-center text-sm text-mist">
+        {t("auth.hasAccount")}{" "}
+        <Link href="/login" className="font-medium text-flare underline">
+          {t("auth.signIn.title")}
         </Link>
       </p>
     </Card>
+  );
+}
+
+function Field({
+  id,
+  label,
+  error,
+  children,
+}: {
+  id: string;
+  label: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="space-y-1">
+      <label htmlFor={id} className="text-sm font-medium text-paper">
+        {label}
+      </label>
+      {children}
+      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+    </div>
   );
 }

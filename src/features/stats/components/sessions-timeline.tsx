@@ -1,17 +1,24 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
+import { useI18n } from "@/i18n/i18n-provider";
 import type { SessionLast30d } from "../types/stats.types";
 
 export function SessionsTimeline({ sessions }: { sessions: SessionLast30d[] }) {
+  const { formatDate, t } = useI18n();
   const days = reviewsByDay(sessions);
   const maxReviews = days.reduce((max, day) => Math.max(max, day.reviews), 0);
 
   return (
     <Card>
-      <h2 className="text-base font-semibold text-navy">Sessões — últimos 30 dias</h2>
+      <h2 className="text-base font-semibold text-navy">{t("stats.sessions")}</h2>
       <p className="mt-1 text-sm text-slate-500">
         {sessions.length === 0
-          ? "Nenhuma sessão neste período."
-          : `${sessions.length} ${sessions.length === 1 ? "sessão" : "sessões"} · ${totalReviews(sessions)} ${totalReviews(sessions) === 1 ? "revisão" : "revisões"}`}
+          ? t("stats.noSessions")
+          : t("stats.sessionSummary", {
+              sessions: sessions.length,
+              reviews: totalReviews(sessions),
+            })}
       </p>
       <div className="mt-4 flex h-24 items-end gap-1">
         {days.map((day) => {
@@ -19,7 +26,7 @@ export function SessionsTimeline({ sessions }: { sessions: SessionLast30d[] }) {
           return (
             <div
               key={day.date}
-              title={`${formatDay(day.date)}: ${day.reviews} revisão${day.reviews === 1 ? "" : "ões"}`}
+              title={`${formatDate(`${day.date}T12:00:00Z`, { day: "2-digit", month: "2-digit" })}: ${t("stats.reviewCount", { count: day.reviews })}`}
               className={`flex-1 rounded-sm ${
                 day.reviews === 0 ? "bg-slate-100" : "bg-navy"
               }`}
@@ -37,8 +44,8 @@ export function SessionsTimeline({ sessions }: { sessions: SessionLast30d[] }) {
             .map((session) => (
               <li key={session.id} className="flex justify-between gap-3">
                 <span>
-                  {formatDay(session.startedAt.slice(0, 10))} ·{" "}
-                  {session.deckSelector === "FULL" ? "Conteúdo completo" : "Essenciais · 80/20"}
+                  {formatDate(session.startedAt, { day: "2-digit", month: "2-digit" })} ·{" "}
+                  {session.deckSelector === "FULL" ? t("study.full") : t("study.essential")}
                 </span>
                 <span className="tabular-nums">
                   {session.reviews} rev. · D{session.tally.HARD} A{session.tally.LEARNING} F
@@ -76,12 +83,4 @@ function reviewsByDay(sessions: SessionLast30d[]): Array<{ date: string; reviews
 
 function startOfUtcDay(date: Date): Date {
   return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
-}
-
-function formatDay(isoDate: string): string {
-  const [year, month, day] = isoDate.split("-");
-  if (!year || !month || !day) {
-    return isoDate;
-  }
-  return `${day}/${month}`;
 }

@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n/i18n-provider";
 
 const ALLOWED_TAGS = [
   "a",
@@ -127,6 +128,7 @@ export interface MarkdownViewProps {
 }
 
 export function MarkdownView({ markdown, className, tone = "light" }: MarkdownViewProps) {
+  const { t } = useI18n();
   const [sanitized, setSanitized] = useState<string | null>(null);
 
   useEffect(() => {
@@ -148,7 +150,7 @@ export function MarkdownView({ markdown, className, tone = "light" }: MarkdownVi
   if (sanitized === null) {
     return (
       <div className={cn("min-h-16 text-sm", tone === "onDark" ? "text-mist" : "text-slate-500", className)}>
-        Carregando conteúdo…
+        {t("markdown.loading")}
       </div>
     );
   }

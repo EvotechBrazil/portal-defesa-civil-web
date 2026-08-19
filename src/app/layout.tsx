@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { cookies } from "next/headers";
 import { AppProviders } from "@/providers/app-providers";
+import { DEFAULT_LOCALE, isLocale, LOCALE_STORAGE_KEY } from "@/i18n/translations";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,18 +17,21 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Portal Defesa Civil",
-  description: "Portal de ensino — Formação de Líderes Humanitários LGND SQUAD",
+  description: "Portal de ensino multilíngue — Formação de Líderes Humanitários LGND SQUAD",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieLocale = (await cookies()).get(LOCALE_STORAGE_KEY)?.value;
+  const initialLocale = isLocale(cookieLocale) ? cookieLocale : DEFAULT_LOCALE;
+
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang={initialLocale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <AppProviders>{children}</AppProviders>
+        <AppProviders initialLocale={initialLocale}>{children}</AppProviders>
       </body>
     </html>
   );

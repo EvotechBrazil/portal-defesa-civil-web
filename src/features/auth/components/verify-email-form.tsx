@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useI18n } from "@/i18n/i18n-provider";
 import { useResendVerification } from "../hooks/use-resend-verification";
 import { useVerifyEmail } from "../hooks/use-verify-email";
 import {
@@ -19,6 +20,7 @@ import {
 import { getApiErrorMessage } from "../services/get-api-error-message";
 
 export function VerifyEmailForm() {
+  const { locale, t } = useI18n();
   const searchParams = useSearchParams();
   const tokenFromUrl = searchParams.get("token") ?? "";
   const emailFromUrl = searchParams.get("email") ?? "";
@@ -48,23 +50,23 @@ export function VerifyEmailForm() {
 
   return (
     <Card>
-      <h1 className="text-2xl font-semibold text-navy">Verificar e-mail</h1>
+      <h1 className="text-2xl font-semibold text-navy">{t("auth.verify.title")}</h1>
       <p className="mt-1 text-sm text-slate-600">
         {emailFromUrl
-          ? `Enviamos um link para ${emailFromUrl}. Abra o Mailpit ou cole o token abaixo.`
-          : "Cole o token recebido por e-mail ou abra o link da mensagem."}
+          ? t("auth.verify.sent", { email: emailFromUrl })
+          : t("auth.verify.instructions")}
       </p>
 
       {isVerified ? (
         <div className="mt-6 space-y-4">
           <p className="rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
-            E-mail verificado. Você já pode entrar no portal.
+            {t("auth.verify.success")}
           </p>
           <Link
             href="/login"
             className="inline-flex w-full cursor-pointer items-center justify-center rounded-md bg-navy px-4 py-2 text-sm font-medium text-white transition hover:bg-navy/90"
           >
-            Ir para o login
+            {t("auth.verify.goLogin")}
           </Link>
         </div>
       ) : (
@@ -75,22 +77,24 @@ export function VerifyEmailForm() {
         >
           <div className="space-y-1">
             <label htmlFor="token" className="text-sm font-medium text-slate-700">
-              Token
+              {t("auth.verify.token")}
             </label>
             <Input id="token" autoComplete="off" {...tokenForm.register("token")} />
             {tokenForm.formState.errors.token ? (
-              <p className="text-sm text-red-600">{tokenForm.formState.errors.token.message}</p>
+              <p className="text-sm text-red-600">{t(tokenForm.formState.errors.token.message ?? "")}</p>
             ) : null}
           </div>
 
           {verify.isError ? (
             <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
-              {getApiErrorMessage(verify.error, "Token inválido ou expirado.")}
+              {locale === "pt-BR"
+                ? getApiErrorMessage(verify.error, t("auth.verify.invalid"))
+                : t("auth.verify.invalid")}
             </p>
           ) : null}
 
           <Button type="submit" className="w-full" disabled={verify.isPending}>
-            {verify.isPending ? "Verificando..." : "Verificar e-mail"}
+            {verify.isPending ? t("auth.verify.pending") : t("auth.verify.action")}
           </Button>
         </form>
       )}
@@ -101,10 +105,10 @@ export function VerifyEmailForm() {
           onSubmit={resendForm.handleSubmit((values) => resend.mutate(values.email))}
           noValidate
         >
-          <p className="text-sm text-slate-600">Não recebeu o e-mail? Reenvie a verificação.</p>
+          <p className="text-sm text-slate-600">{t("auth.verify.resendPrompt")}</p>
           <div className="space-y-1">
             <label htmlFor="resend-email" className="text-sm font-medium text-slate-700">
-              E-mail
+              {t("auth.email")}
             </label>
             <Input
               id="resend-email"
@@ -113,28 +117,30 @@ export function VerifyEmailForm() {
               {...resendForm.register("email")}
             />
             {resendForm.formState.errors.email ? (
-              <p className="text-sm text-red-600">{resendForm.formState.errors.email.message}</p>
+              <p className="text-sm text-red-600">{t(resendForm.formState.errors.email.message ?? "")}</p>
             ) : null}
           </div>
           {resend.isSuccess ? (
             <p className="text-sm text-emerald-700">
-              Se o e-mail existir e ainda não estiver verificado, enviamos um novo link.
+              {t("auth.verify.resendSuccess")}
             </p>
           ) : null}
           {resend.isError ? (
             <p className="text-sm text-red-600">
-              {getApiErrorMessage(resend.error, "Não foi possível reenviar agora.")}
+              {locale === "pt-BR"
+                ? getApiErrorMessage(resend.error, t("auth.verify.resendError"))
+                : t("auth.verify.resendError")}
             </p>
           ) : null}
           <Button type="submit" className="w-full" disabled={resend.isPending}>
-            {resend.isPending ? "Reenviando..." : "Reenviar verificação"}
+            {resend.isPending ? t("auth.verify.resending") : t("auth.verify.resend")}
           </Button>
         </form>
       ) : null}
 
       <p className="mt-4 text-center text-sm text-slate-600">
         <Link href="/login" className="font-medium text-navy underline">
-          Voltar ao login
+          {t("auth.verify.backLogin")}
         </Link>
       </p>
     </Card>

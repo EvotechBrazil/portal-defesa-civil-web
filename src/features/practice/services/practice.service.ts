@@ -82,7 +82,7 @@ export async function listRecentAttempts(): Promise<RecentAttempt[]> {
   return response.data.data.items;
 }
 
-export function getApiErrorMessage(error: unknown): string {
+export function getApiErrorMessage(error: unknown, fallback = "Não foi possível concluir a operação."): string {
   if (typeof error === "object" && error !== null && "response" in error) {
     const response = (error as { response?: { data?: { message?: unknown } } })
       .response;
@@ -94,5 +94,5 @@ export function getApiErrorMessage(error: unknown): string {
       return message.join(", ");
     }
   }
-  return "Não foi possível concluir a operação.";
+  return fallback;
 }

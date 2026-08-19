@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useI18n } from "@/i18n/i18n-provider";
 import { useCourse } from "../hooks/use-course";
 import { useEnroll } from "../hooks/use-enroll";
 
 export function CourseDetail() {
+  const { t } = useI18n();
   const params = useParams<{ slug: string }>();
   const slug = params.slug ?? "";
   const { data, isLoading, isError } = useCourse(slug);
@@ -16,13 +18,13 @@ export function CourseDetail() {
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
-      {isLoading ? <p className="text-slate-600">Carregando curso…</p> : null}
-      {isError ? <p className="text-red-600">Curso não encontrado.</p> : null}
+      {isLoading ? <p className="text-slate-600">{t("course.loading")}</p> : null}
+      {isError ? <p className="text-red-600">{t("course.notFound")}</p> : null}
       {course ? (
         <>
           <p className="text-sm">
             <Link href="/biblioteca" className="cursor-pointer text-amber hover:underline">
-              ← Biblioteca
+              ← {t("course.backLibrary")}
             </Link>
           </p>
           <header className="mt-3 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
@@ -34,7 +36,7 @@ export function CourseDetail() {
             </div>
             {course.isEnrolled ? (
               <span className="rounded-full bg-emerald-50 px-3 py-1 text-sm text-emerald-700">
-                Matriculado
+                {t("course.enrolled")}
               </span>
             ) : (
               <Button
@@ -42,21 +44,21 @@ export function CourseDetail() {
                 disabled={enroll.isPending}
                 onClick={() => enroll.mutate(course.slug)}
               >
-                {enroll.isPending ? "Matriculando…" : "Matricular-se"}
+                {enroll.isPending ? t("catalog.enrolling") : t("catalog.enroll")}
               </Button>
             )}
           </header>
           {enroll.isError ? (
-            <p className="mt-2 text-sm text-red-600">Não foi possível matricular.</p>
+            <p className="mt-2 text-sm text-red-600">{t("course.enrollError")}</p>
           ) : null}
 
-          <h2 className="mt-8 mb-3 text-lg font-semibold text-navy">Páginas de conteúdo</h2>
+          <h2 className="mt-8 mb-3 text-lg font-semibold text-navy">{t("course.contentPages")}</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {course.pages.map((page) => (
               <Link key={page.slug} href={`/curso/${course.slug}/${page.slug}`}>
                 <Card className="h-full cursor-pointer transition hover:border-amber/50">
                   <p className="text-xs tracking-wide text-amber uppercase">
-                    Página {page.ord}
+                    {t("course.page", { number: page.ord })}
                   </p>
                   <p className="mt-1 font-medium text-navy">{page.title}</p>
                 </Card>
@@ -64,7 +66,7 @@ export function CourseDetail() {
             ))}
           </div>
 
-          <h2 className="mt-8 mb-3 text-lg font-semibold text-navy">Módulos</h2>
+          <h2 className="mt-8 mb-3 text-lg font-semibold text-navy">{t("course.modules")}</h2>
           <div className="space-y-3">
             {course.modules.map((module) => (
               <Card key={module.id} className="flex flex-wrap items-center justify-between gap-3">
@@ -73,12 +75,12 @@ export function CourseDetail() {
                     {module.code} — {module.title}
                   </p>
                   <p className="text-sm text-slate-600">
-                    {module.quizCount} quizzes · {module.questionCount} questões
+                    {t("course.counts", { quizzes: module.quizCount, questions: module.questionCount })}
                   </p>
                 </div>
                 <Link href={`/questoes?moduleCode=${module.code}`}>
                   <Button type="button" className="bg-slate-700 hover:bg-slate-700/90">
-                    Ver questões
+                    {t("course.viewQuestions")}
                   </Button>
                 </Link>
               </Card>

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n/i18n-provider";
 import {
   useFinishStudySession,
   useReviewStudySession,
@@ -31,19 +32,14 @@ const TONE_COLOR: Record<Tone, string> = {
 };
 
 /** Ordem espelha o gesto: fácil à esquerda, difícil à direita. */
-const FOCUS_STATS: { focus: Exclude<StudyFocus, null>; label: string; tone: Tone }[] = [
-  { focus: "EASY", label: "Fácil", tone: "fac" },
-  { focus: "LEARNING", label: "Aprendendo", tone: "apr" },
-  { focus: "HARD", label: "Difícil", tone: "dif" },
+const FOCUS_STATS: { focus: Exclude<StudyFocus, null>; labelKey: string; tone: Tone }[] = [
+  { focus: "EASY", labelKey: "study.easy", tone: "fac" },
+  { focus: "LEARNING", labelKey: "study.learning", tone: "apr" },
+  { focus: "HARD", labelKey: "study.hard", tone: "dif" },
 ];
 
-const FOCUS_LABEL: Record<Exclude<StudyFocus, null>, string> = {
-  EASY: "fácil",
-  LEARNING: "aprendendo",
-  HARD: "difícil",
-};
-
 export function StudyBoard({ sessionId }: StudyBoardProps) {
+  const { t } = useI18n();
   const [focus, setFocus] = useState<StudyFocus>(null);
   const sessionQuery = useStudySession(sessionId, focus);
   const reviewMutation = useReviewStudySession(sessionId, focus);
@@ -110,12 +106,12 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
   }, [displayed?.finished, handleRate]);
 
   if (sessionQuery.isLoading && !displayed) {
-    return <p className="px-1 py-10 text-sm text-mist">Carregando a fila…</p>;
+    return <p className="px-1 py-10 text-sm text-mist">{t("study.queueLoading")}</p>;
   }
   if (sessionQuery.isError || !displayed) {
     return (
       <p className="px-1 py-10 text-sm text-hard">
-        Não foi possível carregar a sessão. Recarregue a página.
+        {t("study.sessionError")}
       </p>
     );
   }
@@ -139,7 +135,7 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
     <div className="space-y-4">
       <div className="grid grid-cols-4 gap-2">
         <Stat
-          label="Na fila"
+          label={t("study.inQueue")}
           value={displayed.queueLength}
           active={focus === null}
           onSelect={() => changeFocus(null)}
@@ -147,7 +143,7 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
         {FOCUS_STATS.map((item) => (
           <Stat
             key={item.focus}
-            label={item.label}
+            label={t(item.labelKey)}
             value={levels[item.focus]}
             tone={item.tone}
             active={focus === item.focus}
@@ -159,16 +155,16 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
       <p className="flex justify-between text-[12.5px] text-mist">
         <span>
           {focus
-            ? `Foco: ${FOCUS_LABEL[focus]}`
+            ? t("study.focus", { focus: t(`study.${focus.toLowerCase()}`) })
             : displayed.card?.direction === "REVERSE"
               ? displayed.card.deck === "EXAM"
-                ? "Mão dupla · resposta → pergunta"
-                : "Mão dupla · definição → conceito"
+                ? t("study.bidirAnswerQuestion")
+                : t("study.bidirDefinitionConcept")
               : displayed.card?.deck === "EXAM"
-                ? "Mão dupla · pergunta → resposta"
-                : "Mão dupla · conceito → definição"}
+                ? t("study.bidirQuestionAnswer")
+                : t("study.bidirConceptDefinition")}
         </span>
-        <span>revisadas {displayed.reviews}</span>
+        <span>{t("study.reviewed", { count: displayed.reviews })}</span>
       </p>
 
       {displayed.card ? (
@@ -188,20 +184,22 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
       ) : (
         <div className="rounded-2xl border border-line bg-panel px-5 py-10 text-center">
           <p className="text-sm text-paper">
-            Nenhuma carta em <b>{focus ? FOCUS_LABEL[focus] : "fila"}</b> agora.
+            {t("study.noCard", {
+              focus: focus ? t(`study.${focus.toLowerCase()}`).toLowerCase() : t("study.queue"),
+            })}
           </p>
           <button
             type="button"
             onClick={() => changeFocus(null)}
             className="mt-3 min-h-11 cursor-pointer rounded-2xl border border-flare px-4 py-2 text-sm font-semibold text-flare transition duration-200 hover:bg-flare/10"
           >
-            Voltar para a fila inteira
+            {t("study.backFullQueue")}
           </button>
         </div>
       )}
 
       {reviewMutation.isError ? (
-        <p className="text-sm text-hard">Falha ao registrar. Tente de novo.</p>
+        <p className="text-sm text-hard">{t("study.reviewError")}</p>
       ) : null}
 
       {isFlipped && displayed.card ? <TheoryPanel card={displayed.card} /> : null}

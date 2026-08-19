@@ -1,4 +1,7 @@
+"use client";
+
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n/i18n-provider";
 import type { FinishedAttempt } from "../types/practice.types";
 import { PracticeAnswerKey } from "./practice-answer-key";
 import { PracticeSparkline } from "./practice-sparkline";
@@ -8,6 +11,7 @@ interface PracticeResultProps {
 }
 
 export function PracticeResult({ result }: PracticeResultProps) {
+  const { t } = useI18n();
   const tone =
     result.scorePct === 100
       ? "text-emerald-600"
@@ -15,14 +19,25 @@ export function PracticeResult({ result }: PracticeResultProps) {
         ? "text-amber-600"
         : "text-red-600";
 
-  let comparison = "primeira tentativa registrada";
+  let comparison = t("practice.firstAttempt");
   if (result.previous && result.deltaPct !== null) {
     if (result.deltaPct > 0) {
-      comparison = `anterior: ${result.previous.correctCount}/${result.previous.totalCount} · +${result.deltaPct} pontos percentuais`;
+      comparison = t("practice.previousPoints", {
+        correct: result.previous.correctCount,
+        total: result.previous.totalCount,
+        delta: `+${result.deltaPct}`,
+      });
     } else if (result.deltaPct < 0) {
-      comparison = `anterior: ${result.previous.correctCount}/${result.previous.totalCount} · ${result.deltaPct} pontos percentuais`;
+      comparison = t("practice.previousPoints", {
+        correct: result.previous.correctCount,
+        total: result.previous.totalCount,
+        delta: result.deltaPct,
+      });
     } else {
-      comparison = `anterior: ${result.previous.correctCount}/${result.previous.totalCount} · mesmo resultado`;
+      comparison = t("practice.sameResult", {
+        correct: result.previous.correctCount,
+        total: result.previous.totalCount,
+      });
     }
   }
 
@@ -48,7 +63,7 @@ export function PracticeResult({ result }: PracticeResultProps) {
       </div>
       <PracticeAnswerKey questions={result.answerKey} />
       <p className="text-xs text-slate-500">
-        Gabarito revelado. Esta avaliação ficou no histórico e não pode ser refeita.
+        {t("practice.keyRevealed")}
       </p>
     </div>
   );

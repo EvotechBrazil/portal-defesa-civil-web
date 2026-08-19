@@ -8,6 +8,10 @@ export function middleware(request: NextRequest) {
   const isAuthenticated = request.cookies.get(AUTH_COOKIE)?.value === "1";
   const isPublic = PUBLIC_PATHS.some((path) => pathname.startsWith(path));
 
+  if (pathname.startsWith("/flags/")) {
+    return NextResponse.next();
+  }
+
   if (!isAuthenticated && !isPublic && pathname !== "/") {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
