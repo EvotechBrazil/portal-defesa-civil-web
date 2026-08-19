@@ -10,17 +10,26 @@ import {
 import {
   CreateStudySessionInput,
   ReviewRating,
+  StudyFocus,
 } from "../types/study.types";
 import { decksQueryKey } from "./use-decks";
 
-export function studySessionQueryKey(sessionId: string) {
-  return ["study-session", sessionId] as const;
+export function studySessionQueryKey(
+  sessionId: string,
+  focus: StudyFocus = null,
+) {
+  return ["study-session", sessionId, focus] as const;
 }
 
-export function useStudySession(sessionId: string | undefined) {
+export function useStudySession(
+  sessionId: string | undefined,
+  focus: StudyFocus = null,
+) {
   return useQuery({
-    queryKey: sessionId ? studySessionQueryKey(sessionId) : ["study-session"],
-    queryFn: () => getStudySession(sessionId as string),
+    queryKey: sessionId
+      ? studySessionQueryKey(sessionId, focus)
+      : ["study-session"],
+    queryFn: () => getStudySession(sessionId as string, focus),
     enabled: Boolean(sessionId),
   });
 }
@@ -36,12 +45,18 @@ export function useCreateStudySession() {
   });
 }
 
-export function useReviewStudySession(sessionId: string) {
+export function useReviewStudySession(sessionId: string, focus: StudyFocus = null) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (rating: ReviewRating) => reviewStudySession(sessionId, rating),
+    mutationFn: (rating: ReviewRating) =>
+      reviewStudySession(sessionId, rating, focus),
     onSuccess: (view) => {
-      queryClient.setQueryData(studySessionQueryKey(sessionId), view);
+      queryClient.setQueryData(studySessionQueryKey(sessionId, focus), view);
+      // A lente ativa já veio na resposta; as dos outros focos ficaram velhas.
+      void queryClient.invalidateQueries({
+        queryKey: ["study-session", sessionId],
+        predicate: (query) => query.queryKey[2] !== focus,
+      });
       void queryClient.invalidateQueries({ queryKey: decksQueryKey });
     },
   });
@@ -52,7 +67,9 @@ export function useFinishStudySession(sessionId: string) {
   return useMutation({
     mutationFn: () => finishStudySession(sessionId),
     onSuccess: () => {
-      void queryClient.invalidateQueries({ queryKey: studySessionQueryKey(sessionId) });
+      void queryClient.invalidateQueries({
+        queryKey: ["study-session", sessionId],
+      });
       void queryClient.invalidateQueries({ queryKey: decksQueryKey });
     },
   });

@@ -6,6 +6,7 @@ import {
   FinishSessionView,
   ReviewRating,
   ReviewSessionView,
+  StudyFocus,
   StudySessionView,
 } from "../types/study.types";
 
@@ -29,9 +30,13 @@ export async function createStudySession(
   return response.data.data;
 }
 
-export async function getStudySession(sessionId: string): Promise<StudySessionView> {
+export async function getStudySession(
+  sessionId: string,
+  focus: StudyFocus = null,
+): Promise<StudySessionView> {
   const response = await api.get<ApiEnvelope<StudySessionView>>(
     `/study-sessions/${sessionId}`,
+    { params: focus ? { focus } : undefined },
   );
   return response.data.data;
 }
@@ -39,10 +44,11 @@ export async function getStudySession(sessionId: string): Promise<StudySessionVi
 export async function reviewStudySession(
   sessionId: string,
   rating: ReviewRating,
+  focus: StudyFocus = null,
 ): Promise<ReviewSessionView> {
   const response = await api.post<ApiEnvelope<ReviewSessionView>>(
     `/study-sessions/${sessionId}/reviews`,
-    { rating },
+    focus ? { rating, focus } : { rating },
   );
   return response.data.data;
 }

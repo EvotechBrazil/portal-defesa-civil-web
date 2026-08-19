@@ -4,6 +4,8 @@ export type StudyFilter = "ALL" | "HARD_ONLY";
 export type CardLevel = "NEW" | "HARD" | "LEARNING" | "EASY";
 export type ReviewRating = "HARD" | "LEARNING" | "EASY";
 export type CardDirection = "FORWARD" | "REVERSE";
+/** Nível em foco na fila. `null` = fila inteira. */
+export type StudyFocus = Exclude<CardLevel, "NEW"> | null;
 
 export interface CardLinkView {
   label: string;
@@ -45,6 +47,9 @@ export interface StudySessionView {
   deckSelector: DeckSelector;
   finished: boolean;
   tally: ReviewTally;
+  /** Composição da fila restante por nível — base dos KPIs clicáveis. */
+  queueLevels: Record<CardLevel, number>;
+  focus: StudyFocus;
   card: CurrentCardView | null;
 }
 

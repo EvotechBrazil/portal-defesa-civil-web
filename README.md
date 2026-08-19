@@ -19,10 +19,11 @@ Rotas: `/login`, `/registro`, `/verificar-email`, `/biblioteca`,
 
 `/biblioteca` lista o catálogo e matricula. `/curso/[slug]` mostra módulos e
 as 4 páginas (`pareto`, `modulos`, `apostila`, `gloss`). `/questoes` é o banco
-(109 itens) com filtro por módulo, busca e modos estudo/gabarito.
+(133 itens) com filtro por módulo, busca e modos estudo/gabarito.
 Markdown sanitizado em `src/components/shared/markdown-view.tsx`.
 
-`/estudar` escolhe Essenciais (43) ou Completo (43+109) e abre uma sessão.
+`/estudar` oferece **Essenciais · 80/20** (51 cartas) e **Conteúdo completo**
+(51 conceitos + 133 perguntas = 184 cartas) e abre uma sessão com mão dupla.
 Espaço vira a carta; 1/2/3 marcam difícil/aprendendo/fácil. Com o painel de
 fundamentação aberto, marcar não avança — aparece “Próxima carta”.
 

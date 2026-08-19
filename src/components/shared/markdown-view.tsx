@@ -72,6 +72,28 @@ function componentsFor(tone: "light" | "onDark"): Components {
       {children}
     </a>
   ),
+  img: ({ src, alt }) => {
+    if (typeof src !== "string" || !src.startsWith("/study/")) {
+      return null;
+    }
+    return (
+      <figure className="my-6 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-2 shadow-sm">
+        {/* O caminho é dinâmico no Markdown e restrito a /study/; next/image não aceita esse contrato sem conhecer o asset no build. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={alt ?? ""}
+          loading="lazy"
+          className="h-auto w-full rounded-xl"
+        />
+        {alt ? (
+          <figcaption className="px-2 pb-1 pt-2 text-center text-xs text-slate-500">
+            {alt}
+          </figcaption>
+        ) : null}
+      </figure>
+    );
+  },
   table: ({ children }) => (
     <div className="my-4 overflow-x-auto">
       <table className="w-full border-collapse border border-slate-300 text-left text-sm">

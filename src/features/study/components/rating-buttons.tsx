@@ -17,19 +17,19 @@ const RATINGS: {
   {
     rating: "EASY",
     label: "Fácil",
-    hint: "volta pouco · ←",
+    hint: "arraste ← · volta pouco",
     className: "border-ok/70 text-ok hover:bg-ok/15",
   },
   {
     rating: "LEARNING",
     label: "Aprendendo",
-    hint: "meio termo · 2",
+    hint: "meio termo · tecla 2",
     className: "border-learn/70 text-learn hover:bg-learn/15",
   },
   {
     rating: "HARD",
     label: "Difícil",
-    hint: "repete já · →",
+    hint: "arraste → · repete já",
     className: "border-hard/70 text-hard hover:bg-hard/15",
   },
 ];

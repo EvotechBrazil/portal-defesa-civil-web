@@ -25,9 +25,9 @@ interface StudyBoardProps {
 type Tone = "fac" | "apr" | "dif";
 
 const TONE_COLOR: Record<Tone, string> = {
-  fac: "#34d399",
-  apr: "#fbbf24",
-  dif: "#f87171",
+  fac: "var(--ok)",
+  apr: "var(--learn)",
+  dif: "var(--hard)",
 };
 
 /** Ordem espelha o gesto: fácil à esquerda, difícil à direita. */
@@ -161,8 +161,12 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
           {focus
             ? `Foco: ${FOCUS_LABEL[focus]}`
             : displayed.card?.direction === "REVERSE"
-              ? "Mão dupla · inversa"
-              : "Mão dupla · conceito → definição"}
+              ? displayed.card.deck === "EXAM"
+                ? "Mão dupla · resposta → pergunta"
+                : "Mão dupla · definição → conceito"
+              : displayed.card?.deck === "EXAM"
+                ? "Mão dupla · pergunta → resposta"
+                : "Mão dupla · conceito → definição"}
         </span>
         <span>revisadas {displayed.reviews}</span>
       </p>

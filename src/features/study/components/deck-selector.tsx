@@ -23,8 +23,8 @@ export function DeckSelectorPanel({
 }: DeckSelectorProps) {
   const essential = decks.find((deck) => deck.kind === "ESSENTIAL");
   const exam = decks.find((deck) => deck.kind === "EXAM");
-  const essentialCount = essential?.cardCount ?? 43;
-  const examCount = exam?.cardCount ?? 109;
+  const essentialCount = essential?.cardCount ?? 51;
+  const examCount = exam?.cardCount ?? 133;
   const courseSlug = essential?.courseSlug ?? exam?.courseSlug ?? "defesa-civil-lgnd";
 
   return (
@@ -43,14 +43,14 @@ export function DeckSelectorPanel({
       <div className="grid gap-3 sm:grid-cols-2">
         <DeckChoice
           selected={value.deckSelector === "ESSENTIAL"}
-          title="Essenciais"
+          title="Essenciais · 80/20"
           description={`${essentialCount} cartas conceituais`}
           levels={essential?.levels}
           onClick={() => onChange({ ...value, deckSelector: "ESSENTIAL" satisfies DeckSelector })}
         />
         <DeckChoice
           selected={value.deckSelector === "FULL"}
-          title="Completo"
+          title="Conteúdo completo"
           description={`${essentialCount} conceituais + ${examCount} de prova`}
           levels={undefined}
           extra={`${essentialCount + examCount} cartas`}

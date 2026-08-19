@@ -61,7 +61,8 @@ a,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flashcard-inner {
+  .flashcard-inner,
+  .flashcard-drag {
     transition: none !important;
   }
 }
@@ -80,7 +81,9 @@ a,
   touch-action: pan-y;
 }
 
-.flashcard-inner {
+/* Camada do arrasto: fica FORA do giro para que translateX siga o dedo
+   mesmo com a carta virada (rotateY(180deg) espelha o eixo X de dentro). */
+.flashcard-drag {
   position: relative;
   width: 100%;
   min-height: 320px;
@@ -90,12 +93,16 @@ a,
     opacity 0.28s ease;
 }
 
-.flashcard-inner.is-flipped {
-  transform: rotateY(180deg);
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+  transform-style: preserve-3d;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.flashcard-inner.is-dragging {
-  transition: none;
+.flashcard-inner.is-flipped {
+  transform: rotateY(180deg);
 }
 
 .flashcard-face {

@@ -38,7 +38,7 @@ export function SessionsTimeline({ sessions }: { sessions: SessionLast30d[] }) {
               <li key={session.id} className="flex justify-between gap-3">
                 <span>
                   {formatDay(session.startedAt.slice(0, 10))} ·{" "}
-                  {session.deckSelector === "FULL" ? "Completo" : "Essenciais"}
+                  {session.deckSelector === "FULL" ? "Conteúdo completo" : "Essenciais · 80/20"}
                 </span>
                 <span className="tabular-nums">
                   {session.reviews} rev. · D{session.tally.HARD} A{session.tally.LEARNING} F
