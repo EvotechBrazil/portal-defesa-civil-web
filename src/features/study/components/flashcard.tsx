@@ -1,9 +1,11 @@
 "use client";
 
-import { PointerEvent, memo, useCallback, useEffect, useRef } from "react";
+import { PointerEvent, memo, useCallback, useEffect, useRef, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { MarkdownView } from "@/components/shared/markdown-view";
-import { cardArt } from "../card-art";
+import { CardArt, cardArt } from "../card-art";
 import { CurrentCardView, ReviewRating } from "../types/study.types";
 
 const LEVEL_LABEL: Record<CurrentCardView["state"]["level"], string> = {
@@ -54,59 +56,76 @@ const CardFace = memo(function CardFace({
   card,
   side,
   art,
+  textHidden = false,
 }: {
   card: CurrentCardView;
   side: "front" | "back";
-  art: string | null;
+  art: CardArt | null;
+  textHidden?: boolean;
 }) {
   const isBack = side === "back";
   const showArt = isBack && art;
   return (
     <div className={cn("flashcard-face", isBack && "flashcard-back")}>
       {showArt ? (
-        <img
-          src={art}
-          alt=""
+        <Image
+          src={art.src}
+          alt={textHidden ? art.alt : ""}
+          fill
+          sizes="(max-width: 680px) 100vw, 680px"
           className="absolute inset-0 h-full w-full object-cover"
         />
       ) : null}
-      {showArt ? <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/35 to-ink/20" /> : null}
-      <p className="absolute top-4 left-5 z-10 text-[11px] font-semibold uppercase tracking-[0.16em] text-mist">
-        {faceLabel(card, side)}
-      </p>
-      <p className="absolute top-4 right-5 z-10 text-[11px] font-semibold text-flare">{card.code}</p>
-      <div
-        className={cn(
-          "relative z-10 flex flex-1 items-center justify-center px-6 text-center",
-          showArt ? "items-end pb-14 pt-16" : "px-8 pt-10 pb-12",
-        )}
-      >
-        <MarkdownView
-          tone="onDark"
-          markdown={isBack ? card.back : card.front}
-          className={
-            isBack
-              ? "text-left text-[17px] leading-snug [&_p]:my-1 [&_p]:text-paper"
-              : "text-[22px] font-semibold leading-snug [&_p]:my-1 [&_p]:text-paper"
-          }
-        />
-      </div>
-      <p className="absolute bottom-4 left-0 right-0 z-10 text-center text-[12px] text-mist">
-        {isBack
-          ? "Arraste ← fácil · arraste → difícil"
-          : "Toque para virar · arraste ← fácil · arraste → difícil"}
-      </p>
-      <span
-        className={cn(
-          "absolute bottom-4 left-5 z-10 rounded-full border px-2.5 py-1 text-[11px] uppercase tracking-wide",
-          card.state.level === "HARD" && "border-hard text-hard",
-          card.state.level === "LEARNING" && "border-learn text-learn",
-          card.state.level === "EASY" && "border-ok text-ok",
-          card.state.level === "NEW" && "border-white/20 text-mist",
-        )}
-      >
-        {LEVEL_LABEL[card.state.level]}
-      </span>
+      {showArt && !textHidden ? (
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/35 to-ink/20" />
+      ) : null}
+      {!textHidden ? (
+        <>
+          <p className="absolute top-4 left-5 z-10 text-[11px] font-semibold uppercase tracking-[0.16em] text-mist">
+            {faceLabel(card, side)}
+          </p>
+          <p
+            className={cn(
+              "absolute top-4 z-10 text-[11px] font-semibold text-flare",
+              showArt ? "right-16" : "right-5",
+            )}
+          >
+            {card.code}
+          </p>
+          <div
+            className={cn(
+              "relative z-10 flex flex-1 items-center justify-center px-6 text-center",
+              showArt ? "items-end pb-14 pt-16" : "px-8 pt-10 pb-12",
+            )}
+          >
+            <MarkdownView
+              tone="onDark"
+              markdown={isBack ? card.back : card.front}
+              className={
+                isBack
+                  ? "text-left text-[17px] leading-snug [&_p]:my-1 [&_p]:text-paper"
+                  : "text-[22px] font-semibold leading-snug [&_p]:my-1 [&_p]:text-paper"
+              }
+            />
+          </div>
+          <p className="absolute bottom-4 left-0 right-0 z-10 text-center text-[12px] text-mist">
+            {isBack
+              ? "Arraste ← fácil · arraste → difícil"
+              : "Toque para virar · arraste ← fácil · arraste → difícil"}
+          </p>
+          <span
+            className={cn(
+              "absolute bottom-4 left-5 z-10 rounded-full border px-2.5 py-1 text-[11px] uppercase tracking-wide",
+              card.state.level === "HARD" && "border-hard text-hard",
+              card.state.level === "LEARNING" && "border-learn text-learn",
+              card.state.level === "EASY" && "border-ok text-ok",
+              card.state.level === "NEW" && "border-white/20 text-mist",
+            )}
+          >
+            {LEVEL_LABEL[card.state.level]}
+          </span>
+        </>
+      ) : null}
     </div>
   );
 });
@@ -142,6 +161,7 @@ export function Flashcard({
   const flying = useRef(false);
   const frame = useRef<number | null>(null);
   const flyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [artTextHidden, setArtTextHidden] = useState(false);
 
   const art = cardArt(courseSlug, frontCard.code);
 
@@ -214,6 +234,7 @@ export function Flashcard({
   // Carta nova entrando: zera arrasto, overlay e a animação de saída da anterior.
   useEffect(() => {
     flying.current = false;
+    setArtTextHidden(false);
     const drag = dragRef.current;
     if (drag) {
       drag.style.transition = "";
@@ -222,6 +243,12 @@ export function Flashcard({
     dragX.current = 0;
     paint(0);
   }, [frontCard.id, frontCard.direction, paint]);
+
+  useEffect(() => {
+    if (!isFlipped) {
+      setArtTextHidden(false);
+    }
+  }, [isFlipped]);
 
   useEffect(
     () => () => {
@@ -296,40 +323,59 @@ export function Flashcard({
   }
 
   return (
-    <button
-      type="button"
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerCancel={onPointerUp}
-      className="flashcard-scene relative w-full cursor-pointer text-left"
-      aria-label={isFlipped ? "Desvirar carta" : "Virar carta"}
-      disabled={disabled}
-    >
-      <div
-        ref={overlayRef}
-        aria-hidden
-        className="swipe-overlay pointer-events-none absolute inset-0 z-30 rounded-[20px] border-2 border-transparent opacity-0"
+    <div className="relative">
+      <button
+        type="button"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        className="flashcard-scene relative w-full cursor-pointer text-left"
+        aria-label={isFlipped ? "Desvirar carta" : "Virar carta"}
+        disabled={disabled}
       >
-        <span
-          ref={leftLabelRef}
-          className="absolute top-1/2 left-6 rounded-2xl border-[3px] border-transparent px-4 py-2 text-[26px] font-extrabold uppercase tracking-[0.08em] opacity-0"
+        <div
+          ref={overlayRef}
+          aria-hidden
+          className="swipe-overlay pointer-events-none absolute inset-0 z-30 rounded-[20px] border-2 border-transparent opacity-0"
         >
-          Fácil ←
-        </span>
-        <span
-          ref={rightLabelRef}
-          className="absolute top-1/2 right-6 rounded-2xl border-[3px] border-transparent px-4 py-2 text-[26px] font-extrabold uppercase tracking-[0.08em] opacity-0"
-        >
-          → Difícil
-        </span>
-      </div>
-      <div ref={dragRef} className="flashcard-drag">
-        <div className={cn("flashcard-inner", isFlipped && "is-flipped")}>
-          <CardFace card={frontCard} side="front" art={art} />
-          <CardFace card={backCard} side="back" art={art} />
+          <span
+            ref={leftLabelRef}
+            className="absolute top-1/2 left-6 rounded-2xl border-[3px] border-transparent px-4 py-2 text-[26px] font-extrabold uppercase tracking-[0.08em] opacity-0"
+          >
+            Fácil ←
+          </span>
+          <span
+            ref={rightLabelRef}
+            className="absolute top-1/2 right-6 rounded-2xl border-[3px] border-transparent px-4 py-2 text-[26px] font-extrabold uppercase tracking-[0.08em] opacity-0"
+          >
+            → Difícil
+          </span>
         </div>
-      </div>
-    </button>
+        <div ref={dragRef} className="flashcard-drag">
+          <div className={cn("flashcard-inner", isFlipped && "is-flipped")}>
+            <CardFace card={frontCard} side="front" art={art} />
+            <CardFace card={backCard} side="back" art={art} textHidden={artTextHidden} />
+          </div>
+        </div>
+      </button>
+      {art && isFlipped ? (
+        <button
+          type="button"
+          onClick={() => setArtTextHidden((current) => !current)}
+          aria-label={
+            artTextHidden
+              ? "Mostrar os textos da carta"
+              : "Ocultar os textos para visualizar a imagem"
+          }
+          aria-pressed={artTextHidden}
+          title={artTextHidden ? "Mostrar textos" : "Ver imagem sem textos"}
+          disabled={disabled}
+          className="absolute right-3 top-3 z-40 flex size-11 items-center justify-center rounded-full border border-white/25 bg-ink/75 text-white shadow-lg backdrop-blur-sm transition duration-200 hover:border-flare hover:bg-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flare disabled:cursor-not-allowed disabled:opacity-50"
+        >
+          {artTextHidden ? <EyeOff aria-hidden size={20} /> : <Eye aria-hidden size={20} />}
+        </button>
+      ) : null}
+    </div>
   );
 }
