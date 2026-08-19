@@ -64,7 +64,7 @@ export function StudyDesk() {
                   "min-h-11 shrink-0 rounded-2xl border px-3 py-2 text-left text-[13px] transition duration-200",
                   active
                     ? "border-flare bg-flare font-semibold text-white"
-                    : "border-white/10 bg-panel text-mist hover:border-flare/40 hover:text-paper",
+                    : "border-line bg-panel text-mist hover:border-flare/40 hover:text-paper",
                   item.status === "soon" && !active && "opacity-55",
                 )}
               >
@@ -80,7 +80,7 @@ export function StudyDesk() {
 
         <div className="mt-6">
           {base.status === "soon" ? (
-            <div className="rounded-2xl border border-white/10 bg-panel px-5 py-10 text-center">
+            <div className="rounded-2xl border border-line bg-panel px-5 py-10 text-center">
               <p className="text-lg font-semibold text-paper">{base.title}</p>
               <p className="mt-2 text-sm text-mist">
                 Em breve · {base.subtitle}. O baralho 80/20 entra no ar depois da aula.

@@ -23,14 +23,14 @@ export function LoginForm() {
 
   return (
     <Card>
-      <h1 className="text-2xl font-semibold text-navy">Entrar</h1>
-      <p className="mt-1 text-sm text-slate-600">
+      <h1 className="text-2xl font-semibold text-paper">Entrar</h1>
+      <p className="mt-1 text-sm text-mist">
         Acesse o portal com o e-mail verificado.
       </p>
 
       <form className="mt-6 space-y-4" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
         <div className="space-y-1">
-          <label htmlFor="email" className="text-sm font-medium text-slate-700">
+          <label htmlFor="email" className="text-sm font-medium text-paper">
             E-mail
           </label>
           <Input
@@ -45,7 +45,7 @@ export function LoginForm() {
         </div>
 
         <div className="space-y-1">
-          <label htmlFor="password" className="text-sm font-medium text-slate-700">
+          <label htmlFor="password" className="text-sm font-medium text-paper">
             Senha
           </label>
           <Input
@@ -70,9 +70,9 @@ export function LoginForm() {
         </Button>
       </form>
 
-      <p className="mt-4 text-center text-sm text-slate-600">
+      <p className="mt-4 text-center text-sm text-mist">
         Ainda não tem conta?{" "}
-        <Link href="/registro" className="font-medium text-navy underline">
+        <Link href="/registro" className="font-medium text-flare underline">
           Criar conta
         </Link>
       </p>

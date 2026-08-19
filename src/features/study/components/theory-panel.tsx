@@ -11,7 +11,7 @@ interface TheoryPanelProps {
 export function TheoryPanel({ card }: TheoryPanelProps) {
   return (
     <div className="space-y-5">
-      <section className="rounded-2xl border border-white/10 bg-panel px-4 py-4">
+      <section className="rounded-2xl border border-line bg-panel px-4 py-4">
         <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-flare">
           Material teórico
         </p>

@@ -25,7 +25,7 @@ export function PracticePanel({
 
   if (panel.isHistoryLoading) {
     return (
-      <Card className={dark ? "border-white/10 bg-panel text-paper" : undefined}>
+      <Card className={dark ? "border-line bg-panel text-paper" : undefined}>
         <p className={dark ? "text-sm text-mist" : "text-sm text-slate-500"}>Carregando mini-prova…</p>
       </Card>
     );
@@ -33,7 +33,7 @@ export function PracticePanel({
 
   if (panel.isHistoryError) {
     return (
-      <Card className={dark ? "border-white/10 bg-panel text-paper" : undefined}>
+      <Card className={dark ? "border-line bg-panel text-paper" : undefined}>
         <p className="text-sm text-hard">Não foi possível carregar o histórico desta carta.</p>
       </Card>
     );
@@ -43,7 +43,7 @@ export function PracticePanel({
     panel.attempt?.total ?? panel.questionCount ?? panel.history[0]?.totalCount ?? 0;
 
   return (
-    <Card className={dark ? "space-y-4 border-white/10 bg-panel text-paper" : "space-y-4"}>
+    <Card className={dark ? "space-y-4 border-line bg-panel text-paper" : "space-y-4"}>
       <header className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <p className={dark ? "text-sm font-semibold text-paper" : "text-sm font-semibold text-navy"}>

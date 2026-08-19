@@ -8,7 +8,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLBut
         ref={ref}
         disabled={disabled}
         className={cn(
-          "inline-flex cursor-pointer items-center justify-center rounded-md bg-navy px-4 py-2 text-sm font-medium text-white transition hover:bg-navy/90 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60",
+          "inline-flex cursor-pointer items-center justify-center rounded-md bg-flare px-4 py-2 text-sm font-medium text-white transition hover:bg-flare/90 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60",
           className,
         )}
         {...props}

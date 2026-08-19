@@ -1,18 +1,49 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f6f1ea;
+  --fg: #1c1917;
+  --ink: #fffaf6;
+  --panel: #ffffff;
+  --paper: #1c1917;
+  --mist: #78716c;
+  --line: rgb(28 25 23 / 0.12);
+  --glow: rgb(234 88 12 / 0.1);
+  --ok: #059669;
+  --hard: #dc2626;
+  --learn: #d97706;
+}
+
+.dark {
+  --bg: #14110f;
+  --fg: #f4ede4;
+  --ink: #1c1917;
+  --panel: #262321;
+  --paper: #f4ede4;
+  --mist: #c4b8ad;
+  --line: rgb(255 255 255 / 0.1);
+  --glow: rgb(234 88 12 / 0.16);
+  --ok: #34d399;
+  --hard: #f87171;
+  --learn: #fbbf24;
+}
+
 @theme inline {
-  --color-navy: #14110f;
+  --color-navy: var(--paper);
   --color-amber: #ea580c;
-  --color-flare: #ff7a1a;
-  --color-ink: #1c1917;
-  --color-panel: #262321;
-  --color-paper: #f4ede4;
-  --color-mist: #c4b8ad;
-  --color-ok: #34d399;
-  --color-hard: #f87171;
-  --color-learn: #fbbf24;
-  --color-background: #14110f;
-  --color-foreground: #f4ede4;
+  --color-flare: #ea580c;
+  --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-paper: var(--paper);
+  --color-mist: var(--mist);
+  --color-line: var(--line);
+  --color-ok: var(--ok);
+  --color-hard: var(--hard);
+  --color-learn: var(--learn);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -38,9 +69,9 @@ a,
 .study-shell {
   min-height: calc(100vh - 64px);
   background:
-    radial-gradient(1200px 480px at 10% -10%, rgba(234, 88, 12, 0.16), transparent 55%),
-    #14110f;
-  color: #f4ede4;
+    radial-gradient(1200px 480px at 10% -10%, var(--glow), transparent 55%),
+    var(--bg);
+  color: var(--fg);
 }
 
 .flashcard-scene {
@@ -54,7 +85,9 @@ a,
   width: 100%;
   min-height: 320px;
   transform-style: preserve-3d;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.28s ease;
 }
 
 .flashcard-inner.is-flipped {
@@ -74,8 +107,8 @@ a,
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: #262321;
+  border: 1px solid var(--line);
+  background: var(--panel);
 }
 
 .flashcard-back {

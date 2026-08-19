@@ -1,6 +1,6 @@
 "use client";
 
-import { PointerEvent, useRef, useState } from "react";
+import { PointerEvent, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { MarkdownView } from "@/components/shared/markdown-view";
 import { cardArt } from "../card-art";
@@ -13,7 +13,19 @@ const LEVEL_LABEL: Record<CurrentCardView["state"]["level"], string> = {
   EASY: "fácil",
 };
 
+/** Distância que confirma a nota. Antes disso o arrasto só pré-visualiza. */
 const SWIPE_PX = 88;
+/** Movimento abaixo disso conta como toque (vira a carta). */
+const TAP_PX = 12;
+/** Duração da saída da carta, casada com a transição de .flashcard-inner. */
+const FLY_MS = 200;
+
+type SwipeSide = "left" | "right";
+
+const SWIPE_RATING: Record<SwipeSide, ReviewRating> = {
+  left: "EASY",
+  right: "HARD",
+};
 
 interface FlashcardProps {
   frontCard: CurrentCardView;
@@ -55,8 +67,15 @@ function CardFace({
           className="absolute inset-0 h-full w-full object-cover"
         />
       ) : null}
-      {showArt ? <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/35 to-ink/20" /> : null}
-      <p className="absolute top-4 left-5 z-10 text-[11px] font-semibold uppercase tracking-[0.16em] text-mist">
+      {showArt ? (
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/15" />
+      ) : null}
+      <p
+        className={cn(
+          "absolute top-4 left-5 z-10 text-[11px] font-semibold uppercase tracking-[0.16em]",
+          showArt ? "text-white/80" : "text-mist",
+        )}
+      >
         {faceLabel(card, side)}
       </p>
       <p className="absolute top-4 right-5 z-10 text-[11px] font-semibold text-flare">{card.code}</p>
@@ -76,11 +95,11 @@ function CardFace({
           }
         />
       </div>
-      {!isBack ? (
-        <p className="absolute bottom-4 left-0 right-0 z-10 text-center text-[12px] text-mist">
-          Toque para virar · arraste ← fácil · arraste → difícil
-        </p>
-      ) : null}
+      <p className="absolute bottom-4 left-0 right-0 z-10 text-center text-[12px] text-mist">
+        {isBack
+          ? "Arraste ← fácil · arraste → difícil"
+          : "Toque para virar · arraste ← fácil · arraste → difícil"}
+      </p>
       <span
         className={cn(
           "absolute bottom-4 left-5 z-10 rounded-full border px-2.5 py-1 text-[11px] uppercase tracking-wide",
@@ -91,6 +110,35 @@ function CardFace({
         )}
       >
         {LEVEL_LABEL[card.state.level]}
+      </span>
+    </div>
+  );
+}
+
+/** Marca de água que acompanha o arrasto e antecipa a nota que será dada. */
+function SwipeOverlay({ side, strength }: { side: SwipeSide; strength: number }) {
+  const isEasy = side === "left";
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 z-30 rounded-[20px]"
+      style={{ opacity: 0.25 + strength * 0.75 }}
+    >
+      <div
+        className={cn(
+          "absolute inset-0 rounded-[20px] border-2",
+          isEasy ? "border-ok bg-ok/10" : "border-hard bg-hard/10",
+        )}
+      />
+      <span
+        className={cn(
+          "absolute top-1/2 -translate-y-1/2 rounded-2xl border-[3px] px-4 py-2 text-[26px] font-extrabold uppercase tracking-[0.08em]",
+          isEasy
+            ? "left-6 -rotate-12 border-ok text-ok"
+            : "right-6 rotate-12 border-hard text-hard",
+        )}
+        style={{ transform: `scale(${0.85 + strength * 0.25})` }}
+      >
+        {isEasy ? "Fácil ←" : "→ Difícil"}
       </span>
     </div>
   );
@@ -108,17 +156,38 @@ export function Flashcard({
   const startX = useRef(0);
   const startY = useRef(0);
   const dragging = useRef(false);
+  const flyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [dragX, setDragX] = useState(0);
+  const [flyOut, setFlyOut] = useState<SwipeSide | null>(null);
   const art = cardArt(courseSlug, frontCard.code);
 
+  // Carta nova entrando: zera o arrasto e a animação de saída da anterior.
+  useEffect(() => {
+    setDragX(0);
+    setFlyOut(null);
+  }, [frontCard.id, frontCard.direction]);
+
+  useEffect(
+    () => () => {
+      if (flyTimer.current) {
+        clearTimeout(flyTimer.current);
+      }
+    },
+    [],
+  );
+
   function onPointerDown(event: PointerEvent<HTMLButtonElement>) {
-    if (disabled) {
+    if (disabled || flyOut) {
       return;
     }
     dragging.current = true;
     startX.current = event.clientX;
     startY.current = event.clientY;
-    event.currentTarget.setPointerCapture(event.pointerId);
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Sem captura o arrasto ainda funciona enquanto o ponteiro ficar na carta.
+    }
   }
 
   function onPointerMove(event: PointerEvent<HTMLButtonElement>) {
@@ -132,6 +201,12 @@ export function Flashcard({
     }
   }
 
+  function commitSwipe(side: SwipeSide) {
+    setFlyOut(side);
+    setDragX(0);
+    flyTimer.current = setTimeout(() => onRate(SWIPE_RATING[side]), FLY_MS);
+  }
+
   function onPointerUp() {
     if (!dragging.current) {
       return;
@@ -139,28 +214,23 @@ export function Flashcard({
     dragging.current = false;
     const dx = dragX;
     setDragX(0);
+    // Estudar a carta acontece antes do gesto: soltar já nota e puxa a próxima.
     if (dx <= -SWIPE_PX) {
-      if (!isFlipped) {
-        onFlip();
-        return;
-      }
-      onRate("EASY");
+      commitSwipe("left");
       return;
     }
     if (dx >= SWIPE_PX) {
-      if (!isFlipped) {
-        onFlip();
-        return;
-      }
-      onRate("HARD");
+      commitSwipe("right");
       return;
     }
-    if (Math.abs(dx) < 12) {
+    if (Math.abs(dx) < TAP_PX) {
       onFlip();
     }
   }
 
-  const overlay = dragX < -24 ? "fácil" : dragX > 24 ? "difícil" : null;
+  const side: SwipeSide | null =
+    flyOut ?? (dragX < -TAP_PX ? "left" : dragX > TAP_PX ? "right" : null);
+  const strength = flyOut ? 1 : Math.min(1, Math.abs(dragX) / SWIPE_PX);
 
   return (
     <button
@@ -171,18 +241,9 @@ export function Flashcard({
       onPointerCancel={onPointerUp}
       className="flashcard-scene relative w-full cursor-pointer text-left"
       aria-label={isFlipped ? "Desvirar carta" : "Virar carta"}
-      disabled={disabled}
+      disabled={disabled && !flyOut}
     >
-      {overlay ? (
-        <span
-          className={cn(
-            "pointer-events-none absolute inset-x-0 top-3 z-20 text-center text-xs font-semibold uppercase tracking-[0.14em]",
-            overlay === "fácil" ? "text-ok" : "text-hard",
-          )}
-        >
-          {overlay}
-        </span>
-      ) : null}
+      {side ? <SwipeOverlay side={side} strength={strength} /> : null}
       <div
         className={cn(
           "flashcard-inner",
@@ -190,11 +251,19 @@ export function Flashcard({
           dragX !== 0 && "is-dragging",
         )}
         style={
-          dragX
+          flyOut
             ? {
-                transform: `rotateY(${isFlipped ? 180 : 0}deg) rotateZ(${dragX / 28}deg) translateX(${dragX}px)`,
+                transform: `rotateY(${isFlipped ? 180 : 0}deg) rotateZ(${
+                  flyOut === "left" ? -18 : 18
+                }deg) translateX(${flyOut === "left" ? -140 : 140}%)`,
+                opacity: 0,
+                transitionDuration: `${FLY_MS}ms`,
               }
-            : undefined
+            : dragX
+              ? {
+                  transform: `rotateY(${isFlipped ? 180 : 0}deg) rotateZ(${dragX / 28}deg) translateX(${dragX}px)`,
+                }
+              : undefined
         }
       >
         <CardFace card={frontCard} side="front" art={art} />

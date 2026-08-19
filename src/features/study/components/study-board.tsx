@@ -1,12 +1,18 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 import {
   useFinishStudySession,
   useReviewStudySession,
   useStudySession,
 } from "../hooks/use-study-session";
-import { CurrentCardView, ReviewRating, StudySessionView } from "../types/study.types";
+import {
+  CurrentCardView,
+  ReviewRating,
+  StudyFocus,
+  StudySessionView,
+} from "../types/study.types";
 import { Flashcard } from "./flashcard";
 import { RatingButtons } from "./rating-buttons";
 import { SessionSummary } from "./session-summary";
@@ -16,9 +22,31 @@ interface StudyBoardProps {
   sessionId: string;
 }
 
+type Tone = "fac" | "apr" | "dif";
+
+const TONE_COLOR: Record<Tone, string> = {
+  fac: "#34d399",
+  apr: "#fbbf24",
+  dif: "#f87171",
+};
+
+/** Ordem espelha o gesto: fácil à esquerda, difícil à direita. */
+const FOCUS_STATS: { focus: Exclude<StudyFocus, null>; label: string; tone: Tone }[] = [
+  { focus: "EASY", label: "Fácil", tone: "fac" },
+  { focus: "LEARNING", label: "Aprendendo", tone: "apr" },
+  { focus: "HARD", label: "Difícil", tone: "dif" },
+];
+
+const FOCUS_LABEL: Record<Exclude<StudyFocus, null>, string> = {
+  EASY: "fácil",
+  LEARNING: "aprendendo",
+  HARD: "difícil",
+};
+
 export function StudyBoard({ sessionId }: StudyBoardProps) {
-  const sessionQuery = useStudySession(sessionId);
-  const reviewMutation = useReviewStudySession(sessionId);
+  const [focus, setFocus] = useState<StudyFocus>(null);
+  const sessionQuery = useStudySession(sessionId, focus);
+  const reviewMutation = useReviewStudySession(sessionId, focus);
   const finishMutation = useFinishStudySession(sessionId);
 
   const [isFlipped, setIsFlipped] = useState(false);
@@ -36,19 +64,26 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
 
   const handleRate = useCallback(
     (rating: ReviewRating) => {
-      if (!isFlipped || reviewMutation.isPending) {
+      if (reviewMutation.isPending) {
         return;
       }
       reviewMutation.mutate(rating, {
         onSuccess: (view) => {
+          // Avança sozinho: a próxima carta já entra desvirada.
           setIsFlipped(false);
           setDisplayed(view);
           setBackCard(view.card);
         },
       });
     },
-    [isFlipped, reviewMutation],
+    [reviewMutation],
   );
+
+  const changeFocus = useCallback((next: StudyFocus) => {
+    setIsFlipped(false);
+    setBackCard(null);
+    setFocus(next);
+  }, []);
 
   useEffect(() => {
     if (displayed?.finished) {
@@ -66,18 +101,15 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
         setIsFlipped((current) => !current);
         return;
       }
-      if (!isFlipped) {
-        return;
-      }
-      if (event.key === "1") handleRate("HARD");
+      if (event.key === "ArrowLeft" || event.key === "3") handleRate("EASY");
+      if (event.key === "ArrowRight" || event.key === "1") handleRate("HARD");
       if (event.key === "2") handleRate("LEARNING");
-      if (event.key === "3") handleRate("EASY");
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [displayed?.finished, handleRate, isFlipped]);
+  }, [displayed?.finished, handleRate]);
 
-  if (sessionQuery.isLoading) {
+  if (sessionQuery.isLoading && !displayed) {
     return <p className="px-1 py-10 text-sm text-mist">Carregando a fila…</p>;
   }
   if (sessionQuery.isError || !displayed) {
@@ -88,9 +120,9 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
     );
   }
 
-  if (displayed.finished || !displayed.card) {
+  if (displayed.finished) {
     return (
-      <div className="rounded-2xl border border-white/10 bg-panel p-4">
+      <div className="rounded-2xl border border-line bg-panel p-4">
         <SessionSummary
           summary={finishMutation.data}
           fallback={{ reviews: displayed.reviews, tally: displayed.tally }}
@@ -101,46 +133,74 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
     );
   }
 
-  const tally = displayed.tally;
+  const levels = displayed.queueLevels;
 
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-4 gap-2">
-        <Stat label="Na fila" value={displayed.queueLength} />
-        <Stat label="Difícil" value={tally.HARD} tone="dif" />
-        <Stat label="Aprendendo" value={tally.LEARNING} tone="apr" />
-        <Stat label="Fácil" value={tally.EASY} tone="fac" />
+        <Stat
+          label="Na fila"
+          value={displayed.queueLength}
+          active={focus === null}
+          onSelect={() => changeFocus(null)}
+        />
+        {FOCUS_STATS.map((item) => (
+          <Stat
+            key={item.focus}
+            label={item.label}
+            value={levels[item.focus]}
+            tone={item.tone}
+            active={focus === item.focus}
+            disabled={levels[item.focus] === 0 && focus !== item.focus}
+            onSelect={() => changeFocus(focus === item.focus ? null : item.focus)}
+          />
+        ))}
       </div>
       <p className="flex justify-between text-[12.5px] text-mist">
         <span>
-          {displayed.card.direction === "REVERSE" ? "Mão dupla · inversa" : "Mão dupla · conceito → definição"}
+          {focus
+            ? `Foco: ${FOCUS_LABEL[focus]}`
+            : displayed.card?.direction === "REVERSE"
+              ? "Mão dupla · inversa"
+              : "Mão dupla · conceito → definição"}
         </span>
         <span>revisadas {displayed.reviews}</span>
       </p>
 
-      <Flashcard
-        frontCard={displayed.card}
-        backCard={backCard ?? displayed.card}
-        courseSlug={displayed.courseSlug}
-        isFlipped={isFlipped}
-        disabled={reviewMutation.isPending}
-        onFlip={() => setIsFlipped((current) => !current)}
-        onRate={handleRate}
-      />
+      {displayed.card ? (
+        <>
+          <Flashcard
+            frontCard={displayed.card}
+            backCard={backCard ?? displayed.card}
+            courseSlug={displayed.courseSlug}
+            isFlipped={isFlipped}
+            disabled={reviewMutation.isPending}
+            onFlip={() => setIsFlipped((current) => !current)}
+            onRate={handleRate}
+          />
 
-      {isFlipped ? (
-        <RatingButtons disabled={reviewMutation.isPending} onRate={handleRate} />
+          <RatingButtons disabled={reviewMutation.isPending} onRate={handleRate} />
+        </>
       ) : (
-        <p className="text-center text-[12.5px] text-mist">
-          Vire a carta. Depois: Fácil ← · Aprendendo · Difícil →
-        </p>
+        <div className="rounded-2xl border border-line bg-panel px-5 py-10 text-center">
+          <p className="text-sm text-paper">
+            Nenhuma carta em <b>{focus ? FOCUS_LABEL[focus] : "fila"}</b> agora.
+          </p>
+          <button
+            type="button"
+            onClick={() => changeFocus(null)}
+            className="mt-3 min-h-11 cursor-pointer rounded-2xl border border-flare px-4 py-2 text-sm font-semibold text-flare transition duration-200 hover:bg-flare/10"
+          >
+            Voltar para a fila inteira
+          </button>
+        </div>
       )}
 
       {reviewMutation.isError ? (
         <p className="text-sm text-hard">Falha ao registrar. Tente de novo.</p>
       ) : null}
 
-      {isFlipped ? <TheoryPanel card={displayed.card} /> : null}
+      {isFlipped && displayed.card ? <TheoryPanel card={displayed.card} /> : null}
     </div>
   );
 }
@@ -149,29 +209,39 @@ function Stat({
   label,
   value,
   tone,
+  active,
+  disabled,
+  onSelect,
 }: {
   label: string;
   value: number;
-  tone?: "dif" | "apr" | "fac";
+  tone?: Tone;
+  active: boolean;
+  disabled?: boolean;
+  onSelect: () => void;
 }) {
+  const color = tone ? TONE_COLOR[tone] : undefined;
   return (
-    <div
-      className="rounded-xl border border-white/10 border-t-[3px] bg-panel px-3 py-2.5 text-center"
+    <button
+      type="button"
+      onClick={onSelect}
+      disabled={disabled}
+      aria-pressed={active}
+      className={cn(
+        "cursor-pointer rounded-xl border border-line border-t-[3px] bg-panel px-3 py-2.5 text-center text-paper transition duration-200",
+        "hover:-translate-y-0.5 active:scale-[0.98]",
+        active && "bg-black/5 dark:bg-white/[0.07]",
+        disabled && "cursor-not-allowed opacity-45 hover:translate-y-0",
+      )}
       style={{
-        borderTopColor:
-          tone === "dif" ? "#f87171" : tone === "apr" ? "#fbbf24" : tone === "fac" ? "#34d399" : "rgba(255,255,255,0.1)",
+        borderTopColor: tone ? color : undefined,
+        ...(active ? { boxShadow: `0 0 0 2px ${color}, 0 6px 20px -12px ${color}` } : {}),
       }}
     >
-      <b
-        className="block text-[22px] leading-tight"
-        style={{
-          color:
-            tone === "dif" ? "#f87171" : tone === "apr" ? "#fbbf24" : tone === "fac" ? "#34d399" : "#f4ede4",
-        }}
-      >
+      <b className="block text-[22px] leading-tight" style={{ color }}>
         {value}
       </b>
       <small className="text-[11px] uppercase tracking-[0.07em] text-mist">{label}</small>
-    </div>
+    </button>
   );
 }
