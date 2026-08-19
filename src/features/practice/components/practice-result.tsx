@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { FinishedAttempt } from "../types/practice.types";
 import { PracticeAnswerKey } from "./practice-answer-key";
@@ -6,11 +5,9 @@ import { PracticeSparkline } from "./practice-sparkline";
 
 interface PracticeResultProps {
   result: FinishedAttempt;
-  isStarting: boolean;
-  onRetry: () => void;
 }
 
-export function PracticeResult({ result, isStarting, onRetry }: PracticeResultProps) {
+export function PracticeResult({ result }: PracticeResultProps) {
   const tone =
     result.scorePct === 100
       ? "text-emerald-600"
@@ -50,9 +47,9 @@ export function PracticeResult({ result, isStarting, onRetry }: PracticeResultPr
         </div>
       </div>
       <PracticeAnswerKey questions={result.answerKey} />
-      <Button type="button" disabled={isStarting} onClick={onRetry}>
-        {isStarting ? "Preparando…" : "Nova tentativa · embaralha"}
-      </Button>
+      <p className="text-xs text-slate-500">
+        Gabarito revelado. Esta avaliação ficou no histórico e não pode ser refeita.
+      </p>
     </div>
   );
 }

@@ -16,13 +16,13 @@ export function middleware(request: NextRequest) {
 
   if (isAuthenticated && isPublic) {
     const url = request.nextUrl.clone();
-    url.pathname = "/biblioteca";
+    url.pathname = "/estudar";
     return NextResponse.redirect(url);
   }
 
   if (pathname === "/") {
     const url = request.nextUrl.clone();
-    url.pathname = isAuthenticated ? "/biblioteca" : "/login";
+    url.pathname = isAuthenticated ? "/estudar" : "/login";
     return NextResponse.redirect(url);
   }
 

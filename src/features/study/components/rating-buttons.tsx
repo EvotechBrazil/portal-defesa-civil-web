@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { ReviewRating } from "../types/study.types";
 
 interface RatingButtonsProps {
@@ -8,43 +8,49 @@ interface RatingButtonsProps {
   onRate: (rating: ReviewRating) => void;
 }
 
-const RATINGS: { rating: ReviewRating; label: string; hint: string; className: string }[] = [
+const RATINGS: {
+  rating: ReviewRating;
+  label: string;
+  hint: string;
+  className: string;
+}[] = [
   {
-    rating: "HARD",
-    label: "Difícil",
-    hint: "travei — volta já · 1",
-    className: "bg-red-600 hover:bg-red-600/90",
+    rating: "EASY",
+    label: "Fácil",
+    hint: "menor frequência · ←",
+    className: "border-b-[#2fbf71] hover:bg-[rgba(47,191,113,.14)] hover:border-[#2fbf71]",
   },
   {
     rating: "LEARNING",
     label: "Aprendendo",
-    hint: "ainda inseguro · 2",
-    className: "bg-amber hover:bg-amber/90",
+    hint: "volta no meio · 2",
+    className: "border-b-[#eba43a] hover:bg-[rgba(235,164,58,.14)] hover:border-[#eba43a]",
   },
   {
-    rating: "EASY",
-    label: "Fácil",
-    hint: "saí de cabeça · 3",
-    className: "bg-emerald-600 hover:bg-emerald-600/90",
+    rating: "HARD",
+    label: "Difícil",
+    hint: "repete mais · →",
+    className: "border-b-[#e0524b] hover:bg-[rgba(224,82,75,.14)] hover:border-[#e0524b]",
   },
 ];
 
 export function RatingButtons({ disabled, onRate }: RatingButtonsProps) {
   return (
-    <div className="grid gap-2 sm:grid-cols-3">
+    <div className="grid grid-cols-3 gap-2.5">
       {RATINGS.map((item) => (
-        <Button
+        <button
           key={item.rating}
           type="button"
           disabled={disabled}
           onClick={() => onRate(item.rating)}
-          className={item.className}
+          className={cn(
+            "cursor-pointer rounded-[13px] border border-[#272d38] border-b-[3px] bg-[#161a21] px-2 py-2.5 text-center text-[#e8ecf3] transition hover:-translate-y-px disabled:cursor-not-allowed disabled:opacity-50",
+            item.className,
+          )}
         >
-          <span className="flex flex-col items-center leading-tight">
-            <span>{item.label}</span>
-            <span className="text-[11px] font-normal opacity-90">{item.hint}</span>
-          </span>
-        </Button>
+          <b className="block text-[15px]">{item.label}</b>
+          <small className="mt-0.5 block text-[11px] text-[#9aa5b6]">{item.hint}</small>
+        </button>
       ))}
     </div>
   );

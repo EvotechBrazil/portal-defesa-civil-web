@@ -1,8 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { useUiStore } from "@/stores/ui.store";
 import {
   useFinishStudySession,
   useReviewStudySession,
@@ -16,67 +14,40 @@ import { TheoryPanel } from "./theory-panel";
 
 interface StudyBoardProps {
   sessionId: string;
-  courseSlug: string;
 }
 
-export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
+export function StudyBoard({ sessionId }: StudyBoardProps) {
   const sessionQuery = useStudySession(sessionId);
   const reviewMutation = useReviewStudySession(sessionId);
   const finishMutation = useFinishStudySession(sessionId);
-  const keepTheoryOpen = useUiStore((state) => state.keepTheoryOpen);
-  const setKeepTheoryOpen = useUiStore((state) => state.setKeepTheoryOpen);
 
   const [isFlipped, setIsFlipped] = useState(false);
-  const [awaitingNext, setAwaitingNext] = useState(false);
-  const [pending, setPending] = useState<StudySessionView | null>(null);
   const [displayed, setDisplayed] = useState<StudySessionView | null>(null);
   const [backCard, setBackCard] = useState<CurrentCardView | null>(null);
-  const [isTurning, setIsTurning] = useState(false);
 
   useEffect(() => {
-    if (sessionQuery.data && !awaitingNext && !isTurning) {
+    if (sessionQuery.data) {
       setDisplayed(sessionQuery.data);
       if (sessionQuery.data.card && !isFlipped) {
         setBackCard(sessionQuery.data.card);
       }
     }
-  }, [awaitingNext, isFlipped, isTurning, sessionQuery.data]);
-
-  const flipToNext = useCallback((next: StudySessionView) => {
-    if (displayed?.card && next.card) {
-      setBackCard(displayed.card);
-      setIsTurning(true);
-    }
-    setDisplayed(next);
-    setPending(null);
-    setAwaitingNext(false);
-    setIsFlipped(false);
-  }, [displayed]);
-
-  const showNext = useCallback(() => {
-    if (!pending) {
-      return;
-    }
-    flipToNext(pending);
-  }, [flipToNext, pending]);
+  }, [isFlipped, sessionQuery.data]);
 
   const handleRate = useCallback(
     (rating: ReviewRating) => {
-      if (!isFlipped || awaitingNext || isTurning || reviewMutation.isPending) {
+      if (!isFlipped || reviewMutation.isPending) {
         return;
       }
       reviewMutation.mutate(rating, {
         onSuccess: (view) => {
-          if (keepTheoryOpen && !view.finished) {
-            setPending(view);
-            setAwaitingNext(true);
-            return;
-          }
-          flipToNext(view);
+          setIsFlipped(false);
+          setDisplayed(view);
+          setBackCard(view.card);
         },
       });
     },
-    [awaitingNext, flipToNext, isFlipped, isTurning, keepTheoryOpen, reviewMutation],
+    [isFlipped, reviewMutation],
   );
 
   useEffect(() => {
@@ -84,8 +55,6 @@ export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
       return;
     }
     function handleKey(event: KeyboardEvent) {
-      // Elemento interativo em foco resolve o próprio Space/Enter. Sequestrar
-      // o evento aqui deixaria botões e links inalcançáveis pelo teclado.
       const target = event.target as HTMLElement | null;
       if (
         target?.closest("input, textarea, select, button, a, [contenteditable], [role='button']")
@@ -94,16 +63,10 @@ export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
       }
       if (event.key === " " || event.key === "Enter") {
         event.preventDefault();
-        if (!isFlipped) {
-          setIsFlipped(true);
-          return;
-        }
-        if (awaitingNext) {
-          showNext();
-        }
+        setIsFlipped((current) => !current);
         return;
       }
-      if (!isFlipped || awaitingNext) {
+      if (!isFlipped) {
         return;
       }
       if (event.key === "1") handleRate("HARD");
@@ -112,14 +75,14 @@ export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [awaitingNext, displayed?.finished, handleRate, isFlipped, showNext]);
+  }, [displayed?.finished, handleRate, isFlipped]);
 
   if (sessionQuery.isLoading) {
-    return <p className="px-4 py-10 text-sm text-slate-600">Carregando sessão…</p>;
+    return <p className="px-1 py-10 text-sm text-[#9aa5b6]">Carregando a fila…</p>;
   }
   if (sessionQuery.isError || !displayed) {
     return (
-      <p className="px-4 py-10 text-sm text-red-600">
+      <p className="px-1 py-10 text-sm text-[#e0524b]">
         Não foi possível carregar a sessão. Recarregue a página.
       </p>
     );
@@ -127,79 +90,87 @@ export function StudyBoard({ sessionId, courseSlug }: StudyBoardProps) {
 
   if (displayed.finished || !displayed.card) {
     return (
-      <SessionSummary
-        summary={finishMutation.data}
-        fallback={{ reviews: displayed.reviews, tally: displayed.tally }}
-        isLoading={finishMutation.isPending}
-        onFinish={() => finishMutation.mutate()}
-      />
+      <div className="rounded-[14px] border border-[#272d38] bg-[#161a21] p-4">
+        <SessionSummary
+          summary={finishMutation.data}
+          fallback={{ reviews: displayed.reviews, tally: displayed.tally }}
+          isLoading={finishMutation.isPending}
+          onFinish={() => finishMutation.mutate()}
+        />
+      </div>
     );
   }
 
+  const tally = displayed.tally;
+
   return (
-    <section className="mx-auto max-w-3xl space-y-4 px-4 py-8">
-      <header className="flex flex-wrap items-end justify-between gap-2">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber">
-            {displayed.deckSelector === "FULL" ? "Baralho completo" : "Essenciais"}
-          </p>
-          <h1 className="text-xl font-semibold text-navy">Estudar</h1>
-        </div>
-        <p className="text-xs text-slate-500">
-          Na fila: {displayed.queueLength} · revisadas: {displayed.reviews}
-        </p>
-      </header>
+    <div className="space-y-4">
+      <div className="grid grid-cols-4 gap-2">
+        <Stat label="Na fila" value={displayed.queueLength} />
+        <Stat label="Difícil" value={tally.HARD} tone="dif" />
+        <Stat label="Aprendendo" value={tally.LEARNING} tone="apr" />
+        <Stat label="Fácil" value={tally.EASY} tone="fac" />
+      </div>
+      <p className="flex justify-between text-[12.5px] text-[#9aa5b6]">
+        <span>
+          {displayed.card.direction === "REVERSE" ? "Mão dupla · inversa" : "Mão dupla · conceito → definição"}
+        </span>
+        <span>revisadas {displayed.reviews}</span>
+      </p>
 
       <Flashcard
         frontCard={displayed.card}
         backCard={backCard ?? displayed.card}
         isFlipped={isFlipped}
-        onFlip={() => {
-          if (!isFlipped) {
-            setIsFlipped(true);
-            return;
-          }
-          if (awaitingNext) {
-            showNext();
-          }
-        }}
-        onFlipEnd={() => {
-          if (!isFlipped && displayed.card) {
-            setBackCard(displayed.card);
-            setIsTurning(false);
-          }
-        }}
+        disabled={reviewMutation.isPending}
+        onFlip={() => setIsFlipped((current) => !current)}
+        onRate={handleRate}
       />
 
-      {!isFlipped && !isTurning ? (
-        <Button type="button" onClick={() => setIsFlipped(true)}>
-          Mostrar resposta · espaço
-        </Button>
-      ) : awaitingNext ? (
-        <div className="space-y-2">
-          <p className="text-sm text-slate-600">
-            Carta marcada. Pratique abaixo e avance quando quiser.
-          </p>
-          <Button type="button" onClick={showNext}>
-            Próxima carta
-          </Button>
-        </div>
+      {isFlipped ? (
+        <RatingButtons disabled={reviewMutation.isPending} onRate={handleRate} />
       ) : (
-        <RatingButtons disabled={reviewMutation.isPending || isTurning} onRate={handleRate} />
+        <p className="text-center text-[12.5px] text-[#9aa5b6]">
+          Vire a carta. Depois: Fácil ← · Aprendendo · Difícil →
+        </p>
       )}
 
       {reviewMutation.isError ? (
-        <p className="text-sm text-red-600">Falha ao registrar a revisão. Tente de novo.</p>
+        <p className="text-sm text-[#e0524b]">Falha ao registrar. Tente de novo.</p>
       ) : null}
 
-      {isFlipped ? (
-        <TheoryPanel
-          card={displayed.card}
-          courseSlug={courseSlug}
-          isOpen={keepTheoryOpen}
-          onToggle={setKeepTheoryOpen}
-        />
-      ) : null}
-    </section>
+      <TheoryPanel card={displayed.card} />
+    </div>
+  );
+}
+
+function Stat({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: number;
+  tone?: "dif" | "apr" | "fac";
+}) {
+  return (
+    <div
+      className="rounded-xl border border-[#272d38] border-t-[3px] bg-[#161a21] px-3 py-2.5 text-center"
+      style={{
+        borderTopColor:
+          tone === "dif" ? "#e0524b" : tone === "apr" ? "#eba43a" : tone === "fac" ? "#2fbf71" : "#272d38",
+      }}
+    >
+      <b
+        className="block text-[22px] leading-tight"
+        style={{
+          color:
+            tone === "dif" ? "#e0524b" : tone === "apr" ? "#eba43a" : tone === "fac" ? "#2fbf71" : "#e8ecf3",
+        }}
+      >
+        {value}
+      </b>
+      <small className="text-[11px] uppercase tracking-[0.07em] text-[#9aa5b6]">{label}</small>
+    </div>
   );
 }

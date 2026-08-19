@@ -1,0 +1,53 @@
+export type ContentBaseStatus = "open" | "soon";
+
+export interface ContentBase {
+  id: string;
+  courseSlug: string | null;
+  title: string;
+  subtitle: string;
+  status: ContentBaseStatus;
+}
+
+export const DEFAULT_BASE_ID = "teorico";
+
+export const CONTENT_BASES: ContentBase[] = [
+  {
+    id: "teorico",
+    courseSlug: "defesa-civil-lgnd",
+    title: "Material teórico",
+    subtitle: "80/20 da apostila e da plataforma",
+    status: "open",
+  },
+  {
+    id: "aula-1",
+    courseSlug: "aula-1-brec-nos",
+    title: "Aula 1",
+    subtitle: "BREC e NOS · segunda 17/08",
+    status: "open",
+  },
+  {
+    id: "aula-2",
+    courseSlug: "aula-2-aguas-rapidas",
+    title: "Aula 2",
+    subtitle: "Águas rápidas · terça 18/08",
+    status: "open",
+  },
+  {
+    id: "aula-3",
+    courseSlug: null,
+    title: "Aula 3",
+    subtitle: "Quarta 19/08 · 20h",
+    status: "soon",
+  },
+  {
+    id: "aula-4",
+    courseSlug: null,
+    title: "Aula 4",
+    subtitle: "Quinta 20/08 · 20h",
+    status: "soon",
+  },
+];
+
+export function baseById(id: string | null | undefined): ContentBase {
+  return CONTENT_BASES.find((item) => item.id === id) ?? CONTENT_BASES[0]!;
+}

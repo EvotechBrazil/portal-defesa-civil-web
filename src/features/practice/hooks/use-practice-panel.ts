@@ -27,6 +27,7 @@ export function usePracticePanel(cardId: string) {
   const [step, setStep] = useState(0);
   const [lockedOptionId, setLockedOptionId] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [keyRevealed, setKeyRevealed] = useState(false);
   const attemptRef = useRef<string | null>(null);
   const resumedId = useRef<string | null>(null);
   const advanceTimer = useRef<number | null>(null);
@@ -52,6 +53,7 @@ export function usePracticePanel(cardId: string) {
     setStep(0);
     setLockedOptionId(null);
     setErrorMessage(null);
+    setKeyRevealed(false);
     attemptRef.current = null;
     resumedId.current = null;
   }, [cardId, cancelAdvance]);
@@ -70,6 +72,10 @@ export function usePracticePanel(cardId: string) {
   }, [historyQuery.data]);
 
   const start = useCallback(async () => {
+    if (keyRevealed) {
+      setErrorMessage("Gabarito já revelado. Esta avaliação não pode ser refeita.");
+      return;
+    }
     setErrorMessage(null);
     try {
       const next = await createMutation.mutateAsync();
@@ -83,10 +89,11 @@ export function usePracticePanel(cardId: string) {
     } catch (error: unknown) {
       setErrorMessage(getApiErrorMessage(error));
     }
-  }, [createMutation]);
+  }, [createMutation, keyRevealed]);
 
   const viewAnswerKey = useCallback(() => {
     setErrorMessage(null);
+    setKeyRevealed(true);
     setPhase("answer_key");
   }, []);
 
@@ -182,6 +189,7 @@ export function usePracticePanel(cardId: string) {
     lockedOptionId,
     errorMessage,
     isBusy,
+    keyRevealed,
     history: historyQuery.data?.history ?? [],
     questionCount: historyQuery.data?.questionCount ?? 0,
     isHistoryLoading: historyQuery.isLoading,

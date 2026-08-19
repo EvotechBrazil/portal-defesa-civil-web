@@ -5,6 +5,7 @@ interface PracticeIdleProps {
   questionCount: number;
   history: HistoryItem[];
   isStarting: boolean;
+  locked: boolean;
   onStart: () => void;
   onViewAnswerKey: () => void;
 }
@@ -13,6 +14,7 @@ export function PracticeIdle({
   questionCount,
   history,
   isStarting,
+  locked,
   onStart,
   onViewAnswerKey,
 }: PracticeIdleProps) {
@@ -29,20 +31,22 @@ export function PracticeIdle({
           : "nenhuma tentativa ainda"}
       </p>
       <div className="flex flex-wrap gap-2">
-        <Button type="button" disabled={isStarting} onClick={onStart}>
-          {isStarting
-            ? "Preparando…"
-            : history.length > 0
-              ? "Nova tentativa · embaralha as questões"
-              : "Iniciar tentativa · embaralha as questões"}
-        </Button>
+        {history.length === 0 && !locked ? (
+          <Button type="button" disabled={isStarting} onClick={onStart}>
+            {isStarting ? "Preparando…" : "Iniciar avaliação · questões embaralhadas"}
+          </Button>
+        ) : (
+          <p className="text-xs text-slate-500">
+            Avaliação encerrada. O gabarito já foi revelado e não pode ser refeita.
+          </p>
+        )}
         <Button
           type="button"
           disabled={isStarting}
           onClick={onViewAnswerKey}
           className="bg-slate-200 text-slate-800 hover:bg-slate-300"
         >
-          Só ver o gabarito
+          Ver gabarito
         </Button>
       </div>
     </div>

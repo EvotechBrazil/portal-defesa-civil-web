@@ -72,6 +72,7 @@ export function PracticePanel({ cardId }: PracticePanelProps) {
           questionCount={questionCount}
           history={panel.history}
           isStarting={panel.isBusy}
+          locked={panel.keyRevealed || panel.history.length > 0}
           onStart={() => void panel.start()}
           onViewAnswerKey={panel.viewAnswerKey}
         />
@@ -89,11 +90,7 @@ export function PracticePanel({ cardId }: PracticePanelProps) {
       ) : null}
 
       {panel.phase === "done" && panel.result ? (
-        <PracticeResult
-          result={panel.result}
-          isStarting={panel.isBusy}
-          onRetry={() => void panel.start()}
-        />
+        <PracticeResult result={panel.result} />
       ) : null}
 
       {panel.phase === "answer_key" ? (
@@ -108,9 +105,6 @@ export function PracticePanel({ cardId }: PracticePanelProps) {
             <PracticeAnswerKey questions={panel.answerKey} />
           ) : null}
           <div className="flex flex-wrap gap-2">
-            <Button type="button" disabled={panel.isBusy} onClick={() => void panel.start()}>
-              {panel.isBusy ? "Preparando…" : "Praticar mesmo assim"}
-            </Button>
             <Button
               type="button"
               disabled={panel.isBusy}

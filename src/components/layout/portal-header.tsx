@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const NAV = [
-  { href: "/biblioteca", label: "Biblioteca" },
+  { href: "/estudar", label: "Cartas" },
+  { href: "/biblioteca", label: "Material" },
   { href: "/questoes", label: "Questões" },
-  { href: "/estudar", label: "Estudar" },
   { href: "/praticar", label: "Praticar" },
   { href: "/desempenho", label: "Desempenho" },
 ];
@@ -12,7 +12,7 @@ export function PortalHeader() {
   return (
     <header className="border-b border-slate-200 bg-navy text-white">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        <Link href="/biblioteca" className="cursor-pointer font-semibold tracking-tight">
+        <Link href="/estudar" className="cursor-pointer font-semibold tracking-tight">
           Portal Defesa Civil
         </Link>
         <nav className="flex gap-4 text-sm">

@@ -11,7 +11,7 @@ export function useLogin() {
   return useMutation({
     mutationFn: (input: LoginInput) => loginAccount(input),
     onSuccess: () => {
-      router.push("/biblioteca");
+      router.push("/estudar");
     },
   });
 }
