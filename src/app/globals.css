@@ -1,10 +1,18 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-navy: #0f2744;
-  --color-amber: #d97706;
-  --color-background: #f8fafc;
-  --color-foreground: #0f172a;
+  --color-navy: #14110f;
+  --color-amber: #ea580c;
+  --color-flare: #ff7a1a;
+  --color-ink: #1c1917;
+  --color-panel: #262321;
+  --color-paper: #f4ede4;
+  --color-mist: #c4b8ad;
+  --color-ok: #34d399;
+  --color-hard: #f87171;
+  --color-learn: #fbbf24;
+  --color-background: #14110f;
+  --color-foreground: #f4ede4;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -21,24 +29,32 @@ a,
   cursor: pointer;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .flashcard-inner {
+    transition: none !important;
+  }
+}
+
 .study-shell {
-  min-height: calc(100vh - 57px);
-  background: #0f1115;
-  color: #e8ecf3;
+  min-height: calc(100vh - 64px);
+  background:
+    radial-gradient(1200px 480px at 10% -10%, rgba(234, 88, 12, 0.16), transparent 55%),
+    #14110f;
+  color: #f4ede4;
 }
 
 .flashcard-scene {
   perspective: 1400px;
-  height: 270px;
+  min-height: 320px;
   touch-action: pan-y;
 }
 
 .flashcard-inner {
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 320px;
   transform-style: preserve-3d;
-  transition: transform 0.45s ease;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .flashcard-inner.is-flipped {
@@ -54,17 +70,15 @@ a,
   inset: 0;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border-radius: 20px;
-  border: 1px solid #272d38;
-  background: #161a21;
-  padding: 38px 32px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #262321;
 }
 
 .flashcard-back {
   transform: rotateY(180deg);
-  background: #1c212a;
-  border-color: #ff7a1a;
+  border-color: #ea580c;
 }

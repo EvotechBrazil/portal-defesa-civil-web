@@ -11,23 +11,30 @@ import { PracticeSparkline } from "./practice-sparkline";
 
 export interface PracticePanelProps {
   cardId: string;
+  variant?: "light" | "onDark";
+  autoResume?: boolean;
 }
 
-export function PracticePanel({ cardId }: PracticePanelProps) {
-  const panel = usePracticePanel(cardId);
+export function PracticePanel({
+  cardId,
+  variant = "light",
+  autoResume = true,
+}: PracticePanelProps) {
+  const panel = usePracticePanel(cardId, { autoResume });
+  const dark = variant === "onDark";
 
   if (panel.isHistoryLoading) {
     return (
-      <Card>
-        <p className="text-sm text-slate-500">Carregando mini-prova…</p>
+      <Card className={dark ? "border-white/10 bg-panel text-paper" : undefined}>
+        <p className={dark ? "text-sm text-mist" : "text-sm text-slate-500"}>Carregando mini-prova…</p>
       </Card>
     );
   }
 
   if (panel.isHistoryError) {
     return (
-      <Card>
-        <p className="text-sm text-red-600">Não foi possível carregar o histórico desta carta.</p>
+      <Card className={dark ? "border-white/10 bg-panel text-paper" : undefined}>
+        <p className="text-sm text-hard">Não foi possível carregar o histórico desta carta.</p>
       </Card>
     );
   }
@@ -36,10 +43,10 @@ export function PracticePanel({ cardId }: PracticePanelProps) {
     panel.attempt?.total ?? panel.questionCount ?? panel.history[0]?.totalCount ?? 0;
 
   return (
-    <Card className="space-y-4">
+    <Card className={dark ? "space-y-4 border-white/10 bg-panel text-paper" : "space-y-4"}>
       <header className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <p className="text-sm font-semibold text-navy">
+          <p className={dark ? "text-sm font-semibold text-paper" : "text-sm font-semibold text-navy"}>
             {panel.phase === "running" && panel.attempt
               ? `Tentativa em andamento — sem gabarito até o fim`
               : panel.phase === "done"
@@ -49,11 +56,11 @@ export function PracticePanel({ cardId }: PracticePanelProps) {
                   : "Mini-prova"}
           </p>
           {panel.phase === "running" && panel.attempt ? (
-            <p className="text-xs text-slate-500">
+            <p className={dark ? "text-xs text-mist" : "text-xs text-slate-500"}>
               questão {panel.step + 1} de {panel.attempt.total}
             </p>
           ) : panel.history.length > 0 ? (
-            <p className="text-xs text-slate-500">
+            <p className={dark ? "text-xs text-mist" : "text-xs text-slate-500"}>
               {panel.history.length} tentativa{panel.history.length > 1 ? "s" : ""} nesta carta
             </p>
           ) : null}
@@ -73,6 +80,7 @@ export function PracticePanel({ cardId }: PracticePanelProps) {
           history={panel.history}
           isStarting={panel.isBusy}
           locked={panel.keyRevealed || panel.history.length > 0}
+          variant={variant}
           onStart={() => void panel.start()}
           onViewAnswerKey={panel.viewAnswerKey}
         />
@@ -85,6 +93,7 @@ export function PracticePanel({ cardId }: PracticePanelProps) {
           question={panel.currentQuestion}
           lockedOptionId={panel.lockedOptionId}
           disabled={panel.isBusy}
+          variant={variant}
           onChoose={(optionId) => void panel.chooseOption(optionId)}
         />
       ) : null}

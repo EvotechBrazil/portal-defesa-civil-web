@@ -15,7 +15,8 @@ import {
 
 const ADVANCE_MS = 260;
 
-export function usePracticePanel(cardId: string) {
+export function usePracticePanel(cardId: string, options?: { autoResume?: boolean }) {
+  const autoResume = options?.autoResume ?? true;
   const historyQuery = usePracticeHistory(cardId);
   const createMutation = useCreateAttempt(cardId);
   const answerMutation = useSubmitAnswer();
@@ -60,7 +61,7 @@ export function usePracticePanel(cardId: string) {
 
   useEffect(() => {
     const current = historyQuery.data?.current;
-    if (!current || resumedId.current === current.attemptId) {
+    if (!autoResume || !current || resumedId.current === current.attemptId) {
       return;
     }
     resumedId.current = current.attemptId;
@@ -69,7 +70,7 @@ export function usePracticePanel(cardId: string) {
     setPhase("running");
     const firstOpen = current.questions.findIndex((question) => !question.chosenOptionId);
     setStep(firstOpen === -1 ? Math.max(current.questions.length - 1, 0) : firstOpen);
-  }, [historyQuery.data]);
+  }, [autoResume, historyQuery.data]);
 
   const start = useCallback(async () => {
     if (keyRevealed) {

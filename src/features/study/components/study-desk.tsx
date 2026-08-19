@@ -38,13 +38,13 @@ export function StudyDesk() {
   return (
     <div className="study-shell">
       <div className="mx-auto max-w-[680px] px-4 py-6">
-        <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-[#ff7a1a]">
+        <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-flare">
           Repetição espaçada · 80/20
         </p>
-        <h1 className="mt-1 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight text-white">
+        <h1 className="mt-1 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight text-paper">
           Essenciais
         </h1>
-        <p className="mt-2 max-w-[62ch] text-sm text-[#9aa5b6]">
+        <p className="mt-2 max-w-[62ch] text-sm text-mist">
           Pareto do material: vire a carta, marque a dificuldade, leia a teoria embaixo e
           faça a mini-prova. Fácil volta pouco. Aprendendo, no meio. Difícil repete mais.
         </p>
@@ -61,11 +61,11 @@ export function StudyDesk() {
                   router.replace(`/estudar?base=${item.id}`);
                 }}
                 className={cn(
-                  "shrink-0 rounded-full border px-3 py-1.5 text-left text-[13px] transition",
+                  "min-h-11 shrink-0 rounded-2xl border px-3 py-2 text-left text-[13px] transition duration-200",
                   active
-                    ? "border-[#ff7a1a] bg-[#ff7a1a] font-semibold text-white"
-                    : "border-[#272d38] bg-[#1c212a] text-[#9aa5b6] hover:text-white",
-                  item.status === "soon" && !active && "opacity-70",
+                    ? "border-flare bg-flare font-semibold text-white"
+                    : "border-white/10 bg-panel text-mist hover:border-flare/40 hover:text-paper",
+                  item.status === "soon" && !active && "opacity-55",
                 )}
               >
                 <span className="block leading-tight">{item.title}</span>
@@ -80,16 +80,16 @@ export function StudyDesk() {
 
         <div className="mt-6">
           {base.status === "soon" ? (
-            <div className="rounded-[14px] border border-[#272d38] bg-[#161a21] px-5 py-10 text-center">
-              <p className="text-lg font-semibold text-white">{base.title}</p>
-              <p className="mt-2 text-sm text-[#9aa5b6]">
+            <div className="rounded-2xl border border-white/10 bg-panel px-5 py-10 text-center">
+              <p className="text-lg font-semibold text-paper">{base.title}</p>
+              <p className="mt-2 text-sm text-mist">
                 Em breve · {base.subtitle}. O baralho 80/20 entra no ar depois da aula.
               </p>
             </div>
           ) : createSession.isPending && !sessionId ? (
-            <p className="py-10 text-sm text-[#9aa5b6]">Montando o baralho essenciais…</p>
+            <p className="py-10 text-sm text-mist">Montando o baralho essenciais…</p>
           ) : createSession.isError ? (
-            <p className="py-10 text-sm text-[#e0524b]">
+            <p className="py-10 text-sm text-hard">
               Não foi possível abrir as cartas. Recarregue.
             </p>
           ) : sessionId ? (

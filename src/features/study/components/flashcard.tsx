@@ -1,8 +1,9 @@
 "use client";
 
-import { PointerEvent, TransitionEvent, useRef, useState } from "react";
+import { PointerEvent, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { MarkdownView } from "@/components/shared/markdown-view";
+import { cardArt } from "../card-art";
 import { CurrentCardView, ReviewRating } from "../types/study.types";
 
 const LEVEL_LABEL: Record<CurrentCardView["state"]["level"], string> = {
@@ -17,11 +18,11 @@ const SWIPE_PX = 88;
 interface FlashcardProps {
   frontCard: CurrentCardView;
   backCard: CurrentCardView;
+  courseSlug?: string | null;
   isFlipped: boolean;
   disabled?: boolean;
   onFlip: () => void;
   onRate: (rating: ReviewRating) => void;
-  onFlipEnd?: () => void;
 }
 
 function faceLabel(card: CurrentCardView, side: "front" | "back"): string {
@@ -37,39 +38,56 @@ function faceLabel(card: CurrentCardView, side: "front" | "back"): string {
 function CardFace({
   card,
   side,
+  art,
 }: {
   card: CurrentCardView;
   side: "front" | "back";
+  art: string | null;
 }) {
   const isBack = side === "back";
+  const showArt = isBack && art;
   return (
     <div className={cn("flashcard-face", isBack && "flashcard-back")}>
-      <p className="absolute top-[15px] left-[19px] text-[11px] uppercase tracking-[0.14em] text-[#9aa5b6]">
+      {showArt ? (
+        <img
+          src={art}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : null}
+      {showArt ? <div className="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/35 to-ink/20" /> : null}
+      <p className="absolute top-4 left-5 z-10 text-[11px] font-semibold uppercase tracking-[0.16em] text-mist">
         {faceLabel(card, side)}
       </p>
-      <p className="absolute top-[15px] right-[19px] text-[11px] text-[#9aa5b6]">{card.code}</p>
-      <div className="flex flex-1 items-center justify-center px-1 text-center">
+      <p className="absolute top-4 right-5 z-10 text-[11px] font-semibold text-flare">{card.code}</p>
+      <div
+        className={cn(
+          "relative z-10 flex flex-1 items-center justify-center px-6 text-center",
+          showArt ? "items-end pb-14 pt-16" : "px-8 pt-10 pb-12",
+        )}
+      >
         <MarkdownView
+          tone="onDark"
           markdown={isBack ? card.back : card.front}
           className={
             isBack
-              ? "text-[17.5px] leading-[1.55] text-[#e8ecf3] [&_strong]:text-[#ff7a1a]"
-              : "text-[23px] font-bold leading-[1.35] text-white"
+              ? "text-left text-[17px] leading-snug [&_p]:my-1 [&_p]:text-paper"
+              : "text-[22px] font-semibold leading-snug [&_p]:my-1 [&_p]:text-paper"
           }
         />
       </div>
       {!isBack ? (
-        <p className="absolute bottom-[15px] left-0 right-0 text-center text-[11.5px] text-[#9aa5b6] opacity-70">
+        <p className="absolute bottom-4 left-0 right-0 z-10 text-center text-[12px] text-mist">
           Toque para virar · arraste ← fácil · arraste → difícil
         </p>
       ) : null}
       <span
         className={cn(
-          "absolute bottom-[14px] left-[19px] rounded-full border px-2 py-0.5 text-[11px] uppercase",
-          card.state.level === "HARD" && "border-[#e0524b] text-[#e0524b]",
-          card.state.level === "LEARNING" && "border-[#eba43a] text-[#eba43a]",
-          card.state.level === "EASY" && "border-[#2fbf71] text-[#2fbf71]",
-          card.state.level === "NEW" && "border-[#272d38] text-[#9aa5b6]",
+          "absolute bottom-4 left-5 z-10 rounded-full border px-2.5 py-1 text-[11px] uppercase tracking-wide",
+          card.state.level === "HARD" && "border-hard text-hard",
+          card.state.level === "LEARNING" && "border-learn text-learn",
+          card.state.level === "EASY" && "border-ok text-ok",
+          card.state.level === "NEW" && "border-white/20 text-mist",
         )}
       >
         {LEVEL_LABEL[card.state.level]}
@@ -81,23 +99,17 @@ function CardFace({
 export function Flashcard({
   frontCard,
   backCard,
+  courseSlug,
   isFlipped,
   disabled,
   onFlip,
   onRate,
-  onFlipEnd,
 }: FlashcardProps) {
   const startX = useRef(0);
   const startY = useRef(0);
   const dragging = useRef(false);
   const [dragX, setDragX] = useState(0);
-
-  function handleTransitionEnd(event: TransitionEvent<HTMLDivElement>) {
-    if (event.propertyName !== "transform") {
-      return;
-    }
-    onFlipEnd?.();
-  }
+  const art = cardArt(courseSlug, frontCard.code);
 
   function onPointerDown(event: PointerEvent<HTMLButtonElement>) {
     if (disabled) {
@@ -148,8 +160,7 @@ export function Flashcard({
     }
   }
 
-  const overlay =
-    dragX < -24 ? "fácil" : dragX > 24 ? "difícil" : null;
+  const overlay = dragX < -24 ? "fácil" : dragX > 24 ? "difícil" : null;
 
   return (
     <button
@@ -165,8 +176,8 @@ export function Flashcard({
       {overlay ? (
         <span
           className={cn(
-            "pointer-events-none absolute inset-x-0 top-3 z-10 text-center text-xs font-semibold uppercase tracking-[0.14em]",
-            overlay === "fácil" ? "text-[#2fbf71]" : "text-[#e0524b]",
+            "pointer-events-none absolute inset-x-0 top-3 z-20 text-center text-xs font-semibold uppercase tracking-[0.14em]",
+            overlay === "fácil" ? "text-ok" : "text-hard",
           )}
         >
           {overlay}
@@ -185,10 +196,9 @@ export function Flashcard({
               }
             : undefined
         }
-        onTransitionEnd={handleTransitionEnd}
       >
-        <CardFace card={frontCard} side="front" />
-        <CardFace card={backCard} side="back" />
+        <CardFace card={frontCard} side="front" art={art} />
+        <CardFace card={backCard} side="back" art={art} />
       </div>
     </button>
   );

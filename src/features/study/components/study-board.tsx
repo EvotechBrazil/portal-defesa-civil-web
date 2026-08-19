@@ -78,11 +78,11 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
   }, [displayed?.finished, handleRate, isFlipped]);
 
   if (sessionQuery.isLoading) {
-    return <p className="px-1 py-10 text-sm text-[#9aa5b6]">Carregando a fila…</p>;
+    return <p className="px-1 py-10 text-sm text-mist">Carregando a fila…</p>;
   }
   if (sessionQuery.isError || !displayed) {
     return (
-      <p className="px-1 py-10 text-sm text-[#e0524b]">
+      <p className="px-1 py-10 text-sm text-hard">
         Não foi possível carregar a sessão. Recarregue a página.
       </p>
     );
@@ -90,7 +90,7 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
 
   if (displayed.finished || !displayed.card) {
     return (
-      <div className="rounded-[14px] border border-[#272d38] bg-[#161a21] p-4">
+      <div className="rounded-2xl border border-white/10 bg-panel p-4">
         <SessionSummary
           summary={finishMutation.data}
           fallback={{ reviews: displayed.reviews, tally: displayed.tally }}
@@ -111,7 +111,7 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
         <Stat label="Aprendendo" value={tally.LEARNING} tone="apr" />
         <Stat label="Fácil" value={tally.EASY} tone="fac" />
       </div>
-      <p className="flex justify-between text-[12.5px] text-[#9aa5b6]">
+      <p className="flex justify-between text-[12.5px] text-mist">
         <span>
           {displayed.card.direction === "REVERSE" ? "Mão dupla · inversa" : "Mão dupla · conceito → definição"}
         </span>
@@ -121,6 +121,7 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
       <Flashcard
         frontCard={displayed.card}
         backCard={backCard ?? displayed.card}
+        courseSlug={displayed.courseSlug}
         isFlipped={isFlipped}
         disabled={reviewMutation.isPending}
         onFlip={() => setIsFlipped((current) => !current)}
@@ -130,16 +131,16 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
       {isFlipped ? (
         <RatingButtons disabled={reviewMutation.isPending} onRate={handleRate} />
       ) : (
-        <p className="text-center text-[12.5px] text-[#9aa5b6]">
+        <p className="text-center text-[12.5px] text-mist">
           Vire a carta. Depois: Fácil ← · Aprendendo · Difícil →
         </p>
       )}
 
       {reviewMutation.isError ? (
-        <p className="text-sm text-[#e0524b]">Falha ao registrar. Tente de novo.</p>
+        <p className="text-sm text-hard">Falha ao registrar. Tente de novo.</p>
       ) : null}
 
-      <TheoryPanel card={displayed.card} />
+      {isFlipped ? <TheoryPanel card={displayed.card} /> : null}
     </div>
   );
 }
@@ -155,22 +156,22 @@ function Stat({
 }) {
   return (
     <div
-      className="rounded-xl border border-[#272d38] border-t-[3px] bg-[#161a21] px-3 py-2.5 text-center"
+      className="rounded-xl border border-white/10 border-t-[3px] bg-panel px-3 py-2.5 text-center"
       style={{
         borderTopColor:
-          tone === "dif" ? "#e0524b" : tone === "apr" ? "#eba43a" : tone === "fac" ? "#2fbf71" : "#272d38",
+          tone === "dif" ? "#f87171" : tone === "apr" ? "#fbbf24" : tone === "fac" ? "#34d399" : "rgba(255,255,255,0.1)",
       }}
     >
       <b
         className="block text-[22px] leading-tight"
         style={{
           color:
-            tone === "dif" ? "#e0524b" : tone === "apr" ? "#eba43a" : tone === "fac" ? "#2fbf71" : "#e8ecf3",
+            tone === "dif" ? "#f87171" : tone === "apr" ? "#fbbf24" : tone === "fac" ? "#34d399" : "#f4ede4",
         }}
       >
         {value}
       </b>
-      <small className="text-[11px] uppercase tracking-[0.07em] text-[#9aa5b6]">{label}</small>
+      <small className="text-[11px] uppercase tracking-[0.07em] text-mist">{label}</small>
     </div>
   );
 }
