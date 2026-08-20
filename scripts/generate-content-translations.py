@@ -5,8 +5,29 @@ The source of truth remains the Portuguese seed content in the sibling API
 project. Translations are produced locally with Argos Translate so no course
 material is sent to an external service.
 
-Usage (after installing Argos and the pt->es / pt->en language packages):
-    python scripts/generate-content-translations.py
+Requires Python >= 3.10 (spacy/thinc dropped 3.9; macOS system python won't do).
+
+    python3.14 -m venv .argos && .argos/bin/pip install argostranslate
+    .argos/bin/python -c "import argostranslate.package as p; p.update_package_index(); \
+        [p.install_from_path(k.download()) for k in p.get_available_packages() \
+         if (k.from_code, k.to_code) in (('pt','es'), ('pt','en'))]"
+    .argos/bin/python scripts/generate-content-translations.py
+
+INCREMENTAL RUNS. A full run re-translates all ~1800 strings and would discard
+the hand-tuned output already in `public/locales/<locale>/content.json`. To
+translate only what is new, seed the partial file with the current pack first:
+
+    for loc in es en; do cp public/locales/$loc/content.json \
+        public/locales/$loc/.content.partial.json; done
+
+`generate()` loads that partial, drops keys no longer in the source, and only
+translates what is missing. Always diff the result against the previous pack and
+confirm that zero pre-existing keys changed.
+
+MARKDOWN THE MODEL BREAKS. `!` and `▶` are not in PROTECTED_PATTERN, and the
+model mangles them along with the `](` that follows: `![alt](` came back as
+"I'm sorry. [alt](" in English. Anything of that shape goes in
+TRANSLATION_OVERRIDES keyed on the exact fragment, never left to the model.
 """
 
 from __future__ import annotations
@@ -29,9 +50,11 @@ JSON_FILES = (
     "decks.json",
     "aula1-decks.json",
     "aula2-decks.json",
+    "aula3-decks.json",
     "questoes.json",
     "aula1-questoes.json",
     "aula2-questoes.json",
+    "aula3-questoes.json",
 )
 
 STATIC_CONTENT = (
@@ -50,8 +73,11 @@ STATIC_CONTENT = (
     "Apostila · M06 Resposta",
     "Apostila · M07 Recuperação",
     "Apostila · M08 Ética e liderança",
+    "Aula 3 — Combate a incêndio",
     "Aula 1 · BREC e NOS",
+    "Aula 1 · Cartilha dos 7 nós",
     "Aula 2 · Águas rápidas",
+    "Aula 3 · Combate a incêndio",
     "Cartas essenciais",
     "Cartas de prova",
     "Essenciais · 80/20",
@@ -62,6 +88,16 @@ STATIC_CONTENT = (
     (
         "Táticas de águas rápidas: pirâmide resgatista-equipe-vítima, EPI, "
         "3 km/h, strainer, remanso, 45°, throw bag e choque térmico."
+    ),
+    (
+        "Cartilha dos 7 nós, um a um, com vídeo de execução: fiel, lais de guia, "
+        "azelha, oito, direito, carioca e cadeirinha rápida. Todo nó tira 20–50% "
+        "da corda; nó conferido é nó seguro."
+    ),
+    (
+        "Teoria do fogo aplicada ao combate: tetraedro, pirólise, propagação do "
+        "calor, pontos de fulgor/combustão/ignição, métodos de extinção e "
+        "classes A a K."
     ),
 )
 
@@ -90,6 +126,78 @@ TRANSLATION_OVERRIDES: dict[str, dict[str, str]] = {
     "Aula 1 · BREC e NOS": {"en": "Lesson 1 · BREC and KNOTS", "es": "Clase 1 · BREC y NUDOS"},
     "mais uma vítima": {"en": "another victim", "es": "una víctima más"},
     "Croqui do sinistro": {"en": "Incident sketch", "es": "Croquis del incidente"},
+    # Figuras da Aula 3: o "!" do markdown de imagem não é protegido — o
+    # modelo o transforma em "! " (es) e em "I'm sorry." (en), quebrando a
+    # sintaxe. Legendas fixadas à mão.
+    "![Brasa e carvão: a pirólise decompõe o sólido pelo calor e libera os gases que alimentam a chama](": {
+        "en": "![Embers and charcoal: pyrolysis breaks the solid down with heat and releases the gases that feed the flame](",
+        "es": "![Brasa y carbón: la pirólisis descompone el sólido por el calor y libera los gases que alimentan la llama](",
+    },
+    "![Propagação do calor em uma edificação: o incêndio avança de pavimento em pavimento pelas aberturas e pela estrutura](": {
+        "en": "![Heat propagation through a building: the fire climbs floor by floor through the openings and the structure](",
+        "es": "![Propagación del calor en una edificación: el incendio avanza piso a piso por las aberturas y por la estructura](",
+    },
+    # Frentes das cartas dos 7 nós: é o texto que o aluno lê primeiro e o
+    # modelo erra o vocabulário (azelha vira "oil"/"horquilla"). Fixadas à mão.
+    "Como o nó fiel prende a corda ao ponto fixo e o que trava esse nó?": {
+        "en": "How does the clove hitch secure the rope to a fixed point, and what locks it?",
+        "es": "¿Cómo sujeta el ballestrinque la cuerda al punto fijo y qué lo bloquea?",
+    },
+    "Por que o lais de guia é o nó de resgate de pessoa?": {
+        "en": "Why is the bowline the knot used to rescue a person?",
+        "es": "¿Por qué el as de guía es el nudo de rescate de personas?",
+    },
+    "Para que serve a azelha e qual é o seu preço depois da carga?": {
+        "en": "What is the overhand loop used for, and what does it cost after loading?",
+        "es": "¿Para qué sirve la gaza simple y cuál es su precio después de la carga?",
+    },
+    "Por que o nó oito é a conexão mais usada e como se confere o desenho dele?": {
+        "en": "Why is the figure eight the most-used connection, and how do you check its shape?",
+        "es": "¿Por qué el nudo ocho es la conexión más usada y cómo se comprueba su diseño?",
+    },
+    "Qual é o envelope de uso do nó direito e por que ele não sustenta vida sem travamento?": {
+        "en": "What is the square knot's envelope of use, and why can't it hold life-safety loads without a backup?",
+        "es": "¿Cuál es el ámbito de uso del nudo llano y por qué no sostiene vida sin bloqueo?",
+    },
+    "O que o nó carioca resolve que os nós de ponta não resolvem?": {
+        "en": "What does the carioca knot solve that end-of-rope knots cannot?",
+        "es": "¿Qué resuelve el nudo carioca que los nudos de punta no resuelven?",
+    },
+    "O que é a cadeirinha rápida e o que se confere antes de elevar?": {
+        "en": "What is the emergency harness, and what do you check before lifting?",
+        "es": "¿Qué es la silla rápida y qué se comprueba antes de elevar?",
+    },
+    # O glifo ▶ desmonta o tradutor: ele come o "](" e devolve markdown quebrado.
+    # Estes rótulos são fixados à mão e nunca passam pelo modelo.
+    "[▶ assistir](": {"en": "[▶ watch](", "es": "[▶ ver]("},
+    "[▶ Ver o nó fiel em vídeo](": {
+        "en": "[▶ Watch the clove hitch on video](",
+        "es": "[▶ Ver el ballestrinque en vídeo](",
+    },
+    "[▶ Ver o lais de guia em vídeo](": {
+        "en": "[▶ Watch the bowline on video](",
+        "es": "[▶ Ver el as de guía en vídeo](",
+    },
+    "[▶ Ver a azelha simples e dupla em vídeo](": {
+        "en": "[▶ Watch the single and double overhand loop on video](",
+        "es": "[▶ Ver la gaza simple y doble en vídeo](",
+    },
+    "[▶ Ver o nó oito em vídeo](": {
+        "en": "[▶ Watch the figure eight on video](",
+        "es": "[▶ Ver el nudo ocho en vídeo](",
+    },
+    "[▶ Ver o nó direito em vídeo](": {
+        "en": "[▶ Watch the square knot on video](",
+        "es": "[▶ Ver el nudo llano en vídeo](",
+    },
+    "[▶ Ver o nó carioca em vídeo](": {
+        "en": "[▶ Watch the carioca knot on video](",
+        "es": "[▶ Ver el nudo carioca en vídeo](",
+    },
+    "[▶ Ver a cadeirinha rápida em vídeo](": {
+        "en": "[▶ Watch the emergency harness on video](",
+        "es": "[▶ Ver la silla rápida en vídeo](",
+    },
 }
 
 # Corrections for rescue vocabulary that the compact offline models tend to
@@ -134,6 +242,29 @@ POST_REPLACEMENTS: dict[str, tuple[tuple[str, str], ...]] = {
         (" · segunda ", " · lunes "),
         (" → 4 conferir", " → 4 comprobar"),
         (" / pare", " / deténgase"),
+        # Módulo 2 (nós): o modelo lê "nó" como nodo de grafo e não conhece
+        # azelha nem cadeirinha. Substituições fecham o vocabulário de resgate.
+        ("nodo", "nudo"),
+        ("Nodo", "Nudo"),
+        ("azelha", "gaza"),
+        ("Azelha", "Gaza"),
+        ("pestaña simple y doble", "gaza simple y doble"),
+        ("pestaña", "gaza"),
+        ("cadeirinha", "silla"),
+        ("Cadeirinha", "Silla"),
+        # Versos das cartas dos nós: sobras de português e de vocabulário náutico.
+        ("medio-no", "medio nudo"),
+        ("meio-nó", "medio nudo"),
+        ("Asento", "Asiento"),
+        ("conferir", "comprobar"),
+        ("las alzas", "las gazas"),
+        ("en doble", "en pareja"),
+        # Títulos da cartilha dos 7 nós: o modelo deixa "Fiel" em português,
+        # traduz "Direito" ao pé da letra e come o parêntese do nó oito.
+        ("## 1. Fiel", "## 1. Ballestrinque"),
+        ("## 4. Ocho", "## 4. Nudo ocho (gaza doble)"),
+        ("## 5. Derecho", "## 5. Nudo llano"),
+        ("## 6. Carioca", "## 6. Nudo carioca"),
         ("| Fiel |", "| Ballestrinque |"),
         ("| Ocho |", "| Nudo ocho |"),
         ("| Derecho |", "| Nudo llano |"),
@@ -159,6 +290,36 @@ POST_REPLACEMENTS: dict[str, tuple[tuple[str, str], ...]] = {
         ("| Carioca | Handle in the middle of the rope | Multiple points on the same line |", "| Carioca knot | Loop in the middle of the rope | Multiple points on the same line |"),
         ("| Right | Join two equal ropes, light load | No load of life without locking |", "| Square knot | Join equal ropes for light loads | Not for life-safety loads unless backed up |"),
         ("| Quick notebook | Improvised seat | Check before lifting |", "| Emergency harness | Improvised seat harness | Check before lifting |"),
+        # Módulo 2 (nós): "azelha" vira "blueberry" e "nó" vira "node".
+        ("blueberry", "overhand loop"),
+        ("Blueberry", "Overhand loop"),
+        ("faithful node", "clove hitch"),
+        ("Faithful node", "Clove hitch"),
+        ("faithful knot", "clove hitch"),
+        ("Faithful knot", "Clove hitch"),
+        ("quick chair", "emergency harness"),
+        ("Quick chair", "Emergency harness"),
+        ("carioca node", "carioca knot"),
+        ("Carioca node", "Carioca knot"),
+        ("node eight", "figure eight"),
+        ("Node eight", "Figure eight"),
+        ("right node", "square knot"),
+        ("Right node", "Square knot"),
+        ("guide lais", "bowline"),
+        ("Guide lais", "Bowline"),
+        # Versos das cartas dos nós: "mosquetão" vira "musket", "meio-nó" vira "half-no".
+        ("half-no", "half hitch"),
+        ("musket", "carabiner"),
+        ("Quick handle", "Quick loop"),
+        ("Une two strings", "Joins two ropes"),
+        ("two strings of the same gauge", "two ropes of the same diameter"),
+        # Títulos da cartilha dos 7 nós.
+        ("## 1. Faithful", "## 1. Clove hitch"),
+        ("## 3. Blueberries (simple and double)", "## 3. Overhand loop (single and double)"),
+        ("## 4. Eight (double blue)", "## 4. Figure eight (double overhand loop)"),
+        ("## 5. Right", "## 5. Square knot"),
+        ("## 6. Carioca", "## 6. Carioca knot"),
+        ("## 7. Quick notebook", "## 7. Emergency harness"),
         ("## 2. Displacement in collapsed area", "## 2. Movement through a collapsed area"),
         (
             "Dusty, empty under slab, hardware, gas smell and snap are order of retreat.",

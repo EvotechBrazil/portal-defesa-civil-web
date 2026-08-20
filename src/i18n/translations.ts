@@ -394,7 +394,7 @@ const ptBR: Record<string, string> = {
   "content.base.lesson2.title": "Aula 2",
   "content.base.lesson2.subtitle": "Águas rápidas · terça 18/08",
   "content.base.lesson3.title": "Aula 3",
-  "content.base.lesson3.subtitle": "Quarta 19/08 · 20h",
+  "content.base.lesson3.subtitle": "Combate a incêndio · quarta 19/08",
   "content.base.lesson4.title": "Aula 4",
   "content.base.lesson4.subtitle": "Quinta 20/08 · 20h",
 };
@@ -766,7 +766,7 @@ const es: Record<string, string> = {
   "content.base.lesson2.title": "Clase 2",
   "content.base.lesson2.subtitle": "Aguas rápidas · martes 18/08",
   "content.base.lesson3.title": "Clase 3",
-  "content.base.lesson3.subtitle": "Miércoles 19/08 · 20:00",
+  "content.base.lesson3.subtitle": "Combate a incendios · miércoles 19/08",
   "content.base.lesson4.title": "Clase 4",
   "content.base.lesson4.subtitle": "Jueves 20/08 · 20:00",
 };
@@ -1138,7 +1138,7 @@ const en: Record<string, string> = {
   "content.base.lesson2.title": "Class 2",
   "content.base.lesson2.subtitle": "Swiftwater rescue · Tuesday 18/08",
   "content.base.lesson3.title": "Class 3",
-  "content.base.lesson3.subtitle": "Wednesday 19/08 · 8 PM",
+  "content.base.lesson3.subtitle": "Firefighting · Wednesday 19/08",
   "content.base.lesson4.title": "Class 4",
   "content.base.lesson4.subtitle": "Thursday 20/08 · 8 PM",
 };
