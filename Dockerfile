@@ -15,7 +15,10 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 COPY package.json pnpm-lock.yaml ./
 # --include=dev equivalente: o build precisa das devDependencies (next, tailwind,
 # typescript). Nao troque por --prod.
-RUN pnpm install --frozen-lockfile
+# --prod=false e obrigatorio: o Coolify injeta as envs da aplicacao como build
+# ARGs, entao NODE_ENV=production chega aqui e faz o pnpm pular devDependencies.
+# Sem elas, o postinstall (prisma generate) e o build do framework nao rodam.
+RUN pnpm install --frozen-lockfile --prod=false
 
 COPY . .
 
