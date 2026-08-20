@@ -1,7 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { EmptyState } from "@/components/ui/empty-state";
+import { Modal } from "@/components/ui/modal";
 import { FlashcardSkeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/i18n/i18n-provider";
 import {
@@ -41,6 +45,8 @@ const FOCUS_STATS: { focus: Exclude<StudyFocus, null>; labelKey: string; tone: T
 
 export function StudyBoard({ sessionId }: StudyBoardProps) {
   const { t } = useI18n();
+  const router = useRouter();
+  const [stopOpen, setStopOpen] = useState(false);
   const [focus, setFocus] = useState<StudyFocus>(null);
   const sessionQuery = useStudySession(sessionId, focus);
   const reviewMutation = useReviewStudySession(sessionId, focus);
@@ -111,9 +117,17 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
   }
   if (sessionQuery.isError || !displayed) {
     return (
-      <p className="px-1 py-10 text-sm text-hard">
+      <EmptyState
+        tone="hard"
+        title={t("study.openErrorTitle")}
+        actions={
+          <Button type="button" onClick={() => void sessionQuery.refetch()}>
+            {t("common.tryAgain")}
+          </Button>
+        }
+      >
         {t("study.sessionError")}
-      </p>
+      </EmptyState>
     );
   }
 
@@ -132,8 +146,48 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
 
   const levels = displayed.queueLevels;
 
+  const rated = displayed.reviews;
+  const remaining = displayed.queueLength;
+
   return (
     <div className="space-y-4">
+      <div className="flex items-center justify-between gap-3">
+        <p className="font-mono text-micro uppercase tracking-[0.14em] text-mist">
+          {t("study.queueProgress", { done: rated, total: rated + remaining })}
+        </p>
+        <Button
+          type="button"
+          className="bg-inset text-paper hover:bg-inset"
+          onClick={() => setStopOpen(true)}
+        >
+          {t("study.stopSession")}
+        </Button>
+      </div>
+      <Modal
+        open={stopOpen}
+        onClose={() => setStopOpen(false)}
+        title={t("study.stopTitle")}
+        footer={
+          <>
+            <Button type="button" className="bg-inset text-paper hover:bg-inset" onClick={() => setStopOpen(false)}>
+              {t("study.keepStudying")}
+            </Button>
+            <Button
+              type="button"
+              className="bg-hard hover:bg-hard/90"
+              onClick={() => {
+                void finishMutation.mutateAsync().finally(() => {
+                  router.push("/estudar");
+                });
+              }}
+            >
+              {t("study.stopNow")}
+            </Button>
+          </>
+        }
+      >
+        {t("study.stopBody", { done: rated })}
+      </Modal>
       <div className="grid grid-cols-4 gap-2">
         <Stat
           label={t("study.inQueue")}

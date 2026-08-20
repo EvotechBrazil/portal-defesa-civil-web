@@ -22,39 +22,58 @@ export function ModuleAccuracyHeat({ modules }: { modules: ModuleAccuracy[] }) {
         {t("stats.accuracyHint")}
       </p>
       <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
-        {modules.map((module) => (
-          <li
-            key={module.code}
-            className={`rounded-lg border p-3 ${heatClass(module.accuracyPct, module.attempts)}`}
-          >
-            <p className="text-xs font-semibold uppercase tracking-wide">{module.code}</p>
-            <p className="mt-1 line-clamp-2 text-sm font-medium">
-              {translateContent(module.title)}
-            </p>
-            <p className="mt-3 text-2xl font-semibold tabular-nums">
-              {module.attempts === 0 ? "—" : `${module.accuracyPct}%`}
-            </p>
-            <p className="text-xs opacity-80">
-              {module.attempts === 0
-                ? t("stats.noAttempts")
-                : t("stats.attemptCount", { count: module.attempts })}
-            </p>
-          </li>
-        ))}
+        {modules.map((module) => {
+          const band = heatBand(module.accuracyPct, module.attempts);
+          return (
+            <li
+              key={module.code}
+              className={`rounded-lg border p-3 ${band.className}`}
+              style={band.hatch ? { backgroundImage: band.hatch } : undefined}
+            >
+              <p className="text-xs font-semibold uppercase tracking-wide">
+                {band.mark} {module.code}
+              </p>
+              <p className="mt-1 line-clamp-2 text-sm font-medium">
+                {translateContent(module.title)}
+              </p>
+              <p className="mt-3 text-2xl font-semibold tabular-nums">
+                {module.attempts === 0 ? "—" : `${module.accuracyPct}%`}
+              </p>
+              <p className="text-xs opacity-80">
+                {module.attempts === 0
+                  ? t("stats.noAttempts")
+                  : t("stats.attemptCount", { count: module.attempts })}
+              </p>
+            </li>
+          );
+        })}
       </ul>
+      <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1 font-mono text-micro uppercase tracking-[0.12em] text-mist">
+        <span>✓ {t("stats.legend.ok")}</span>
+        <span>△ {t("stats.legend.watch")}</span>
+        <span>✕ {t("stats.legend.weak")}</span>
+      </p>
     </Card>
   );
 }
 
-function heatClass(accuracyPct: number, attempts: number): string {
+function heatBand(accuracyPct: number, attempts: number): {
+  className: string;
+  mark: string;
+  hatch?: string;
+} {
   if (attempts === 0) {
-    return "border-line bg-inset text-mist";
+    return { className: "border-line bg-inset text-mist", mark: "·" };
   }
-  if (accuracyPct < 40) {
-    return "border-hard bg-hard-surf text-hard";
+  if (accuracyPct < 55) {
+    return {
+      className: "border-hard text-hard",
+      mark: "✕",
+      hatch: "repeating-linear-gradient(-45deg, var(--hard-surf), var(--hard-surf) 6px, transparent 6px, transparent 10px)",
+    };
   }
   if (accuracyPct < 70) {
-    return "border-learn bg-learn-surf text-learn";
+    return { className: "border-learn bg-learn-surf text-learn", mark: "△" };
   }
-  return "border-ok bg-ok-surf text-ok";
+  return { className: "border-ok bg-ok-surf text-ok", mark: "✓" };
 }

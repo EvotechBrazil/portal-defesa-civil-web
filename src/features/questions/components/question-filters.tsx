@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { CourseModule } from "@/features/catalog/types/catalog.types";
@@ -29,6 +29,7 @@ export function QuestionFilters({
   onModeChange,
 }: QuestionFiltersProps) {
   const { t, translateContent } = useI18n();
+  const [more, setMore] = useState(false);
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     onSearchSubmit(search);
@@ -65,7 +66,16 @@ export function QuestionFilters({
         </div>
       </form>
 
-      <div className="inline-flex rounded-lg border border-line bg-panel p-1">
+      <button
+        type="button"
+        className="min-h-11 self-start rounded-ctl border border-line px-3 text-sm text-paper md:hidden"
+        aria-expanded={more}
+        onClick={() => setMore((value) => !value)}
+      >
+        {t("questions.moreFilters")}
+      </button>
+
+      <div className={`inline-flex rounded-lg border border-line bg-panel p-1 ${more ? "" : "hidden md:inline-flex"}`}>
         <button
           type="button"
           onClick={() => onModeChange("study")}

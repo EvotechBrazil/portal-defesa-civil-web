@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { EmptyState } from "@/components/ui/empty-state";
+import { FlashcardSkeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/i18n/i18n-provider";
+import { cn } from "@/lib/utils";
 import { baseById, CONTENT_BASES, DEFAULT_BASE_ID } from "../content-bases";
 import { useCreateStudySession } from "../hooks/use-study-session";
 import type { DeckSelector } from "../types/study.types";
-import { StudyBoard } from "./study-board";
 
 export function StudyDesk() {
   const { t } = useI18n();
@@ -16,126 +17,141 @@ export function StudyDesk() {
   const base = baseById(params.get("base") ?? DEFAULT_BASE_ID);
   const deckSelector: DeckSelector = params.get("modo") === "completo" ? "FULL" : "ESSENTIAL";
   const createSession = useCreateStudySession();
-  const startedFor = useRef<string | null>(null);
-  const sessionId = createSession.data?.sessionId;
 
-  useEffect(() => {
-    if (base.status !== "open" || !base.courseSlug) {
-      return;
-    }
-    const sessionKey = `${base.id}:${deckSelector}`;
-    if (startedFor.current === sessionKey) {
-      return;
-    }
-    startedFor.current = sessionKey;
-    createSession.reset();
-    createSession.mutate({
-      deckSelector,
-      bidir: true,
-      filter: "ALL",
-      courseSlug: base.courseSlug,
-    });
-    // mutate/reset mudam de identidade a cada render do mutation — a guarda
-    // startedFor impede retrigger; a dependência é só a base escolhida.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [base.courseSlug, base.id, base.status, deckSelector]);
-
-  function selectMode(next: DeckSelector) {
+  function setQuery(next: { base?: string; modo?: DeckSelector }) {
     const query = new URLSearchParams(params.toString());
-    if (next === "FULL") {
+    const nextBase = next.base ?? base.id;
+    if (nextBase === DEFAULT_BASE_ID) {
+      query.delete("base");
+    } else {
+      query.set("base", nextBase);
+    }
+    const nextMode = next.modo ?? deckSelector;
+    if (nextMode === "FULL") {
       query.set("modo", "completo");
     } else {
       query.delete("modo");
     }
-    startedFor.current = null;
     const search = query.toString();
     router.replace(search ? `/estudar?${search}` : "/estudar");
   }
 
+  function start() {
+    if (base.status !== "open" || !base.courseSlug) {
+      return;
+    }
+    createSession.mutate(
+      {
+        deckSelector,
+        bidir: true,
+        filter: "ALL",
+        courseSlug: base.courseSlug,
+      },
+      {
+        onSuccess: (view) => {
+          if (view.finished || !view.card) {
+            return;
+          }
+          router.push(`/estudar/${view.sessionId}`);
+        },
+      },
+    );
+  }
+
+  const emptyQueue = Boolean(createSession.data && (createSession.data.finished || !createSession.data.card));
+
   return (
     <div className="study-shell">
       <div className="mx-auto max-w-[680px] px-4 py-6">
-        <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-flare-ink">
-          {t("study.spacedRepetition")} · {deckSelector === "FULL" ? t("study.coverageFull") : "80/20"}
+        <p className="font-mono text-micro font-medium uppercase tracking-[0.14em] text-mist">
+          {t("study.newSession")}
         </p>
         <h1 className="mt-1 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight text-paper">
-          {deckSelector === "FULL" ? t("study.full") : t("study.essential")}
+          {t("study.startTitle")}
         </h1>
-        <p className="mt-2 max-w-[62ch] text-sm text-mist">
-          {deckSelector === "FULL"
-            ? t("study.fullDescription")
-            : t("study.essentialDescription")}
-        </p>
+        <p className="mt-2 max-w-[62ch] text-sm text-mist">{t("study.startHint")}</p>
 
-        {base.id === DEFAULT_BASE_ID ? (
-          <div className="mt-5 grid gap-3 sm:grid-cols-2" aria-label={t("study.modeLabel")}>
-            <ModeChoice
-              selected={deckSelector === "ESSENTIAL"}
-              eyebrow={t("study.recommended")}
-              title={t("study.essential")}
-              description={t("study.essentialCount")}
-              onSelect={() => selectMode("ESSENTIAL")}
-            />
-            <ModeChoice
-              selected={deckSelector === "FULL"}
-              eyebrow={t("study.fullRoute")}
-              title={t("study.full")}
-              description={t("study.fullCount")}
-              onSelect={() => selectMode("FULL")}
-            />
-          </div>
-        ) : null}
+        <p className="mt-6 font-mono text-micro uppercase tracking-[0.14em] text-mist">{t("study.trackStep")}</p>
+        <div className="mt-2 grid gap-3 sm:grid-cols-2" aria-label={t("study.modeLabel")}>
+          <ModeChoice
+            selected={deckSelector === "ESSENTIAL"}
+            eyebrow={t("study.recommended")}
+            title={t("study.essential")}
+            description={t("study.essentialCount")}
+            onSelect={() => setQuery({ modo: "ESSENTIAL" })}
+          />
+          <ModeChoice
+            selected={deckSelector === "FULL"}
+            eyebrow={t("study.fullRoute")}
+            title={t("study.full")}
+            description={t("study.fullCount")}
+            onSelect={() => setQuery({ modo: "FULL" })}
+          />
+        </div>
 
-        <nav className="mt-5 flex gap-2 overflow-x-auto pb-1">
+        <p className="mt-6 font-mono text-micro uppercase tracking-[0.14em] text-mist">{t("study.baseStep")}</p>
+        <div className="mt-2 grid gap-2 sm:grid-cols-2">
           {CONTENT_BASES.map((item) => {
             const active = item.id === base.id;
+            const soon = item.status === "soon";
             return (
               <button
                 key={item.id}
                 type="button"
-                onClick={() => {
-                  startedFor.current = null;
-                  router.replace(`/estudar?base=${item.id}`);
-                }}
+                onClick={() => setQuery({ base: item.id })}
                 className={cn(
-                  "min-h-11 shrink-0 rounded-2xl border px-3 py-2 text-left text-[13px] transition duration-200",
+                  "min-h-11 rounded-ctl border px-3 py-3 text-left text-sm transition",
                   active
-                    ? "border-flare bg-primary font-semibold text-primary-ink"
-                    : "border-line bg-panel text-mist hover:border-flare/40 hover:text-paper",
-                  item.status === "soon" && !active && "opacity-55",
+                    ? "border-paper bg-panel font-semibold text-paper"
+                    : "border-line bg-panel text-mist hover:border-paper/40 hover:text-paper",
+                  soon && "border-dashed",
                 )}
               >
                 <span className="block leading-tight">{contentBaseText(item.id, "title", t)}</span>
-                <span className="block text-[10px] uppercase tracking-[0.06em] opacity-80">
-                  {item.status === "soon" ? `${t("common.soon")} · ` : ""}
+                <span className="mt-0.5 block text-xs text-mist">
+                  {soon ? `${t("common.soon")} · ` : null}
                   {contentBaseText(item.id, "subtitle", t)}
                 </span>
               </button>
             );
           })}
-        </nav>
+        </div>
 
         <div className="mt-6">
           {base.status === "soon" ? (
-            <div className="rounded-2xl border border-line bg-panel px-5 py-10 text-center">
-              <p className="text-lg font-semibold text-paper">{contentBaseText(base.id, "title", t)}</p>
-              <p className="mt-2 text-sm text-mist">
-                {t("study.soonDeck", { subtitle: contentBaseText(base.id, "subtitle", t) })}
-              </p>
-            </div>
-          ) : createSession.isPending && !sessionId ? (
-            <p className="py-10 text-sm text-mist">
-              {t("study.buildingDeck", {
-                mode: deckSelector === "FULL" ? t("study.modeComplete") : t("study.modeEssential"),
-              })}
-            </p>
+            <EmptyState tone="learn" title={contentBaseText(base.id, "title", t)}>
+              {t("study.soonDeck", { subtitle: contentBaseText(base.id, "subtitle", t) })}
+            </EmptyState>
+          ) : createSession.isPending ? (
+            <FlashcardSkeleton>{t("study.buildingDeck", { mode: deckSelector === "FULL" ? t("study.modeComplete") : t("study.modeEssential") })}</FlashcardSkeleton>
           ) : createSession.isError ? (
-            <p className="py-10 text-sm text-hard">
-              {t("study.openError")}
-            </p>
-          ) : sessionId ? (
-            <StudyBoard key={sessionId} sessionId={sessionId} />
-          ) : null}
+            <EmptyState
+              tone="hard"
+              title={t("study.openErrorTitle")}
+              actions={
+                <Button type="button" onClick={start}>
+                  {t("common.tryAgain")}
+                </Button>
+              }
+            >
+              {t("study.openErrorBody")}
+            </EmptyState>
+          ) : emptyQueue ? (
+            <EmptyState
+              title={t("study.queueEmptyTitle")}
+              actions={
+                <Button type="button" className="bg-inset text-paper hover:bg-inset" onClick={() => router.push("/desempenho")}>
+                  {t("nav.performance")}
+                </Button>
+              }
+            >
+              {t("study.queueEmptyBody")}
+            </EmptyState>
+          ) : (
+            <Button type="button" className="min-h-12 w-full sm:w-auto" onClick={start}>
+              {t("study.startSession")}
+            </Button>
+          )}
         </div>
       </div>
     </div>
@@ -176,13 +192,11 @@ function ModeChoice({
       aria-pressed={selected}
       onClick={onSelect}
       className={cn(
-        "min-h-28 rounded-2xl border p-4 text-left transition duration-200 active:scale-[0.99]",
-        selected
-          ? "border-flare bg-flare/10 shadow-[0_0_0_1px_rgba(249,115,22,0.35)]"
-          : "border-line bg-panel hover:border-flare/50",
+        "min-h-28 rounded-card border p-4 text-left transition duration-200 active:scale-[0.99]",
+        selected ? "border-paper bg-card" : "border-line bg-panel hover:border-paper/40",
       )}
     >
-      <span className="block text-[10px] font-bold uppercase tracking-[0.12em] text-flare-ink">
+      <span className="block font-mono text-micro font-medium uppercase tracking-[0.12em] text-flare-ink">
         {eyebrow}
       </span>
       <span className="mt-1 block text-base font-semibold text-paper">{title}</span>

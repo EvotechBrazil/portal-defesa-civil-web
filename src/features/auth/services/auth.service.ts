@@ -1,4 +1,4 @@
-import { api, setSession } from "@/lib/api";
+import { api, clearSession, getRefreshToken, setSession } from "@/lib/api";
 import type { ApiEnvelope } from "@/types/api.types";
 import type {
   AccessRequestInput,
@@ -48,4 +48,20 @@ export async function verifyEmail(token: string): Promise<VerifyEmailResult> {
 
 export async function resendVerification(email: string): Promise<void> {
   await api.post("/auth/resend-verification", { email });
+}
+
+export async function logoutAccount(): Promise<void> {
+  const refreshToken = getRefreshToken();
+  try {
+    if (refreshToken) {
+      await api.post("/auth/logout", { refreshToken });
+    }
+  } catch {
+    // O cookie local cai mesmo se o revoke remoto falhar.
+  } finally {
+    clearSession();
+    if (typeof window !== "undefined") {
+      window.location.href = "/login";
+    }
+  }
 }

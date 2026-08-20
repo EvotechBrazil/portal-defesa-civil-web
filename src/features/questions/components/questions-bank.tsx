@@ -2,12 +2,13 @@
 
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { useI18n } from "@/i18n/i18n-provider";
 import { useCourse } from "@/features/catalog/hooks/use-course";
 import { questionsFilterSchema } from "../schemas/questions-filter.schema";
 import { useQuestions } from "../hooks/use-questions";
 import type { QuestionBankMode } from "../types/questions.types";
+import { TablePagination } from "@/components/ui/data-table";
+import { TableRowSkeleton } from "@/components/ui/skeleton";
 import { QuestionFilters } from "./question-filters";
 import { QuestionItem } from "./question-item";
 
@@ -79,7 +80,13 @@ export function QuestionsBank() {
       />
 
       <div className="mt-6">
-        {questionsQuery.isLoading ? <p className="text-mist">{t("questions.loading")}</p> : null}
+        {questionsQuery.isLoading ? (
+          <div aria-busy="true">
+            <TableRowSkeleton />
+            <TableRowSkeleton />
+            <TableRowSkeleton />
+          </div>
+        ) : null}
         {questionsQuery.isError ? (
           <p className="text-hard">{t("questions.error")}</p>
         ) : null}
@@ -100,30 +107,15 @@ export function QuestionsBank() {
       </div>
 
       {meta && (meta.pageCount ?? 0) > 1 ? (
-        <div className="mt-6 flex items-center justify-between">
-          <Button
-            type="button"
-            disabled={page <= 1}
-            onClick={() => setPage((current) => Math.max(1, current - 1))}
-            className="bg-paper hover:bg-paper/90"
-          >
-            {t("common.previous")}
-          </Button>
-          <p className="text-sm text-mist">
-            {t("questions.pagination", {
-              page: meta.page ?? page,
-              pageCount: meta.pageCount ?? 1,
-              total: meta.total ?? questions.length,
-            })}
-          </p>
-          <Button
-            type="button"
-            disabled={page >= (meta.pageCount ?? 1)}
-            onClick={() => setPage((current) => current + 1)}
-            className="bg-paper hover:bg-paper/90"
-          >
-            {t("common.next")}
-          </Button>
+        <div className="mt-6">
+          <TablePagination
+            from={(page - 1) * 20 + 1}
+            to={Math.min(page * 20, meta.total ?? questions.length)}
+            total={meta.total ?? questions.length}
+            page={meta.page ?? page}
+            pageCount={meta.pageCount ?? 1}
+            onPageChange={setPage}
+          />
         </div>
       ) : meta ? (
         <p className="mt-6 text-center text-sm text-mist">

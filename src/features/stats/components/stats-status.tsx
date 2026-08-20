@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { EmptyState } from "@/components/ui/empty-state";
 import { useI18n } from "@/i18n/i18n-provider";
 
 export function StatsLoading() {
@@ -38,9 +40,18 @@ export function StatsError({ onRetry }: { onRetry: () => void }) {
 export function StatsEmpty() {
   const { t } = useI18n();
   return (
-    <div className="rounded-xl border border-dashed border-line bg-panel p-8 text-center">
-      <h2 className="text-lg font-semibold text-paper">{t("stats.empty")}</h2>
-      <p className="mt-2 text-sm text-mist">{t("stats.emptyHint")}</p>
-    </div>
+    <EmptyState
+      title={t("stats.empty")}
+      actions={
+        <Link
+          href="/estudar"
+          className="inline-flex min-h-11 items-center justify-center rounded-ctl bg-primary px-4 text-sm font-medium text-primary-ink"
+        >
+          {t("stats.emptyCta")}
+        </Link>
+      }
+    >
+      {t("stats.emptyHint")}
+    </EmptyState>
   );
 }

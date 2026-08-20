@@ -6,6 +6,7 @@ import { SessionsTimeline } from "./sessions-timeline";
 import { StuckCardsList } from "./stuck-cards-list";
 import type { ModuleAccuracy, UserStats } from "../types/stats.types";
 import { useI18n } from "@/i18n/i18n-provider";
+import Link from "next/link";
 
 export function StatsPanels({ data }: { data: UserStats }) {
   return (
@@ -31,21 +32,27 @@ function WeakSpotBanner({
   const { t } = useI18n();
   const weakest = weakestModule(modules);
   return (
-    <div className="rounded-xl border border-learn bg-learn-surf px-4 py-3 text-sm text-learn">
-      {weakest ? (
+    <div className="flex flex-col gap-2 rounded-xl border border-learn bg-learn-surf px-4 py-3 text-sm text-learn sm:flex-row sm:items-center sm:justify-between">
+      <div>
         <p>
-          {t("stats.weakest", {
-            code: weakest.code,
-            accuracy: weakest.accuracyPct,
-            attempts: weakest.attempts,
-          })}
+          {weakest
+            ? t("stats.weakest", {
+                code: weakest.code,
+                accuracy: weakest.accuracyPct,
+                attempts: weakest.attempts,
+              })
+            : t("stats.noWeakest")}
         </p>
-      ) : (
-        <p>{t("stats.noWeakest")}</p>
-      )}
-      <p className="mt-1">
-        {stuckCount === 0 ? t("stats.noStuck") : t("stats.stuckCount", { count: stuckCount })}
-      </p>
+        <p className="mt-1">
+          {stuckCount === 0 ? t("stats.noStuck") : t("stats.stuckCount", { count: stuckCount })}
+        </p>
+      </div>
+      <Link
+        href="/praticar"
+        className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-ctl border border-learn px-3 font-medium"
+      >
+        {t("nav.practice")}
+      </Link>
     </div>
   );
 }

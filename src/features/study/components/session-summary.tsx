@@ -22,21 +22,45 @@ export function SessionSummary({
   const { t } = useI18n();
   const tally = summary?.tally ?? fallback?.tally;
   const reviews = summary?.reviews ?? fallback?.reviews ?? 0;
+  const levels = tally
+    ? [
+        { key: "hard", count: tally.HARD, bar: "bg-hard", label: t("study.hard") },
+        { key: "learn", count: tally.LEARNING, bar: "bg-learn", label: t("study.learning") },
+        { key: "easy", count: tally.EASY, bar: "bg-ok", label: t("study.easy") },
+      ]
+    : [];
+  const max = Math.max(1, ...levels.map((level) => level.count));
 
   return (
-    <section className="mx-auto max-w-xl px-4 py-10">
-      <Card className="space-y-4">
+    <section className="mx-auto max-w-xl">
+      <Card className="space-y-5">
         <h1 className="text-2xl font-semibold text-paper">{t("study.sessionComplete")}</h1>
         <p className="text-sm text-mist">{t("study.roundReviews", { count: reviews })}</p>
-        {tally ? (
-          <p className="text-sm text-paper">
-            {t("study.tally", { easy: tally.EASY, learning: tally.LEARNING, hard: tally.HARD })}
-          </p>
+        {levels.length > 0 ? (
+          <div>
+            <p className="font-mono text-micro uppercase tracking-[0.14em] text-mist">{t("study.byLevel")}</p>
+            <ul className="mt-3 space-y-2">
+              {levels.map((level) => (
+                <li key={level.key}>
+                  <div className="mb-1 flex justify-between text-sm">
+                    <span className="text-paper">{level.label}</span>
+                    <span className="tabular-nums text-mist">{level.count}</span>
+                  </div>
+                  <div className="h-2 overflow-hidden rounded-full bg-inset">
+                    <div
+                      className={`h-full rounded-full ${level.bar}`}
+                      style={{ width: `${Math.round((level.count / max) * 100)}%` }}
+                    />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         ) : null}
         {summary ? (
-          <p className="text-sm">
+          <p className="text-sm text-paper">
             <b>
-              {summary.easyCount} de {summary.poolSize}
+              {summary.easyCount} {t("common.of")} {summary.poolSize}
             </b>{" "}
             {t("study.easyPool")}
           </p>
@@ -45,12 +69,20 @@ export function SessionSummary({
             {isLoading ? t("study.closing") : t("study.viewSummary")}
           </Button>
         )}
-        <Link
-          href="/estudar"
-          className="inline-flex min-h-11 cursor-pointer items-center justify-center rounded-ctl bg-paper px-4 py-2 text-sm font-medium text-ink transition hover:bg-paper/90"
-        >
-          {t("study.newSession")}
-        </Link>
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <Link
+            href="/estudar"
+            className="inline-flex min-h-11 flex-1 items-center justify-center rounded-ctl bg-primary px-4 text-sm font-medium text-primary-ink"
+          >
+            {t("study.stopToday")}
+          </Link>
+          <Link
+            href="/estudar"
+            className="inline-flex min-h-11 flex-1 items-center justify-center rounded-ctl border border-line bg-panel px-4 text-sm font-medium text-paper"
+          >
+            {t("study.newSession")}
+          </Link>
+        </div>
       </Card>
     </section>
   );

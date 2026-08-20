@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { EmptyState } from "@/components/ui/empty-state";
+import { TableRowSkeleton } from "@/components/ui/skeleton";
 import { Tabs } from "@/components/ui/tabs";
 import { formatWhatsapp } from "@/features/auth/lib/whatsapp";
 import { getApiErrorMessage } from "@/features/auth/services/get-api-error-message";
@@ -169,10 +171,16 @@ function RequestList({
 }) {
   const { t } = useI18n();
   if (isLoading) {
-    return <p className="text-sm text-mist">{t("common.loading")}</p>;
+    return (
+      <div className="space-y-3" aria-busy="true">
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+      </div>
+    );
   }
   if (!rows || rows.length === 0) {
-    return <p className="text-sm text-mist">{empty}</p>;
+    return <EmptyState title={empty} />;
   }
   return (
     <div className="space-y-3">

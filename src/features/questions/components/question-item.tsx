@@ -47,6 +47,7 @@ export function QuestionItem({ question, index, mode }: QuestionItemProps) {
                 )}
               >
                 <span className="mr-2 font-semibold">
+                  {showCorrect ? "✓ " : showWrong ? "✕ " : ""}
                   {String.fromCharCode(65 + option.ord)}.
                 </span>
                 <span>{translateContent(option.text)}</span>
