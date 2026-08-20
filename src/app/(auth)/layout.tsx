@@ -10,7 +10,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <ThemeToggle />
       </div>
       <div className="w-full max-w-lg">
-        <BrandMark className="mb-6 text-center" />
+        <BrandMark className="mb-6 justify-center" priority />
         {children}
       </div>
     </div>

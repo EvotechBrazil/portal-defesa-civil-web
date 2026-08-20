@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { CONTENT_BASES, baseById } from "@/features/study/content-bases";
 import { useCreateStudySession } from "@/features/study/hooks/use-study-session";
 import { useI18n } from "@/i18n/i18n-provider";
+import { BRAND } from "@/lib/brand";
 import { cn } from "@/lib/utils";
 import { useAuthUser } from "@/features/auth/hooks/use-auth-user";
 import {
@@ -79,7 +80,7 @@ export function OnboardingFlow() {
       {step === "welcome" ? (
         <>
           <h1 className="text-2xl font-semibold text-paper">
-            {t("onb.welcome.title", { name: firstName || t("brand.short") })}
+            {t("onb.welcome.title", { name: firstName || BRAND.short })}
           </h1>
           <p className="text-sm leading-relaxed text-mist">{t("onb.welcome.body")}</p>
           <ol className="space-y-2 text-sm text-paper">

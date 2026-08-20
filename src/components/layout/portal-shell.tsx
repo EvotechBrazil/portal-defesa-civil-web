@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { AccountMenu } from "@/components/layout/account-menu";
 import { BrandMark } from "@/components/layout/brand-mark";
+import { BRAND } from "@/lib/brand";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useAuthUser } from "@/features/auth/hooks/use-auth-user";
@@ -77,7 +78,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-background text-foreground">
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-[72px] flex-col border-r border-line bg-panel py-3 lg:flex">
         <div className="px-1 text-center">
-          <BrandMark href="/estudar" />
+          <BrandMark href="/estudar" markOnly />
         </div>
         <nav className="mt-4 flex flex-1 flex-col gap-1 px-1" aria-label={t("nav.primary")}>
           {railItems.map((item, index) => {
@@ -114,14 +115,14 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
         <header className="sticky top-0 z-30 flex min-h-14 items-center justify-between gap-3 border-b border-line bg-panel/95 px-4 py-2 backdrop-blur-md">
           <div className="min-w-0 lg:hidden">
             <p className="truncate text-sm font-semibold text-paper">
-              {firstName ? t(greetKey, { name: firstName }) : t("brand.short")}
+              {firstName ? t(greetKey, { name: firstName }) : BRAND.short}
             </p>
             <p className="truncate font-mono text-micro uppercase tracking-[0.14em] text-mist">
               {weekday}
             </p>
           </div>
           <div className="hidden min-w-0 lg:block">
-            <p className="truncate text-sm font-semibold text-paper">{t("brand.short")}</p>
+            <p className="truncate text-sm font-semibold tracking-[0.03em] text-paper">{BRAND.short}</p>
             <p className="font-mono text-micro uppercase tracking-[0.14em] text-mist">{weekday}</p>
           </div>
           <div className="flex shrink-0 items-center gap-2 lg:hidden">

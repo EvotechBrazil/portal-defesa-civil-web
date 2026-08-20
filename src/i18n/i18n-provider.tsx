@@ -44,8 +44,9 @@ export function I18nProvider({
   }, [locale]);
 
   useEffect(() => {
-    const isAuthPage = AUTH_PATHS.some((path) => pathname.startsWith(path));
-    if (locale === DEFAULT_LOCALE || contentPacks[locale] || isAuthPage) return;
+    const isPublicShell =
+      pathname === "/" || AUTH_PATHS.some((path) => pathname.startsWith(path));
+    if (locale === DEFAULT_LOCALE || contentPacks[locale] || isPublicShell) return;
 
     const controller = new AbortController();
     void fetch(`/locales/${locale}/content.json`, {

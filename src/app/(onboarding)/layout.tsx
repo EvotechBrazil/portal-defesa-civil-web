@@ -10,7 +10,7 @@ export default function OnboardingLayout({ children }: { children: React.ReactNo
         <ThemeToggle />
       </div>
       <div className="w-full max-w-lg py-16">
-        <BrandMark className="mb-6 text-center" />
+        <BrandMark className="mb-6 justify-center" priority />
         {children}
       </div>
     </div>

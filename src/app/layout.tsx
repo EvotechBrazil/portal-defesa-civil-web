@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { cookies } from "next/headers";
 import { AppProviders } from "@/providers/app-providers";
+import { BRAND } from "@/lib/brand";
 import { DEFAULT_LOCALE, isLocale, LOCALE_STORAGE_KEY } from "@/i18n/translations";
 import "./globals.css";
 
@@ -16,9 +17,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Programa de evolução contínua LGND SQUAD",
+  metadataBase: new URL(BRAND.url),
+  title: BRAND.long,
   description:
-    "Portal de ensino multilíngue — Programa de evolução contínua LGND SQUAD",
+    "Formação de Líderes Humanitários — Defesa Civil e Desastres. Flashcards com repetição espaçada, banco de questões e simulados.",
+  applicationName: BRAND.short,
+  alternates: { canonical: "/" },
 };
 
 export default async function RootLayout({
