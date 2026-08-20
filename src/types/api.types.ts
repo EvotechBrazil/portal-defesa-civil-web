@@ -10,10 +10,12 @@ export interface ApiEnvelope<T> {
   };
 }
 
+export type Role = "STUDENT" | "ADMIN" | "ADMIN_SENIOR" | "SUPER_ADMIN";
+
 export interface AuthUser {
   id: string;
   email: string;
   name: string;
-  role: "STUDENT" | "ADMIN";
+  role: Role;
   tenantId: string;
 }
