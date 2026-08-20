@@ -16,7 +16,7 @@ import { useCheckWhatsapp } from "../hooks/use-check-whatsapp";
 import { useRegister } from "../hooks/use-register";
 import { useRequestAccess } from "../hooks/use-request-access";
 import { markOnboardingPending } from "../lib/onboarding";
-import { fileToDataUrl, formatWhatsapp } from "../lib/whatsapp";
+import { digitsOf, fileToDataUrl, formatWhatsapp } from "../lib/whatsapp";
 import {
   checkWhatsappSchema,
   registerSchema,
@@ -37,10 +37,6 @@ type Flow = "gate" | "result" | "register" | "request" | "sent";
 type RegisterBlock = 1 | 2 | 3;
 
 const PHOTO_MAX_BYTES = 2 * 1024 * 1024;
-
-function digitsOf(value: string): string {
-  return value.replace(/\D/g, "").slice(0, 13);
-}
 
 function passwordTone(password: string): "weak" | "ok" | "good" {
   if (password.length < 8) {
@@ -136,7 +132,7 @@ export function RegisterForm() {
   }
 
   function handleCheck(values: CheckWhatsappFormValues) {
-    check.mutate(digitsOf(values.whatsapp) || values.whatsapp, {
+    check.mutate(values.whatsapp, {
       onSuccess: (result) => {
         setWhatsapp(result.whatsapp);
         setStatus(result.status);
@@ -256,13 +252,12 @@ export function RegisterForm() {
             >
               <Input
                 id="whatsapp"
-                inputMode="tel"
+                inputMode="numeric"
                 autoComplete="tel"
-                placeholder="+55 43 99999-9999"
+                placeholder="5543999999999"
                 value={gateForm.watch("whatsapp")}
                 onChange={(event) => {
-                  const digits = digitsOf(event.target.value);
-                  gateForm.setValue("whatsapp", digits ? formatWhatsapp(digits) : "", {
+                  gateForm.setValue("whatsapp", digitsOf(event.target.value), {
                     shouldValidate: true,
                   });
                 }}

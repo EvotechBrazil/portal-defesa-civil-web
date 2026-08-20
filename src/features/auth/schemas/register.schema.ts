@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const checkWhatsappSchema = z.object({
-  whatsapp: z.string().min(10, "validation.whatsapp"),
+  whatsapp: z.string().regex(/^\d{8,15}$/, "validation.whatsapp"),
 });
 
 export type CheckWhatsappFormValues = z.infer<typeof checkWhatsappSchema>;

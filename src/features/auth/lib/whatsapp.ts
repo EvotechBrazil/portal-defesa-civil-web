@@ -1,14 +1,9 @@
+export function digitsOf(value: string): string {
+  return value.replace(/\D/g, "").slice(0, 15);
+}
+
 export function formatWhatsapp(digits: string): string {
-  if (digits.startsWith("55") && digits.length === 13) {
-    return `+55 (${digits.slice(2, 4)}) ${digits.slice(4, 9)}-${digits.slice(9)}`;
-  }
-  if (digits.startsWith("55") && digits.length === 12) {
-    return `+55 (${digits.slice(2, 4)}) ${digits.slice(4, 8)}-${digits.slice(8)}`;
-  }
-  if (digits.startsWith("1") && digits.length === 11) {
-    return `+1 (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7)}`;
-  }
-  return `+${digits}`;
+  return digits;
 }
 
 export function fileToDataUrl(file: File): Promise<string> {

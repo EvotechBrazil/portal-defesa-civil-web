@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { EmptyState } from "@/components/ui/empty-state";
 import { TableRowSkeleton } from "@/components/ui/skeleton";
 import { Tabs } from "@/components/ui/tabs";
-import { formatWhatsapp } from "@/features/auth/lib/whatsapp";
+import { digitsOf, formatWhatsapp } from "@/features/auth/lib/whatsapp";
 import { getApiErrorMessage } from "@/features/auth/services/get-api-error-message";
 import { useI18n } from "@/i18n/i18n-provider";
 import {
@@ -41,7 +41,7 @@ export function AdminAccessPage() {
       return;
     }
     addAllowed.mutate(
-      { whatsapp: newNumber.trim(), label: newLabel.trim() || undefined },
+      { whatsapp: digitsOf(newNumber), label: newLabel.trim() || undefined },
       {
         onSuccess: () => {
           setNewNumber("");
@@ -109,8 +109,9 @@ export function AdminAccessPage() {
           <form className="mb-6 grid gap-3 sm:grid-cols-[1fr_1fr_auto]" onSubmit={handleAdd}>
             <Input
               placeholder={t("admin.access.placeholderWhatsapp")}
+              inputMode="numeric"
               value={newNumber}
-              onChange={(event) => setNewNumber(event.target.value)}
+              onChange={(event) => setNewNumber(digitsOf(event.target.value))}
             />
             <Input
               placeholder={t("admin.access.placeholderName")}
