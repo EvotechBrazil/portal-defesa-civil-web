@@ -7,11 +7,13 @@ import {
   BookOpen,
   CircleHelp,
   Layers,
+  ListOrdered,
   Shield,
   Target,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { BrandMark } from "@/components/layout/brand-mark";
 import { useAuthUser } from "@/features/auth/hooks/use-auth-user";
 import { useI18n } from "@/i18n/i18n-provider";
 import { cn } from "@/lib/utils";
@@ -30,17 +32,16 @@ export function PortalHeader() {
   const user = useAuthUser();
   const items =
     user?.role === "ADMIN"
-      ? [...NAV, { href: "/admin/acessos", labelKey: "nav.access", icon: Shield }]
+      ? [
+          ...NAV,
+          { href: "/admin/engajamento-estudo", labelKey: "nav.studyEngagement", icon: ListOrdered },
+          { href: "/admin/acessos", labelKey: "nav.access", icon: Shield },
+        ]
       : NAV;
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-ink/90 text-paper backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
-        <Link
-          href="/estudar"
-          className="cursor-pointer text-sm font-semibold tracking-tight text-paper"
-        >
-          Portal <span className="text-flare">Defesa Civil</span>
-        </Link>
+        <BrandMark href="/estudar" compactOnMobile />
         <nav className="flex min-w-0 flex-1 justify-center gap-1 overflow-x-auto text-sm" aria-label={t("nav.primary")}>
           {items.map((item) => {
             const active = pathname === item.href || pathname.startsWith(`${item.href}/`);

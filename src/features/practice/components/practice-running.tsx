@@ -1,3 +1,6 @@
+"use client";
+
+import { useI18n } from "@/i18n/i18n-provider";
 import { cn } from "@/lib/utils";
 import type { RunningQuestion } from "../types/practice.types";
 
@@ -22,6 +25,7 @@ export function PracticeRunning({
   variant = "light",
   onChoose,
 }: PracticeRunningProps) {
+  const { translateContent } = useI18n();
   const dark = variant === "onDark";
   const progress = total > 0 ? (step / total) * 100 : 0;
   const selected = lockedOptionId ?? question.chosenOptionId;
@@ -34,10 +38,12 @@ export function PracticeRunning({
       </div>
       {question.sourceRef ? (
         <p className={cn("mb-1 text-[11px] uppercase tracking-wider", dark ? "text-mist" : "text-slate-500")}>
-          {question.sourceRef}
+          {translateContent(question.sourceRef)}
         </p>
       ) : null}
-      <p className={cn("mb-3 font-semibold", dark ? "text-paper" : "text-slate-900")}>{question.stem}</p>
+      <p className={cn("mb-3 font-semibold", dark ? "text-paper" : "text-slate-900")}>
+        {translateContent(question.stem)}
+      </p>
       <ul className="space-y-2">
         {question.options.map((option, index) => {
           const isChosen = selected === option.optionId;
@@ -64,7 +70,7 @@ export function PracticeRunning({
                 <span className={cn("w-5 font-semibold", dark ? "text-flare" : "text-slate-500")}>
                   {KEYS[index] ?? String(index + 1)}
                 </span>
-                <span>{option.text}</span>
+                <span>{translateContent(option.text)}</span>
               </button>
             </li>
           );

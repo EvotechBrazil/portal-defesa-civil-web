@@ -16,8 +16,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portal Defesa Civil",
-  description: "Portal de ensino multilíngue — Formação de Líderes Humanitários LGND SQUAD",
+  title: "Programa de evolução contínua LGND SQUAD",
+  description:
+    "Portal de ensino multilíngue — Programa de evolução contínua LGND SQUAD",
 };
 
 export default async function RootLayout({

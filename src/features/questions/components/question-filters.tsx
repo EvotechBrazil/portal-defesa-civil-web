@@ -28,7 +28,7 @@ export function QuestionFilters({
   onSearchSubmit,
   onModeChange,
 }: QuestionFiltersProps) {
-  const { t } = useI18n();
+  const { t, translateContent } = useI18n();
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     onSearchSubmit(search);
@@ -47,7 +47,7 @@ export function QuestionFilters({
             <option value="">{t("questions.allModules")}</option>
             {modules.map((module) => (
               <option key={module.id} value={module.code}>
-                {module.code} — {module.title} ({module.questionCount})
+                {module.code} — {translateContent(module.title)} ({module.questionCount})
               </option>
             ))}
           </select>

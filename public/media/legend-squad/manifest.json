@@ -1,0 +1,170 @@
+{
+  "collection": "LGND Squad / FIRE Experience",
+  "collectedAt": "2026-08-19",
+  "basePath": "/media/legend-squad",
+  "officialProfiles": {
+    "lgndSquadInstagram": "https://www.instagram.com/legendarios.squad/",
+    "legendariosBrasilInstagram": "https://www.instagram.com/legendariosbrasil/",
+    "operationalSite": "https://squad.borri.com.br/",
+    "appStore": "https://apps.apple.com/br/app/lgnd-squad/id6762421460"
+  },
+  "rights": {
+    "licenseFound": false,
+    "defaultStatus": "approval-required",
+    "brandUseAuthorizedForProject": true,
+    "authorizationContext": "Sistema desenvolvido para o próprio LGND SQUAD; o responsável pelo projeto confirmou autorização de uso da marca em 2026-08-19.",
+    "notice": "Logo e tokens de marca estão autorizados neste projeto. Fotografias e peças sociais ainda podem envolver direitos de imagem e de terceiros."
+  },
+  "palette": {
+    "source": "https://squad.borri.com.br/public/css/mockup.css",
+    "dark": {
+      "background": "#0b0f14",
+      "panel": "#101826",
+      "panelAlt": "#0e1624",
+      "text": "#e6e7ea",
+      "muted": "#9aa3ad",
+      "accent": "#ff5a00",
+      "accentBright": "#ff7a1a"
+    },
+    "light": {
+      "background": "#f8fafc",
+      "panel": "#ffffff",
+      "panelAlt": "#f1f5f9",
+      "text": "#0f172a",
+      "muted": "#475569",
+      "accent": "#e04f00",
+      "accentStrong": "#c94800"
+    }
+  },
+  "assets": [
+    {
+      "id": "lgnd-squad-logo",
+      "path": "/media/legend-squad/brand/lgnd-squad-logo.png",
+      "category": "brand",
+      "format": "png",
+      "width": 1080,
+      "height": 1080,
+      "hasTransparency": true,
+      "sourcePage": "https://squad.borri.com.br/",
+      "sourceAsset": "https://squad.borri.com.br/public/img/logo-lgnd-squad.png",
+      "usageStatus": "authorized-for-project",
+      "recommendedUse": ["header", "login", "favicon-source", "badge"]
+    },
+    {
+      "id": "fire-001-ticketandgo-banner",
+      "path": "/media/legend-squad/events/fire-001-ticketandgo-banner.webp",
+      "category": "event",
+      "format": "webp",
+      "width": 1140,
+      "height": 400,
+      "sourcePage": "https://ticketandgo.com.br/evento/lgnd-squad-fire-experience-001",
+      "event": "FIRE Experience 001 — Campinas/SP — 20 a 22/03/2026",
+      "usageStatus": "approval-required",
+      "recommendedUse": ["archive", "timeline", "wide-card"]
+    },
+    {
+      "id": "fire-002-ticketandgo-banner",
+      "path": "/media/legend-squad/events/fire-002-ticketandgo-banner.webp",
+      "category": "event",
+      "format": "webp",
+      "width": 1140,
+      "height": 400,
+      "sourcePage": "https://ticketandgo.com.br/evento/lgnd-squad-fire-experience-002",
+      "event": "FIRE Experience 002 — Jarinu/SP — 29 a 31/05/2026",
+      "usageStatus": "approval-required",
+      "recommendedUse": ["hero", "course-cover", "wide-card"]
+    },
+    {
+      "id": "fire-002-instagram-post",
+      "path": "/media/legend-squad/events/fire-002-instagram-post.jpg",
+      "category": "event",
+      "format": "jpg",
+      "width": 1024,
+      "height": 1024,
+      "sourcePage": "https://www.instagram.com/legendarios.squad/p/DXsy_ICDfit/",
+      "publishedAt": "2026-04-28",
+      "usageStatus": "reference-only",
+      "recommendedUse": ["editorial-card", "about-section", "visual-reference"]
+    },
+    {
+      "id": "fire-004-reel-cover",
+      "path": "/media/legend-squad/events/fire-004-reel-cover.jpg",
+      "category": "event",
+      "format": "jpg",
+      "width": 640,
+      "height": 1138,
+      "sourcePage": "https://www.instagram.com/legendarios.squad/reel/DcCbp6yt_CN/",
+      "usageStatus": "reference-only",
+      "recommendedUse": ["vertical-card", "campaign-reference"]
+    },
+    {
+      "id": "prontos-para-servir",
+      "path": "/media/legend-squad/operations/prontos-para-servir-reel-cover.jpg",
+      "category": "operations",
+      "format": "jpg",
+      "width": 1215,
+      "height": 2160,
+      "sourcePage": "https://www.instagram.com/legendarios.squad/reel/DYhUiieNmMO/",
+      "usageStatus": "reference-only",
+      "recommendedUse": ["vertical-hero", "mission-card", "visual-reference"]
+    },
+    {
+      "id": "reconstrucao-minas-do-leao",
+      "path": "/media/legend-squad/operations/reconstrucao-minas-do-leao-reel-cover.jpg",
+      "category": "operations",
+      "format": "jpg",
+      "width": 640,
+      "height": 1136,
+      "sourcePage": "https://www.instagram.com/legendarios.squad/reel/DcBn7nSxnf-/",
+      "usageStatus": "reference-only",
+      "recommendedUse": ["mission-card", "vertical-card"]
+    },
+    {
+      "id": "apoio-minas-do-leao",
+      "path": "/media/legend-squad/operations/apoio-minas-do-leao.webp",
+      "category": "operations",
+      "format": "webp",
+      "width": 1440,
+      "height": 1800,
+      "sourcePage": "https://www.instagram.com/legendarios.squad/p/Db7GRvpjcV2/",
+      "publishedAt": "2026-08-11",
+      "usageStatus": "reference-only",
+      "recommendedUse": ["mission-story", "editorial-card"]
+    },
+    {
+      "id": "o-que-e-lgnd-squad",
+      "path": "/media/legend-squad/social/o-que-e-lgnd-squad.jpg",
+      "category": "social",
+      "format": "jpg",
+      "width": 1254,
+      "height": 1254,
+      "sourcePage": "https://www.instagram.com/legendarios.squad/p/DanqRw1loRz/",
+      "publishedAt": "2026-07-10",
+      "usageStatus": "reference-only",
+      "recommendedUse": ["about-section", "editorial-card", "visual-reference"]
+    },
+    {
+      "id": "alerta-global",
+      "path": "/media/legend-squad/social/alerta-global.jpg",
+      "category": "social",
+      "format": "jpg",
+      "width": 1125,
+      "height": 1125,
+      "sourcePage": "https://www.instagram.com/legendarios.squad/p/DcG7WrhN5s_/",
+      "usageStatus": "reference-only",
+      "recommendedUse": ["alert-reference", "editorial-card"]
+    },
+    {
+      "id": "instagram-highlight-fire",
+      "path": "/media/legend-squad/social/instagram-highlight-fire.jpg",
+      "category": "social",
+      "format": "jpg",
+      "width": 150,
+      "height": 150,
+      "sourcePage": "https://www.instagram.com/stories/highlights/18095507015100519/",
+      "usageStatus": "reference-only",
+      "recommendedUse": ["small-icon", "visual-reference"],
+      "qualityNote": "Baixa resolução; não ampliar."
+    }
+  ]
+}

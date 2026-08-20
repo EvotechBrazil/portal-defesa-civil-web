@@ -5,6 +5,8 @@ export interface ApiEnvelope<T> {
     pageSize?: number;
     total?: number;
     pageCount?: number;
+    reason?: string;
+    disclaimer?: string;
   };
 }
 

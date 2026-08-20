@@ -1,6 +1,6 @@
 # portal-defesa-civil-web
 
-Frontend Next.js 15 do Portal de Ensino — Defesa Civil.
+Frontend Next.js 15 do Programa de evolução contínua LGND SQUAD.
 
 ## Como rodar
 

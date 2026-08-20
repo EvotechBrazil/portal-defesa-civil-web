@@ -57,7 +57,7 @@ const CardFace = memo(function CardFace({
   art: CardArt | null;
   textHidden?: boolean;
 }) {
-  const { locale, t } = useI18n();
+  const { locale, t, translateContent } = useI18n();
   const isBack = side === "back";
   const showArt = isBack && art;
   return (
@@ -97,7 +97,7 @@ const CardFace = memo(function CardFace({
                 (o <strong> vira flare), nunca de tamanho ou alinhamento. */}
             <MarkdownView
               tone="onDark"
-              markdown={isBack ? card.back : card.front}
+              markdown={translateContent(isBack ? card.back : card.front)}
               className="text-[22px] font-semibold leading-snug [&_p]:my-1 [&_p]:text-paper"
             />
           </div>

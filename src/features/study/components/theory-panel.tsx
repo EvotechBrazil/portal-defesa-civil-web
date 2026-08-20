@@ -10,7 +10,7 @@ interface TheoryPanelProps {
 }
 
 export function TheoryPanel({ card }: TheoryPanelProps) {
-  const { t } = useI18n();
+  const { t, translateContent } = useI18n();
   return (
     <div className="space-y-5">
       <section className="rounded-2xl border border-line bg-panel px-4 py-4">
@@ -19,12 +19,12 @@ export function TheoryPanel({ card }: TheoryPanelProps) {
         </p>
         <MarkdownView
           tone="onDark"
-          markdown={card.theoryMd}
+          markdown={translateContent(card.theoryMd)}
           className="text-[15px] leading-relaxed [&_p]:text-paper"
         />
         {card.sourceMd ? (
           <p className="mt-3 rounded-xl border-l-[3px] border-flare bg-white/5 px-3 py-2 text-[13px] text-mist">
-            {card.sourceMd}
+            {translateContent(card.sourceMd)}
           </p>
         ) : null}
       </section>
