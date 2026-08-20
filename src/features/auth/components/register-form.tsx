@@ -42,6 +42,7 @@ export function RegisterForm() {
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [registerPack, setRegisterPack] = useState<ManadaView | null>(null);
   const [requestPack, setRequestPack] = useState<ManadaView | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const check = useCheckWhatsapp();
   const registerAccount = useRegister();
@@ -63,7 +64,9 @@ export function RegisterForm() {
       squad: "",
       eventoFire: "",
       email: "",
+      confirmEmail: "",
       password: "",
+      confirmPassword: "",
     },
   });
   const requestForm = useForm<RequestAccessFormValues>({
@@ -76,6 +79,7 @@ export function RegisterForm() {
       city: "",
       manadaId: "",
       email: "",
+      confirmEmail: "",
       justification: "",
     },
   });
@@ -88,6 +92,7 @@ export function RegisterForm() {
     setPhotoError(null);
     setRegisterPack(null);
     setRequestPack(null);
+    setShowPassword(false);
     gateForm.reset();
     registerForm.reset();
     requestForm.reset();
@@ -126,12 +131,35 @@ export function RegisterForm() {
       return;
     }
     const photoBase64 = await fileToDataUrl(photoFile);
-    registerAccount.mutate({ ...values, whatsapp, photoBase64 });
+    registerAccount.mutate({
+      whatsapp,
+      name: values.name,
+      lgndNumber: values.lgndNumber,
+      manadaId: values.manadaId,
+      country: values.country,
+      state: values.state,
+      city: values.city,
+      squad: values.squad,
+      eventoFire: values.eventoFire,
+      email: values.email,
+      password: values.password,
+      photoBase64,
+    });
   }
 
   function handleRequest(values: RequestAccessFormValues) {
     request.mutate(
-      { ...values, whatsapp },
+      {
+        whatsapp,
+        name: values.name,
+        lgndNumber: values.lgndNumber,
+        manadaId: values.manadaId,
+        country: values.country,
+        state: values.state,
+        city: values.city,
+        email: values.email,
+        justification: values.justification,
+      },
       {
         onSuccess: () => {
           setStatus("REQUEST_SENT");
@@ -331,7 +359,27 @@ export function RegisterForm() {
               id="email"
               type="email"
               autoComplete="email"
+              autoCapitalize="none"
+              autoCorrect="off"
               {...registerForm.register("email")}
+            />
+          </Field>
+          <Field
+            id="confirmEmail"
+            label={t("auth.confirmEmail")}
+            error={
+              registerForm.formState.errors.confirmEmail?.message
+                ? t(registerForm.formState.errors.confirmEmail.message)
+                : undefined
+            }
+          >
+            <Input
+              id="confirmEmail"
+              type="email"
+              autoComplete="off"
+              autoCapitalize="none"
+              autoCorrect="off"
+              {...registerForm.register("confirmEmail")}
             />
           </Field>
           <Field
@@ -341,9 +389,33 @@ export function RegisterForm() {
           >
             <Input
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               autoComplete="new-password"
               {...registerForm.register("password")}
+            />
+            <button
+              type="button"
+              className="text-sm font-medium text-flare underline"
+              aria-pressed={showPassword}
+              onClick={() => setShowPassword((current) => !current)}
+            >
+              {showPassword ? t("auth.hidePassword") : t("auth.showPassword")}
+            </button>
+          </Field>
+          <Field
+            id="confirmPassword"
+            label={t("auth.confirmPassword")}
+            error={
+              registerForm.formState.errors.confirmPassword?.message
+                ? t(registerForm.formState.errors.confirmPassword.message)
+                : undefined
+            }
+          >
+            <Input
+              id="confirmPassword"
+              type={showPassword ? "text" : "password"}
+              autoComplete="new-password"
+              {...registerForm.register("confirmPassword")}
             />
           </Field>
 
@@ -424,7 +496,27 @@ export function RegisterForm() {
               id="request-email"
               type="email"
               autoComplete="email"
+              autoCapitalize="none"
+              autoCorrect="off"
               {...requestForm.register("email")}
+            />
+          </Field>
+          <Field
+            id="request-confirm-email"
+            label={t("auth.confirmEmail")}
+            error={
+              requestForm.formState.errors.confirmEmail?.message
+                ? t(requestForm.formState.errors.confirmEmail.message)
+                : undefined
+            }
+          >
+            <Input
+              id="request-confirm-email"
+              type="email"
+              autoComplete="off"
+              autoCapitalize="none"
+              autoCorrect="off"
+              {...requestForm.register("confirmEmail")}
             />
           </Field>
           <div className="space-y-1">
