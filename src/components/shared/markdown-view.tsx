@@ -7,6 +7,10 @@ import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n/i18n-provider";
+import {
+  CourseFigureBySrc,
+  isCourseFigureSrc,
+} from "@/features/catalog/diagrams/course-figures";
 
 const ALLOWED_TAGS = [
   "a",
@@ -21,6 +25,7 @@ const ALLOWED_TAGS = [
   "h5",
   "h6",
   "hr",
+  "img",
   "li",
   "ol",
   "p",
@@ -36,25 +41,40 @@ const ALLOWED_TAGS = [
   "ul",
 ];
 
-function componentsFor(tone: "light" | "onDark"): Components {
-  const heading = tone === "onDark" ? "text-paper" : "text-paper";
-  const body = tone === "onDark" ? "text-paper" : "text-paper";
+function componentsFor(tone: "light" | "onDark", variant: "default" | "longform"): Components {
+  const heading = "text-paper";
+  const body = "text-paper";
   const strong = tone === "onDark" ? "text-flare-ink" : "text-paper";
   const quote =
     tone === "onDark"
-      ? "border-flare bg-white/5 text-mist"
-      : "border-flare text-paper";
+      ? "border-l-steel bg-steel-surf text-steel"
+      : "border-l-steel bg-steel-surf text-steel";
+  const longform = variant === "longform";
   return {
   h1: ({ children }) => (
-    <h1 className={cn("mt-6 mb-3 text-2xl font-semibold", heading)}>{children}</h1>
+    <h1 className={cn("mt-6 mb-3 font-semibold", heading, longform ? "text-3xl tracking-tight" : "text-2xl")}>
+      {children}
+    </h1>
   ),
   h2: ({ children }) => (
-    <h2 className={cn("mt-6 mb-2 text-xl font-semibold", heading)}>{children}</h2>
+    <h2 className={cn("mt-8 mb-3 font-semibold", heading, longform ? "text-2xl tracking-tight" : "text-xl")}>
+      {children}
+    </h2>
   ),
   h3: ({ children }) => (
     <h3 className={cn("mt-4 mb-2 text-lg font-semibold", heading)}>{children}</h3>
   ),
-  p: ({ children }) => <p className={cn("my-2 leading-relaxed", body)}>{children}</p>,
+  p: ({ children }) => (
+    <p
+      className={cn(
+        "my-2 text-pretty",
+        body,
+        longform ? "my-4 leading-[1.7] text-[length:var(--library-body,1.125rem)]" : "leading-relaxed",
+      )}
+    >
+      {children}
+    </p>
+  ),
   ul: ({ children }) => <ul className="my-2 list-disc space-y-1 pl-5">{children}</ul>,
   ol: ({ children }) => <ol className="my-2 list-decimal space-y-1 pl-5">{children}</ol>,
   li: ({ children }) => <li className="leading-relaxed">{children}</li>,
@@ -77,8 +97,11 @@ function componentsFor(tone: "light" | "onDark"): Components {
     if (typeof src !== "string" || !src.startsWith("/study/")) {
       return null;
     }
+    if (isCourseFigureSrc(src)) {
+      return <CourseFigureBySrc src={src} />;
+    }
     return (
-      <figure className="my-6 overflow-hidden rounded-2xl border border-line bg-inset p-2">
+      <figure className="my-6 overflow-hidden rounded-card border border-line bg-card p-2">
         {/* O caminho é dinâmico no Markdown e restrito a /study/; next/image não aceita esse contrato sem conhecer o asset no build. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -118,16 +141,19 @@ function componentsFor(tone: "light" | "onDark"): Components {
   };
 }
 
-const lightComponents = componentsFor("light");
-const darkComponents = componentsFor("onDark");
-
 export interface MarkdownViewProps {
   markdown: string;
   className?: string;
   tone?: "light" | "onDark";
+  variant?: "default" | "longform";
 }
 
-export function MarkdownView({ markdown, className, tone = "light" }: MarkdownViewProps) {
+export function MarkdownView({
+  markdown,
+  className,
+  tone = "light",
+  variant = "default",
+}: MarkdownViewProps) {
   const { t } = useI18n();
   const [sanitized, setSanitized] = useState<string | null>(null);
 
@@ -136,7 +162,7 @@ export function MarkdownView({ markdown, className, tone = "light" }: MarkdownVi
     void import("isomorphic-dompurify").then((mod) => {
       const next = mod.default.sanitize(markdown, {
         ALLOWED_TAGS,
-        ALLOWED_ATTR: ["href", "title", "target", "rel"],
+        ALLOWED_ATTR: ["href", "title", "target", "rel", "src", "alt"],
       });
       if (isMounted) {
         setSanitized(next);
@@ -160,7 +186,7 @@ export function MarkdownView({ markdown, className, tone = "light" }: MarkdownVi
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
-        components={tone === "onDark" ? darkComponents : lightComponents}
+        components={componentsFor(tone, variant)}
       >
         {sanitized}
       </ReactMarkdown>

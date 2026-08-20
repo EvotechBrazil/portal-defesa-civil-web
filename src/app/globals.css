@@ -114,6 +114,7 @@
   --text-xl: clamp(1.3125rem, 1.15rem + 0.55vw, 1.5625rem);
   --text-2xl: clamp(1.625rem, 1.35rem + 1.1vw, 2rem);
   --text-3xl: clamp(1.9375rem, 1.5rem + 2vw, 2.625rem);
+  --max-width-measure: var(--measure);
   --ease-instrument: var(--ease);
   /* aliases de compatibilidade — 76 usos atuais continuam válidos */
   --color-line: var(--line);
