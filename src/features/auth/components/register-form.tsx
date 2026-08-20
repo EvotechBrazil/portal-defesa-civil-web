@@ -23,6 +23,9 @@ import {
 } from "../schemas/register.schema";
 import { getApiErrorMessage } from "../services/get-api-error-message";
 import type { WhatsappCheckStatus } from "../types/auth.types";
+import type { ManadaView } from "../types/manada.types";
+import { LocationFields } from "./location-fields";
+import { ManadaPicker } from "./manada-picker";
 
 type Step = "gate" | "register" | "request" | "status";
 
@@ -37,6 +40,8 @@ export function RegisterForm() {
   const [whatsapp, setWhatsapp] = useState("");
   const [photoError, setPhotoError] = useState<string | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [registerPack, setRegisterPack] = useState<ManadaView | null>(null);
+  const [requestPack, setRequestPack] = useState<ManadaView | null>(null);
 
   const check = useCheckWhatsapp();
   const registerAccount = useRegister();
@@ -51,8 +56,10 @@ export function RegisterForm() {
     defaultValues: {
       name: "",
       lgndNumber: "",
-      manada: "",
+      country: "BR",
+      state: "",
       city: "",
+      manadaId: "",
       squad: "",
       eventoFire: "",
       email: "",
@@ -64,7 +71,10 @@ export function RegisterForm() {
     defaultValues: {
       name: "",
       lgndNumber: "",
-      manada: "",
+      country: "BR",
+      state: "",
+      city: "",
+      manadaId: "",
       email: "",
       justification: "",
     },
@@ -76,6 +86,8 @@ export function RegisterForm() {
     setWhatsapp("");
     setPhotoFile(null);
     setPhotoError(null);
+    setRegisterPack(null);
+    setRequestPack(null);
     gateForm.reset();
     registerForm.reset();
     requestForm.reset();
@@ -130,6 +142,16 @@ export function RegisterForm() {
   }
 
   const formatted = whatsapp ? formatWhatsapp(whatsapp) : "";
+  const registerLocation = {
+    country: registerForm.watch("country"),
+    state: registerForm.watch("state"),
+    city: registerForm.watch("city"),
+  };
+  const requestLocation = {
+    country: requestForm.watch("country"),
+    state: requestForm.watch("state"),
+    city: requestForm.watch("city"),
+  };
 
   return (
     <Card>
@@ -165,7 +187,7 @@ export function RegisterForm() {
               id="whatsapp"
               inputMode="tel"
               autoComplete="tel"
-              placeholder="(43) 99999-9999"
+              placeholder="+55 43 99999-9999"
               {...gateForm.register("whatsapp")}
             />
             {gateForm.formState.errors.whatsapp ? (
@@ -233,20 +255,40 @@ export function RegisterForm() {
           >
             <Input id="lgndNumber" {...registerForm.register("lgndNumber")} />
           </Field>
-          <Field
+          <LocationFields
+            idPrefix="register"
+            value={registerLocation}
+            onChange={(next) => {
+              registerForm.setValue("country", next.country, { shouldValidate: true });
+              registerForm.setValue("state", next.state, { shouldValidate: true });
+              registerForm.setValue("city", next.city, { shouldValidate: true });
+            }}
+            errors={{
+              country: registerForm.formState.errors.country?.message
+                ? t(registerForm.formState.errors.country.message)
+                : undefined,
+              state: registerForm.formState.errors.state?.message
+                ? t(registerForm.formState.errors.state.message)
+                : undefined,
+              city: registerForm.formState.errors.city?.message
+                ? t(registerForm.formState.errors.city.message)
+                : undefined,
+            }}
+          />
+          <ManadaPicker
             id="manada"
-            label={t("register.pack")}
-            error={registerForm.formState.errors.manada?.message ? t(registerForm.formState.errors.manada.message) : undefined}
-          >
-            <Input id="manada" {...registerForm.register("manada")} />
-          </Field>
-          <Field
-            id="city"
-            label={t("register.city")}
-            error={registerForm.formState.errors.city?.message ? t(registerForm.formState.errors.city.message) : undefined}
-          >
-            <Input id="city" autoComplete="address-level2" {...registerForm.register("city")} />
-          </Field>
+            value={registerPack}
+            location={registerLocation}
+            onChange={(pack) => {
+              setRegisterPack(pack);
+              registerForm.setValue("manadaId", pack?.id ?? "", { shouldValidate: true });
+            }}
+            error={
+              registerForm.formState.errors.manadaId?.message
+                ? t(registerForm.formState.errors.manadaId.message)
+                : undefined
+            }
+          />
           <Field
             id="squad"
             label={t("register.squad")}
@@ -339,13 +381,40 @@ export function RegisterForm() {
           >
             <Input id="request-lgnd" {...requestForm.register("lgndNumber")} />
           </Field>
-          <Field
+          <LocationFields
+            idPrefix="request"
+            value={requestLocation}
+            onChange={(next) => {
+              requestForm.setValue("country", next.country, { shouldValidate: true });
+              requestForm.setValue("state", next.state, { shouldValidate: true });
+              requestForm.setValue("city", next.city, { shouldValidate: true });
+            }}
+            errors={{
+              country: requestForm.formState.errors.country?.message
+                ? t(requestForm.formState.errors.country.message)
+                : undefined,
+              state: requestForm.formState.errors.state?.message
+                ? t(requestForm.formState.errors.state.message)
+                : undefined,
+              city: requestForm.formState.errors.city?.message
+                ? t(requestForm.formState.errors.city.message)
+                : undefined,
+            }}
+          />
+          <ManadaPicker
             id="request-manada"
-            label={t("register.pack")}
-            error={requestForm.formState.errors.manada?.message ? t(requestForm.formState.errors.manada.message) : undefined}
-          >
-            <Input id="request-manada" {...requestForm.register("manada")} />
-          </Field>
+            value={requestPack}
+            location={requestLocation}
+            onChange={(pack) => {
+              setRequestPack(pack);
+              requestForm.setValue("manadaId", pack?.id ?? "", { shouldValidate: true });
+            }}
+            error={
+              requestForm.formState.errors.manadaId?.message
+                ? t(requestForm.formState.errors.manadaId.message)
+                : undefined
+            }
+          />
           <Field
             id="request-email"
             label={t("auth.email")}

@@ -16,7 +16,9 @@ export interface RegisterInput {
   whatsapp: string;
   name: string;
   lgndNumber: string;
-  manada: string;
+  manadaId: string;
+  country: string;
+  state: string;
   city: string;
   squad: string;
   eventoFire: string;
@@ -35,7 +37,10 @@ export interface AccessRequestInput {
   whatsapp: string;
   name: string;
   lgndNumber: string;
-  manada: string;
+  manadaId: string;
+  country: string;
+  state: string;
+  city: string;
   email: string;
   justification: string;
 }

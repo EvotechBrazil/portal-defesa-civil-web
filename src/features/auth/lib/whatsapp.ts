@@ -5,7 +5,10 @@ export function formatWhatsapp(digits: string): string {
   if (digits.startsWith("55") && digits.length === 12) {
     return `+55 (${digits.slice(2, 4)}) ${digits.slice(4, 8)}-${digits.slice(8)}`;
   }
-  return digits;
+  if (digits.startsWith("1") && digits.length === 11) {
+    return `+1 (${digits.slice(1, 4)}) ${digits.slice(4, 7)}-${digits.slice(7)}`;
+  }
+  return `+${digits}`;
 }
 
 export function fileToDataUrl(file: File): Promise<string> {
