@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { FlashcardSkeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/i18n/i18n-provider";
 import { useDecks } from "../hooks/use-decks";
 import { useCreateStudySession } from "../hooks/use-study-session";
@@ -22,7 +23,11 @@ export function StudyStart() {
   const [form, setForm] = useState<CreateStudySessionForm>(INITIAL);
 
   if (decksQuery.isLoading) {
-    return <p className="px-4 py-10 text-sm text-mist">{t("study.loadingDecks")}</p>;
+    return (
+      <div className="px-4 py-6">
+        <FlashcardSkeleton>{t("study.loadingDecks")}</FlashcardSkeleton>
+      </div>
+    );
   }
   if (decksQuery.isError) {
     return (

@@ -43,6 +43,8 @@
   --dur-3: 320ms;
   --ease: cubic-bezier(0.3, 0, 0.2, 1);
   --measure: 62ch;
+  --toast: #171412;
+  --toast-fg: #eceae7;
 }
 
 .dark {
@@ -68,6 +70,8 @@
   --learn-surf: #241d10;
   --hard: #f87171;
   --hard-surf: #241416;
+  --toast: #2b2f33;
+  --toast-fg: #eceae7;
 }
 
 @theme inline {
@@ -92,6 +96,8 @@
   --color-learn-surf: var(--learn-surf);
   --color-hard: var(--hard);
   --color-hard-surf: var(--hard-surf);
+  --color-toast: var(--toast);
+  --color-toast-fg: var(--toast-fg);
   --color-ring: var(--ring);
   --radius-chip: var(--r-1);
   --radius-ctl: var(--r-2);
@@ -139,6 +145,47 @@ a,
   box-shadow:
     0 0 0 var(--ring-offset) var(--panel),
     0 0 0 calc(var(--ring-offset) + var(--ring-w)) var(--ring);
+}
+
+.ui-modal {
+  width: calc(100% - 32px);
+  max-width: 28rem;
+  max-height: min(90vh, 40rem);
+  margin: auto;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-3);
+  background: var(--panel);
+  color: var(--fg);
+  padding: 1.25rem;
+  box-shadow: var(--e-3);
+}
+
+.ui-modal::backdrop {
+  background: var(--scrim);
+}
+
+.ui-toast {
+  background: var(--toast);
+  color: var(--toast-fg);
+  animation: ui-toast-in var(--dur-2) var(--ease);
+}
+
+@keyframes ui-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-toast {
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

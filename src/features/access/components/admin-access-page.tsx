@@ -4,10 +4,10 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Tabs } from "@/components/ui/tabs";
 import { formatWhatsapp } from "@/features/auth/lib/whatsapp";
 import { getApiErrorMessage } from "@/features/auth/services/get-api-error-message";
 import { useI18n } from "@/i18n/i18n-provider";
-import { cn } from "@/lib/utils";
 import {
   useAccessRequests,
   useAddAllowedWhatsapp,
@@ -56,17 +56,16 @@ export function AdminAccessPage() {
         <p className="mt-1 text-sm text-mist">{t("admin.access.description")}</p>
       </div>
 
-      <div className="flex flex-wrap gap-2">
-        <TabButton active={tab === "PENDING"} onClick={() => setTab("PENDING")}>
-          {t("admin.access.requests", { count: pending.data?.length ?? 0 })}
-        </TabButton>
-        <TabButton active={tab === "INTERESTED"} onClick={() => setTab("INTERESTED")}>
-          {t("admin.access.interested", { count: interested.data?.length ?? 0 })}
-        </TabButton>
-        <TabButton active={tab === "ALLOWED"} onClick={() => setTab("ALLOWED")}>
-          {t("admin.access.allowed", { count: allowed.data?.length ?? 0 })}
-        </TabButton>
-      </div>
+      <Tabs
+        value={tab}
+        onChange={setTab}
+        ariaLabel={t("admin.access.title")}
+        items={[
+          { id: "PENDING", label: t("admin.access.requests", { count: pending.data?.length ?? 0 }) },
+          { id: "INTERESTED", label: t("admin.access.interested", { count: interested.data?.length ?? 0 }) },
+          { id: "ALLOWED", label: t("admin.access.allowed", { count: allowed.data?.length ?? 0 }) },
+        ]}
+      />
 
       {tab === "PENDING" ? (
         <RequestList
@@ -154,29 +153,6 @@ export function AdminAccessPage() {
         </Card>
       ) : null}
     </div>
-  );
-}
-
-function TabButton({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        "rounded-full px-4 py-2 text-sm font-medium",
-        active ? "bg-primary text-primary-ink" : "bg-panel text-mist hover:text-paper",
-      )}
-    >
-      {children}
-    </button>
   );
 }
 

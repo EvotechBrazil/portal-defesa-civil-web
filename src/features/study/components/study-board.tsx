@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { FlashcardSkeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/i18n/i18n-provider";
 import {
   useFinishStudySession,
@@ -106,7 +107,7 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
   }, [displayed?.finished, handleRate]);
 
   if (sessionQuery.isLoading && !displayed) {
-    return <p className="px-1 py-10 text-sm text-mist">{t("study.queueLoading")}</p>;
+    return <FlashcardSkeleton>{t("study.queueLoading")}</FlashcardSkeleton>;
   }
   if (sessionQuery.isError || !displayed) {
     return (
