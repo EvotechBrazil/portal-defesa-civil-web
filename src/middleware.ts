@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 const AUTH_COOKIE = "pdc_authenticated";
-const PUBLIC_PATHS = ["/login", "/registro", "/verificar-email"];
+const PUBLIC_PATHS = ["/login", "/registro", "/verificar-email", "/esqueci-senha", "/redefinir-senha"];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

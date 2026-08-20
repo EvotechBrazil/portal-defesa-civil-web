@@ -49,3 +49,19 @@ export async function verifyEmail(token: string): Promise<VerifyEmailResult> {
 export async function resendVerification(email: string): Promise<void> {
   await api.post("/auth/resend-verification", { email });
 }
+
+export async function forgotPassword(email: string): Promise<{ message: string }> {
+  const response = await api.post<ApiEnvelope<{ message: string }>>(
+    "/auth/forgot-password",
+    { email },
+  );
+  return response.data.data;
+}
+
+export async function resetPassword(input: {
+  token: string;
+  password: string;
+}): Promise<{ reset: true }> {
+  const response = await api.post<ApiEnvelope<{ reset: true }>>("/auth/reset-password", input);
+  return response.data.data;
+}

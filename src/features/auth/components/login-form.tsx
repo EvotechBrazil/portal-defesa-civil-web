@@ -57,6 +57,11 @@ export function LoginForm() {
           {form.formState.errors.password ? (
             <p className="text-sm text-red-600">{t(form.formState.errors.password.message ?? "")}</p>
           ) : null}
+          <p className="text-right">
+            <Link href="/esqueci-senha" className="text-sm font-medium text-flare underline">
+              {t("auth.forgotPassword")}
+            </Link>
+          </p>
         </div>
 
         {login.isError ? (
