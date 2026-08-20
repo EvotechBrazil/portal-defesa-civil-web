@@ -64,6 +64,7 @@ export function RegisterForm() {
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [registerPack, setRegisterPack] = useState<ManadaView | null>(null);
   const [requestPack, setRequestPack] = useState<ManadaView | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const check = useCheckWhatsapp();
   const registerAccount = useRegister();
@@ -128,6 +129,7 @@ export function RegisterForm() {
     setPhotoWarning(false);
     setRegisterPack(null);
     setRequestPack(null);
+    setShowPassword(false);
     gateForm.reset();
     registerForm.reset();
     requestForm.reset();
@@ -383,10 +385,28 @@ export function RegisterForm() {
                 <Input id="confirmEmail" type="email" autoComplete="off" autoCapitalize="none" autoCorrect="off" {...registerForm.register("confirmEmail")} />
               </Field>
               <Field id="password" label={t("auth.password")} error={err(registerForm, "password", t)}>
-                <Input id="password" type="password" autoComplete="new-password" {...registerForm.register("password")} />
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  {...registerForm.register("password")}
+                />
+                <button
+                  type="button"
+                  className="text-sm font-medium text-flare-ink underline"
+                  aria-pressed={showPassword}
+                  onClick={() => setShowPassword((current) => !current)}
+                >
+                  {showPassword ? t("auth.hidePassword") : t("auth.showPassword")}
+                </button>
               </Field>
               <Field id="confirmPassword" label={t("auth.confirmPassword")} error={err(registerForm, "confirmPassword", t)}>
-                <Input id="confirmPassword" type="password" autoComplete="new-password" {...registerForm.register("confirmPassword")} />
+                <Input
+                  id="confirmPassword"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  {...registerForm.register("confirmPassword")}
+                />
               </Field>
               {password ? (
                 <PasswordMeter tone={passwordTone(password)} label={t(`signup.password.${passwordTone(password)}`)} />
