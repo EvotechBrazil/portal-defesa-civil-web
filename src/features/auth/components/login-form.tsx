@@ -9,10 +9,8 @@ import { Input } from "@/components/ui/input";
 import { useI18n } from "@/i18n/i18n-provider";
 import { useLogin } from "../hooks/use-login";
 import { loginSchema, type LoginFormValues } from "../schemas/login.schema";
-import { getApiErrorMessage } from "../services/get-api-error-message";
-
 export function LoginForm() {
-  const { locale, t } = useI18n();
+  const { t } = useI18n();
   const login = useLogin();
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -60,10 +58,8 @@ export function LoginForm() {
         </div>
 
         {login.isError ? (
-          <p className="rounded-md bg-hard-surf px-3 py-2 text-sm text-hard">
-            {locale === "pt-BR"
-              ? getApiErrorMessage(login.error, t("auth.signIn.error"))
-              : t("auth.signIn.error")}
+          <p className="rounded-ctl bg-hard-surf px-3 py-2 text-sm text-hard">
+            {t("auth.signIn.genericError")}
           </p>
         ) : null}
 
@@ -72,10 +68,16 @@ export function LoginForm() {
         </Button>
       </form>
 
+      <p className="mt-4 text-center text-sm">
+        <Link href="/verificar-email" className="font-medium text-flare-ink underline">
+          {t("auth.resendVerification")}
+        </Link>
+      </p>
+
       <p className="mt-4 text-center text-sm text-mist">
         {t("auth.noAccount")}{" "}
         <Link href="/registro" className="font-medium text-flare-ink underline">
-          {t("auth.requestRegistration")}
+          {t("auth.requestAccessCta")}
         </Link>
       </p>
     </Card>

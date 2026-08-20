@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -27,6 +27,17 @@ export function VerifyEmailForm() {
   const verify = useVerifyEmail();
   const resend = useResendVerification();
   const started = useRef(false);
+  const [cooldown, setCooldown] = useState(0);
+
+  useEffect(() => {
+    if (cooldown <= 0) {
+      return;
+    }
+    const timer = window.setInterval(() => {
+      setCooldown((value) => Math.max(0, value - 1));
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, [cooldown]);
 
   const tokenForm = useForm<VerifyEmailFormValues>({
     resolver: zodResolver(verifyEmailSchema),
@@ -63,10 +74,10 @@ export function VerifyEmailForm() {
             {t("auth.verify.success")}
           </p>
           <Link
-            href="/login"
-            className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center rounded-ctl bg-paper px-4 py-2 text-sm font-medium text-ink transition hover:bg-paper/90"
+            href="/login?next=/onboarding"
+            className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center rounded-ctl bg-primary px-4 py-2 text-sm font-medium text-primary-ink"
           >
-            {t("auth.verify.goLogin")}
+            {t("verify.startOnboarding")}
           </Link>
         </div>
       ) : (
@@ -86,10 +97,8 @@ export function VerifyEmailForm() {
           </div>
 
           {verify.isError ? (
-            <p className="rounded-md bg-hard-surf px-3 py-2 text-sm text-hard">
-              {locale === "pt-BR"
-                ? getApiErrorMessage(verify.error, t("auth.verify.invalid"))
-                : t("auth.verify.invalid")}
+            <p className="rounded-ctl bg-learn-surf px-3 py-2 text-sm text-learn">
+              {t("verify.expired")}
             </p>
           ) : null}
 
@@ -102,7 +111,9 @@ export function VerifyEmailForm() {
       {!isVerified ? (
         <form
           className="mt-8 space-y-3 border-t border-line pt-6"
-          onSubmit={resendForm.handleSubmit((values) => resend.mutate(values.email))}
+          onSubmit={resendForm.handleSubmit((values) =>
+            resend.mutate(values.email, { onSuccess: () => setCooldown(60) }),
+          )}
           noValidate
         >
           <p className="text-sm text-mist">{t("auth.verify.resendPrompt")}</p>
@@ -132,9 +143,18 @@ export function VerifyEmailForm() {
                 : t("auth.verify.resendError")}
             </p>
           ) : null}
-          <Button type="submit" className="w-full" disabled={resend.isPending}>
-            {resend.isPending ? t("auth.verify.resending") : t("auth.verify.resend")}
+          <Button type="submit" className="w-full" disabled={resend.isPending || cooldown > 0}>
+            {resend.isPending
+              ? t("auth.verify.resending")
+              : cooldown > 0
+                ? t("verify.cooldown", { seconds: String(cooldown).padStart(2, "0") })
+                : t("auth.verify.resend")}
           </Button>
+          {cooldown > 0 ? (
+            <p className="font-mono text-sm text-mist" aria-live="polite">
+              {t("verify.cooldown", { seconds: `00:${String(cooldown).padStart(2, "0")}` })}
+            </p>
+          ) : null}
         </form>
       ) : null}
 
