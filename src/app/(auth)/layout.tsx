@@ -1,5 +1,6 @@
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageSwitcher } from "@/components/language-switcher";
+import { BrandMark } from "@/components/layout/brand-mark";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,9 +10,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <ThemeToggle />
       </div>
       <div className="w-full max-w-lg">
-        <p className="mb-6 text-center text-sm font-medium uppercase tracking-wide text-paper">
-          Portal Defesa Civil
-        </p>
+        <BrandMark className="mb-6 text-center" />
         {children}
       </div>
     </div>
