@@ -21,7 +21,7 @@ interface I18nContextValue {
 }
 
 type ContentPack = Record<string, string>;
-const AUTH_PATHS = ["/login", "/registro", "/verificar-email"];
+const AUTH_PATHS = ["/login", "/registro", "/verificar-email", "/esqueci-senha", "/redefinir-senha"];
 
 const I18nContext = createContext<I18nContextValue | null>(null);
 

@@ -65,3 +65,19 @@ export async function logoutAccount(): Promise<void> {
     }
   }
 }
+
+export async function forgotPassword(email: string): Promise<{ message: string }> {
+  const response = await api.post<ApiEnvelope<{ message: string }>>(
+    "/auth/forgot-password",
+    { email },
+  );
+  return response.data.data;
+}
+
+export async function resetPassword(input: {
+  token: string;
+  password: string;
+}): Promise<{ reset: true }> {
+  const response = await api.post<ApiEnvelope<{ reset: true }>>("/auth/reset-password", input);
+  return response.data.data;
+}

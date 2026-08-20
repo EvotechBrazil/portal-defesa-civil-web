@@ -22,7 +22,7 @@ type Step = "welcome" | "track" | "base" | "goal" | "tour" | "done";
 export function OnboardingFlow() {
   const { t } = useI18n();
   const router = useRouter();
-  const user = useAuthUser();
+  const { user } = useAuthUser();
   const createSession = useCreateStudySession();
   const firstName = user?.name?.trim().split(/\s+/)[0] ?? "";
   const [step, setStep] = useState<Step>("welcome");

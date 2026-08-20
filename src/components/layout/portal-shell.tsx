@@ -10,8 +10,10 @@ import {
   Layers,
   ListOrdered,
   MoreHorizontal,
+  ScrollText,
   Shield,
   Target,
+  Users,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -21,13 +23,15 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useAuthUser } from "@/features/auth/hooks/use-auth-user";
 import { useI18n } from "@/i18n/i18n-provider";
+import { hasAtLeast } from "@/lib/authz";
 import { cn } from "@/lib/utils";
+import type { Role } from "@/types/api.types";
 
 type NavItem = {
   href: string;
   labelKey: string;
   icon: LucideIcon;
-  admin?: boolean;
+  minRole?: Role;
 };
 
 const PRIMARY: NavItem[] = [
@@ -42,8 +46,10 @@ const SECONDARY: NavItem[] = [
 ];
 
 const ADMIN: NavItem[] = [
-  { href: "/admin/acessos", labelKey: "nav.access", icon: Shield, admin: true },
-  { href: "/admin/engajamento-estudo", labelKey: "nav.studyEngagement", icon: ListOrdered, admin: true },
+  { href: "/admin/acessos", labelKey: "nav.access", icon: Shield, minRole: "ADMIN" },
+  { href: "/admin/engajamento-estudo", labelKey: "nav.studyEngagement", icon: ListOrdered, minRole: "ADMIN" },
+  { href: "/admin/usuarios", labelKey: "nav.users", icon: Users, minRole: "ADMIN" },
+  { href: "/admin/auditoria", labelKey: "nav.audit", icon: ScrollText, minRole: "ADMIN_SENIOR" },
 ];
 
 function isActive(pathname: string, href: string): boolean {
@@ -53,12 +59,14 @@ function isActive(pathname: string, href: string): boolean {
 export function PortalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const inSession = pathname.startsWith("/estudar/");
-  const user = useAuthUser();
+  const { user } = useAuthUser();
   const { t, locale } = useI18n();
   const [moreOpen, setMoreOpen] = useState(false);
-  const isAdmin = user?.role === "ADMIN";
-  const railItems = [...PRIMARY, ...SECONDARY, ...(isAdmin ? ADMIN : [])];
-  const moreItems = [...SECONDARY, ...(isAdmin ? ADMIN : [])];
+  const adminItems = ADMIN.filter(
+    (item) => item.minRole && user != null && hasAtLeast(user.role, item.minRole),
+  );
+  const railItems = [...PRIMARY, ...SECONDARY, ...adminItems];
+  const moreItems = [...SECONDARY, ...adminItems];
   const firstName = user?.name?.trim().split(/\s+/)[0] ?? "";
   const hour = new Date().getHours();
   const greetKey =
@@ -75,7 +83,7 @@ export function PortalShell({ children }: { children: React.ReactNode }) {
           {railItems.map((item, index) => {
             const Icon = item.icon;
             const active = isActive(pathname, item.href);
-            const showRule = item.admin && index === railItems.findIndex((entry) => entry.admin);
+            const showRule = item.minRole && index === railItems.findIndex((entry) => entry.minRole);
             return (
               <div key={item.href}>
                 {showRule ? <div className="mx-2 my-2 border-t border-line" /> : null}

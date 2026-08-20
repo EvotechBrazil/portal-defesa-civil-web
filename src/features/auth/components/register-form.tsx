@@ -85,7 +85,9 @@ export function RegisterForm() {
       squad: "",
       eventoFire: "",
       email: "",
+      confirmEmail: "",
       password: "",
+      confirmPassword: "",
     },
   });
   const requestForm = useForm<RequestAccessFormValues>({
@@ -98,6 +100,7 @@ export function RegisterForm() {
       city: "",
       manadaId: "",
       email: "",
+      confirmEmail: "",
       justification: "",
     },
   });
@@ -175,14 +178,37 @@ export function RegisterForm() {
     }
     const photoBase64 = photoFile ? await fileToDataUrl(photoFile) : undefined;
     registerAccount.mutate(
-      { ...values, whatsapp, photoBase64 },
+      {
+        whatsapp,
+        name: values.name,
+        lgndNumber: values.lgndNumber,
+        manadaId: values.manadaId,
+        country: values.country,
+        state: values.state,
+        city: values.city,
+        squad: values.squad,
+        eventoFire: values.eventoFire,
+        email: values.email,
+        password: values.password,
+        photoBase64,
+      },
       { onSuccess: () => markOnboardingPending() },
     );
   }
 
   function handleRequest(values: RequestAccessFormValues) {
     request.mutate(
-      { ...values, whatsapp },
+      {
+        whatsapp,
+        name: values.name,
+        lgndNumber: values.lgndNumber,
+        manadaId: values.manadaId,
+        country: values.country,
+        state: values.state,
+        city: values.city,
+        email: values.email,
+        justification: values.justification,
+      },
       { onSuccess: () => setFlow("sent") },
     );
   }
@@ -351,10 +377,16 @@ export function RegisterForm() {
           {registerBlock === 3 ? (
             <>
               <Field id="email" label={t("auth.email")} hint={t("signup.emailHint")} error={err(registerForm, "email", t)}>
-                <Input id="email" type="email" autoComplete="email" {...registerForm.register("email")} />
+                <Input id="email" type="email" autoComplete="email" autoCapitalize="none" autoCorrect="off" {...registerForm.register("email")} />
+              </Field>
+              <Field id="confirmEmail" label={t("auth.confirmEmail")} error={err(registerForm, "confirmEmail", t)}>
+                <Input id="confirmEmail" type="email" autoComplete="off" autoCapitalize="none" autoCorrect="off" {...registerForm.register("confirmEmail")} />
               </Field>
               <Field id="password" label={t("auth.password")} error={err(registerForm, "password", t)}>
                 <Input id="password" type="password" autoComplete="new-password" {...registerForm.register("password")} />
+              </Field>
+              <Field id="confirmPassword" label={t("auth.confirmPassword")} error={err(registerForm, "confirmPassword", t)}>
+                <Input id="confirmPassword" type="password" autoComplete="new-password" {...registerForm.register("confirmPassword")} />
               </Field>
               {password ? (
                 <PasswordMeter tone={passwordTone(password)} label={t(`signup.password.${passwordTone(password)}`)} />
@@ -435,7 +467,10 @@ export function RegisterForm() {
             error={err(requestForm, "manadaId", t)}
           />
           <Field id="request-email" label={t("auth.email")} error={err(requestForm, "email", t)}>
-            <Input id="request-email" type="email" autoComplete="email" {...requestForm.register("email")} />
+            <Input id="request-email" type="email" autoComplete="email" autoCapitalize="none" autoCorrect="off" {...requestForm.register("email")} />
+          </Field>
+          <Field id="request-confirm-email" label={t("auth.confirmEmail")} error={err(requestForm, "confirmEmail", t)}>
+            <Input id="request-confirm-email" type="email" autoComplete="off" autoCapitalize="none" autoCorrect="off" {...requestForm.register("confirmEmail")} />
           </Field>
           <Field id="justification" label={t("register.justification")} error={err(requestForm, "justification", t)}>
             <Textarea id="justification" {...requestForm.register("justification")} />

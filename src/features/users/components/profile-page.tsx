@@ -11,7 +11,7 @@ import { useI18n } from "@/i18n/i18n-provider";
 import { cn } from "@/lib/utils";
 
 export function ProfilePage() {
-  const user = useAuthUser();
+  const { user } = useAuthUser();
   const { t } = useI18n();
   const { theme, setTheme } = useTheme();
   const name = user?.name ?? t("nav.profile");

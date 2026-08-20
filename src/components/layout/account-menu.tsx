@@ -10,7 +10,7 @@ import { useI18n } from "@/i18n/i18n-provider";
 import { cn } from "@/lib/utils";
 
 export function AccountMenu({ compact = false }: { compact?: boolean }) {
-  const user = useAuthUser();
+  const { user } = useAuthUser();
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);

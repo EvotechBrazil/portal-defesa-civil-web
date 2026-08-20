@@ -9,7 +9,7 @@ import type { ManadaMember } from "../types/stats.types";
 
 export function ManadaMembersList() {
   const { t, locale } = useI18n();
-  const user = useAuthUser();
+  const { user } = useAuthUser();
   const { data, isLoading, isError } = useManadaMembers();
 
   return (
