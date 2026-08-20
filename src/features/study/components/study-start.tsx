@@ -22,11 +22,11 @@ export function StudyStart() {
   const [form, setForm] = useState<CreateStudySessionForm>(INITIAL);
 
   if (decksQuery.isLoading) {
-    return <p className="px-4 py-10 text-sm text-slate-600">{t("study.loadingDecks")}</p>;
+    return <p className="px-4 py-10 text-sm text-mist">{t("study.loadingDecks")}</p>;
   }
   if (decksQuery.isError) {
     return (
-      <p className="px-4 py-10 text-sm text-red-600">
+      <p className="px-4 py-10 text-sm text-hard">
         {t("study.loadDecksError")}
       </p>
     );
@@ -48,7 +48,7 @@ export function StudyStart() {
         }}
       />
       {createSession.isError ? (
-        <p className="px-4 text-sm text-red-600">{t("study.openSessionError")}</p>
+        <p className="px-4 text-sm text-hard">{t("study.openSessionError")}</p>
       ) : null}
     </div>
   );

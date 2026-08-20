@@ -29,12 +29,12 @@ export function PracticeSparkline({ points }: { points: SparklinePoint[] }) {
             className={cn(
               "block w-2 rounded-sm",
               isLast
-                ? "bg-amber-500"
+                ? "bg-learn"
                 : ratio === 1
-                  ? "bg-emerald-500"
+                  ? "bg-ok"
                   : ratio >= 0.6
-                    ? "bg-amber-400"
-                    : "bg-red-500",
+                    ? "bg-learn"
+                    : "bg-hard",
             )}
             style={{ height: Math.max(6, Math.round(ratio * 28)) }}
           />

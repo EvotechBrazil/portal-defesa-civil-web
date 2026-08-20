@@ -11,8 +11,8 @@ export function SessionsTimeline({ sessions }: { sessions: SessionLast30d[] }) {
 
   return (
     <Card>
-      <h2 className="text-base font-semibold text-navy">{t("stats.sessions")}</h2>
-      <p className="mt-1 text-sm text-slate-500">
+      <h2 className="text-base font-semibold text-paper">{t("stats.sessions")}</h2>
+      <p className="mt-1 text-sm text-mist">
         {sessions.length === 0
           ? t("stats.noSessions")
           : t("stats.sessionSummary", {
@@ -28,7 +28,7 @@ export function SessionsTimeline({ sessions }: { sessions: SessionLast30d[] }) {
               key={day.date}
               title={`${formatDate(`${day.date}T12:00:00Z`, { day: "2-digit", month: "2-digit" })}: ${t("stats.reviewCount", { count: day.reviews })}`}
               className={`flex-1 rounded-sm ${
-                day.reviews === 0 ? "bg-slate-100" : "bg-navy"
+                day.reviews === 0 ? "bg-inset" : "bg-paper"
               }`}
               style={{ height: day.reviews === 0 ? "8%" : `${height}%` }}
             />
@@ -36,7 +36,7 @@ export function SessionsTimeline({ sessions }: { sessions: SessionLast30d[] }) {
         })}
       </div>
       {sessions.length > 0 ? (
-        <ul className="mt-4 space-y-2 text-sm text-slate-600">
+        <ul className="mt-4 space-y-2 text-sm text-mist">
           {sessions
             .slice()
             .reverse()

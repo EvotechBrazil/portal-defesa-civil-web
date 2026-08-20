@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#dcd8d2;font-family:'Geist',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;-webkit-tap-highlight-color:transparent}
+input,textarea,select{font-family:inherit}
+a{color:#9a3412;text-decoration:underline;text-underline-offset:2px}
+a:hover{color:#7c2d12}
+@keyframes sk{0%{opacity:.55}50%{opacity:1}100%{opacity:.55}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}}
+</style>
+</helmet>
+
+<section style="padding:64px;display:flex;flex-direction:column;gap:48px;width:max-content">
+
+  <header style="max-width:940px;display:flex;flex-direction:column;gap:14px">
+    <span style="font:600 12px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#155e75">Fase 1 · Grupos B + C — um fluxo contínuo</span>
+    <h1 style="margin:0;font:600 44px/1.05 'Geist',system-ui;letter-spacing:-.02em;color:#171412">Do link recebido à primeira sessão</h1>
+    <p style="margin:0;font:400 17px/1.55 'Geist',system-ui;color:#5f5952;max-width:62ch;text-wrap:pretty">B e C na mesma rodada, sem costura: o gate pergunta uma coisa, o cadastro divide em três blocos, e o onboarding só pergunta o que ainda não foi respondido. Trilha e meta diária aparecem <strong style="font-weight:600">uma única vez</strong> em todo o fluxo — no onboarding, nunca no cadastro.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">
+      <span style="padding:6px 10px;border-radius:8px;background:#fff;border:1px solid rgba(0,0,0,.14);font:500 12px/1.3 'Geist Mono',ui-monospace;color:#171412">B1 login · B2 gate · B3 os 4 retornos · B4 cadastro · B5 foto · B6 pedido · B7 verificação</span>
+      <span style="padding:6px 10px;border-radius:8px;background:#fff;border:1px solid rgba(0,0,0,.14);font:500 12px/1.3 'Geist Mono',ui-monospace;color:#171412">C1 boas-vindas · C2 trilha · C3 base · C4 meta · C5 tour do gesto · C6 conclusão</span>
+      <span style="padding:6px 10px;border-radius:8px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);font:500 12px/1.3 'Geist Mono',ui-monospace;color:#854d0e">Grupo A adiado até o nome fechar</span>
+    </div>
+  </header>
+
+  <!-- ============ 5b · SELETOR DE MANADA ============ -->
+  <div id="5b" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">5b</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">Revisão · Manada deixa de ser texto livre</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:78ch">A ordem dos blocos inverteu: <strong style="font-weight:600">país → estado → cidade</strong> vêm antes, e só então a manada. O campo virou combobox com busca, filtro automático em escada (mesma cidade → mesmo estado → mesmo país → todas) e criação dentro do próprio campo por selects encadeados. Grafia livre está eliminada em toda a cadeia: é ela que quebrava o agrupamento.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Aberto · filtro automático em escada · 390 light</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+          <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 4px;border-bottom:1px solid rgba(0,0,0,.1)">
+            <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+            <span style="font:600 15px/1 'Geist',system-ui;color:#171412">Escolher manada</span>
+            <span style="width:44px"></span>
+          </div>
+          <div style="padding:14px 16px 0;display:flex;flex-direction:column;gap:10px">
+            <input value="nor" placeholder="Buscar manada…" style="min-height:52px;padding:0 14px;border-radius:10px;border:1.5px solid #9a3412;background:#fff;color:#171412;font:400 16px/1 'Geist',system-ui;box-shadow:0 0 0 2px #efece7,0 0 0 4px #ea580c">
+            <div style="display:flex;align-items:center;gap:7px;padding:8px 11px;border-radius:8px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28)"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#155e75">SUA REGIÃO</span><span style="font:500 12.5px/1.3 'Geist',system-ui;color:#0f4457">Arapongas · PR · Brasil</span></div>
+          </div>
+          <div style="flex:1;padding:12px 16px 16px;display:flex;flex-direction:column;gap:14px;overflow:hidden">
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">FILTRO AUTOMÁTICO · MESMA CIDADE</span>
+              <button style="text-align:left;min-height:60px;padding:12px 14px;border-radius:10px;border:1.5px solid #9a3412;background:#faf6ef;cursor:pointer;display:flex;align-items:center;gap:10px"><div style="flex:1"><div style="display:flex;align-items:center;gap:7px"><span style="font:600 15.5px/1.25 'Geist',system-ui;color:#171412">Manada Norte</span><span style="padding:3px 7px;border-radius:5px;background:#e8f6f0;border:1px solid rgba(4,120,87,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#047857">✓ VERIFICADA</span></div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#5f5952">Arapongas/PR · 18 pessoas</div></div><span style="font:600 14px/1 'Geist',system-ui;color:#9a3412">✓</span></button>
+              <button style="text-align:left;min-height:60px;padding:12px 14px;border-radius:10px;border:1px solid rgba(0,0,0,.16);background:#fff;cursor:pointer"><div style="display:flex;align-items:center;gap:7px"><span style="font:600 15.5px/1.25 'Geist',system-ui;color:#171412">Manada Nordeste</span><span style="padding:3px 7px;border-radius:5px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#854d0e">△ NÃO VERIF.</span></div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#5f5952">Arapongas/PR · 2 pessoas · criada há 3 dias</div></button>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">MESMO ESTADO · PR</span>
+              <button style="text-align:left;min-height:56px;padding:12px 14px;border-radius:10px;border:1px solid rgba(0,0,0,.16);background:#fff;cursor:pointer"><div style="font:600 15px/1.25 'Geist',system-ui;color:#171412">Manada Norte Pioneiro</div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#5f5952">Londrina/PR · 34 pessoas</div></button>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">MESMO PAÍS · BRASIL</span>
+              <button style="text-align:left;min-height:56px;padding:12px 14px;border-radius:10px;border:1px solid rgba(0,0,0,.16);background:#fff;cursor:pointer"><div style="font:600 15px/1.25 'Geist',system-ui;color:#171412">Manada Norte Fluminense</div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#5f5952">Campos/RJ · 11 pessoas</div></button>
+            </div>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+              <span style="font:400 12px/1.45 'Geist',system-ui;color:#5f5952">A escada nunca deixa a lista vazia: se a cidade não tem nada, o estado aparece; depois o país; por último todas.</span>
+              <button style="min-height:52px;border-radius:10px;border:1px dashed rgba(23,20,18,.3);background:#e5e0d8;font:600 15px/1 'Geist',system-ui;color:#171412;cursor:pointer">＋ Criar “nor…” como nova manada</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Criar manada · selects encadeados · 390 dark</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#0f1113;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+          <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 4px;border-bottom:1px solid rgba(255,255,255,.1)">
+            <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#eceae7;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+            <span style="font:600 15px/1 'Geist',system-ui;color:#f4ede4">Criar manada</span>
+            <span style="width:44px"></span>
+          </div>
+          <div style="flex:1;padding:20px 16px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#eceae7">Nome da manada</label>
+              <input value="Norte" style="min-height:52px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0a0c0d;color:#eceae7;font:400 16px/1 'Geist',system-ui">
+              <span style="font:400 12.5px/1.45 'Geist',system-ui;color:#a8a29e">Só o nome. A região vem dos campos abaixo — não escreva cidade no nome.</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#eceae7">País</label>
+              <select style="min-height:52px;padding:0 12px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0a0c0d;color:#eceae7;font:400 16px/1 'Geist',system-ui"><option>Brasil</option><option>Argentina</option></select>
+            </div>
+            <div style="display:grid;grid-template-columns:100px 1fr;gap:10px">
+              <div style="display:flex;flex-direction:column;gap:6px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#eceae7">Estado</label><select style="min-height:52px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0a0c0d;color:#eceae7;font:400 16px/1 'Geist',system-ui"><option>PR</option></select></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#eceae7">Cidade</label><select style="min-height:52px;padding:0 12px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0a0c0d;color:#eceae7;font:400 16px/1 'Geist',system-ui"><option>Arapongas</option></select></div>
+            </div>
+            <div style="padding:16px;border-radius:14px;background:#241d10;border:1px solid rgba(251,191,36,.32);display:flex;flex-direction:column;gap:10px">
+              <span style="display:flex;align-items:center;gap:8px;font:600 13.5px/1.3 'Geist',system-ui;color:#fde9b6"><span style="width:24px;height:24px;border-radius:7px;background:#0f1113;border:1px solid rgba(251,191,36,.3);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fbbf24">△</span>Já existe Manada Norte em Arapongas/PR</span>
+              <span style="font:400 13px/1.5 'Geist',system-ui;color:#fbbf24">Tem 18 pessoas e está verificada. É essa mesma?</span>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <button style="min-height:48px;border-radius:10px;border:0;background:#fb923c;color:#171412;font:600 15px/1 'Geist',system-ui;cursor:pointer">Sim, é essa — usar a existente</button>
+                <button style="min-height:48px;border-radius:10px;border:1px solid rgba(244,237,228,.24);background:transparent;color:#f4ede4;font:600 15px/1 'Geist',system-ui;cursor:pointer">Não, é outra manada</button>
+              </div>
+            </div>
+            <span style="font:400 12.5px/1.5 'Geist',system-ui;color:#a8a29e">Comparação por nome normalizado (sem acento, sem caixa, sem espaço extra) + cidade. Sem isso, em uma semana existem “Norte”, “norte”, “Manada Norte” e “Norte/PR”.</span>
+            <div style="margin-top:auto"><button disabled="{{ true }}" style="width:100%;min-height:56px;border-radius:10px;border:1px solid rgba(255,255,255,.08);background:#141719;color:#6f6a66;font:600 17px/1 'Geist',system-ui;cursor:not-allowed">Criar manada</button><span style="display:block;margin-top:7px;font:400 12px/1.45 'Geist',system-ui;color:#a8a29e;text-align:center">Bloqueado até você responder sobre a duplicata.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">2ª barreira · por cidade, não por nome · 390 light</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+          <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 4px;border-bottom:1px solid rgba(0,0,0,.1)">
+            <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+            <span style="font:600 15px/1 'Geist',system-ui;color:#171412">Criar manada</span>
+            <span style="width:44px"></span>
+          </div>
+          <div style="flex:1;padding:18px 16px;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Nome da manada</label>
+              <input value="Aliança" style="min-height:48px;padding:0 14px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 16px/1 'Geist',system-ui">
+            </div>
+            <div style="display:flex;align-items:center;gap:7px;padding:9px 11px;border-radius:8px;background:#e5e0d8;border:1px solid rgba(0,0,0,.12)"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">REGIÃO</span><span style="font:500 12.5px/1.3 'Geist',system-ui;color:#171412">Arapongas · PR · Brasil</span></div>
+            <div style="padding:16px;border-radius:14px;background:#e0f0f5;border:1px solid rgba(21,94,117,.3);display:flex;flex-direction:column;gap:11px">
+              <span style="display:flex;align-items:center;gap:8px;font:600 14.5px/1.3 'Geist',system-ui;color:#0f4457"><span style="width:26px;height:26px;flex:0 0 26px;border-radius:8px;background:#fff;border:1px solid rgba(21,94,117,.3);display:flex;align-items:center;justify-content:center;font-size:13px;color:#155e75">◇</span>Existem 2 manadas em Arapongas/PR</span>
+              <span style="font:400 13px/1.5 'Geist',system-ui;color:#155e75">Antes de criar mais uma, confira se alguma destas é a sua. É comum a mesma manada ter apelidos diferentes.</span>
+              <div style="display:flex;flex-direction:column;gap:7px">
+                <button style="text-align:left;min-height:56px;padding:11px 13px;border-radius:10px;border:1px solid rgba(21,94,117,.3);background:#fff;cursor:pointer"><div style="display:flex;align-items:center;gap:7px"><span style="font:600 14.5px/1.25 'Geist',system-ui;color:#171412">Manada Norte</span><span style="padding:3px 6px;border-radius:5px;background:#e8f6f0;border:1px solid rgba(4,120,87,.3);font:600 9px/1.2 'Geist Mono',ui-monospace;color:#047857">✓ VERIF.</span></div><div style="font:400 12px/1.4 'Geist',system-ui;color:#5f5952">18 pessoas · criada em março</div></button>
+                <button style="text-align:left;min-height:56px;padding:11px 13px;border-radius:10px;border:1px solid rgba(21,94,117,.3);background:#fff;cursor:pointer"><div style="display:flex;align-items:center;gap:7px"><span style="font:600 14.5px/1.25 'Geist',system-ui;color:#171412">Manada Aliança Norte</span><span style="padding:3px 6px;border-radius:5px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);font:600 9px/1.2 'Geist Mono',ui-monospace;color:#854d0e">△ NÃO VERIF.</span></div><div style="font:400 12px/1.4 'Geist',system-ui;color:#5f5952">4 pessoas · criada há 6 dias</div></button>
+              </div>
+              <button style="min-height:48px;border-radius:10px;border:1px solid rgba(21,94,117,.35);background:#e0f0f5;font:600 14.5px/1 'Geist',system-ui;color:#0f4457;cursor:pointer">Nenhuma é a minha manada</button>
+            </div>
+            <span style="font:400 12.5px/1.5 'Geist',system-ui;color:#5f5952">Esta barreira é <strong style="font-weight:600;color:#171412">por cidade</strong>, não por nome: pega o quase-acerto que a normalização deixa passar — “Norte” contra “Manada Norte”, “Aliança” contra “Aliança Norte”.</span>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+              <button disabled="{{ true }}" style="min-height:56px;border-radius:10px;border:1px solid rgba(0,0,0,.12);background:#e5e0d8;color:#8a827a;font:600 17px/1 'Geist',system-ui;cursor:not-allowed">Criar “Aliança”</button>
+              <span style="font:400 12px/1.45 'Geist',system-ui;color:#5f5952;text-align:center">Libera só depois de “nenhuma é a minha”. As duas barreiras são sequenciais: cidade primeiro, nome exato depois.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e">Os quatro estados novos · light</div>
+
+        <div style="width:390px;padding:18px 16px;border-radius:20px;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column;gap:11px">
+          <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">1 · BUSCA SEM RESULTADO</span>
+          <input value="manada do lago" style="min-height:48px;padding:0 14px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 15px/1 'Geist',system-ui">
+          <span style="width:34px;height:34px;border-radius:10px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);display:flex;align-items:center;justify-content:center;font:600 14px/1 'Geist',system-ui;color:#155e75">◇</span>
+          <div style="font:600 15.5px/1.3 'Geist',system-ui;color:#171412">Nenhuma manada com esse nome</div>
+          <div style="font:400 13.5px/1.5 'Geist',system-ui;color:#5f5952">Procuramos em Arapongas, no Paraná e no Brasil. Confira a grafia ou crie a sua — leva 20 segundos.</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button style="min-height:48px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 15px/1 'Geist',system-ui;cursor:pointer">＋ Criar “manada do lago”</button>
+            <button style="min-height:48px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;color:#171412;font:600 15px/1 'Geist',system-ui;cursor:pointer">Ver todas as manadas</button>
+          </div>
+        </div>
+
+        <div style="width:390px;padding:18px 16px;border-radius:20px;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column;gap:11px">
+          <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">2 · FILTRO AUTOMÁTICO VAZIO · escada abre um degrau</span>
+          <div style="display:flex;align-items:center;gap:7px;padding:8px 11px;border-radius:8px;background:#e5e0d8;border:1px solid rgba(0,0,0,.12)"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">CIDADE</span><span style="font:500 12.5px/1.3 'Geist',system-ui;color:#171412">Arapongas/PR · nenhuma manada</span></div>
+          <div style="font:400 13.5px/1.5 'Geist',system-ui;color:#5f5952">Sem manada na sua cidade, mostramos as do <strong style="font-weight:600;color:#171412">Paraná</strong>. A lista nunca fica vazia.</div>
+          <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">MESMO ESTADO · PR</span>
+          <button style="text-align:left;min-height:56px;padding:12px 14px;border-radius:10px;border:1px solid rgba(0,0,0,.16);background:#fff;cursor:pointer"><div style="font:600 15px/1.25 'Geist',system-ui;color:#171412">Manada Norte Pioneiro</div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#5f5952">Londrina/PR · 34 pessoas · 62 km</div></button>
+          <button style="text-align:left;min-height:56px;padding:12px 14px;border-radius:10px;border:1px solid rgba(0,0,0,.16);background:#fff;cursor:pointer"><div style="font:600 15px/1.25 'Geist',system-ui;color:#171412">Manada Vale do Ivaí</div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#5f5952">Apucarana/PR · 9 pessoas · 18 km</div></button>
+        </div>
+
+        <div style="width:390px;padding:18px 16px;border-radius:20px;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column;gap:11px">
+          <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">3 · MANADA CRIADA · AGUARDANDO VERIFICAÇÃO</span>
+          <span style="width:34px;height:34px;border-radius:10px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);display:flex;align-items:center;justify-content:center;font:600 14px/1 'Geist',system-ui;color:#854d0e">△</span>
+          <div style="font:600 15.5px/1.3 'Geist',system-ui;color:#171412">Manada Norte criada</div>
+          <div style="display:flex;align-items:center;gap:8px;padding:11px 13px;border-radius:10px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3)"><span style="padding:3px 7px;border-radius:5px;background:#fff;border:1px solid rgba(180,83,9,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#854d0e">△ NÃO VERIFICADA</span><span style="font:500 12.5px/1.35 'Geist',system-ui;color:#7c3d06">Arapongas/PR · você é a 1ª pessoa</span></div>
+          <div style="font:400 13.5px/1.5 'Geist',system-ui;color:#5f5952">Você já pode estudar normalmente. Um admin confirma a manada em até 3 dias úteis — até lá ela aparece com o selo para ninguém criar uma duplicata.</div>
+          <button style="min-height:48px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 15px/1 'Geist',system-ui;cursor:pointer">Continuar cadastro</button>
+        </div>
+
+        <div style="width:390px;padding:18px 16px;border-radius:20px;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column;gap:11px">
+          <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">4 · MUNICÍPIO SEM NENHUMA MANADA</span>
+          <span style="width:34px;height:34px;border-radius:10px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);display:flex;align-items:center;justify-content:center;font:600 14px/1 'Geist',system-ui;color:#155e75">◇</span>
+          <div style="font:600 15.5px/1.3 'Geist',system-ui;color:#171412">Você é a primeira pessoa de Sabáudia/PR</div>
+          <div style="font:400 13.5px/1.5 'Geist',system-ui;color:#5f5952">Ainda não existe manada no seu município. Você pode abrir a primeira — ou entrar em uma vizinha, o que muita gente faz no começo.</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <button style="min-height:48px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 15px/1 'Geist',system-ui;cursor:pointer">Criar a manada de Sabáudia</button>
+            <button style="min-height:48px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;color:#171412;font:600 15px/1 'Geist',system-ui;cursor:pointer">Ver as 3 manadas mais próximas</button>
+          </div>
+          <span style="font:400 12px/1.45 'Geist',system-ui;color:#5f5952">Decisão registrada: nunca oferecemos “sem manada”. Ficar sem vínculo quebra o agrupamento tanto quanto a grafia livre.</span>
+        </div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Consequência · 4ª aba em /admin/acessos · 1280 light</div>
+        <div style="width:900px;border-radius:16px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column">
+          <div style="background:#fff;border-bottom:1px solid rgba(0,0,0,.14);padding:16px 20px 0;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:baseline;gap:12px"><h3 style="margin:0;font:600 19px/1.2 'Geist',system-ui;color:#171412">Acessos</h3><span style="padding:4px 8px;border-radius:6px;background:#e5e0d8;font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#5f5952">ADMIN</span></div></div>
+            <div style="display:flex;gap:4px;flex-wrap:wrap">
+              <button style="min-height:44px;padding:0 14px;border:0;border-bottom:2px solid transparent;background:transparent;font:500 14px/1 'Geist',system-ui;color:#5f5952;cursor:pointer">Pendentes <span style="font-family:'Geist Mono',ui-monospace">3</span></button>
+              <button style="min-height:44px;padding:0 14px;border:0;border-bottom:2px solid transparent;background:transparent;font:500 14px/1 'Geist',system-ui;color:#5f5952;cursor:pointer">Interessados <span style="font-family:'Geist Mono',ui-monospace">7</span></button>
+              <button style="min-height:44px;padding:0 14px;border:0;border-bottom:2px solid transparent;background:transparent;font:500 14px/1 'Geist',system-ui;color:#5f5952;cursor:pointer">Autorizados <span style="font-family:'Geist Mono',ui-monospace">42</span></button>
+              <button style="min-height:44px;padding:0 14px;border:0;border-bottom:2px solid #9a3412;background:transparent;font:600 14px/1 'Geist',system-ui;color:#9a3412;cursor:pointer">✓ Manadas <span style="font-family:'Geist Mono',ui-monospace">2</span></button>
+            </div>
+          </div>
+          <div style="padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+            <div style="display:grid;grid-template-columns:1fr 170px 120px 240px;gap:12px;padding:10px 14px;background:#e5e0d8;border-radius:8px">
+              <span style="font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">MANADA</span>
+              <span style="font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">REGIÃO</span>
+              <span style="font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">CRIADA POR</span>
+              <span style="font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">AÇÃO</span>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 170px 120px 240px;gap:12px;padding:12px 14px;align-items:center;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:10px">
+              <div><div style="display:flex;align-items:center;gap:7px"><span style="font:600 14.5px/1.25 'Geist',system-ui;color:#171412">Manada Nordeste</span><span style="padding:3px 7px;border-radius:5px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#854d0e">△ NÃO VERIF.</span></div><div style="font:400 12px/1.35 'Geist',system-ui;color:#b91c1c;margin-top:3px">Possível duplicata de Manada Norte (mesma cidade)</div></div>
+              <span style="font:500 12.5px/1.35 'Geist',system-ui;color:#171412">Arapongas · PR · BR</span>
+              <span style="font:400 12.5px/1.35 'Geist',system-ui;color:#5f5952">LGND 3102</span>
+              <div style="display:flex;gap:8px;flex-wrap:wrap"><button style="min-height:40px;padding:0 12px;border-radius:8px;border:1px solid rgba(4,120,87,.35);background:#e8f6f0;font:600 13px/1 'Geist',system-ui;color:#047857;cursor:pointer">✓ Verificar</button><button style="min-height:40px;padding:0 12px;border-radius:8px;border:1px solid rgba(0,0,0,.2);background:#fff;font:600 13px/1 'Geist',system-ui;color:#171412;cursor:pointer">⇄ Mesclar</button></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 170px 120px 240px;gap:12px;padding:12px 14px;align-items:center;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:10px">
+              <div style="display:flex;align-items:center;gap:7px"><span style="font:600 14.5px/1.25 'Geist',system-ui;color:#171412">Manada Sabáudia</span><span style="padding:3px 7px;border-radius:5px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#854d0e">△ NÃO VERIF.</span></div>
+              <span style="font:500 12.5px/1.35 'Geist',system-ui;color:#171412">Sabáudia · PR · BR</span>
+              <span style="font:400 12.5px/1.35 'Geist',system-ui;color:#5f5952">LGND 2755</span>
+              <div style="display:flex;gap:8px;flex-wrap:wrap"><button style="min-height:40px;padding:0 12px;border-radius:8px;border:1px solid rgba(4,120,87,.35);background:#e8f6f0;font:600 13px/1 'Geist',system-ui;color:#047857;cursor:pointer">✓ Verificar</button><button style="min-height:40px;padding:0 12px;border-radius:8px;border:1px solid rgba(185,28,28,.35);background:#fdeeee;font:600 13px/1 'Geist',system-ui;color:#b91c1c;cursor:pointer">✕ Recusar</button></div>
+            </div>
+            <div style="padding:20px;border-radius:12px;background:#fff;border:1px dashed rgba(0,0,0,.2);display:flex;flex-direction:column;gap:7px;align-items:flex-start">
+              <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">VAZIO DESTA ABA</span>
+              <div style="font:600 15px/1.3 'Geist',system-ui;color:#171412">Nenhuma manada esperando verificação</div>
+              <div style="font:400 13.5px/1.5 'Geist',system-ui;color:#5f5952;max-width:60ch">As 14 manadas ativas estão todas confirmadas. Quando alguém criar uma nova no cadastro, ela aparece aqui com a checagem de duplicata já feita.</div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:12px">
+              <div style="flex:1 1 380px;padding:18px;border-radius:12px;background:#171412;display:flex;flex-direction:column;gap:11px">
+                <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#fdba74">CONFIRMAÇÃO DE MESCLAGEM · MODAL</span>
+                <h4 style="margin:0;font:600 18px/1.3 'Geist',system-ui;color:#f5f1ea">Mesclar “Norte” em “Manada Norte”?</h4>
+                <div style="display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.14);border-radius:8px;overflow:hidden">
+                  <div style="background:#221f1c;padding:10px 12px;display:flex;justify-content:space-between"><span style="font:400 12.5px/1.3 'Geist',system-ui;color:#c4b8ad">Vencedora</span><span style="font:500 12.5px/1.3 'Geist',system-ui;color:#f4ede4">Manada Norte · 18 pessoas</span></div>
+                  <div style="background:#221f1c;padding:10px 12px;display:flex;justify-content:space-between"><span style="font:400 12.5px/1.3 'Geist',system-ui;color:#c4b8ad">Descartada</span><span style="font:500 12.5px/1.3 'Geist',system-ui;color:#f4ede4">Norte · 7 pessoas</span></div>
+                  <div style="background:#221f1c;padding:10px 12px;display:flex;justify-content:space-between"><span style="font:400 12.5px/1.3 'Geist',system-ui;color:#c4b8ad">Após mesclar</span><span style="font:500 12.5px/1.3 'Geist Mono',ui-monospace;color:#34d399">25 pessoas</span></div>
+                </div>
+                <div style="display:flex;gap:10px;padding:11px 13px;border-radius:8px;background:#241416;border:1px solid rgba(248,113,113,.34)"><span style="font:600 14px/1.3 'Geist',system-ui;color:#f87171">✕</span><span style="font:400 12.5px/1.5 'Geist',system-ui;color:#fcd9d9"><strong style="font-weight:600">Não tem desfazer.</strong> 7 pessoas e os pedidos de acesso vinculados passam para Manada Norte; “Norte” deixa de existir.</span></div>
+                <label style="display:flex;align-items:center;gap:9px;min-height:44px;font:500 13px/1.4 'Geist',system-ui;color:#f5f1ea;cursor:pointer"><span style="width:22px;height:22px;flex:0 0 22px;border-radius:6px;border:1.5px solid #fdba74;background:#fdba74;display:flex;align-items:center;justify-content:center;font:600 13px/1 'Geist',system-ui;color:#171412">✓</span>Entendi que a mesclagem é definitiva</label>
+                <div style="display:flex;gap:8px"><button style="flex:1;min-height:44px;border-radius:8px;border:1px solid rgba(245,241,234,.24);background:transparent;font:600 14px/1 'Geist',system-ui;color:#f5f1ea;cursor:pointer">Cancelar</button><button style="flex:1;min-height:44px;border-radius:8px;border:0;background:#fb923c;font:600 14px/1 'Geist',system-ui;color:#171412;cursor:pointer">Mesclar 7 pessoas</button></div>
+              </div>
+              <div style="flex:1 1 380px;padding:18px;border-radius:12px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);display:flex;flex-direction:column;gap:9px">
+                <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#854d0e">NOTA DE HANDOFF · IMPLEMENTAÇÃO</span>
+                <span style="font:400 13px/1.65 'Geist',system-ui;color:#7c3d06">Mesclar reaponta as FKs de <span style="font-family:'Geist Mono',ui-monospace">User</span> e <span style="font-family:'Geist Mono',ui-monospace">AccessRequest</span> para a manada vencedora e descarta a perdedora. Precisa ser <strong style="font-weight:600">transação única</strong> — metade das FKs movidas é pior que nenhuma — e precisa <strong style="font-weight:600">registrar qual virou qual</strong> (id perdedora, id vencedora, autor, timestamp, contagem movida). Sem esse registro, um merge errado não tem como ser reconstruído.</span>
+                <span style="font:400 12.5px/1.6 'Geist',system-ui;color:#854d0e">O desenho cobre a parte dele: confirmação com nome das duas manadas, quantas pessoas se movem, total resultante, aviso explícito de irreversibilidade e checkbox de ciência. O botão só habilita com o checkbox marcado.</span>
+              </div>
+            </div>
+            <div style="padding:14px 16px;border-radius:10px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);font:400 13px/1.6 'Geist',system-ui;color:#0f4457"><strong style="font-weight:600">Mesclar</strong> existe porque duplicata vai passar: move as pessoas da manada nova para a existente e apaga a duplicada, sem quebrar histórico de estudo. Sem essa ação, verificar seria uma escolha entre aprovar sujeira ou recusar gente de boa-fé.</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;max-width:900px;padding:16px 18px;border-radius:12px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);font:400 13.5px/1.65 'Geist',system-ui;color:#292524">
+          <strong style="font-weight:600">Comportamento do combobox:</strong> foco no campo → abre a lista com o filtro automático já aplicado → digitar filtra dentro de todos os degraus (não só do primeiro) → ↑↓ navega, Enter escolhe, Esc fecha e devolve o foco ao gatilho. <span style="font-family:'Geist Mono',ui-monospace">role="combobox"</span> + <span style="font-family:'Geist Mono',ui-monospace">aria-expanded</span> + <span style="font-family:'Geist Mono',ui-monospace">aria-activedescendant</span>; o grupo de cada degrau é um <span style="font-family:'Geist Mono',ui-monospace">role="group"</span> com rótulo, então o leitor de tela anuncia “mesma cidade, 2 itens”. Selo de verificação é ícone + texto, nunca só cor. Sem dependência nova: <span style="font-family:'Geist Mono',ui-monospace">datalist</span> não permite os grupos nem os selos, então o combobox é markup próprio com <span style="font-family:'Geist Mono',ui-monospace">input</span> + lista — CSS puro, sem lib.<br><br>
+          <strong style="font-weight:600">Chaves i18n novas:</strong> <span style="font-family:'Geist Mono',ui-monospace">region.country|state|city</span>, <span style="font-family:'Geist Mono',ui-monospace">pack.field|search|create|verified|unverified</span>, <span style="font-family:'Geist Mono',ui-monospace">pack.scope.city|state|country|all</span>, <span style="font-family:'Geist Mono',ui-monospace">pack.empty.search|scope|noneInCity</span>, <span style="font-family:'Geist Mono',ui-monospace">pack.duplicate.title|useExisting|isOther</span>, <span style="font-family:'Geist Mono',ui-monospace">pack.created.pending</span>, <span style="font-family:'Geist Mono',ui-monospace">admin.tabs.packs</span>, <span style="font-family:'Geist Mono',ui-monospace">admin.packs.verify|merge|reject|empty</span>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MAPA DO FLUXO ============ -->
+  <div id="4a" style="display:flex;flex-direction:column;gap:16px;padding:28px 32px;border-radius:16px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);max-width:1500px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">4a</span>
+      <h2 style="margin:0;font:600 24px/1.1 'Geist',system-ui;letter-spacing:-.015em;color:#171412">Mapa · visitante → primeira sessão → retorno diário</h2>
+    </div>
+    <div style="display:flex;align-items:stretch;gap:0;flex-wrap:wrap">
+      <div style="flex:1 1 150px;min-width:150px;padding:14px 16px;border-radius:12px 0 0 12px;background:#e5e0d8;border:1px solid rgba(0,0,0,.12);display:flex;flex-direction:column;gap:5px"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">B2 · 1 CAMPO</span><span style="font:600 14px/1.25 'Geist',system-ui;color:#171412">Gate WhatsApp</span><span style="font:400 12px/1.4 'Geist',system-ui;color:#5f5952">Único campo. Decide o caminho.</span></div>
+      <div style="flex:1 1 150px;min-width:150px;padding:14px 16px;background:#faf6ef;border:1px solid rgba(0,0,0,.12);border-left:0;display:flex;flex-direction:column;gap:5px"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">B4 · 3 BLOCOS</span><span style="font:600 14px/1.25 'Geist',system-ui;color:#171412">Cadastro</span><span style="font:400 12px/1.4 'Geist',system-ui;color:#5f5952">Identidade → LGND → acesso. Foto opcional.</span></div>
+      <div style="flex:1 1 150px;min-width:150px;padding:14px 16px;background:#faf6ef;border:1px solid rgba(0,0,0,.12);border-left:0;display:flex;flex-direction:column;gap:5px"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">B7</span><span style="font:600 14px/1.25 'Geist',system-ui;color:#171412">Verificação</span><span style="font:400 12px/1.4 'Geist',system-ui;color:#5f5952">Aguardando · ok · expirado · reenvio.</span></div>
+      <div style="flex:1 1 150px;min-width:150px;padding:14px 16px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);border-left:0;display:flex;flex-direction:column;gap:5px"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#155e75">C · NOVO</span><span style="font:600 14px/1.25 'Geist',system-ui;color:#0f4457">Onboarding</span><span style="font:400 12px/1.4 'Geist',system-ui;color:#155e75">Trilha, base, meta, tour do gesto.</span></div>
+      <div style="flex:1 1 150px;min-width:150px;padding:14px 16px;background:#faf6ef;border:1px solid rgba(0,0,0,.12);border-left:0;display:flex;flex-direction:column;gap:5px"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">C6 → D</span><span style="font:600 14px/1.25 'Geist',system-ui;color:#171412">1ª sessão real</span><span style="font:400 12px/1.4 'Geist',system-ui;color:#5f5952">Sem repetir nenhuma pergunta.</span></div>
+      <div style="flex:1 1 150px;min-width:150px;padding:14px 16px;border-radius:0 12px 12px 0;background:#e8f6f0;border:1px solid rgba(4,120,87,.28);border-left:0;display:flex;flex-direction:column;gap:5px"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#047857">RETORNO</span><span style="font:600 14px/1.25 'Geist',system-ui;color:#03533c">Dia 2 em diante</span><span style="font:400 12px/1.4 'Geist',system-ui;color:#047857">Abre em “13 vencem hoje”. Zero decisão.</span></div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <div style="flex:1 1 300px;padding:14px 16px;border-radius:10px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);font:400 13px/1.6 'Geist',system-ui;color:#0f4457"><strong style="font-weight:600">Ordem revista:</strong> região (país → estado → cidade) vem <em>antes</em> da manada — sem a região o filtro automático não tem como sugerir nada. <strong style="font-weight:600">Costura evitada:</strong> o cadastro não pergunta trilha nem meta — mesmo tendo espaço. Elas pertencem ao onboarding, onde há contexto para explicar o trade-off. Perguntar antes obrigaria a repetir depois.</div>
+      <div style="flex:1 1 300px;padding:14px 16px;border-radius:10px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);font:400 13px/1.6 'Geist',system-ui;color:#7c3d06"><strong style="font-weight:600">Regra registrada (aperto em 390 na carta com foto):</strong> quando a carta tem fotografia, o cabeçalho de medição colapsa para uma tira de uma linha (<span style="font-family:'Geist Mono',ui-monospace">FILA 08/20</span>, sem o bloco de acerto); e o controle de olho esconde a tira junto com a camada de texto. Sem artboard novo — vale para todas as telas de /estudar.</div>
+    </div>
+  </div>
+
+  <!-- ============ B1 · LOGIN + B2 GATE ============ -->
+  <div id="4b" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">4b</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">B1 · Login · e B2 · gate de WhatsApp</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:74ch"><strong style="font-weight:600">O que mudou (dívida 4):</strong> o gate é uma tela de um campo. Explica <em>por que</em> o acesso é controlado antes de pedir o número — quem entende a razão não abandona. Máscara aplicada ao digitar; erro de credencial no login não diz qual campo falhou.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">B1 · login · 390 · light · erro de credencial</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+          <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 16px;border-bottom:1px solid rgba(0,0,0,.1)">
+            <span style="font:600 15px/1 'Geist',system-ui;letter-spacing:-.01em;color:#171412">LGND Squad</span>
+            <div style="display:flex;gap:6px"><button style="min-width:44px;min-height:44px;padding:0 11px;border-radius:10px;border:1px solid rgba(0,0,0,.14);background:#fff;font:600 12px/1 'Geist Mono',ui-monospace;color:#171412;cursor:pointer">PT</button><button aria-label="Tema" style="width:44px;height:44px;border-radius:10px;border:1px solid rgba(0,0,0,.14);background:#fff;font:400 14px/1 'Geist',system-ui;color:#171412;cursor:pointer">◐</button></div>
+          </div>
+          <div style="flex:1;padding:28px 20px;display:flex;flex-direction:column;gap:16px">
+            <h1 style="margin:0;font:600 28px/1.15 'Geist',system-ui;letter-spacing:-.02em;color:#171412">Entrar</h1>
+            <div style="display:flex;gap:11px;padding:14px 16px;border-radius:10px;background:#fdeeee;border:1px solid rgba(185,28,28,.3)"><span style="font:600 15px/1.3 'Geist',system-ui;color:#b91c1c">✕</span><div><div style="font:600 14px/1.35 'Geist',system-ui;color:#8f1414">E-mail ou senha não conferem</div><div style="font:400 13px/1.45 'Geist',system-ui;color:#b91c1c">Confira os dois e tente de novo.</div></div></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">E-mail</label>
+              <input value="maria@exemplo.com" style="min-height:52px;padding:0 14px;border-radius:10px;border:1.5px solid #b91c1c;background:#fff;color:#171412;font:400 16px/1 'Geist',system-ui">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Senha</label>
+              <div style="display:flex;gap:8px"><input value="••••••••" style="flex:1;min-height:52px;padding:0 14px;border-radius:10px;border:1.5px solid #b91c1c;background:#fff;color:#171412;font:400 16px/1 'Geist',system-ui"><button aria-label="Mostrar senha" style="width:52px;min-height:52px;border-radius:10px;border:1px solid rgba(0,0,0,.18);background:#fff;color:#171412;cursor:pointer"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
+            </div>
+            <button style="min-height:56px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer;margin-top:4px">Entrar</button>
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:8px">
+              <a href="#4b" style="font:500 14px/1.4 'Geist',system-ui;min-height:44px;display:flex;align-items:center">Esqueci minha senha</a>
+              <a href="#4b" style="font:500 14px/1.4 'Geist',system-ui;min-height:44px;display:flex;align-items:center">Não recebi o e-mail de verificação</a>
+            </div>
+            <div style="margin-top:auto;padding:16px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:8px">
+              <span style="font:600 14px/1.3 'Geist',system-ui;color:#171412">Primeira vez aqui?</span>
+              <span style="font:400 13.5px/1.5 'Geist',system-ui;color:#5f5952">O acesso é liberado pela lista da turma. Leva um minuto para conferir.</span>
+              <button style="min-height:48px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#efece7;color:#171412;font:600 15px/1 'Geist',system-ui;cursor:pointer">Pedir acesso</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">B2 · gate · 390 · light · uma decisão</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+          <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;gap:8px;padding:0 8px 0 4px;border-bottom:1px solid rgba(0,0,0,.1)">
+            <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+            <div style="flex:1;display:flex;gap:4px"><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(0,0,0,.14)"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(0,0,0,.14)"></div></div>
+            <span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#5f5952;padding-right:10px">1/3</span>
+          </div>
+          <div style="flex:1;padding:28px 20px;display:flex;flex-direction:column;gap:16px">
+            <h1 style="margin:0;font:600 28px/1.15 'Geist',system-ui;letter-spacing:-.02em;color:#171412;text-wrap:pretty">Qual é o seu WhatsApp?</h1>
+            <p style="margin:0;font:400 15.5px/1.55 'Geist',system-ui;color:#5f5952;text-wrap:pretty">O conteúdo do curso é material de terceiros, então o acesso vale só para quem está na lista da turma. Conferimos seu número e liberamos na hora.</p>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Número com DDD</label>
+              <input value="+55 43 99999-9999" style="min-height:56px;padding:0 16px;border-radius:10px;border:1.5px solid #9a3412;background:#fff;color:#171412;font:500 19px/1 'Geist Mono',ui-monospace;box-shadow:0 0 0 2px #efece7,0 0 0 4px #ea580c">
+              <span style="font:400 13px/1.45 'Geist',system-ui;color:#5f5952">Formatamos enquanto você digita. Não enviamos mensagem sem seu pedido.</span>
+            </div>
+            <button style="min-height:56px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer">Conferir número</button>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:10px;background:#e5e0d8;border:1px solid rgba(0,0,0,.1)">
+              <span style="font:600 13px/1.3 'Geist',system-ui;color:#171412">Não está na lista?</span>
+              <span style="font:400 13px/1.5 'Geist',system-ui;color:#5f5952">Sem problema — na próxima tela você pode pedir acesso à organização.</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:8px;max-width:390px;font:400 12px/1.5 'Geist',system-ui;color:#5f5952">Um campo, um botão. A explicação vem <em>antes</em> do pedido: era a maior fonte de abandono.</div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">B2 · gate · 390 · dark + estado carregando</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#0f1113;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+          <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;gap:8px;padding:0 8px 0 4px;border-bottom:1px solid rgba(255,255,255,.1)">
+            <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#eceae7;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+            <div style="flex:1;display:flex;gap:4px"><div style="flex:1;height:4px;border-radius:99px;background:#fb923c"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(255,255,255,.14)"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(255,255,255,.14)"></div></div>
+            <span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#a8a29e;padding-right:10px">1/3</span>
+          </div>
+          <div style="flex:1;padding:28px 20px;display:flex;flex-direction:column;gap:16px">
+            <h1 style="margin:0;font:600 28px/1.15 'Geist',system-ui;letter-spacing:-.02em;color:#f4ede4;text-wrap:pretty">Qual é o seu WhatsApp?</h1>
+            <p style="margin:0;font:400 15.5px/1.55 'Geist',system-ui;color:#a8a29e;text-wrap:pretty">O conteúdo do curso é material de terceiros, então o acesso vale só para quem está na lista da turma. Conferimos seu número e liberamos na hora.</p>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#eceae7">Número com DDD</label>
+              <input value="+55 43 99999-9999" style="min-height:56px;padding:0 16px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0a0c0d;color:#eceae7;font:500 19px/1 'Geist Mono',ui-monospace">
+              <span style="font:400 13px/1.45 'Geist',system-ui;color:#a8a29e">Formatamos enquanto você digita. Não enviamos mensagem sem seu pedido.</span>
+            </div>
+            <button style="min-height:56px;border-radius:10px;border:0;background:#fb923c;color:#171412;font:600 17px/1 'Geist',system-ui;display:flex;align-items:center;justify-content:center;gap:10px;cursor:progress"><span style="width:17px;height:17px;border-radius:99px;border:2px solid rgba(23,20,18,.35);border-top-color:#171412;animation:sk 1s linear infinite"></span>Conferindo…</button>
+            <div style="display:flex;flex-direction:column;gap:10px;padding-top:4px">
+              <div style="height:12px;width:60%;border-radius:4px;background:#191c1f;animation:sk 1.4s ease-in-out infinite"></div>
+              <div style="height:12px;width:44%;border-radius:4px;background:#191c1f;animation:sk 1.4s ease-in-out infinite .15s"></div>
+            </div>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:10px;background:#0a0c0d;border:1px solid rgba(255,255,255,.1)">
+              <span style="font:600 13px/1.3 'Geist',system-ui;color:#eceae7">Não está na lista?</span>
+              <span style="font:400 13px/1.5 'Geist',system-ui;color:#a8a29e">Sem problema — na próxima tela você pode pedir acesso à organização.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ B3 · OS QUATRO RETORNOS ============ -->
+  <div id="4c" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">4c</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">B3 · Os quatro retornos do gate</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:74ch">Nenhum é um beco: todo retorno tem próximo passo. Cada estado usa ícone + rótulo + surface — nunca só cor. Dark idêntico em estrutura, só troca a camada de token.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:20px">
+      <div style="width:300px;padding:20px;border-radius:20px;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column;gap:12px;min-height:340px">
+        <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">RETORNO · ALLOWED</span>
+        <span style="width:40px;height:40px;border-radius:12px;background:#e8f6f0;border:1px solid rgba(4,120,87,.3);display:flex;align-items:center;justify-content:center;font:600 17px/1 'Geist',system-ui;color:#047857">✓</span>
+        <h3 style="margin:0;font:600 20px/1.25 'Geist',system-ui;color:#171412">Número na lista</h3>
+        <p style="margin:0;font:400 14px/1.5 'Geist',system-ui;color:#5f5952">Você está na turma. Agora falta o cadastro — três blocos curtos, cerca de 2 minutos.</p>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+          <div style="padding:10px 12px;border-radius:8px;background:#e8f6f0;border:1px solid rgba(4,120,87,.28);font:500 12.5px/1.4 'Geist Mono',ui-monospace;color:#03533c">+55 43 99999-9999</div>
+          <button style="min-height:52px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 16px/1 'Geist',system-ui;cursor:pointer">Continuar cadastro</button>
+        </div>
+      </div>
+
+      <div style="width:300px;padding:20px;border-radius:20px;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column;gap:12px;min-height:340px">
+        <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">RETORNO · NOT_ALLOWED</span>
+        <span style="width:40px;height:40px;border-radius:12px;background:#e0f0f5;border:1px solid rgba(21,94,117,.3);display:flex;align-items:center;justify-content:center;font:600 17px/1 'Geist',system-ui;color:#155e75">◇</span>
+        <h3 style="margin:0;font:600 20px/1.25 'Geist',system-ui;color:#171412">Não encontramos este número</h3>
+        <p style="margin:0;font:400 14px/1.5 'Geist',system-ui;color:#5f5952">Pode ser outro número seu, ou você ainda não foi incluído. Peça acesso e a organização confere.</p>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+          <button style="min-height:52px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 16px/1 'Geist',system-ui;cursor:pointer">Pedir acesso</button>
+          <button style="min-height:48px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;color:#171412;font:600 15px/1 'Geist',system-ui;cursor:pointer">Tentar outro número</button>
+        </div>
+      </div>
+
+      <div style="width:300px;padding:20px;border-radius:20px;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column;gap:12px;min-height:340px">
+        <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">RETORNO · PENDING</span>
+        <span style="width:40px;height:40px;border-radius:12px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);display:flex;align-items:center;justify-content:center;font:600 17px/1 'Geist',system-ui;color:#854d0e">△</span>
+        <h3 style="margin:0;font:600 20px/1.25 'Geist',system-ui;color:#171412">Seu pedido está na fila</h3>
+        <p style="margin:0;font:400 14px/1.5 'Geist',system-ui;color:#5f5952">Enviado há 2 dias. A organização costuma responder em até 3 dias úteis — você recebe um e-mail assim que sair.</p>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+          <div style="padding:10px 12px;border-radius:8px;background:#fdf5e6;border:1px solid rgba(180,83,9,.28);font:500 12.5px/1.4 'Geist',system-ui;color:#7c3d06">Pedido #2841 · em análise</div>
+          <button style="min-height:48px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;color:#171412;font:600 15px/1 'Geist',system-ui;cursor:pointer">Falar com a organização</button>
+        </div>
+      </div>
+
+      <div style="width:300px;padding:20px;border-radius:20px;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column;gap:12px;min-height:340px">
+        <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">RETORNO · REJECTED</span>
+        <span style="width:40px;height:40px;border-radius:12px;background:#fdeeee;border:1px solid rgba(185,28,28,.3);display:flex;align-items:center;justify-content:center;font:600 17px/1 'Geist',system-ui;color:#b91c1c">✕</span>
+        <h3 style="margin:0;font:600 20px/1.25 'Geist',system-ui;color:#171412">Pedido não aprovado</h3>
+        <p style="margin:0;font:400 14px/1.5 'Geist',system-ui;color:#5f5952">Não conseguimos confirmar sua matrícula na turma. Se acha que houve engano, fale com a organização — dá para revisar.</p>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+          <button style="min-height:52px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 16px/1 'Geist',system-ui;cursor:pointer">Falar no WhatsApp da turma</button>
+          <span style="font:400 12px/1.45 'Geist',system-ui;color:#5f5952">Sem culpabilizar e sem beco: recusa sempre com caminho de contato.</span>
+        </div>
+      </div>
+
+      <div style="width:300px;padding:20px;border-radius:20px;background:#0f1113;border:1px solid rgba(0,0,0,.4);display:flex;flex-direction:column;gap:12px;min-height:340px">
+        <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e">MESMO ESTADO · DARK</span>
+        <span style="width:40px;height:40px;border-radius:12px;background:#241d10;border:1px solid rgba(251,191,36,.3);display:flex;align-items:center;justify-content:center;font:600 17px/1 'Geist',system-ui;color:#fbbf24">△</span>
+        <h3 style="margin:0;font:600 20px/1.25 'Geist',system-ui;color:#f4ede4">Seu pedido está na fila</h3>
+        <p style="margin:0;font:400 14px/1.5 'Geist',system-ui;color:#c4b8ad">Enviado há 2 dias. A organização costuma responder em até 3 dias úteis — você recebe um e-mail assim que sair.</p>
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+          <div style="padding:10px 12px;border-radius:8px;background:#241d10;border:1px solid rgba(251,191,36,.28);font:500 12.5px/1.4 'Geist',system-ui;color:#fde9b6">Pedido #2841 · em análise</div>
+          <button style="min-height:48px;border-radius:10px;border:1px solid rgba(244,237,228,.24);background:transparent;color:#f4ede4;font:600 15px/1 'Geist',system-ui;cursor:pointer">Falar com a organização</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ B4 · CADASTRO EM 3 BLOCOS + B5 FOTO ============ -->
+  <div id="4d" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">4d</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">B4 · Cadastro em três blocos · e B5 · a foto</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:74ch"><strong style="font-weight:600">O que mudou (dívida 4):</strong> os 8 campos de uma vez viraram 3 blocos de 2–3 campos, com barra de progresso e “voltar” sempre disponível. A foto saiu do caminho crítico — é opcional (a API aceita nulo) e vira convite no fim, não bloqueio no meio.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Bloco 1/3 · quem é você · 390 light</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+          <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;gap:8px;padding:0 8px 0 4px;border-bottom:1px solid rgba(0,0,0,.1)">
+            <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+            <div style="flex:1;display:flex;gap:4px"><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(0,0,0,.14)"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(0,0,0,.14)"></div></div>
+            <span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#5f5952;padding-right:10px">1/3</span>
+          </div>
+          <div style="flex:1;padding:26px 20px;display:flex;flex-direction:column;gap:16px">
+            <div><span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">BLOCO 1 DE 3</span><h1 style="margin:6px 0 0;font:600 26px/1.2 'Geist',system-ui;letter-spacing:-.02em;color:#171412">Quem é você e de onde</h1></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Nome completo</label>
+              <input value="Maria Corrêa" style="min-height:52px;padding:0 14px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 16px/1 'Geist',system-ui">
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">País</label>
+              <select style="min-height:52px;padding:0 12px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 16px/1 'Geist',system-ui"><option>Brasil</option><option>Argentina</option><option>Paraguai</option></select>
+            </div>
+            <div style="display:grid;grid-template-columns:100px 1fr;gap:10px">
+              <div style="display:flex;flex-direction:column;gap:6px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Estado</label><select style="min-height:52px;padding:0 10px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 16px/1 'Geist',system-ui"><option>PR</option><option>SP</option></select></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Cidade</label><select style="min-height:52px;padding:0 12px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 16px/1 'Geist',system-ui"><option>Arapongas</option><option>Londrina</option></select></div>
+            </div>
+            <div style="padding:12px 14px;border-radius:10px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);font:400 13px/1.5 'Geist',system-ui;color:#0f4457">Selects encadeados, nunca texto livre: é isso que permite achar a sua manada no próximo bloco. “Arapongas” digitado de três formas viraria três regiões.</div>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+              <div style="padding:12px 14px;border-radius:10px;background:#e5e0d8;border:1px solid rgba(0,0,0,.1);font:400 13px/1.5 'Geist',system-ui;color:#5f5952">Faltam 2 blocos: manada e LGND, depois o acesso. Nada é enviado até o fim.</div>
+              <button style="min-height:56px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer">Continuar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Bloco 2/3 · dados LGND · 390 light</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+          <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;gap:8px;padding:0 8px 0 4px;border-bottom:1px solid rgba(0,0,0,.1)">
+            <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+            <div style="flex:1;display:flex;gap:4px"><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(0,0,0,.14)"></div></div>
+            <span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#5f5952;padding-right:10px">2/3</span>
+          </div>
+          <div style="flex:1;padding:26px 20px;display:flex;flex-direction:column;gap:14px">
+            <div><span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">BLOCO 2 DE 3</span><h1 style="margin:6px 0 0;font:600 26px/1.2 'Geist',system-ui;letter-spacing:-.02em;color:#171412">Sua manada</h1></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Manada</label>
+              <button style="min-height:52px;padding:0 14px;border-radius:10px;border:1.5px solid #9a3412;background:#faf6ef;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer"><span style="display:flex;align-items:center;gap:8px;font:500 16px/1 'Geist',system-ui;color:#171412">Manada Norte<span style="padding:3px 7px;border-radius:5px;background:#e8f6f0;border:1px solid rgba(4,120,87,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#047857">✓ VERIF.</span></span><span style="font:400 13px/1 'Geist',system-ui;color:#5f5952">▾</span></button>
+              <span style="font:400 13px/1.45 'Geist',system-ui;color:#5f5952">Buscamos pelas manadas de Arapongas/PR primeiro. Se a sua não estiver, dá para criar aqui mesmo.</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Número LGND</label>
+              <input value="2755" style="min-height:52px;padding:0 14px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:500 17px/1 'Geist Mono',ui-monospace">
+              <span style="font:400 13px/1.45 'Geist',system-ui;color:#5f5952">Está no seu crachá ou no grupo da turma.</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Squad</label><select style="min-height:52px;padding:0 12px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 15px/1 'Geist',system-ui"><option>Squad 4</option></select></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Evento fire</label>
+              <select style="min-height:52px;padding:0 12px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 15px/1 'Geist',system-ui"><option>Fire 12</option><option>Não participei ainda</option></select>
+              <span style="font:400 13px/1.45 'Geist',system-ui;color:#5f5952">Se não sabe qual, escolha “não participei ainda” — dá para ajustar no perfil.</span>
+            </div>
+            <div style="margin-top:auto"><button style="min-height:56px;width:100%;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer">Continuar</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Bloco 3/3 · acesso + foto opcional · 390 dark</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#0f1113;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+          <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;gap:8px;padding:0 8px 0 4px;border-bottom:1px solid rgba(255,255,255,.1)">
+            <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#eceae7;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+            <div style="flex:1;display:flex;gap:4px"><div style="flex:1;height:4px;border-radius:99px;background:#fb923c"></div><div style="flex:1;height:4px;border-radius:99px;background:#fb923c"></div><div style="flex:1;height:4px;border-radius:99px;background:#fb923c"></div></div>
+            <span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#a8a29e;padding-right:10px">3/3</span>
+          </div>
+          <div style="flex:1;padding:26px 20px;display:flex;flex-direction:column;gap:14px">
+            <div><span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e">BLOCO 3 DE 3</span><h1 style="margin:6px 0 0;font:600 26px/1.2 'Geist',system-ui;letter-spacing:-.02em;color:#f4ede4">Seu acesso</h1></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#eceae7">E-mail</label>
+              <input value="maria@exemplo.com" style="min-height:52px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0a0c0d;color:#eceae7;font:400 16px/1 'Geist',system-ui">
+              <span style="font:400 13px/1.45 'Geist',system-ui;color:#a8a29e">Enviamos um link de confirmação para este endereço.</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font:600 13px/1.2 'Geist',system-ui;color:#eceae7">Senha</label>
+              <input value="••••••••••" style="min-height:52px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:#0a0c0d;color:#eceae7;font:400 16px/1 'Geist',system-ui">
+              <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:5px;border-radius:99px;background:#0a0c0d;overflow:hidden"><div style="width:72%;height:100%;background:#34d399"></div></div><span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#34d399">✓ BOA</span></div>
+              <span style="font:400 13px/1.45 'Geist',system-ui;color:#a8a29e">Mínimo 8 caracteres. Força indicada por barra <em>e</em> rótulo.</span>
+            </div>
+            <div style="padding:16px;border-radius:14px;background:#191c1f;border:1px solid rgba(255,255,255,.12);display:flex;gap:14px;align-items:center">
+              <div style="width:56px;height:56px;flex:0 0 56px;border-radius:99px;background:#0a0c0d;border:1.5px dashed rgba(255,255,255,.24);display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#a8a29e">MC</div>
+              <div style="flex:1"><div style="display:flex;align-items:center;gap:7px"><span style="font:600 14px/1.25 'Geist',system-ui;color:#eceae7">Foto do perfil</span><span style="padding:3px 7px;border-radius:5px;background:#10262e;border:1px solid rgba(125,211,252,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#7dd3fc">OPCIONAL</span></div><div style="font:400 12.5px/1.45 'Geist',system-ui;color:#a8a29e;margin-top:3px">Pode adicionar depois no perfil.</div></div>
+              <button style="min-height:44px;padding:0 12px;border-radius:8px;border:1px solid rgba(236,234,231,.24);background:transparent;font:600 13px/1 'Geist',system-ui;color:#eceae7;cursor:pointer">Escolher</button>
+            </div>
+            <div style="margin-top:auto;display:flex;flex-direction:column;gap:10px">
+              <span style="font:400 12.5px/1.5 'Geist',system-ui;color:#a8a29e">Ao criar a conta você concorda que o conteúdo é material de terceiros, de uso restrito à turma.</span>
+              <button style="min-height:56px;border-radius:10px;border:0;background:#fb923c;color:#171412;font:600 17px/1 'Geist',system-ui;cursor:pointer">Criar minha conta</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:8px;max-width:390px;font:400 12px/1.5 'Geist',system-ui;color:#5f5952">A foto obrigatória saiu: era o último obstáculo antes do envio, e o backend nunca precisou dela.</div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">B5 · seletor de foto · recorte e os três erros · 390 light</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column">
+          <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 4px;border-bottom:1px solid rgba(0,0,0,.1)">
+            <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+            <span style="font:600 15px/1 'Geist',system-ui;color:#171412">Sua foto</span>
+            <button style="min-height:44px;padding:0 10px;border:0;background:transparent;font:600 14px/1 'Geist',system-ui;color:#9a3412;cursor:pointer">Pular</button>
+          </div>
+          <div style="flex:1;padding:18px 16px;display:flex;flex-direction:column;gap:14px">
+            <div style="border-radius:14px;background:#e5e0d8;border:1px solid rgba(0,0,0,.12);padding:18px;display:flex;flex-direction:column;align-items:center;gap:14px">
+              <div style="width:180px;height:180px;border-radius:99px;background:repeating-linear-gradient(135deg,#d0c9be 0 10px,#c6bfb3 10px 20px);border:3px solid #9a3412;position:relative;display:flex;align-items:center;justify-content:center">
+                <span style="font:500 11px/1.4 'Geist Mono',ui-monospace;color:#4a453f;background:rgba(255,255,255,.85);padding:4px 8px;border-radius:6px">PREVIEW</span>
+              </div>
+              <div style="width:100%;display:flex;align-items:center;gap:12px"><span style="font:500 11px/1 'Geist Mono',ui-monospace;color:#5f5952">ZOOM</span><div style="flex:1;height:6px;border-radius:99px;background:#d0c9be;position:relative"><span style="position:absolute;left:38%;top:-9px;width:24px;height:24px;border-radius:99px;background:#fff;border:2px solid #9a3412"></span></div></div>
+              <div style="display:flex;gap:8px;width:100%"><button style="flex:1;min-height:44px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;font:600 14px/1 'Geist',system-ui;color:#171412;cursor:pointer">Girar</button><button style="flex:1;min-height:44px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;font:600 14px/1 'Geist',system-ui;color:#171412;cursor:pointer">Trocar</button></div>
+              <span style="font:400 12px/1.45 'Geist',system-ui;color:#5f5952;text-align:center">Arraste para reposicionar. Os botões fazem o mesmo por toque e por teclado (setas).</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">OS TRÊS ERROS</span>
+              <div style="display:flex;gap:11px;padding:12px 14px;border-radius:10px;background:#fdeeee;border:1px solid rgba(185,28,28,.3)"><span style="font:600 14px/1.3 'Geist',system-ui;color:#b91c1c">✕</span><div><div style="font:600 13.5px/1.35 'Geist',system-ui;color:#8f1414">Arquivo de 3,4 MB</div><div style="font:400 12.5px/1.45 'Geist',system-ui;color:#b91c1c">Limite 2 MB. Reduzimos ao recortar — quer tentar?</div></div></div>
+              <div style="display:flex;gap:11px;padding:12px 14px;border-radius:10px;background:#fdeeee;border:1px solid rgba(185,28,28,.3)"><span style="font:600 14px/1.3 'Geist',system-ui;color:#b91c1c">✕</span><div><div style="font:600 13.5px/1.35 'Geist',system-ui;color:#8f1414">Formato .heic não aceito</div><div style="font:400 12.5px/1.45 'Geist',system-ui;color:#b91c1c">Use JPEG, PNG ou WebP. No iPhone: Ajustes → Câmera → Mais compatível.</div></div></div>
+              <div style="display:flex;gap:11px;padding:12px 14px;border-radius:10px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3)"><span style="font:600 14px/1.3 'Geist',system-ui;color:#854d0e">△</span><div><div style="font:600 13.5px/1.35 'Geist',system-ui;color:#7c3d06">Nenhuma foto escolhida</div><div style="font:400 12.5px/1.45 'Geist',system-ui;color:#854d0e">Sem problema: seu avatar fica com as iniciais MC.</div></div></div>
+            </div>
+            <div style="margin-top:auto"><button style="width:100%;min-height:56px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer">Usar esta foto</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ B6 PEDIDO + B7 VERIFICAÇÃO ============ -->
+  <div id="4e" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">4e</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">B6 · Pedido de acesso · e B7 · verificação de e-mail</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:74ch">Toda espera diz o prazo. O reenvio tem cooldown visível com contagem em mono — nunca um botão que parece quebrado.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:20px">
+      <div style="width:390px;border-radius:20px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column">
+        <div style="height:52px;flex:0 0 52px;display:flex;align-items:center;gap:8px;padding:0 12px 0 4px;border-bottom:1px solid rgba(0,0,0,.1)"><button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button><span style="font:600 15px/1 'Geist',system-ui;color:#171412">Pedir acesso</span></div>
+        <div style="flex:1;padding:20px 16px;display:flex;flex-direction:column;gap:12px">
+          <p style="margin:0;font:400 14px/1.5 'Geist',system-ui;color:#5f5952">A organização confere seus dados com a lista da turma. Quatro campos e uma linha explicando quem você é.</p>
+          <div style="display:flex;flex-direction:column;gap:5px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Nome completo</label><input value="Ana Rocha" style="min-height:48px;padding:0 14px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 15px/1 'Geist',system-ui"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div style="display:flex;flex-direction:column;gap:5px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">LGND</label><input value="3102" style="min-height:48px;padding:0 14px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:500 15px/1 'Geist Mono',ui-monospace"></div>
+            <div style="display:flex;flex-direction:column;gap:5px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Manada</label><button style="min-height:48px;padding:0 12px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;display:flex;align-items:center;justify-content:space-between;gap:8px;cursor:pointer"><span style="font:500 15px/1 'Geist',system-ui;color:#171412">Manada Norte</span><span style="font:400 12px/1 'Geist',system-ui;color:#5f5952">▾</span></button></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 90px 1fr;gap:8px">
+            <div style="display:flex;flex-direction:column;gap:5px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">País</label><select style="min-height:48px;padding:0 10px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 14px/1 'Geist',system-ui"><option>Brasil</option></select></div>
+            <div style="display:flex;flex-direction:column;gap:5px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">UF</label><select style="min-height:48px;padding:0 8px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 14px/1 'Geist',system-ui"><option>PR</option></select></div>
+            <div style="display:flex;flex-direction:column;gap:5px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Cidade</label><select style="min-height:48px;padding:0 10px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 14px/1 'Geist',system-ui"><option>Arapongas</option></select></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">E-mail</label><input value="ana@exemplo.com" style="min-height:48px;padding:0 14px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 15px/1 'Geist',system-ui"></div>
+          <div style="display:flex;flex-direction:column;gap:5px"><label style="font:600 13px/1.2 'Geist',system-ui;color:#171412">Por que quer acesso</label><textarea style="min-height:76px;padding:11px 14px;border-radius:10px;border:1px solid rgba(0,0,0,.2);background:#fff;color:#171412;font:400 14.5px/1.5 'Geist',system-ui;resize:vertical">Sou voluntária da manada Norte e participo desde a Aula 1.</textarea><span style="font:400 12px/1.4 'Geist Mono',ui-monospace;color:#5f5952">62/300</span></div>
+          <div style="margin-top:auto"><button style="width:100%;min-height:52px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 16px/1 'Geist',system-ui;cursor:pointer">Enviar pedido</button></div>
+        </div>
+      </div>
+
+      <div style="width:390px;height:600px;border-radius:20px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);padding:24px 20px;display:flex;flex-direction:column;gap:14px;justify-content:center">
+        <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">PEDIDO ENVIADO</span>
+        <span style="width:44px;height:44px;border-radius:12px;background:#e8f6f0;border:1px solid rgba(4,120,87,.3);display:flex;align-items:center;justify-content:center;font:600 19px/1 'Geist',system-ui;color:#047857">✓</span>
+        <h2 style="margin:0;font:600 25px/1.2 'Geist',system-ui;letter-spacing:-.02em;color:#171412">Recebemos seu pedido</h2>
+        <p style="margin:0;font:400 15px/1.55 'Geist',system-ui;color:#5f5952">A organização responde em até <strong style="font-weight:600;color:#171412">3 dias úteis</strong>. Você recebe um e-mail em ana@exemplo.com assim que houver decisão — não precisa ficar voltando aqui.</p>
+        <div style="padding:12px 14px;border-radius:10px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);font:500 12.5px/1.45 'Geist Mono',ui-monospace;color:#0f4457">PEDIDO #2841 · ENVIADO HOJE 21:14</div>
+        <button style="min-height:48px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;color:#171412;font:600 15px/1 'Geist',system-ui;cursor:pointer">Voltar ao início</button>
+      </div>
+
+      <div style="width:390px;border-radius:20px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);padding:20px;display:flex;flex-direction:column;gap:12px">
+        <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">B7 · VERIFICAÇÃO · OS QUATRO ESTADOS</span>
+        <div style="padding:14px;border-radius:12px;background:#fff;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:7px">
+          <span style="display:flex;align-items:center;gap:8px;font:600 13.5px/1.3 'Geist',system-ui;color:#171412"><span style="width:24px;height:24px;border-radius:7px;background:#e0f0f5;border:1px solid rgba(21,94,117,.3);display:flex;align-items:center;justify-content:center;font-size:12px;color:#155e75">◇</span>Aguardando confirmação</span>
+          <span style="font:400 13px/1.5 'Geist',system-ui;color:#5f5952">Enviamos um link para maria@exemplo.com. Ele vale por 24 horas.</span>
+        </div>
+        <div style="padding:14px;border-radius:12px;background:#e8f6f0;border:1px solid rgba(4,120,87,.3);display:flex;flex-direction:column;gap:7px">
+          <span style="display:flex;align-items:center;gap:8px;font:600 13.5px/1.3 'Geist',system-ui;color:#03533c"><span style="width:24px;height:24px;border-radius:7px;background:#fff;border:1px solid rgba(4,120,87,.3);display:flex;align-items:center;justify-content:center;font-size:12px;color:#047857">✓</span>E-mail confirmado</span>
+          <span style="font:400 13px/1.5 'Geist',system-ui;color:#047857">Tudo certo. Vamos configurar seu estudo em 4 passos rápidos.</span>
+          <button style="align-self:flex-start;min-height:44px;padding:0 14px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 14px/1 'Geist',system-ui;cursor:pointer">Começar configuração</button>
+        </div>
+        <div style="padding:14px;border-radius:12px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);display:flex;flex-direction:column;gap:7px">
+          <span style="display:flex;align-items:center;gap:8px;font:600 13.5px/1.3 'Geist',system-ui;color:#7c3d06"><span style="width:24px;height:24px;border-radius:7px;background:#fff;border:1px solid rgba(180,83,9,.3);display:flex;align-items:center;justify-content:center;font-size:12px;color:#854d0e">△</span>Link expirado</span>
+          <span style="font:400 13px/1.5 'Geist',system-ui;color:#854d0e">Passaram as 24 horas. Enviamos outro na hora — sua senha continua a mesma.</span>
+          <button style="align-self:flex-start;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid rgba(133,77,14,.35);background:#fff;color:#854d0e;font:600 14px/1 'Geist',system-ui;cursor:pointer">Enviar novo link</button>
+        </div>
+        <div style="padding:14px;border-radius:12px;background:#e5e0d8;border:1px solid rgba(0,0,0,.12);display:flex;flex-direction:column;gap:7px">
+          <span style="display:flex;align-items:center;gap:8px;font:600 13.5px/1.3 'Geist',system-ui;color:#171412"><span style="width:24px;height:24px;border-radius:7px;background:#fff;border:1px solid rgba(0,0,0,.16);display:flex;align-items:center;justify-content:center;font-size:12px;color:#5f5952">↻</span>Reenvio em cooldown</span>
+          <span style="font:400 13px/1.5 'Geist',system-ui;color:#5f5952">Você acabou de pedir um link. Pode pedir de novo em:</span>
+          <div style="display:flex;align-items:center;gap:10px"><button disabled="{{ true }}" style="min-height:44px;padding:0 14px;border-radius:10px;border:1px solid rgba(0,0,0,.12);background:#efece7;color:#8a827a;font:600 14px/1 'Geist',system-ui;cursor:not-allowed">Reenviar</button><span style="font:600 17px/1 'Geist Mono',ui-monospace;color:#171412">00:47</span></div>
+          <span style="font:400 12px/1.45 'Geist',system-ui;color:#5f5952">Contagem em texto, não só em barra: quem usa leitor de tela ouve o tempo restante.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ C · ONBOARDING ============ -->
+  <div id="4f" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">4f</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">C · Onboarding — do zero (dívida 2)</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:74ch">Uma pergunta por passo, “pular” sempre visível, e nada perguntado duas vezes: trilha, base e meta só existem aqui. O tour do gesto acontece numa carta de demonstração real — a pessoa aprende virando, não lendo.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+
+      <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+        <div style="height:52px;flex:0 0 52px;display:flex;align-items:center;justify-content:flex-end;padding:0 8px;border-bottom:1px solid rgba(0,0,0,.1)"><button style="min-height:44px;padding:0 12px;border:0;background:transparent;font:600 14px/1 'Geist',system-ui;color:#5f5952;cursor:pointer">Pular tudo</button></div>
+        <div style="flex:1;padding:32px 24px;display:flex;flex-direction:column;gap:18px">
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#155e75">C1 · BOAS-VINDAS</span>
+          <h1 style="margin:0;font:600 32px/1.12 'Geist',system-ui;letter-spacing:-.025em;color:#171412;text-wrap:pretty">Tudo pronto, Maria.</h1>
+          <p style="margin:0;font:400 16px/1.6 'Geist',system-ui;color:#5f5952;text-wrap:pretty">Antes da primeira sessão, quatro perguntas rápidas para o portal saber o que te mostrar. Menos de um minuto.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.14)"><span style="width:26px;height:26px;flex:0 0 26px;border-radius:8px;background:#e5e0d8;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#5f5952">1</span><div><div style="font:600 14.5px/1.3 'Geist',system-ui;color:#171412">Qual trilha seguir</div><div style="font:400 13px/1.45 'Geist',system-ui;color:#5f5952">51 cartas essenciais ou as 184 do completo</div></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.14)"><span style="width:26px;height:26px;flex:0 0 26px;border-radius:8px;background:#e5e0d8;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#5f5952">2</span><div><div style="font:600 14.5px/1.3 'Geist',system-ui;color:#171412">Por onde começar</div><div style="font:400 13px/1.45 'Geist',system-ui;color:#5f5952">Material teórico, Aula 1 ou Aula 2</div></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.14)"><span style="width:26px;height:26px;flex:0 0 26px;border-radius:8px;background:#e5e0d8;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#5f5952">3</span><div><div style="font:600 14.5px/1.3 'Geist',system-ui;color:#171412">Quanto por dia</div><div style="font:400 13px/1.45 'Geist',system-ui;color:#5f5952">E em que horário te lembramos</div></div></div>
+            <div style="display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:#faf6ef;border:1.5px solid #9a3412"><span style="width:26px;height:26px;flex:0 0 26px;border-radius:8px;background:#9a3412;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#fff">4</span><div><div style="font:600 14.5px/1.3 'Geist',system-ui;color:#171412">Como avaliar uma carta</div><div style="font:400 13px/1.45 'Geist',system-ui;color:#5f5952">Um treino de 30 segundos numa carta real</div></div></div>
+          </div>
+          <div style="margin-top:auto"><button style="width:100%;min-height:56px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer">Vamos lá</button></div>
+        </div>
+      </div>
+
+      <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+        <div style="height:52px;flex:0 0 52px;display:flex;align-items:center;gap:8px;padding:0 8px 0 4px;border-bottom:1px solid rgba(0,0,0,.1)">
+          <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+          <div style="flex:1;display:flex;gap:4px"><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(0,0,0,.14)"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(0,0,0,.14)"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(0,0,0,.14)"></div></div>
+          <button style="min-height:44px;padding:0 10px;border:0;background:transparent;font:600 13px/1 'Geist',system-ui;color:#5f5952;cursor:pointer">Pular</button>
+        </div>
+        <div style="flex:1;padding:26px 20px;display:flex;flex-direction:column;gap:16px">
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">C2 · PASSO 1 DE 4</span>
+          <h1 style="margin:0;font:600 27px/1.18 'Geist',system-ui;letter-spacing:-.02em;color:#171412;text-wrap:pretty">Quer cobrir o essencial ou tudo?</h1>
+          <button style="text-align:left;padding:20px;border-radius:20px;border:1.5px solid #9a3412;background:#faf6ef;cursor:pointer;display:flex;flex-direction:column;gap:9px">
+            <span style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span style="font:600 19px/1.2 'Geist',system-ui;color:#171412">✓ Essenciais</span><span style="padding:4px 9px;border-radius:6px;background:#9a3412;font:600 10px/1.2 'Geist Mono',ui-monospace;color:#fff">RECOMENDADA</span></span>
+            <span style="font:600 24px/1 'Geist Mono',ui-monospace;color:#171412">51 <span style="font-size:14px;font-weight:500;color:#5f5952">cartas</span></span>
+            <span style="font:400 14px/1.5 'Geist',system-ui;color:#5f5952">O núcleo que aparece mais. Fecha o primeiro ciclo em cerca de uma semana estudando 15 min por noite.</span>
+          </button>
+          <button style="text-align:left;padding:20px;border-radius:20px;border:1px solid rgba(0,0,0,.16);background:#fff;cursor:pointer;display:flex;flex-direction:column;gap:9px">
+            <span style="font:600 19px/1.2 'Geist',system-ui;color:#171412">Conteúdo completo</span>
+            <span style="font:600 24px/1 'Geist Mono',ui-monospace;color:#171412">184 <span style="font-size:14px;font-weight:500;color:#5f5952">cartas</span></span>
+            <span style="font:400 14px/1.5 'Geist',system-ui;color:#5f5952">Tudo o que existe no material. Leva cerca de três semanas para o primeiro ciclo — bom se você tem tempo e quer profundidade.</span>
+          </button>
+          <div style="padding:12px 14px;border-radius:10px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);font:400 13px/1.5 'Geist',system-ui;color:#0f4457">Dá para trocar depois sem perder nada: as cartas que você já estudou continuam com o seu histórico.</div>
+          <div style="margin-top:auto"><button style="width:100%;min-height:56px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer">Continuar com Essenciais</button></div>
+        </div>
+      </div>
+
+      <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#0f1113;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+        <div style="height:52px;flex:0 0 52px;display:flex;align-items:center;gap:8px;padding:0 8px 0 4px;border-bottom:1px solid rgba(255,255,255,.1)">
+          <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#eceae7;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+          <div style="flex:1;display:flex;gap:4px"><div style="flex:1;height:4px;border-radius:99px;background:#fb923c"></div><div style="flex:1;height:4px;border-radius:99px;background:#fb923c"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(255,255,255,.14)"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(255,255,255,.14)"></div></div>
+          <button style="min-height:44px;padding:0 10px;border:0;background:transparent;font:600 13px/1 'Geist',system-ui;color:#a8a29e;cursor:pointer">Pular</button>
+        </div>
+        <div style="flex:1;padding:26px 20px;display:flex;flex-direction:column;gap:14px">
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e">C3 · PASSO 2 DE 4</span>
+          <h1 style="margin:0;font:600 27px/1.18 'Geist',system-ui;letter-spacing:-.02em;color:#f4ede4;text-wrap:pretty">Por onde você quer começar?</h1>
+          <p style="margin:0;font:400 14.5px/1.55 'Geist',system-ui;color:#a8a29e">Se acabou de sair da aula, escolha a aula correspondente — a memória fresca rende mais.</p>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <button style="text-align:left;padding:15px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background:#191c1f;cursor:pointer;display:flex;align-items:center;gap:12px;min-height:64px"><span style="width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:#0a0c0d;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#a8a29e">MT</span><div style="flex:1"><div style="font:600 15.5px/1.25 'Geist',system-ui;color:#eceae7">Material teórico</div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#a8a29e">Base conceitual · 6 módulos</div></div></button>
+            <button style="text-align:left;padding:15px 16px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background:#191c1f;cursor:pointer;display:flex;align-items:center;gap:12px;min-height:64px"><span style="width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:#0a0c0d;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#a8a29e">A1</span><div style="flex:1"><div style="font:600 15.5px/1.25 'Geist',system-ui;color:#eceae7">Aula 1 — BREC e NOS</div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#a8a29e">Busca e resgate · normas</div></div></button>
+            <button style="text-align:left;padding:15px 16px;border-radius:14px;border:1.5px solid #fb923c;background:#221f1c;cursor:pointer;display:flex;align-items:center;gap:12px;min-height:64px"><span style="width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:#fb923c;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#171412">A2</span><div style="flex:1"><div style="display:flex;align-items:center;gap:7px"><span style="font:600 15.5px/1.25 'Geist',system-ui;color:#f4ede4">✓ Aula 2 — Águas rápidas</span></div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#c4b8ad">Sua aula de ontem</div></div></button>
+            <div style="padding:15px 16px;border-radius:14px;border:1px dashed rgba(255,255,255,.16);background:#0a0c0d;display:flex;align-items:center;gap:12px;min-height:64px;opacity:.85"><span style="width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:#191c1f;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#6f6a66">A3</span><div style="flex:1"><div style="font:600 15.5px/1.25 'Geist',system-ui;color:#a8a29e">Aula 3</div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#6f6a66">Chega depois da aula ao vivo</div></div><span style="padding:5px 9px;border-radius:6px;border:1px solid rgba(255,255,255,.16);font:600 9.5px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#a8a29e">EM BREVE</span></div>
+            <div style="padding:15px 16px;border-radius:14px;border:1px dashed rgba(255,255,255,.16);background:#0a0c0d;display:flex;align-items:center;gap:12px;min-height:64px;opacity:.85"><span style="width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:#191c1f;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#6f6a66">A4</span><div style="flex:1"><div style="font:600 15.5px/1.25 'Geist',system-ui;color:#a8a29e">Aula 4</div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#6f6a66">Chega depois da aula ao vivo</div></div><span style="padding:5px 9px;border-radius:6px;border:1px solid rgba(255,255,255,.16);font:600 9.5px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#a8a29e">EM BREVE</span></div>
+          </div>
+          <span style="font:400 12.5px/1.5 'Geist',system-ui;color:#a8a29e">Base bloqueada: tracejado, opacidade e rótulo “em breve” — estado, não erro. Não é botão, então não recebe foco.</span>
+          <div style="margin-top:auto"><button style="width:100%;min-height:56px;border-radius:10px;border:0;background:#fb923c;color:#171412;font:600 17px/1 'Geist',system-ui;cursor:pointer">Continuar</button></div>
+        </div>
+      </div>
+
+      <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+        <div style="height:52px;flex:0 0 52px;display:flex;align-items:center;gap:8px;padding:0 8px 0 4px;border-bottom:1px solid rgba(0,0,0,.1)">
+          <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+          <div style="flex:1;display:flex;gap:4px"><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div><div style="flex:1;height:4px;border-radius:99px;background:rgba(0,0,0,.14)"></div></div>
+          <button style="min-height:44px;padding:0 10px;border:0;background:transparent;font:600 13px/1 'Geist',system-ui;color:#5f5952;cursor:pointer">Pular</button>
+        </div>
+        <div style="flex:1;padding:26px 20px;display:flex;flex-direction:column;gap:16px">
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">C4 · PASSO 3 DE 4</span>
+          <h1 style="margin:0;font:600 27px/1.18 'Geist',system-ui;letter-spacing:-.02em;color:#171412;text-wrap:pretty">Quantas cartas por dia?</h1>
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <button style="padding:16px 18px;border-radius:14px;border:1px solid rgba(0,0,0,.16);background:#fff;cursor:pointer;display:flex;align-items:center;gap:14px;min-height:70px;text-align:left"><span style="font:600 22px/1 'Geist Mono',ui-monospace;color:#171412;width:34px">10</span><div style="flex:1"><div style="font:600 15px/1.25 'Geist',system-ui;color:#171412">Leve</div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#5f5952">cerca de 5 min · bom para dias cheios</div></div></button>
+            <button style="padding:16px 18px;border-radius:14px;border:1.5px solid #9a3412;background:#faf6ef;cursor:pointer;display:flex;align-items:center;gap:14px;min-height:70px;text-align:left"><span style="font:600 22px/1 'Geist Mono',ui-monospace;color:#9a3412;width:34px">20</span><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span style="font:600 15px/1.25 'Geist',system-ui;color:#171412">✓ Constante</span><span style="padding:3px 7px;border-radius:5px;background:#9a3412;font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#fff">SUGERIDO</span></div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#5f5952">cerca de 10 min · fecha as 51 em uma semana</div></div></button>
+            <button style="padding:16px 18px;border-radius:14px;border:1px solid rgba(0,0,0,.16);background:#fff;cursor:pointer;display:flex;align-items:center;gap:14px;min-height:70px;text-align:left"><span style="font:600 22px/1 'Geist Mono',ui-monospace;color:#171412;width:34px">30</span><div style="flex:1"><div style="font:600 15px/1.25 'Geist',system-ui;color:#171412">Intenso</div><div style="font:400 12.5px/1.4 'Geist',system-ui;color:#5f5952">cerca de 15 min · para quem tem prova perto</div></div></button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:9px;padding-top:4px">
+            <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">HORÁRIO DO LEMBRETE</span>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <button style="min-height:44px;padding:0 14px;border-radius:6px;border:1px solid rgba(0,0,0,.18);background:#fff;font:500 14px/1 'Geist Mono',ui-monospace;color:#171412;cursor:pointer">19:00</button>
+              <button style="min-height:44px;padding:0 14px;border-radius:6px;border:1.5px solid #171412;background:#171412;font:600 14px/1 'Geist Mono',ui-monospace;color:#fff;cursor:pointer">✓ 21:30</button>
+              <button style="min-height:44px;padding:0 14px;border-radius:6px;border:1px solid rgba(0,0,0,.18);background:#fff;font:500 14px/1 'Geist Mono',ui-monospace;color:#171412;cursor:pointer">22:30</button>
+              <button style="min-height:44px;padding:0 14px;border-radius:6px;border:1px solid rgba(0,0,0,.18);background:#fff;font:500 13.5px/1 'Geist',system-ui;color:#171412;cursor:pointer">Sem lembrete</button>
+            </div>
+            <span style="font:400 12.5px/1.5 'Geist',system-ui;color:#5f5952">21:30 vem pré-selecionado porque a aula ao vivo é às 20h.</span>
+          </div>
+          <div style="margin-top:auto"><button style="width:100%;min-height:56px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer">Continuar</button></div>
+        </div>
+      </div>
+
+      <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+        <div style="height:52px;flex:0 0 52px;display:flex;align-items:center;gap:8px;padding:0 8px 0 4px;border-bottom:1px solid rgba(0,0,0,.1)">
+          <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+          <div style="flex:1;display:flex;gap:4px"><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div><div style="flex:1;height:4px;border-radius:99px;background:#9a3412"></div></div>
+          <button style="min-height:44px;padding:0 10px;border:0;background:transparent;font:600 13px/1 'Geist',system-ui;color:#5f5952;cursor:pointer">Pular</button>
+        </div>
+        <div style="flex:1;padding:20px 16px;display:flex;flex-direction:column;gap:12px">
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">C5 · PASSO 4 DE 4 · CARTA DE DEMONSTRAÇÃO</span>
+          <h1 style="margin:0;font:600 23px/1.2 'Geist',system-ui;letter-spacing:-.02em;color:#171412">Experimente numa carta de teste</h1>
+          <div style="background:#faf6ef;border:1px solid rgba(0,0,0,.12);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px;position:relative;min-height:230px">
+            <span style="position:absolute;top:-11px;left:16px;padding:4px 9px;border-radius:6px;background:#155e75;font:600 9.5px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#fff">DEMONSTRAÇÃO · NÃO CONTA NO SEU HISTÓRICO</span>
+            <span style="display:flex;align-items:center;gap:6px;align-self:flex-start;padding:6px 9px;border-radius:6px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);font:600 11px/1 'Geist',system-ui;color:#155e75;margin-top:4px">⇄ Mão dupla</span>
+            <p style="margin:0;font:600 22px/1.3 'Geist',system-ui;letter-spacing:-.012em;color:#171412;text-wrap:pretty">Qual é o telefone nacional da Defesa Civil?</p>
+            <div style="margin-top:auto;display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:10px;background:#9a3412"><span style="width:26px;height:26px;flex:0 0 26px;border-radius:8px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font:600 13px/1 'Geist',system-ui;color:#fff">1</span><span style="font:500 13.5px/1.4 'Geist',system-ui;color:#fff">Toque na carta para ver a resposta</span></div>
+          </div>
+          <div style="padding:14px 16px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:9px">
+            <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">DEPOIS DE VER, VOCÊ AVALIA</span>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div style="padding:10px 12px;border-radius:10px;background:#fdeeee;border:1px solid rgba(185,28,28,.26)"><div style="font:600 13.5px/1.2 'Geist',system-ui;color:#b91c1c">✕ Errei</div><div style="font:500 10.5px/1.3 'Geist Mono',ui-monospace;color:#5f5952;margin-top:3px">volta hoje</div></div>
+              <div style="padding:10px 12px;border-radius:10px;background:#fdf5e6;border:1px solid rgba(180,83,9,.26)"><div style="font:600 13.5px/1.2 'Geist',system-ui;color:#854d0e">△ Difícil</div><div style="font:500 10.5px/1.3 'Geist Mono',ui-monospace;color:#5f5952;margin-top:3px">em 10 min</div></div>
+              <div style="padding:10px 12px;border-radius:10px;background:#e8f6f0;border:1px solid rgba(4,120,87,.26)"><div style="font:600 13.5px/1.2 'Geist',system-ui;color:#047857">✓ Bom</div><div style="font:500 10.5px/1.3 'Geist Mono',ui-monospace;color:#5f5952;margin-top:3px">em 2 dias</div></div>
+              <div style="padding:10px 12px;border-radius:10px;background:#047857;border:1px solid #047857"><div style="font:600 13.5px/1.2 'Geist',system-ui;color:#fff">✓✓ Fácil</div><div style="font:500 10.5px/1.3 'Geist Mono',ui-monospace;color:rgba(255,255,255,.82);margin-top:3px">em 5 dias</div></div>
+            </div>
+            <span style="font:400 12.5px/1.5 'Geist',system-ui;color:#5f5952">Responda com sinceridade: marcar “Fácil” no que você não sabe só adia o problema.</span>
+          </div>
+          <div style="padding:14px 16px;border-radius:14px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);display:flex;flex-direction:column;gap:6px">
+            <span style="font:600 13.5px/1.3 'Geist',system-ui;color:#0f4457">O que é “mão dupla”</span>
+            <span style="font:400 13px/1.5 'Geist',system-ui;color:#155e75">A mesma carta às vezes vem de trás para frente: você vê a resposta e precisa lembrar da pergunta. Isso fixa os dois lados.</span>
+          </div>
+          <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+            <span style="font:400 12px/1.45 'Geist',system-ui;color:#5f5952">Arrastar a carta faz o mesmo que os botões — e as teclas 1–4 também. Escolha o que for mais confortável.</span>
+            <button style="width:100%;min-height:56px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer">Entendi, virar a carta</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#0f1113;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+        <div style="height:52px;flex:0 0 52px;border-bottom:1px solid rgba(255,255,255,.1)"></div>
+        <div style="flex:1;padding:32px 24px;display:flex;flex-direction:column;gap:18px">
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#34d399">C6 · TUDO CONFIGURADO</span>
+          <h1 style="margin:0;font:600 31px/1.12 'Geist',system-ui;letter-spacing:-.025em;color:#f4ede4;text-wrap:pretty">Sua primeira sessão está pronta.</h1>
+          <div style="display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden">
+            <div style="background:#191c1f;padding:14px 16px;display:flex;justify-content:space-between;align-items:center"><span style="font:400 14px/1.3 'Geist',system-ui;color:#a8a29e">Trilha</span><span style="font:500 14px/1.3 'Geist',system-ui;color:#eceae7">Essenciais · 51 cartas</span></div>
+            <div style="background:#191c1f;padding:14px 16px;display:flex;justify-content:space-between;align-items:center"><span style="font:400 14px/1.3 'Geist',system-ui;color:#a8a29e">Base</span><span style="font:500 14px/1.3 'Geist',system-ui;color:#eceae7">Aula 2 — Águas rápidas</span></div>
+            <div style="background:#191c1f;padding:14px 16px;display:flex;justify-content:space-between;align-items:center"><span style="font:400 14px/1.3 'Geist',system-ui;color:#a8a29e">Meta diária</span><span style="font:500 14px/1.3 'Geist Mono',ui-monospace;color:#eceae7">20 cartas</span></div>
+            <div style="background:#191c1f;padding:14px 16px;display:flex;justify-content:space-between;align-items:center"><span style="font:400 14px/1.3 'Geist',system-ui;color:#a8a29e">Lembrete</span><span style="font:500 14px/1.3 'Geist Mono',ui-monospace;color:#eceae7">21:30</span></div>
+          </div>
+          <div style="padding:16px;border-radius:14px;background:#10262e;border:1px solid rgba(125,211,252,.28);display:flex;flex-direction:column;gap:5px">
+            <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#7dd3fc">FILA DE HOJE</span>
+            <span style="font:600 30px/1 'Geist Mono',ui-monospace;color:#d5f0fd">20</span>
+            <span style="font:400 13.5px/1.5 'Geist',system-ui;color:#7dd3fc">Todas novas nesta primeira vez · cerca de 10 minutos</span>
+          </div>
+          <span style="font:400 13px/1.55 'Geist',system-ui;color:#a8a29e">Amanhã o portal abre direto no que vence — sem perguntar nada de novo. Dá para mudar tudo isso no seu perfil.</span>
+          <div style="margin-top:auto;display:flex;flex-direction:column;gap:9px">
+            <button style="min-height:56px;border-radius:10px;border:0;background:#fb923c;color:#171412;font:600 17px/1 'Geist',system-ui;cursor:pointer">Começar a estudar</button>
+            <button style="min-height:48px;border-radius:10px;border:1px solid rgba(244,237,228,.24);background:transparent;color:#f4ede4;font:600 15px/1 'Geist',system-ui;cursor:pointer">Ver o portal primeiro</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:24px 28px;border-radius:16px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);max-width:1100px;display:flex;flex-direction:column;gap:12px">
+    <h2 style="margin:0;font:600 20px/1.3 'Geist',system-ui;letter-spacing:-.015em;color:#171412">Notas dos grupos B e C</h2>
+    <ul style="margin:0;padding-left:18px;font:400 14px/1.7 'Geist',system-ui;color:#292524">
+      <li><strong style="font-weight:600">Dívida 4 endereçada:</strong> 452 linhas com 4 passos e 8 campos → gate de 1 campo + 3 blocos de 2–3 campos + foto opcional fora do caminho crítico. Nenhum bloco tem mais de uma decisão real.</li>
+      <li><strong style="font-weight:600">Dívida 2 endereçada:</strong> o onboarding existe, e a sessão automática deixou de existir. Cada conceito é ensinado onde é usado — “mão dupla” aparece na carta de demonstração, não num texto de boas-vindas.</li>
+      <li><strong style="font-weight:600">Sem pergunta repetida:</strong> trilha, base, meta e horário são perguntados uma vez, no onboarding, e o resumo C6 mostra as quatro respostas juntas antes da primeira sessão. O cadastro deliberadamente não toca nelas.</li>
+      <li><strong style="font-weight:600">Interações:</strong> gate → máscara aplicada a cada tecla → retorno em ≤2s com um dos 4 estados → botão do estado. Recorte de foto → arraste ou setas do teclado, zoom por slider com <span style="font-family:'Geist Mono',ui-monospace">aria-valuetext</span>. Tour → toque/Enter na carta demo → flip → botões de avaliação ganham foco. Cooldown → contagem em texto, botão desabilitado com <span style="font-family:'Geist Mono',ui-monospace">aria-live</span>.</li>
+      <li><strong style="font-weight:600">Chaves i18n novas:</strong> <span style="font-family:'Geist Mono',ui-monospace">gate.title|why|field|submit</span>, <span style="font-family:'Geist Mono',ui-monospace">gate.result.allowed|notAllowed|pending|rejected</span>, <span style="font-family:'Geist Mono',ui-monospace">signup.block1|block2|block3</span>, <span style="font-family:'Geist Mono',ui-monospace">signup.photo.optional|crop|tooLarge|badType|none</span>, <span style="font-family:'Geist Mono',ui-monospace">request.form|sent|sla</span>, <span style="font-family:'Geist Mono',ui-monospace">verify.waiting|success|expired|resend|cooldown</span>, <span style="font-family:'Geist Mono',ui-monospace">onb.welcome|track|base|goal|reminder|tour|done</span>, <span style="font-family:'Geist Mono',ui-monospace">onb.tour.flip|rate|twoWay</span>.</li>
+      <li><strong style="font-weight:600">Manada deixou de ser texto livre</strong> (revisão 5b): combobox com busca, filtro automático em escada, criação por selects encadeados, checagem de duplicata por nome normalizado + cidade, e selo “não verificada” até um admin confirmar — o que cria a quarta aba <span style="font-family:'Geist Mono',ui-monospace">Manadas</span> em <span style="font-family:'Geist Mono',ui-monospace">/admin/acessos</span>.</li>
+      <li><strong style="font-weight:600">Grupo A adiado</strong> conforme sua decisão: wordmark, símbolo e herói só depois de “Programa de evolução contínua LGND SQUAD” fechar. Nota: o nome novo é longo — no header vai precisar de versão curta, e em espanhol cresce mais. Vale decidir a forma curta junto com o nome.</li>
+    </ul>
+  </div>
+
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Revisão&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { notes: this.props.showNotes ?? true };
+  }
+}
+</script>
+</body>
+</html>

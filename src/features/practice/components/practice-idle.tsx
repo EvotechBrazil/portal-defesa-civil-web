@@ -28,10 +28,10 @@ export function PracticeIdle({
   const last = history[history.length - 1];
   return (
     <div className="space-y-3">
-      <p className={dark ? "text-sm text-paper" : "text-sm text-slate-700"}>
+      <p className={dark ? "text-sm text-paper" : "text-sm text-paper"}>
         {t("practice.idleIntro", { count: questionCount })}
       </p>
-      <p className={dark ? "text-xs text-mist" : "text-xs text-slate-500"}>
+      <p className={dark ? "text-xs text-mist" : "text-xs text-mist"}>
         {last
           ? t("practice.lastAttempt", {
               correct: last.correctCount,
@@ -47,7 +47,7 @@ export function PracticeIdle({
             {isStarting ? t("practice.preparing") : t("practice.start")}
           </Button>
         ) : (
-          <p className={dark ? "text-xs text-mist" : "text-xs text-slate-500"}>
+          <p className={dark ? "text-xs text-mist" : "text-xs text-mist"}>
             {t("practice.closed")}
           </p>
         )}
@@ -58,7 +58,7 @@ export function PracticeIdle({
           className={
             dark
               ? "bg-white/10 text-paper hover:bg-white/15"
-              : "bg-slate-200 text-slate-800 hover:bg-slate-300"
+              : "bg-inset text-paper hover:bg-inset"
           }
         >
           {t("practice.viewKey")}

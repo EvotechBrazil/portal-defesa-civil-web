@@ -23,7 +23,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       onClick={() => setTheme(isDark ? "light" : "dark")}
       disabled={!mounted}
       className={cn(
-        "inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-line bg-panel text-paper transition duration-200 hover:border-flare/50 hover:text-flare disabled:opacity-60",
+        "inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-line bg-panel text-paper transition duration-200 hover:border-flare/50 hover:text-flare-ink disabled:opacity-60",
         className,
       )}
       aria-label={isDark ? t("theme.light.activate") : t("theme.dark.activate")}

@@ -14,10 +14,10 @@ export function PracticeResult({ result }: PracticeResultProps) {
   const { t } = useI18n();
   const tone =
     result.scorePct === 100
-      ? "text-emerald-600"
+      ? "text-ok"
       : result.scorePct >= 60
-        ? "text-amber-600"
-        : "text-red-600";
+        ? "text-learn"
+        : "text-hard";
 
   let comparison = t("practice.firstAttempt");
   if (result.previous && result.deltaPct !== null) {
@@ -43,16 +43,16 @@ export function PracticeResult({ result }: PracticeResultProps) {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-lg bg-slate-50 p-4 text-center">
+      <div className="rounded-lg bg-inset p-4 text-center">
         <p className={cn("text-2xl font-semibold", tone)}>
           {result.correctCount}/{result.totalCount} · {result.scorePct}%
         </p>
         <p
           className={cn(
             "mt-1 text-sm",
-            result.deltaPct !== null && result.deltaPct > 0 && "text-emerald-700",
-            result.deltaPct !== null && result.deltaPct < 0 && "text-red-700",
-            (result.deltaPct === null || result.deltaPct === 0) && "text-slate-600",
+            result.deltaPct !== null && result.deltaPct > 0 && "text-ok",
+            result.deltaPct !== null && result.deltaPct < 0 && "text-hard",
+            (result.deltaPct === null || result.deltaPct === 0) && "text-mist",
           )}
         >
           {comparison}
@@ -62,7 +62,7 @@ export function PracticeResult({ result }: PracticeResultProps) {
         </div>
       </div>
       <PracticeAnswerKey questions={result.answerKey} />
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-mist">
         {t("practice.keyRevealed")}
       </p>
     </div>

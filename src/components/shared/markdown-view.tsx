@@ -37,13 +37,13 @@ const ALLOWED_TAGS = [
 ];
 
 function componentsFor(tone: "light" | "onDark"): Components {
-  const heading = tone === "onDark" ? "text-paper" : "text-navy";
-  const body = tone === "onDark" ? "text-paper" : "text-slate-800";
-  const strong = tone === "onDark" ? "text-flare" : "text-slate-900";
+  const heading = tone === "onDark" ? "text-paper" : "text-paper";
+  const body = tone === "onDark" ? "text-paper" : "text-paper";
+  const strong = tone === "onDark" ? "text-flare-ink" : "text-paper";
   const quote =
     tone === "onDark"
       ? "border-flare bg-white/5 text-mist"
-      : "border-amber text-slate-700";
+      : "border-flare text-paper";
   return {
   h1: ({ children }) => (
     <h1 className={cn("mt-6 mb-3 text-2xl font-semibold", heading)}>{children}</h1>
@@ -66,7 +66,7 @@ function componentsFor(tone: "light" | "onDark"): Components {
   a: ({ href, children }) => (
     <a
       href={href}
-      className="cursor-pointer text-amber underline decoration-amber/40 hover:decoration-amber"
+      className="cursor-pointer text-flare-ink underline decoration-flare/40 hover:decoration-flare"
       target="_blank"
       rel="noreferrer"
     >
@@ -78,7 +78,7 @@ function componentsFor(tone: "light" | "onDark"): Components {
       return null;
     }
     return (
-      <figure className="my-6 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 p-2 shadow-sm">
+      <figure className="my-6 overflow-hidden rounded-2xl border border-line bg-inset p-2">
         {/* O caminho é dinâmico no Markdown e restrito a /study/; next/image não aceita esse contrato sem conhecer o asset no build. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -88,7 +88,7 @@ function componentsFor(tone: "light" | "onDark"): Components {
           className="h-auto w-full rounded-xl"
         />
         {alt ? (
-          <figcaption className="px-2 pb-1 pt-2 text-center text-xs text-slate-500">
+          <figcaption className="px-2 pb-1 pt-2 text-center text-xs text-mist">
             {alt}
           </figcaption>
         ) : null}
@@ -97,24 +97,24 @@ function componentsFor(tone: "light" | "onDark"): Components {
   },
   table: ({ children }) => (
     <div className="my-4 overflow-x-auto">
-      <table className="w-full border-collapse border border-slate-300 text-left text-sm">
+      <table className="w-full border-collapse border border-line text-left text-sm">
         {children}
       </table>
     </div>
   ),
-  thead: ({ children }) => <thead className="bg-slate-100">{children}</thead>,
+  thead: ({ children }) => <thead className="bg-inset">{children}</thead>,
   th: ({ children }) => (
-    <th className="border border-slate-300 px-3 py-2 font-semibold text-navy">{children}</th>
+    <th className="border border-line px-3 py-2 font-semibold text-paper">{children}</th>
   ),
-  td: ({ children }) => <td className="border border-slate-300 px-3 py-2 align-top">{children}</td>,
+  td: ({ children }) => <td className="border border-line px-3 py-2 align-top">{children}</td>,
   strong: ({ children }) => (
     <strong className={cn("font-semibold", strong)}>{children}</strong>
   ),
   em: ({ children }) => <em className="italic">{children}</em>,
   code: ({ children }) => (
-    <code className="rounded bg-slate-100 px-1 py-0.5 text-[0.9em]">{children}</code>
+    <code className="rounded bg-inset px-1 py-0.5 text-[0.9em]">{children}</code>
   ),
-  hr: () => <hr className="my-6 border-slate-200" />,
+  hr: () => <hr className="my-6 border-line" />,
   };
 }
 
@@ -149,14 +149,14 @@ export function MarkdownView({ markdown, className, tone = "light" }: MarkdownVi
 
   if (sanitized === null) {
     return (
-      <div className={cn("min-h-16 text-sm", tone === "onDark" ? "text-mist" : "text-slate-500", className)}>
+      <div className={cn("min-h-16 text-sm", tone === "onDark" ? "text-mist" : "text-mist", className)}>
         {t("markdown.loading")}
       </div>
     );
   }
 
   return (
-    <div className={cn("max-w-none", tone === "onDark" ? "text-paper" : "text-slate-800", className)}>
+    <div className={cn("max-w-none", tone === "onDark" ? "text-paper" : "text-paper", className)}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}

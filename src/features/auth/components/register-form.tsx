@@ -165,7 +165,7 @@ export function RegisterForm() {
           </p>
           <button
             type="button"
-            className="text-flare underline"
+            className="text-flare-ink underline"
             onClick={resetToGate}
           >
             {t("register.change")}
@@ -191,14 +191,14 @@ export function RegisterForm() {
               {...gateForm.register("whatsapp")}
             />
             {gateForm.formState.errors.whatsapp ? (
-              <p className="text-sm text-red-600">
+              <p className="text-sm text-hard">
                 {t(gateForm.formState.errors.whatsapp.message ?? "")}
               </p>
             ) : null}
           </div>
 
           {check.isError ? (
-            <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+            <p className="rounded-md bg-hard-surf px-3 py-2 text-sm text-hard">
               {locale === "pt-BR"
                 ? getApiErrorMessage(check.error, t("register.checkError"))
                 : t("register.checkError")}
@@ -320,7 +320,7 @@ export function RegisterForm() {
                 setPhotoFile(event.target.files?.[0] ?? null);
               }}
             />
-            {photoError ? <p className="text-sm text-red-600">{photoError}</p> : null}
+            {photoError ? <p className="text-sm text-hard">{photoError}</p> : null}
           </div>
           <Field
             id="email"
@@ -348,7 +348,7 @@ export function RegisterForm() {
           </Field>
 
           {registerAccount.isError ? (
-            <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+            <p className="rounded-md bg-hard-surf px-3 py-2 text-sm text-hard">
               {locale === "pt-BR"
                 ? getApiErrorMessage(registerAccount.error, t("auth.register.error"))
                 : t("auth.register.error")}
@@ -436,14 +436,14 @@ export function RegisterForm() {
               {...requestForm.register("justification")}
             />
             {requestForm.formState.errors.justification ? (
-              <p className="text-sm text-red-600">
+              <p className="text-sm text-hard">
                 {t(requestForm.formState.errors.justification.message ?? "")}
               </p>
             ) : null}
           </div>
 
           {request.isError ? (
-            <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+            <p className="rounded-md bg-hard-surf px-3 py-2 text-sm text-hard">
               {locale === "pt-BR"
                 ? getApiErrorMessage(request.error, t("register.requestError"))
                 : t("register.requestError")}
@@ -459,24 +459,24 @@ export function RegisterForm() {
       {step === "status" ? (
         <div className="mt-6 space-y-4">
           {status === "PENDING" ? (
-            <p className="rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-900">
+            <p className="rounded-md bg-learn-surf px-3 py-2 text-sm text-learn">
               {t("register.pending")}
             </p>
           ) : null}
           {status === "REGISTERED" ? (
-            <p className="rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+            <p className="rounded-md bg-ok-surf px-3 py-2 text-sm text-ok">
               {t("register.registered")}
             </p>
           ) : null}
           {status === "REQUEST_SENT" ? (
-            <p className="rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+            <p className="rounded-md bg-ok-surf px-3 py-2 text-sm text-ok">
               {t("register.requestSent")}
             </p>
           ) : null}
           {status === "REGISTERED" ? (
             <Link
               href="/login"
-              className="inline-flex w-full cursor-pointer items-center justify-center rounded-md bg-flare px-4 py-2 text-sm font-medium text-white"
+              className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center rounded-ctl bg-primary px-4 py-2 text-sm font-medium text-primary-ink"
             >
               {t("auth.verify.goLogin")}
             </Link>
@@ -490,7 +490,7 @@ export function RegisterForm() {
 
       <p className="mt-4 text-center text-sm text-mist">
         {t("auth.hasAccount")}{" "}
-        <Link href="/login" className="font-medium text-flare underline">
+        <Link href="/login" className="font-medium text-flare-ink underline">
           {t("auth.signIn.title")}
         </Link>
       </p>
@@ -515,7 +515,7 @@ function Field({
         {label}
       </label>
       {children}
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      {error ? <p className="text-sm text-hard">{error}</p> : null}
     </div>
   );
 }

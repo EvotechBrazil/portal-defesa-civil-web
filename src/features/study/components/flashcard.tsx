@@ -81,7 +81,7 @@ const CardFace = memo(function CardFace({
           </p>
           <p
             className={cn(
-              "absolute top-4 z-10 text-[11px] font-semibold text-flare",
+              "absolute top-4 z-10 text-[11px] font-semibold text-flare-ink",
               showArt ? "right-16" : "right-5",
             )}
           >
@@ -365,7 +365,7 @@ export function Flashcard({
           aria-pressed={artTextHidden}
           title={artTextHidden ? t("study.showTextsShort") : t("study.imageOnly")}
           disabled={disabled}
-          className="absolute right-3 top-3 z-40 flex size-11 items-center justify-center rounded-full border border-white/25 bg-ink/75 text-white shadow-lg backdrop-blur-sm transition duration-200 hover:border-flare hover:bg-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flare disabled:cursor-not-allowed disabled:opacity-50"
+          className="absolute right-3 top-3 z-40 flex size-11 items-center justify-center rounded-full border border-white/25 bg-scrim text-white shadow-lg backdrop-blur-sm transition duration-200 hover:border-flare hover:bg-scrim disabled:cursor-not-allowed disabled:opacity-50"
         >
           {artTextHidden ? <EyeOff aria-hidden size={20} /> : <Eye aria-hidden size={20} />}
         </button>

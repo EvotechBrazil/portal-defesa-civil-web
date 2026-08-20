@@ -55,7 +55,7 @@ export function StudyDesk() {
   return (
     <div className="study-shell">
       <div className="mx-auto max-w-[680px] px-4 py-6">
-        <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-flare">
+        <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-flare-ink">
           {t("study.spacedRepetition")} · {deckSelector === "FULL" ? t("study.coverageFull") : "80/20"}
         </p>
         <h1 className="mt-1 text-[clamp(22px,3vw,30px)] font-semibold tracking-tight text-paper">
@@ -100,7 +100,7 @@ export function StudyDesk() {
                 className={cn(
                   "min-h-11 shrink-0 rounded-2xl border px-3 py-2 text-left text-[13px] transition duration-200",
                   active
-                    ? "border-flare bg-flare font-semibold text-white"
+                    ? "border-flare bg-primary font-semibold text-primary-ink"
                     : "border-line bg-panel text-mist hover:border-flare/40 hover:text-paper",
                   item.status === "soon" && !active && "opacity-55",
                 )}
@@ -182,7 +182,7 @@ function ModeChoice({
           : "border-line bg-panel hover:border-flare/50",
       )}
     >
-      <span className="block text-[10px] font-bold uppercase tracking-[0.12em] text-flare">
+      <span className="block text-[10px] font-bold uppercase tracking-[0.12em] text-flare-ink">
         {eyebrow}
       </span>
       <span className="mt-1 block text-base font-semibold text-paper">{title}</span>

@@ -37,12 +37,12 @@ export function QuestionFilters({
   return (
     <div className="flex flex-col gap-4">
       <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:flex-row">
-        <label className="flex min-w-48 flex-col gap-1 text-sm text-slate-600">
+        <label className="flex min-w-48 flex-col gap-1 text-sm text-mist">
           {t("questions.module")}
           <select
             value={moduleCode}
             onChange={(event) => onModuleChange(event.target.value)}
-            className="h-10 cursor-pointer rounded-md border border-slate-300 bg-white px-3 text-sm outline-none ring-amber-500 focus:ring-2"
+            className="min-h-11 cursor-pointer rounded-ctl border border-line bg-panel px-3 text-sm outline-none"
           >
             <option value="">{t("questions.allModules")}</option>
             {modules.map((module) => (
@@ -52,7 +52,7 @@ export function QuestionFilters({
             ))}
           </select>
         </label>
-        <label className="flex min-w-0 flex-1 flex-col gap-1 text-sm text-slate-600">
+        <label className="flex min-w-0 flex-1 flex-col gap-1 text-sm text-mist">
           {t("questions.searchLabel")}
           <Input
             value={search}
@@ -65,12 +65,12 @@ export function QuestionFilters({
         </div>
       </form>
 
-      <div className="inline-flex rounded-lg border border-slate-200 bg-white p-1">
+      <div className="inline-flex rounded-lg border border-line bg-panel p-1">
         <button
           type="button"
           onClick={() => onModeChange("study")}
-          className={`cursor-pointer rounded-md px-3 py-1.5 text-sm ${
-            mode === "study" ? "bg-navy text-white" : "text-slate-600 hover:bg-slate-50"
+          className={`min-h-11 cursor-pointer rounded-ctl px-3 py-1.5 text-sm ${
+            mode === "study" ? "bg-paper text-ink" : "text-mist hover:bg-inset"
           }`}
         >
           {t("questions.studyMode")}
@@ -78,8 +78,8 @@ export function QuestionFilters({
         <button
           type="button"
           onClick={() => onModeChange("answer-key")}
-          className={`cursor-pointer rounded-md px-3 py-1.5 text-sm ${
-            mode === "answer-key" ? "bg-navy text-white" : "text-slate-600 hover:bg-slate-50"
+          className={`min-h-11 cursor-pointer rounded-ctl px-3 py-1.5 text-sm ${
+            mode === "answer-key" ? "bg-paper text-ink" : "text-mist hover:bg-inset"
           }`}
         >
           {t("questions.answerKeyMode")}

@@ -121,7 +121,7 @@ export function AdminAccessPage() {
             </Button>
           </form>
           {addAllowed.isError ? (
-            <p className="mb-4 text-sm text-red-600">
+            <p className="mb-4 text-sm text-hard">
               {locale === "pt-BR"
                 ? getApiErrorMessage(addAllowed.error, t("admin.access.addError"))
                 : t("admin.access.addError")}
@@ -172,7 +172,7 @@ function TabButton({
       onClick={onClick}
       className={cn(
         "rounded-full px-4 py-2 text-sm font-medium",
-        active ? "bg-flare text-white" : "bg-panel text-mist hover:text-paper",
+        active ? "bg-primary text-primary-ink" : "bg-panel text-mist hover:text-paper",
       )}
     >
       {children}

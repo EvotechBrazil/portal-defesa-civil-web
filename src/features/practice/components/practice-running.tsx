@@ -33,15 +33,15 @@ export function PracticeRunning({
 
   return (
     <div>
-      <div className={cn("mb-3 h-1.5 overflow-hidden rounded-full", dark ? "bg-white/10" : "bg-slate-200")}>
-        <div className="h-full bg-flare transition-all" style={{ width: `${progress}%` }} />
+      <div className={cn("mb-3 h-1.5 overflow-hidden rounded-full", dark ? "bg-white/10" : "bg-inset")}>
+        <div className="h-full bg-primary transition-all" style={{ width: `${progress}%` }} />
       </div>
       {question.sourceRef ? (
-        <p className={cn("mb-1 text-[11px] uppercase tracking-wider", dark ? "text-mist" : "text-slate-500")}>
+        <p className={cn("mb-1 text-[11px] uppercase tracking-wider", dark ? "text-mist" : "text-mist")}>
           {translateContent(question.sourceRef)}
         </p>
       ) : null}
-      <p className={cn("mb-3 font-semibold", dark ? "text-paper" : "text-slate-900")}>
+      <p className={cn("mb-3 font-semibold", dark ? "text-paper" : "text-paper")}>
         {translateContent(question.stem)}
       </p>
       <ul className="space-y-2">
@@ -55,19 +55,19 @@ export function PracticeRunning({
                 onClick={() => onChoose(option.optionId)}
                 className={cn(
                   "flex min-h-11 w-full cursor-pointer items-start gap-2 rounded-xl border px-3 py-2.5 text-left text-sm transition duration-200",
-                  dark ? "text-paper" : "text-slate-800",
+                  dark ? "text-paper" : "text-paper",
                   isChosen
                     ? dark
                       ? "border-flare bg-flare/15"
-                      : "border-amber bg-orange-50"
+                      : "border-flare bg-learn-surf"
                     : dark
-                      ? "border-white/10 bg-ink/60 hover:border-flare/50"
-                      : "border-slate-200 bg-white hover:border-amber/60",
-                  locked && !isChosen && (dark ? "hover:border-white/10" : "hover:border-slate-200"),
+                      ? "border-white/10 bg-scrim hover:border-flare/50"
+                      : "border-line bg-panel hover:border-flare/60",
+                  locked && !isChosen && (dark ? "hover:border-white/10" : "hover:border-line"),
                   locked && "disabled:cursor-not-allowed",
                 )}
               >
-                <span className={cn("w-5 font-semibold", dark ? "text-flare" : "text-slate-500")}>
+                <span className={cn("w-5 font-semibold", dark ? "text-flare-ink" : "text-mist")}>
                   {KEYS[index] ?? String(index + 1)}
                 </span>
                 <span>{translateContent(option.text)}</span>

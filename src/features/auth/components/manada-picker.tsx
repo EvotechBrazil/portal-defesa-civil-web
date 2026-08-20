@@ -124,7 +124,7 @@ export function ManadaPicker({
           </div>
           <button
             type="button"
-            className="text-sm text-flare underline"
+            className="text-sm text-flare-ink underline"
             onClick={() => {
               setOpen(true);
               setQuery("");
@@ -154,7 +154,7 @@ export function ManadaPicker({
       )}
 
       {open && !creating ? (
-        <div className="overflow-hidden rounded-md border border-line bg-panel shadow-sm">
+        <div className="overflow-hidden rounded-ctl border border-line bg-panel shadow-e2">
           {!hasLocation ? (
             <p className="px-3 py-2 text-sm text-mist">{t("register.packNeedLocation")}</p>
           ) : null}
@@ -162,7 +162,7 @@ export function ManadaPicker({
             <p className="px-3 py-2 text-sm text-mist">{t("common.loading")}</p>
           ) : null}
           {manadas.isError ? (
-            <p className="px-3 py-2 text-sm text-red-600">{t("register.packLoadError")}</p>
+            <p className="px-3 py-2 text-sm text-hard">{t("register.packLoadError")}</p>
           ) : null}
 
           <PackGroup title={t("register.packAutomatic")} items={automatic} onSelect={selectPack} />
@@ -175,7 +175,7 @@ export function ManadaPicker({
           {canCreate ? (
             <button
               type="button"
-              className="block w-full border-t border-line px-3 py-2 text-left text-sm text-flare hover:bg-background"
+              className="block w-full border-t border-line px-3 py-2 text-left text-sm text-flare-ink hover:bg-background"
               onClick={handleCreate}
             >
               {t("register.packCreate", { name: query.trim() })}
@@ -195,7 +195,7 @@ export function ManadaPicker({
             onChange={setDraftLocation}
           />
           {create.isError ? (
-            <p className="text-sm text-red-600">
+            <p className="text-sm text-hard">
               {locale === "pt-BR"
                 ? getApiErrorMessage(create.error, t("register.packCreateError"))
                 : t("register.packCreateError")}
@@ -225,7 +225,7 @@ export function ManadaPicker({
         </div>
       ) : null}
 
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      {error ? <p className="text-sm text-hard">{error}</p> : null}
     </div>
   );
 }

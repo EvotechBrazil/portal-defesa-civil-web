@@ -26,10 +26,10 @@ export function SessionSummary({
   return (
     <section className="mx-auto max-w-xl px-4 py-10">
       <Card className="space-y-4">
-        <h1 className="text-2xl font-semibold text-navy">{t("study.sessionComplete")}</h1>
-        <p className="text-sm text-slate-600">{t("study.roundReviews", { count: reviews })}</p>
+        <h1 className="text-2xl font-semibold text-paper">{t("study.sessionComplete")}</h1>
+        <p className="text-sm text-mist">{t("study.roundReviews", { count: reviews })}</p>
         {tally ? (
-          <p className="text-sm text-slate-700">
+          <p className="text-sm text-paper">
             {t("study.tally", { easy: tally.EASY, learning: tally.LEARNING, hard: tally.HARD })}
           </p>
         ) : null}
@@ -47,7 +47,7 @@ export function SessionSummary({
         )}
         <Link
           href="/estudar"
-          className="inline-flex cursor-pointer items-center justify-center rounded-md bg-navy px-4 py-2 text-sm font-medium text-white transition hover:bg-navy/90"
+          className="inline-flex min-h-11 cursor-pointer items-center justify-center rounded-ctl bg-paper px-4 py-2 text-sm font-medium text-ink transition hover:bg-paper/90"
         >
           {t("study.newSession")}
         </Link>

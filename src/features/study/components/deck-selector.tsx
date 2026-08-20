@@ -32,11 +32,11 @@ export function DeckSelectorPanel({
   return (
     <section className="mx-auto max-w-3xl space-y-6 px-4 py-10">
       <header>
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-flare-ink">
           {t("study.spacedRepetition")}
         </p>
-        <h1 className="mt-1 text-2xl font-semibold text-navy">{t("study.studyTitle")}</h1>
-        <p className="mt-2 text-sm text-slate-600">{t("study.selectorDescription")}</p>
+        <h1 className="mt-1 text-2xl font-semibold text-paper">{t("study.studyTitle")}</h1>
+        <p className="mt-2 text-sm text-mist">{t("study.selectorDescription")}</p>
       </header>
 
       <div className="grid gap-3 sm:grid-cols-2">
@@ -61,7 +61,7 @@ export function DeckSelectorPanel({
         <label className="flex cursor-pointer items-center gap-2 text-sm">
           <input
             type="checkbox"
-            className="cursor-pointer accent-navy"
+            className="cursor-pointer accent-primary"
             checked={value.bidir}
             onChange={(event) => onChange({ ...value, bidir: event.target.checked })}
           />
@@ -70,7 +70,7 @@ export function DeckSelectorPanel({
         <label className="flex cursor-pointer items-center gap-2 text-sm">
           <input
             type="checkbox"
-            className="cursor-pointer accent-navy"
+            className="cursor-pointer accent-primary"
             checked={value.filter === "HARD_ONLY"}
             onChange={(event) =>
               onChange({
@@ -86,7 +86,7 @@ export function DeckSelectorPanel({
       <Button type="button" disabled={isSubmitting} onClick={onStart}>
         {isSubmitting ? t("study.openingSession") : t("study.startSession")}
       </Button>
-      <p className="text-xs text-slate-500">{t("common.course")}: {courseSlug}</p>
+      <p className="text-xs text-mist">{t("common.course")}: {courseSlug}</p>
     </section>
   );
 }
@@ -112,15 +112,15 @@ function DeckChoice({
       type="button"
       onClick={onClick}
       className={cn(
-        "cursor-pointer rounded-xl border bg-white p-5 text-left shadow-sm transition hover:border-navy/40 active:scale-[0.99]",
-        selected ? "border-navy ring-2 ring-navy/20" : "border-slate-200",
+        "cursor-pointer rounded-card border bg-panel p-5 text-left transition hover:border-paper/40 active:scale-[0.99]",
+        selected ? "border-paper ring-2 ring-paper/20" : "border-line",
       )}
     >
-      <p className="text-lg font-semibold text-navy">{title}</p>
-      <p className="mt-1 text-sm text-slate-600">{description}</p>
-      {extra ? <p className="mt-1 text-xs text-slate-500">{extra}</p> : null}
+      <p className="text-lg font-semibold text-paper">{title}</p>
+      <p className="mt-1 text-sm text-mist">{description}</p>
+      {extra ? <p className="mt-1 text-xs text-mist">{extra}</p> : null}
       {levels ? (
-        <p className="mt-3 text-xs text-slate-500">
+        <p className="mt-3 text-xs text-mist">
           {t("study.levelSummary", {
             new: levels.NEW,
             hard: levels.HARD,

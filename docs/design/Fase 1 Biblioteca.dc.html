@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#dcd8d2;font-family:'Geist',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;-webkit-tap-highlight-color:transparent}
+a{color:#9a3412;text-decoration:underline;text-underline-offset:2px}
+a:hover{color:#7c2d12}
+@keyframes sk{0%{opacity:.55}50%{opacity:1}100%{opacity:.55}}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+</style>
+</helmet>
+
+<section style="padding:64px;display:flex;flex-direction:column;gap:48px;width:max-content">
+
+  <header style="max-width:940px;display:flex;flex-direction:column;gap:14px">
+    <span style="font:600 12px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#155e75">Fase 1 · /biblioteca — último grupo</span>
+    <h1 style="margin:0;font:600 44px/1.05 'Geist',system-ui;letter-spacing:-.02em;color:#171412">Catálogo, curso e leitura longa</h1>
+    <p style="margin:0;font:400 17px/1.55 'Geist',system-ui;color:#5f5952;max-width:62ch;text-wrap:pretty">A biblioteca é a única superfície de <em>leitura</em> do produto — todo o resto é prática. Por isso ela é a única que abandona a densidade instrumento: medida de 62ch, escala maior, e figura com legenda para os três diagramas do material.</p>
+  </header>
+
+  <!-- ============ 7a · CATÁLOGO ============ -->
+  <div id="7a" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">7a</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">Catálogo de cursos · 1280 light e 390 dark</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:74ch">Card de curso mostra matrícula, progresso de leitura e quantas bases estão abertas. Sem matrícula, o card não some — vira estado explicativo com caminho, porque desaparecer parece bug.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+      <div style="width:1280px;border-radius:16px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+        <div style="height:64px;flex:0 0 64px;background:#fff;border-bottom:1px solid rgba(0,0,0,.14);display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+          <div style="display:flex;align-items:baseline;gap:14px"><h3 style="margin:0;font:600 19px/1.2 'Geist',system-ui;color:#171412">Material</h3><span style="font:500 12px/1 'Geist Mono',ui-monospace;color:#5f5952">/BIBLIOTECA · 1 CURSO MATRICULADO</span></div>
+          <div style="display:flex;align-items:center;gap:10px"><button style="min-height:40px;padding:0 12px;border-radius:8px;border:1px solid rgba(0,0,0,.18);background:#efece7;font:600 13px/1 'Geist',system-ui;color:#171412;cursor:pointer">Continuar leitura</button></div>
+        </div>
+        <div style="padding:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-content:start">
+          <div style="grid-column:span 2;padding:24px;border-radius:20px;background:#faf6ef;border:1.5px solid #9a3412;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px">
+              <div><span style="font:600 10.5px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">MATRICULADA · TURMA 2026</span><h4 style="margin:7px 0 0;font:600 25px/1.2 'Geist',system-ui;letter-spacing:-.02em;color:#171412">Formação de Líderes Humanitários</h4><div style="font:400 14.5px/1.5 'Geist',system-ui;color:#5f5952;margin-top:5px">Defesa Civil e Desastres · 6 módulos · 5 bases de conteúdo</div></div>
+              <span style="padding:5px 10px;border-radius:6px;background:#e8f6f0;border:1px solid rgba(4,120,87,.3);font:600 10px/1.2 'Geist Mono',ui-monospace;color:#047857;white-space:nowrap">✓ ATIVO</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:500 11.5px/1 'Geist Mono',ui-monospace;color:#5f5952">LEITURA DO MATERIAL TEÓRICO</span><span style="font:600 12px/1 'Geist Mono',ui-monospace;color:#171412">4/6 módulos</span></div>
+              <div style="height:10px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:67%;height:100%;background:#155e75"></div></div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:7px">
+              <span style="padding:5px 10px;border-radius:6px;background:#e0f0f5;border:1px solid rgba(21,94,117,.3);font:600 11px/1.2 'Geist',system-ui;color:#155e75">✓ Material teórico</span>
+              <span style="padding:5px 10px;border-radius:6px;background:#e0f0f5;border:1px solid rgba(21,94,117,.3);font:600 11px/1.2 'Geist',system-ui;color:#155e75">✓ Aula 1 — BREC e NOS</span>
+              <span style="padding:5px 10px;border-radius:6px;background:#e0f0f5;border:1px solid rgba(21,94,117,.3);font:600 11px/1.2 'Geist',system-ui;color:#155e75">✓ Aula 2 — Águas rápidas</span>
+              <span style="padding:5px 10px;border-radius:6px;background:#e5e0d8;border:1px dashed rgba(0,0,0,.2);font:500 11px/1.2 'Geist',system-ui;color:#8a827a">Aula 3 · em breve</span>
+              <span style="padding:5px 10px;border-radius:6px;background:#e5e0d8;border:1px dashed rgba(0,0,0,.2);font:500 11px/1.2 'Geist',system-ui;color:#8a827a">Aula 4 · em breve</span>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:2px"><button style="min-height:48px;padding:0 20px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 15.5px/1 'Geist',system-ui;cursor:pointer">Abrir curso</button><button style="min-height:48px;padding:0 18px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;color:#171412;font:600 15.5px/1 'Geist',system-ui;cursor:pointer">Continuar no Módulo 5</button></div>
+          </div>
+
+          <div style="padding:22px;border-radius:20px;background:#fff;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:12px">
+            <span style="width:36px;height:36px;border-radius:10px;background:#e5e0d8;border:1px solid rgba(0,0,0,.14);display:flex;align-items:center;justify-content:center;font:600 15px/1 'Geist',system-ui;color:#5f5952">🔒</span>
+            <div><span style="font:600 10.5px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">SEM MATRÍCULA</span><h4 style="margin:7px 0 0;font:600 19px/1.25 'Geist',system-ui;color:#171412">Gestão de Abrigos Temporários</h4></div>
+            <div style="font:400 13.5px/1.55 'Geist',system-ui;color:#5f5952">Curso da próxima turma. Você vê que ele existe, mas o conteúdo abre só com matrícula aprovada.</div>
+            <button style="margin-top:auto;min-height:44px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#efece7;color:#171412;font:600 14px/1 'Geist',system-ui;cursor:pointer">Avisar quando abrir</button>
+            <span style="font:400 11.5px/1.45 'Geist',system-ui;color:#5f5952">Card bloqueado não desaparece: sumir parece erro, e a pessoa acha que perdeu acesso.</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Catálogo · 390 · dark</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#0f1113;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+          <div style="height:56px;flex:0 0 56px;background:#191c1f;border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center;padding:0 16px"><span style="font:600 17px/1.2 'Geist',system-ui;letter-spacing:-.01em;color:#f4ede4">Material</span></div>
+          <div style="flex:1;padding:16px 14px;display:flex;flex-direction:column;gap:12px;overflow:hidden">
+            <div style="padding:18px;border-radius:20px;background:#221f1c;border:1.5px solid #fb923c;display:flex;flex-direction:column;gap:12px">
+              <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#c4b8ad">MATRICULADA · TURMA 2026</span>
+              <h4 style="margin:0;font:600 20px/1.22 'Geist',system-ui;letter-spacing:-.015em;color:#f4ede4">Formação de Líderes Humanitários</h4>
+              <div style="font:400 13.5px/1.5 'Geist',system-ui;color:#c4b8ad">Defesa Civil e Desastres · 6 módulos</div>
+              <div style="display:flex;flex-direction:column;gap:7px">
+                <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:500 10.5px/1 'Geist Mono',ui-monospace;color:#a8a29e">LEITURA</span><span style="font:600 11.5px/1 'Geist Mono',ui-monospace;color:#eceae7">4/6</span></div>
+                <div style="height:9px;border-radius:3px;background:#0a0c0d;overflow:hidden"><div style="width:67%;height:100%;background:#7dd3fc"></div></div>
+              </div>
+              <button style="min-height:48px;border-radius:10px;border:0;background:#fb923c;color:#171412;font:600 15.5px/1 'Geist',system-ui;cursor:pointer">Abrir curso</button>
+            </div>
+            <div style="padding:16px;border-radius:20px;background:#191c1f;border:1px solid rgba(255,255,255,.12);display:flex;flex-direction:column;gap:10px">
+              <span style="width:32px;height:32px;border-radius:10px;background:#0a0c0d;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font:600 14px/1 'Geist',system-ui;color:#a8a29e">🔒</span>
+              <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e">SEM MATRÍCULA</span>
+              <h4 style="margin:0;font:600 17px/1.25 'Geist',system-ui;color:#eceae7">Gestão de Abrigos Temporários</h4>
+              <div style="font:400 13px/1.5 'Geist',system-ui;color:#a8a29e">Abre na próxima turma.</div>
+              <button style="min-height:44px;border-radius:10px;border:1px solid rgba(244,237,228,.24);background:transparent;color:#f4ede4;font:600 14px/1 'Geist',system-ui;cursor:pointer">Avisar quando abrir</button>
+            </div>
+            <div style="margin-top:auto;padding:16px;border-radius:14px;background:#191c1f;border:1px dashed rgba(255,255,255,.16);display:flex;flex-direction:column;gap:9px">
+              <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e">CARREGANDO · SKELETON</span>
+              <div style="height:12px;width:58%;border-radius:4px;background:#332f2b;animation:sk 1.4s ease-in-out infinite"></div>
+              <div style="height:44px;border-radius:12px;background:#332f2b;animation:sk 1.4s ease-in-out infinite .12s"></div>
+              <div style="height:9px;border-radius:3px;background:#332f2b;animation:sk 1.4s ease-in-out infinite .22s"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 7b · DETALHE DO CURSO ============ -->
+  <div id="7b" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">7b</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">Detalhe do curso · 1280 light</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:74ch">Índice à esquerda, conteúdo à direita, e cada módulo diz o que tem: leitura, cartas e questões. O CTA de cada linha é o próximo passo real, não “ver mais”.</p>
+      </div>
+    </div>
+
+    <div style="width:1280px;border-radius:16px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+      <div style="padding:28px 32px;background:#fff;border-bottom:1px solid rgba(0,0,0,.14);display:flex;align-items:flex-end;justify-content:space-between;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font:600 10.5px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">/BIBLIOTECA · CURSO</span>
+          <h3 style="margin:0;font:600 32px/1.15 'Geist',system-ui;letter-spacing:-.024em;color:#171412">Formação de Líderes Humanitários</h3>
+          <span style="font:400 15px/1.5 'Geist',system-ui;color:#5f5952">Defesa Civil e Desastres · material teórico + 4 aulas · pt-BR · es · en</span>
+        </div>
+        <div style="display:flex;gap:10px"><button style="min-height:48px;padding:0 18px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#efece7;font:600 15px/1 'Geist',system-ui;color:#171412;cursor:pointer">Estudar cartas</button><button style="min-height:48px;padding:0 20px;border-radius:10px;border:0;background:#9a3412;font:600 15px/1 'Geist',system-ui;color:#fff;cursor:pointer">Continuar leitura</button></div>
+      </div>
+      <div style="display:grid;grid-template-columns:280px 1fr">
+        <div style="border-right:1px solid rgba(0,0,0,.12);background:#fff;padding:20px 18px;display:flex;flex-direction:column;gap:8px">
+          <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952;margin-bottom:4px">ÍNDICE</span>
+          <button style="text-align:left;min-height:44px;padding:10px 12px;border-radius:8px;border:0;background:#faf6ef;border-left:3px solid #9a3412;font:600 13.5px/1.35 'Geist',system-ui;color:#171412;cursor:pointer">1 · Conceitos e componentes do risco</button>
+          <button style="text-align:left;min-height:44px;padding:10px 12px;border-radius:8px;border:0;background:transparent;font:500 13.5px/1.35 'Geist',system-ui;color:#5f5952;cursor:pointer">2 · Ciclo de gestão de riscos</button>
+          <button style="text-align:left;min-height:44px;padding:10px 12px;border-radius:8px;border:0;background:transparent;font:500 13.5px/1.35 'Geist',system-ui;color:#5f5952;cursor:pointer">3 · Resposta e primeiros socorros</button>
+          <button style="text-align:left;min-height:44px;padding:10px 12px;border-radius:8px;border:0;background:transparent;font:500 13.5px/1.35 'Geist',system-ui;color:#5f5952;cursor:pointer">4 · Abrigos e assistência</button>
+          <button style="text-align:left;min-height:44px;padding:10px 12px;border-radius:8px;border:0;background:transparent;font:500 13.5px/1.35 'Geist',system-ui;color:#5f5952;cursor:pointer">5 · PLANCON</button>
+          <button style="text-align:left;min-height:44px;padding:10px 12px;border-radius:8px;border:0;background:transparent;font:500 13.5px/1.35 'Geist',system-ui;color:#5f5952;cursor:pointer">6 · Comunicação e comando</button>
+          <div style="margin-top:14px;padding:14px;border-radius:10px;background:#efece7;border:1px solid rgba(0,0,0,.12);display:flex;flex-direction:column;gap:5px">
+            <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">SUA LEITURA</span>
+            <span style="font:600 20px/1 'Geist Mono',ui-monospace;color:#171412">4<span style="font-size:13px;color:#5f5952">/6 módulos</span></span>
+            <span style="font:400 12px/1.4 'Geist',system-ui;color:#5f5952">Módulo 5 é onde seu acerto está mais baixo.</span>
+          </div>
+        </div>
+        <div style="padding:24px 32px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:grid;grid-template-columns:1fr 92px 92px 150px;gap:14px;padding:10px 16px;background:#e5e0d8;border-radius:8px;align-items:center">
+            <span style="font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">MÓDULO</span>
+            <span style="font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">CARTAS</span>
+            <span style="font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">QUESTÕES</span>
+            <span style="font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">PRÓXIMO PASSO</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 92px 92px 150px;gap:14px;padding:14px 16px;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:10px;align-items:center">
+            <div><div style="font:600 15px/1.3 'Geist',system-ui;color:#171412">1 · Conceitos e componentes do risco</div><div style="display:flex;align-items:center;gap:7px;margin-top:4px"><span style="padding:3px 7px;border-radius:5px;background:#e8f6f0;border:1px solid rgba(4,120,87,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#047857">✓ LIDO</span><span style="font:400 12px/1.3 'Geist',system-ui;color:#5f5952">1 diagrama</span></div></div>
+            <span style="font:600 13px/1 'Geist Mono',ui-monospace;color:#171412">12</span>
+            <span style="font:600 13px/1 'Geist Mono',ui-monospace;color:#171412">21</span>
+            <button style="min-height:40px;padding:0 12px;border-radius:8px;border:1px solid rgba(0,0,0,.18);background:#efece7;font:600 12.5px/1 'Geist',system-ui;color:#171412;cursor:pointer">Reler</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 92px 92px 150px;gap:14px;padding:14px 16px;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:10px;align-items:center">
+            <div><div style="font:600 15px/1.3 'Geist',system-ui;color:#171412">2 · Ciclo de gestão de riscos</div><div style="display:flex;align-items:center;gap:7px;margin-top:4px"><span style="padding:3px 7px;border-radius:5px;background:#e8f6f0;border:1px solid rgba(4,120,87,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#047857">✓ LIDO</span><span style="font:400 12px/1.3 'Geist',system-ui;color:#5f5952">1 diagrama</span></div></div>
+            <span style="font:600 13px/1 'Geist Mono',ui-monospace;color:#171412">9</span>
+            <span style="font:600 13px/1 'Geist Mono',ui-monospace;color:#171412">18</span>
+            <button style="min-height:40px;padding:0 12px;border-radius:8px;border:1px solid rgba(0,0,0,.18);background:#efece7;font:600 12.5px/1 'Geist',system-ui;color:#171412;cursor:pointer">Reler</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 92px 92px 150px;gap:14px;padding:14px 16px;background:#faf6ef;border:1.5px solid #9a3412;border-radius:10px;align-items:center">
+            <div><div style="font:600 15px/1.3 'Geist',system-ui;color:#171412">5 · PLANCON</div><div style="display:flex;align-items:center;gap:7px;margin-top:4px"><span style="padding:3px 7px;border-radius:5px;background:#fdeeee;border:1px solid rgba(185,28,28,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#b91c1c">✕ 54% DE ACERTO</span><span style="font:400 12px/1.3 'Geist',system-ui;color:#5f5952">1 diagrama · 9 passos</span></div></div>
+            <span style="font:600 13px/1 'Geist Mono',ui-monospace;color:#171412">14</span>
+            <span style="font:600 13px/1 'Geist Mono',ui-monospace;color:#171412">26</span>
+            <button style="min-height:40px;padding:0 12px;border-radius:8px;border:0;background:#9a3412;font:600 12.5px/1 'Geist',system-ui;color:#fff;cursor:pointer">Ler agora</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 92px 92px 150px;gap:14px;padding:14px 16px;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:10px;align-items:center;opacity:.8">
+            <div><div style="font:600 15px/1.3 'Geist',system-ui;color:#171412">6 · Comunicação e comando</div><div style="display:flex;align-items:center;gap:7px;margin-top:4px"><span style="padding:3px 7px;border-radius:5px;background:#e0f0f5;border:1px solid rgba(21,94,117,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#155e75">◇ NÃO LIDO</span></div></div>
+            <span style="font:600 13px/1 'Geist Mono',ui-monospace;color:#171412">8</span>
+            <span style="font:600 13px/1 'Geist Mono',ui-monospace;color:#171412">15</span>
+            <button style="min-height:40px;padding:0 12px;border-radius:8px;border:1px solid rgba(0,0,0,.18);background:#efece7;font:600 12.5px/1 'Geist',system-ui;color:#171412;cursor:pointer">Começar</button>
+          </div>
+          <div style="padding:14px 16px;border-radius:10px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);font:400 13px/1.6 'Geist',system-ui;color:#0f4457;margin-top:4px">Cada módulo mostra quantas cartas e questões dependem dele: ler deixa de ser tarefa solta e passa a ser preparação visível para a prática.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 7c · LEITURA LONGA + DIAGRAMAS ============ -->
+  <div id="7c" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">7c</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">Página de conteúdo em markdown · tipografia longa-forma e os três diagramas</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:74ch">Medida de 62ch, corpo 18px, entrelinha 1,7. Os três diagramas do material viram <strong style="font-weight:600">figura</strong>: moldura <span style="font-family:'Geist Mono',ui-monospace">--card</span>, número, legenda abaixo em 13,5px, e SVG à mão que se lê em preto e branco. Nenhuma lib de gráfico.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+      <div style="width:900px;border-radius:16px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+        <div style="height:60px;flex:0 0 60px;background:#fff;border-bottom:1px solid rgba(0,0,0,.14);display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+          <div style="display:flex;align-items:center;gap:12px"><button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button><span style="font:500 12.5px/1 'Geist Mono',ui-monospace;color:#5f5952">MÓDULO 1 · CONCEITOS</span></div>
+          <div style="display:flex;align-items:center;gap:14px"><span style="font:500 12px/1 'Geist Mono',ui-monospace;color:#5f5952">8 MIN DE LEITURA</span><div style="width:120px;height:6px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:34%;height:100%;background:#155e75"></div></div></div>
+        </div>
+        <div style="padding:44px 0;display:flex;justify-content:center">
+          <article style="width:100%;max-width:660px;padding:0 28px;display:flex;flex-direction:column;gap:22px">
+            <h1 style="margin:0;font:600 38px/1.14 'Geist',system-ui;letter-spacing:-.026em;color:#171412;text-wrap:balance">Componentes do risco de desastre</h1>
+            <p style="margin:0;font:400 18px/1.7 'Geist',system-ui;color:#292524;text-wrap:pretty">Risco de desastre não é sinônimo de ameaça. Uma chuva de 80 mm em área rural sem ocupação é um evento; a mesma chuva sobre encosta ocupada é um desastre em formação. O que muda entre os dois casos não é o clima — é a exposição e a vulnerabilidade das pessoas atingidas.</p>
+            <p style="margin:0;font:400 18px/1.7 'Geist',system-ui;color:#292524;text-wrap:pretty">Por isso trabalhamos com três componentes que se multiplicam entre si. Se qualquer um deles for zero, não há risco: sem ameaça não há evento, sem exposição não há quem sofra, e sem vulnerabilidade o impacto é absorvido.</p>
+
+            <figure style="margin:0;display:flex;flex-direction:column;gap:11px">
+              <div style="padding:26px 24px;border-radius:20px;background:#faf6ef;border:1px solid rgba(0,0,0,.12)">
+                <svg viewBox="0 0 560 210" style="width:100%;height:auto" role="img" aria-label="Diagrama: ameaça, exposição e vulnerabilidade se multiplicam formando o risco; a capacidade de resposta reduz o risco resultante">
+                  <g>
+                    <rect x="8" y="30" width="140" height="66" rx="10" fill="#fff" stroke="#171412" stroke-width="1.5"></rect>
+                    <text x="78" y="58" text-anchor="middle" style="font:600 14px 'Geist',sans-serif" fill="#171412">Ameaça</text>
+                    <text x="78" y="78" text-anchor="middle" style="font:400 11px 'Geist',sans-serif" fill="#5f5952">chuva, vento, sismo</text>
+                    <text x="163" y="70" text-anchor="middle" style="font:600 20px 'Geist Mono',monospace" fill="#9a3412">×</text>
+                    <rect x="178" y="30" width="140" height="66" rx="10" fill="#fff" stroke="#171412" stroke-width="1.5"></rect>
+                    <text x="248" y="58" text-anchor="middle" style="font:600 14px 'Geist',sans-serif" fill="#171412">Exposição</text>
+                    <text x="248" y="78" text-anchor="middle" style="font:400 11px 'Geist',sans-serif" fill="#5f5952">pessoas e bens no local</text>
+                    <text x="333" y="70" text-anchor="middle" style="font:600 20px 'Geist Mono',monospace" fill="#9a3412">×</text>
+                    <rect x="348" y="30" width="150" height="66" rx="10" fill="#fff" stroke="#171412" stroke-width="1.5"></rect>
+                    <text x="423" y="58" text-anchor="middle" style="font:600 14px 'Geist',sans-serif" fill="#171412">Vulnerabilidade</text>
+                    <text x="423" y="78" text-anchor="middle" style="font:400 11px 'Geist',sans-serif" fill="#5f5952">fragilidade construtiva, social</text>
+                    <path d="M253 100 L253 128" stroke="#171412" stroke-width="1.5"></path>
+                    <path d="M253 132 l-5 -8 h10 z" fill="#171412"></path>
+                    <rect x="163" y="136" width="180" height="52" rx="10" fill="#9a3412"></rect>
+                    <text x="253" y="160" text-anchor="middle" style="font:600 16px 'Geist',sans-serif" fill="#fff">RISCO</text>
+                    <text x="253" y="177" text-anchor="middle" style="font:400 10.5px 'Geist',sans-serif" fill="#f6e2d8">probabilidade × consequência</text>
+                    <rect x="366" y="136" width="186" height="52" rx="10" fill="#e0f0f5" stroke="#155e75" stroke-width="1.5" stroke-dasharray="5 4"></rect>
+                    <text x="459" y="158" text-anchor="middle" style="font:600 13px 'Geist',sans-serif" fill="#0f4457">Capacidade de resposta</text>
+                    <text x="459" y="175" text-anchor="middle" style="font:400 10.5px 'Geist',sans-serif" fill="#155e75">reduz o risco resultante</text>
+                    <path d="M366 162 L349 162" stroke="#155e75" stroke-width="1.5"></path>
+                    <path d="M345 162 l8 -5 v10 z" fill="#155e75"></path>
+                  </g>
+                </svg>
+              </div>
+              <figcaption style="font:400 13.5px/1.6 'Geist',system-ui;color:#5f5952"><strong style="font-weight:600;color:#171412">Figura 1.</strong> Os três componentes se multiplicam: zerar qualquer um zera o risco. A capacidade de resposta não entra na multiplicação — ela atua sobre o resultado, reduzindo o dano do risco que já existe. <span style="font-family:'Geist Mono',ui-monospace;font-size:12px">Fonte: material teórico, p. 12</span></figcaption>
+            </figure>
+
+            <h2 style="margin:14px 0 0;font:600 26px/1.25 'Geist',system-ui;letter-spacing:-.02em;color:#171412">As cinco fases do ciclo</h2>
+            <p style="margin:0;font:400 18px/1.7 'Geist',system-ui;color:#292524;text-wrap:pretty">A gestão de riscos não começa quando o telefone toca. O ciclo tem cinco fases, e quatro delas acontecem antes do evento — é onde o trabalho rende mais e aparece menos.</p>
+
+            <figure style="margin:0;display:flex;flex-direction:column;gap:11px">
+              <div style="padding:26px 24px;border-radius:20px;background:#faf6ef;border:1px solid rgba(0,0,0,.12)">
+                <svg viewBox="0 0 560 250" style="width:100%;height:auto" role="img" aria-label="Ciclo de cinco fases: prevenção, mitigação, preparação, resposta e recuperação, em círculo, com resposta destacada como a única durante o evento">
+                  <circle cx="280" cy="125" r="86" fill="none" stroke="rgba(0,0,0,.14)" stroke-width="1.5" stroke-dasharray="4 5"></circle>
+                  <rect x="212" y="6" width="136" height="46" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect>
+                  <text x="280" y="26" text-anchor="middle" style="font:600 13px 'Geist',sans-serif" fill="#171412">1 · Prevenção</text>
+                  <text x="280" y="42" text-anchor="middle" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">evitar que ocorra</text>
+                  <rect x="404" y="82" width="150" height="46" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect>
+                  <text x="479" y="102" text-anchor="middle" style="font:600 13px 'Geist',sans-serif" fill="#171412">2 · Mitigação</text>
+                  <text x="479" y="118" text-anchor="middle" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">reduzir o dano possível</text>
+                  <rect x="366" y="192" width="150" height="46" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect>
+                  <text x="441" y="212" text-anchor="middle" style="font:600 13px 'Geist',sans-serif" fill="#171412">3 · Preparação</text>
+                  <text x="441" y="228" text-anchor="middle" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">treino, plano, recurso</text>
+                  <rect x="144" y="192" width="150" height="46" rx="9" fill="#9a3412"></rect>
+                  <text x="219" y="212" text-anchor="middle" style="font:600 13px 'Geist',sans-serif" fill="#fff">4 · Resposta</text>
+                  <text x="219" y="228" text-anchor="middle" style="font:400 10px 'Geist',sans-serif" fill="#f6e2d8">durante o evento</text>
+                  <rect x="6" y="82" width="150" height="46" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect>
+                  <text x="81" y="102" text-anchor="middle" style="font:600 13px 'Geist',sans-serif" fill="#171412">5 · Recuperação</text>
+                  <text x="81" y="118" text-anchor="middle" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">reconstruir melhor</text>
+                  <path d="M350 40 q46 14 58 44" fill="none" stroke="#171412" stroke-width="1.5"></path><path d="M410 88 l-7 -6 l8 -3 z" fill="#171412"></path>
+                  <path d="M478 132 q-6 40 -40 58" fill="none" stroke="#171412" stroke-width="1.5"></path><path d="M436 192 l1 -9 l7 5 z" fill="#171412"></path>
+                  <path d="M362 215 h-62" fill="none" stroke="#171412" stroke-width="1.5"></path><path d="M296 215 l9 -5 v10 z" fill="#171412"></path>
+                  <path d="M148 192 q-40 -18 -50 -58" fill="none" stroke="#171412" stroke-width="1.5"></path><path d="M97 130 l6 7 l-9 2 z" fill="#171412"></path>
+                  <path d="M82 78 q10 -42 56 -54" fill="none" stroke="#171412" stroke-width="1.5"></path><path d="M142 22 l-8 5 l-1 -9 z" fill="#171412"></path>
+                  <text x="280" y="120" text-anchor="middle" style="font:600 11px 'Geist Mono',monospace" fill="#5f5952">4 DE 5 FASES</text>
+                  <text x="280" y="136" text-anchor="middle" style="font:600 11px 'Geist Mono',monospace" fill="#5f5952">ANTES DO EVENTO</text>
+                </svg>
+              </div>
+              <figcaption style="font:400 13.5px/1.6 'Geist',system-ui;color:#5f5952"><strong style="font-weight:600;color:#171412">Figura 2.</strong> O ciclo é contínuo: a recuperação alimenta a prevenção do próximo evento. A resposta está destacada por ser a única fase que ocorre durante o desastre — e a que mais aparece publicamente, embora ocupe a menor parte do trabalho. <span style="font-family:'Geist Mono',ui-monospace;font-size:12px">Fonte: material teórico, p. 24</span></figcaption>
+            </figure>
+
+            <h2 style="margin:14px 0 0;font:600 26px/1.25 'Geist',system-ui;letter-spacing:-.02em;color:#171412">Os nove passos do PLANCON</h2>
+            <p style="margin:0;font:400 18px/1.7 'Geist',system-ui;color:#292524;text-wrap:pretty">O Plano de Contingência não é documento de gaveta: é sequência de decisões tomadas antes da pressa. Os nove passos vão do diagnóstico à revisão, e o segundo — cenários de risco — sustenta todos os seguintes.</p>
+
+            <figure style="margin:0;display:flex;flex-direction:column;gap:11px">
+              <div style="padding:24px;border-radius:20px;background:#faf6ef;border:1px solid rgba(0,0,0,.12)">
+                <svg viewBox="0 0 560 330" style="width:100%;height:auto" role="img" aria-label="Nove passos do PLANCON em sequência: diagnóstico, cenários de risco, objetivos, estrutura de comando, protocolos, recursos, comunicação, treinamento e revisão">
+                  <g>
+                    <rect x="4" y="4" width="176" height="52" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect><text x="20" y="27" style="font:600 11px 'Geist Mono',monospace" fill="#5f5952">01</text><text x="46" y="27" style="font:600 13px 'Geist',sans-serif" fill="#171412">Diagnóstico</text><text x="46" y="44" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">o que se sabe do território</text>
+                    <rect x="192" y="4" width="176" height="52" rx="9" fill="#9a3412"></rect><text x="208" y="27" style="font:600 11px 'Geist Mono',monospace" fill="#f6e2d8">02</text><text x="234" y="27" style="font:600 13px 'Geist',sans-serif" fill="#fff">Cenários de risco</text><text x="234" y="44" style="font:400 10px 'Geist',sans-serif" fill="#f6e2d8">base de todos os seguintes</text>
+                    <rect x="380" y="4" width="176" height="52" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect><text x="396" y="27" style="font:600 11px 'Geist Mono',monospace" fill="#5f5952">03</text><text x="422" y="27" style="font:600 13px 'Geist',sans-serif" fill="#171412">Objetivos</text><text x="422" y="44" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">o que o plano garante</text>
+                    <rect x="4" y="72" width="176" height="52" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect><text x="20" y="95" style="font:600 11px 'Geist Mono',monospace" fill="#5f5952">04</text><text x="46" y="95" style="font:600 12px 'Geist',sans-serif" fill="#171412">Estrutura de comando</text><text x="46" y="112" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">quem decide o quê</text>
+                    <rect x="192" y="72" width="176" height="52" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect><text x="208" y="95" style="font:600 11px 'Geist Mono',monospace" fill="#5f5952">05</text><text x="234" y="95" style="font:600 13px 'Geist',sans-serif" fill="#171412">Protocolos</text><text x="234" y="112" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">gatilho → ação</text>
+                    <rect x="380" y="72" width="176" height="52" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect><text x="396" y="95" style="font:600 11px 'Geist Mono',monospace" fill="#5f5952">06</text><text x="422" y="95" style="font:600 13px 'Geist',sans-serif" fill="#171412">Recursos</text><text x="422" y="112" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">o que existe e onde está</text>
+                    <rect x="4" y="140" width="176" height="52" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect><text x="20" y="163" style="font:600 11px 'Geist Mono',monospace" fill="#5f5952">07</text><text x="46" y="163" style="font:600 13px 'Geist',sans-serif" fill="#171412">Comunicação</text><text x="46" y="180" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">alerta e alarme</text>
+                    <rect x="192" y="140" width="176" height="52" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect><text x="208" y="163" style="font:600 11px 'Geist Mono',monospace" fill="#5f5952">08</text><text x="234" y="163" style="font:600 13px 'Geist',sans-serif" fill="#171412">Treinamento</text><text x="234" y="180" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">simulado periódico</text>
+                    <rect x="380" y="140" width="176" height="52" rx="9" fill="#fff" stroke="#171412" stroke-width="1.5"></rect><text x="396" y="163" style="font:600 11px 'Geist Mono',monospace" fill="#5f5952">09</text><text x="422" y="163" style="font:600 13px 'Geist',sans-serif" fill="#171412">Revisão</text><text x="422" y="180" style="font:400 10px 'Geist',sans-serif" fill="#5f5952">volta ao passo 01</text>
+                    <path d="M180 30 h8" stroke="#171412" stroke-width="1.5"></path><path d="M192 30 l-8 -4 v8 z" fill="#171412"></path>
+                    <path d="M368 30 h8" stroke="#171412" stroke-width="1.5"></path><path d="M380 30 l-8 -4 v8 z" fill="#171412"></path>
+                    <path d="M180 98 h8" stroke="#171412" stroke-width="1.5"></path><path d="M192 98 l-8 -4 v8 z" fill="#171412"></path>
+                    <path d="M368 98 h8" stroke="#171412" stroke-width="1.5"></path><path d="M380 98 l-8 -4 v8 z" fill="#171412"></path>
+                    <path d="M180 166 h8" stroke="#171412" stroke-width="1.5"></path><path d="M192 166 l-8 -4 v8 z" fill="#171412"></path>
+                    <path d="M368 166 h8" stroke="#171412" stroke-width="1.5"></path><path d="M380 166 l-8 -4 v8 z" fill="#171412"></path>
+                    <path d="M468 192 v34 H90 v-34" fill="none" stroke="#155e75" stroke-width="1.5" stroke-dasharray="5 4"></path><path d="M90 196 l-5 8 h10 z" fill="#155e75"></path>
+                    <rect x="150" y="240" width="260" height="40" rx="8" fill="#e0f0f5" stroke="#155e75" stroke-width="1.5"></rect>
+                    <text x="280" y="265" text-anchor="middle" style="font:600 12px 'Geist',sans-serif" fill="#0f4457">O passo 09 devolve ao 01: o plano é vivo</text>
+                    <text x="280" y="306" text-anchor="middle" style="font:400 11px 'Geist',sans-serif" fill="#5f5952">Leitura: esquerda → direita, linha por linha, 01 a 09</text>
+                  </g>
+                </svg>
+              </div>
+              <figcaption style="font:400 13.5px/1.6 'Geist',system-ui;color:#5f5952"><strong style="font-weight:600;color:#171412">Figura 3.</strong> Nove passos em três linhas de leitura. O passo 2 está destacado porque define os cenários sobre os quais todos os outros são dimensionados — errar o cenário invalida protocolo, recurso e treinamento. A seta tracejada indica o retorno ao diagnóstico. <span style="font-family:'Geist Mono',ui-monospace;font-size:12px">Fonte: material teórico, p. 58</span></figcaption>
+            </figure>
+
+            <div style="padding:18px 20px;border-radius:14px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);display:flex;flex-direction:column;gap:7px">
+              <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#155e75">DESTAQUE · BLOCKQUOTE DO MARKDOWN</span>
+              <p style="margin:0;font:400 17px/1.65 'Geist',system-ui;color:#0f4457;text-wrap:pretty">A ordem de prioridade de segurança nunca se inverte: eu, minha equipe, a vítima. Socorrista acidentado deixa de socorrer.</p>
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:20px;border-top:1px solid rgba(0,0,0,.12)">
+              <button style="min-height:48px;padding:0 16px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;font:600 14.5px/1 'Geist',system-ui;color:#171412;cursor:pointer">‹ Módulo anterior</button>
+              <button style="min-height:48px;padding:0 18px;border-radius:10px;border:0;background:#9a3412;font:600 14.5px/1 'Geist',system-ui;color:#fff;cursor:pointer">Estudar as 12 cartas deste módulo</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div>
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Leitura longa · 390 · dark</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#0f1113;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+            <div style="height:52px;flex:0 0 52px;background:#191c1f;border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 4px">
+              <button aria-label="Voltar" style="width:44px;height:44px;border:0;background:transparent;color:#eceae7;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+              <span style="font:500 11px/1 'Geist Mono',ui-monospace;color:#a8a29e">MÓDULO 1 · 8 MIN</span>
+              <button aria-label="Tamanho do texto" style="width:44px;height:44px;border:0;background:transparent;color:#eceae7;font:600 14px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">Aa</button>
+            </div>
+            <div style="height:3px;flex:0 0 3px;background:#0a0c0d"><div style="width:34%;height:100%;background:#7dd3fc"></div></div>
+            <div style="flex:1;padding:22px 20px;display:flex;flex-direction:column;gap:16px;overflow:hidden">
+              <h1 style="margin:0;font:600 27px/1.18 'Geist',system-ui;letter-spacing:-.022em;color:#f4ede4;text-wrap:pretty">Componentes do risco de desastre</h1>
+              <p style="margin:0;font:400 16.5px/1.7 'Geist',system-ui;color:#e0d8ce;text-wrap:pretty">Risco não é sinônimo de ameaça. Uma chuva de 80 mm em área sem ocupação é um evento; a mesma chuva sobre encosta ocupada é um desastre em formação.</p>
+              <figure style="margin:0;display:flex;flex-direction:column;gap:9px">
+                <div style="padding:16px;border-radius:16px;background:#221f1c;border:1px solid rgba(255,255,255,.1)">
+                  <svg viewBox="0 0 300 200" style="width:100%;height:auto" role="img" aria-label="Diagrama vertical: ameaça vezes exposição vezes vulnerabilidade resulta em risco; capacidade de resposta reduz o resultado">
+                    <rect x="42" y="4" width="216" height="38" rx="8" fill="#191c1f" stroke="#f4ede4" stroke-width="1.5"></rect><text x="150" y="28" text-anchor="middle" style="font:600 13px 'Geist',sans-serif" fill="#f4ede4">Ameaça</text>
+                    <text x="150" y="58" text-anchor="middle" style="font:600 16px 'Geist Mono',monospace" fill="#fb923c">×</text>
+                    <rect x="42" y="66" width="216" height="38" rx="8" fill="#191c1f" stroke="#f4ede4" stroke-width="1.5"></rect><text x="150" y="90" text-anchor="middle" style="font:600 13px 'Geist',sans-serif" fill="#f4ede4">Exposição</text>
+                    <text x="150" y="120" text-anchor="middle" style="font:600 16px 'Geist Mono',monospace" fill="#fb923c">×</text>
+                    <rect x="42" y="128" width="216" height="38" rx="8" fill="#191c1f" stroke="#f4ede4" stroke-width="1.5"></rect><text x="150" y="152" text-anchor="middle" style="font:600 13px 'Geist',sans-serif" fill="#f4ede4">Vulnerabilidade</text>
+                    <rect x="42" y="176" width="216" height="22" rx="6" fill="#fb923c"></rect><text x="150" y="191" text-anchor="middle" style="font:600 12px 'Geist',sans-serif" fill="#171412">= RISCO</text>
+                  </svg>
+                </div>
+                <figcaption style="font:400 12.5px/1.6 'Geist',system-ui;color:#a8a29e"><strong style="font-weight:600;color:#eceae7">Figura 1.</strong> Em 390px o diagrama vira vertical — mesma informação, mesma legenda, sem rolagem lateral.</figcaption>
+              </figure>
+              <p style="margin:0;font:400 16.5px/1.7 'Geist',system-ui;color:#e0d8ce;text-wrap:pretty">Se qualquer componente for zero, não há risco: sem ameaça não há evento, sem exposição não há quem sofra.</p>
+            </div>
+          </div>
+        </div>
+        <div style="width:390px;padding:18px 16px;border-radius:20px;background:#efece7;border:1px solid rgba(0,0,0,.18);display:flex;flex-direction:column;gap:10px">
+          <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">ERRO · CONTEÚDO NÃO CARREGOU</span>
+          <span style="width:34px;height:34px;border-radius:10px;background:#fdeeee;border:1px solid rgba(185,28,28,.3);display:flex;align-items:center;justify-content:center;font:600 14px/1 'Geist',system-ui;color:#b91c1c">✕</span>
+          <div style="font:600 16px/1.3 'Geist',system-ui;color:#171412">Não conseguimos abrir este módulo</div>
+          <div style="font:400 13.5px/1.5 'Geist',system-ui;color:#5f5952">O texto vem do servidor e a conexão caiu. O que você já leu continua marcado.</div>
+          <div style="display:flex;gap:8px"><button style="min-height:44px;padding:0 14px;border-radius:10px;border:0;background:#9a3412;font:600 14px/1 'Geist',system-ui;color:#fff;cursor:pointer">Tentar de novo</button><button style="min-height:44px;padding:0 14px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;font:600 14px/1 'Geist',system-ui;color:#171412;cursor:pointer">Ver índice</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:24px 28px;border-radius:16px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);max-width:1100px;display:flex;flex-direction:column;gap:12px">
+    <h2 style="margin:0;font:600 20px/1.3 'Geist',system-ui;letter-spacing:-.015em;color:#171412">Notas da /biblioteca</h2>
+    <ul style="margin:0;padding-left:18px;font:400 14px/1.7 'Geist',system-ui;color:#292524">
+      <li><strong style="font-weight:600">Estilo de figura:</strong> moldura <span style="font-family:'Geist Mono',ui-monospace">--card</span> com raio 20, respiro 24px, SVG fluido em <span style="font-family:'Geist Mono',ui-monospace">viewBox</span>, e <span style="font-family:'Geist Mono',ui-monospace">&lt;figcaption&gt;</span> em 13,5px com “Figura N.” em peso 600. Todo diagrama tem <span style="font-family:'Geist Mono',ui-monospace">role="img"</span> + <span style="font-family:'Geist Mono',ui-monospace">aria-label</span> descrevendo a relação, não só os rótulos.</li>
+      <li><strong style="font-weight:600">Legível em preto e branco:</strong> nenhum diagrama depende de cor — hierarquia por preenchimento sólido vs. contorno, e o único bloco laranja é o resultado. Impresso em cinza continua correto.</li>
+      <li><strong style="font-weight:600">Mobile:</strong> em 390px os diagramas horizontais viram verticais (mesma legenda, mesmo <span style="font-family:'Geist Mono',ui-monospace">aria-label</span>) — nunca scroll lateral dentro do texto. Controle <span style="font-family:'Geist Mono',ui-monospace">Aa</span> no header ajusta o corpo entre 16 e 20px.</li>
+      <li><strong style="font-weight:600">Única superfície de leitura:</strong> aqui o corpo vai a 18px/1,7 e a medida a 62ch — contraste deliberado com a densidade instrumento do resto do produto.</li>
+      <li><strong style="font-weight:600">Chaves i18n novas:</strong> <span style="font-family:'Geist Mono',ui-monospace">library.title|enrolled|locked|notify</span>, <span style="font-family:'Geist Mono',ui-monospace">course.index|progress|nextStep</span>, <span style="font-family:'Geist Mono',ui-monospace">course.module.read|unread|weak</span>, <span style="font-family:'Geist Mono',ui-monospace">reader.time|fontSize|prev|next</span>, <span style="font-family:'Geist Mono',ui-monospace">figure.1|2|3</span> (rótulo e legenda traduzíveis; os rótulos internos do SVG também). <span style="font-family:'Geist Mono',ui-monospace">error.moduleFailed</span>.</li>
+      <li><strong style="font-weight:600">Handoff dos diagramas:</strong> os três SVGs são componentes React sem props, um arquivo cada, com os textos vindos de i18n — não achatar em imagem, senão espanhol e inglês ficam com rótulo em português.</li>
+      <li><strong style="font-weight:600">Escopo da §7 fechado:</strong> A, B, C, D e /biblioteca entregues; as sete dívidas da §4 endereçadas. Falta só a página de componentes em nível de especificação (variantes formais, anatomia, do/don’t por componente) — diga se abro.</li>
+    </ul>
+  </div>
+
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Revisão&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { notes: this.props.showNotes ?? true };
+  }
+}
+</script>
+</body>
+</html>

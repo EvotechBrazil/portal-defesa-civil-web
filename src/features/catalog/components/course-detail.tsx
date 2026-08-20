@@ -18,26 +18,26 @@ export function CourseDetail() {
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
-      {isLoading ? <p className="text-slate-600">{t("course.loading")}</p> : null}
-      {isError ? <p className="text-red-600">{t("course.notFound")}</p> : null}
+      {isLoading ? <p className="text-mist">{t("course.loading")}</p> : null}
+      {isError ? <p className="text-hard">{t("course.notFound")}</p> : null}
       {course ? (
         <>
           <p className="text-sm">
-            <Link href="/biblioteca" className="cursor-pointer text-amber hover:underline">
+            <Link href="/biblioteca" className="cursor-pointer text-flare-ink hover:underline">
               ← {t("course.backLibrary")}
             </Link>
           </p>
           <header className="mt-3 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div>
-              <h1 className="text-2xl font-semibold text-navy">{translateContent(course.title)}</h1>
+              <h1 className="text-2xl font-semibold text-paper">{translateContent(course.title)}</h1>
               {course.description ? (
-                <p className="mt-2 max-w-3xl text-slate-600">
+                <p className="mt-2 max-w-3xl text-mist">
                   {translateContent(course.description)}
                 </p>
               ) : null}
             </div>
             {course.isEnrolled ? (
-              <span className="rounded-full bg-emerald-50 px-3 py-1 text-sm text-emerald-700">
+              <span className="rounded-full bg-ok-surf px-3 py-1 text-sm text-ok">
                 {t("course.enrolled")}
               </span>
             ) : (
@@ -51,37 +51,37 @@ export function CourseDetail() {
             )}
           </header>
           {enroll.isError ? (
-            <p className="mt-2 text-sm text-red-600">{t("course.enrollError")}</p>
+            <p className="mt-2 text-sm text-hard">{t("course.enrollError")}</p>
           ) : null}
 
-          <h2 className="mt-8 mb-3 text-lg font-semibold text-navy">{t("course.contentPages")}</h2>
+          <h2 className="mt-8 mb-3 text-lg font-semibold text-paper">{t("course.contentPages")}</h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {course.pages.map((page) => (
               <Link key={page.slug} href={`/curso/${course.slug}/${page.slug}`}>
-                <Card className="h-full cursor-pointer transition hover:border-amber/50">
-                  <p className="text-xs tracking-wide text-amber uppercase">
+                <Card className="h-full cursor-pointer transition hover:border-flare/50">
+                  <p className="text-xs tracking-wide text-flare-ink uppercase">
                     {t("course.page", { number: page.ord })}
                   </p>
-                  <p className="mt-1 font-medium text-navy">{translateContent(page.title)}</p>
+                  <p className="mt-1 font-medium text-paper">{translateContent(page.title)}</p>
                 </Card>
               </Link>
             ))}
           </div>
 
-          <h2 className="mt-8 mb-3 text-lg font-semibold text-navy">{t("course.modules")}</h2>
+          <h2 className="mt-8 mb-3 text-lg font-semibold text-paper">{t("course.modules")}</h2>
           <div className="space-y-3">
             {course.modules.map((module) => (
               <Card key={module.id} className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p className="text-sm font-semibold text-navy">
+                  <p className="text-sm font-semibold text-paper">
                     {module.code} — {translateContent(module.title)}
                   </p>
-                  <p className="text-sm text-slate-600">
+                  <p className="text-sm text-mist">
                     {t("course.counts", { quizzes: module.quizCount, questions: module.questionCount })}
                   </p>
                 </div>
                 <Link href={`/questoes?moduleCode=${module.code}`}>
-                  <Button type="button" className="bg-slate-700 hover:bg-slate-700/90">
+                  <Button type="button" className="bg-paper hover:bg-paper/90">
                     {t("course.viewQuestions")}
                   </Button>
                 </Link>

@@ -9,7 +9,7 @@ export function StatsLoading() {
       {["heat", "levels", "stuck", "sessions"].map((slot) => (
         <div
           key={slot}
-          className="h-48 animate-pulse rounded-xl border border-slate-200 bg-slate-100"
+          className="h-48 animate-pulse rounded-xl border border-line bg-inset"
         />
       ))}
     </div>
@@ -19,15 +19,15 @@ export function StatsLoading() {
 export function StatsError({ onRetry }: { onRetry: () => void }) {
   const { t } = useI18n();
   return (
-    <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-red-900">
+    <div className="rounded-xl border border-hard bg-hard-surf p-6 text-hard">
       <h2 className="text-lg font-semibold">{t("stats.loadError")}</h2>
-      <p className="mt-1 text-sm text-red-800">
+      <p className="mt-1 text-sm text-hard">
         {t("stats.loadErrorHint")}
       </p>
       <Button
         type="button"
         onClick={onRetry}
-        className="mt-4 bg-red-800 hover:bg-red-800/90"
+        className="mt-4 bg-hard hover:bg-hard/90"
       >
         {t("common.tryAgain")}
       </Button>
@@ -38,9 +38,9 @@ export function StatsError({ onRetry }: { onRetry: () => void }) {
 export function StatsEmpty() {
   const { t } = useI18n();
   return (
-    <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center">
-      <h2 className="text-lg font-semibold text-navy">{t("stats.empty")}</h2>
-      <p className="mt-2 text-sm text-slate-600">{t("stats.emptyHint")}</p>
+    <div className="rounded-xl border border-dashed border-line bg-panel p-8 text-center">
+      <h2 className="text-lg font-semibold text-paper">{t("stats.empty")}</h2>
+      <p className="mt-2 text-sm text-mist">{t("stats.emptyHint")}</p>
     </div>
   );
 }

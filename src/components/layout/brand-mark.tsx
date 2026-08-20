@@ -24,7 +24,7 @@ export function BrandMark({
       >
         {t("brand.program")}
       </span>
-      <span className="text-sm font-semibold tracking-tight text-flare">
+      <span className="text-sm font-semibold tracking-tight text-flare-ink">
         {t("brand.short")}
       </span>
     </>

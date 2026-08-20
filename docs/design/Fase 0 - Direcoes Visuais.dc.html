@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#dcd8d2;font-family:'Geist',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;-webkit-tap-highlight-color:transparent}
+a{color:#c2410c;text-decoration:underline;text-underline-offset:2px}
+a:hover{color:#9a3412}
+</style>
+</helmet>
+
+<section style="padding:64px;display:flex;flex-direction:column;gap:40px;width:max-content">
+
+  <header style="max-width:900px;display:flex;flex-direction:column;gap:14px">
+    <span style="font:600 12px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#9a3412">Portal Defesa Civil · LGND Squad</span>
+    <h1 style="margin:0;font:600 44px/1.05 'Geist',system-ui;letter-spacing:-.02em;color:#1c1917">Fase 0 — três direções visuais</h1>
+    <p style="margin:0;font:400 17px/1.55 'Geist',system-ui;color:#57534e;max-width:62ch;text-wrap:pretty">Três teses sobre como este produto deve parecer e se comportar, posicionadas em pontos diferentes do eixo “quanto muda”. As mesmas duas telas em todas: <strong style="font-weight:600;color:#1c1917">a carta de estudo</strong> (o coração) e <strong style="font-weight:600;color:#1c1917">o herói da home pública</strong> (o que decide o pedido de acesso). Cada uma em light e dark, 390px.</p>
+    <p style="margin:0;font:400 14px/1.5 'Geist',system-ui;color:#78716c;max-width:62ch">Referencie por id no chat: <a href="#1a">1a</a> · <a href="#1b">1b</a> · <a href="#1c">1c</a>. Contraste calculado em WCAG 2.1 sobre o próprio fundo de cada token.</p>
+  </header>
+
+  <div style="display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start">
+
+    <!-- ============================= 1a — PAPEL CALIBRADO ============================= -->
+    <div id="1a" style="width:844px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:12px;padding-bottom:20px;border-bottom:2px solid rgba(28,25,23,.2)">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#1c1917;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">1a</span>
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#57534e">Ambição: refinar</span>
+        </div>
+        <h2 style="margin:0;font:600 32px/1.1 'Geist',system-ui;letter-spacing:-.015em;color:#1c1917">Papel Calibrado</h2>
+        <p style="margin:0;font:400 16px/1.55 'Geist',system-ui;color:#44403c;max-width:58ch;text-wrap:pretty">A identidade atual está certa — o que falha é a execução. Aposta em rigor: escala tipográfica fluida, ritmo de espaço em 4px, tons de superfície para os estados e contraste corrigido. Para quem já usa o portal e não deve sentir que trocaram o produto de lugar.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;text-transform:uppercase;color:#78716c">Paleta · light</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#f6f1ea;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">bg</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#f6f1ea</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#fffdfa;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">panel <span style="color:#9a3412">novo</span></div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#fffdfa</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#1c1917"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">fg / paper</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#1c1917</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#6b6259"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">mist <span style="color:#9a3412">ajust.</span></div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#6b6259</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#ea580c"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">flare</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#ea580c</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#c2410c"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">flare-ink <span style="color:#9a3412">novo</span></div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#c2410c</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#047857"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">ok</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#047857</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#b45309"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">learn</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#b45309</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#b91c1c"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">hard</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#b91c1c</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:linear-gradient(90deg,#ecfdf5 0 33.3%,#fffbeb 33.3% 66.6%,#fef2f2 66.6%);border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">*-surf <span style="color:#9a3412">novo</span></div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">tinta 6%</div></div>
+        </div>
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;text-transform:uppercase;color:#78716c;margin-top:6px">Paleta · dark</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#14110f;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">bg</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#14110f</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#221f1c;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">panel</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#221f1c</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#f4ede4;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">fg / paper</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#f4ede4</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#c4b8ad"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">mist</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#c4b8ad</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#fb923c"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">flare <span style="color:#9a3412">clareado</span></div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#fb923c</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#34d399"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">ok</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#34d399</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#fbbf24"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">learn</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#fbbf24</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:#f87171"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">hard</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#f87171</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:12px;background:linear-gradient(90deg,#10231c 0 33.3%,#2a2010 33.3% 66.6%,#2a1616 66.6%);border:1px solid rgba(255,255,255,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">*-surf</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">tinta 12%</div></div>
+        </div>
+        <sc-if value="{{ anno }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+            <span style="padding:5px 9px;border-radius:8px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">fg/bg 15,6:1 · AAA</span>
+            <span style="padding:5px 9px;border-radius:8px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">mist/bg 5,3:1 · AA <span style="color:#047857">era 4,3 ✕</span></span>
+            <span style="padding:5px 9px;border-radius:8px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">flare-ink/bg 4,6:1 · AA <span style="color:#047857">era 3,2 ✕</span></span>
+            <span style="padding:5px 9px;border-radius:8px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">ok/bg 4,9:1 · AA <span style="color:#047857">era 3,4 ✕</span></span>
+            <span style="padding:5px 9px;border-radius:8px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">dark fg/bg 16,2:1 · AAA</span>
+            <span style="padding:5px 9px;border-radius:8px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">dark flare/bg 8,3:1 · AAA</span>
+            <span style="padding:5px 9px;border-radius:8px;background:#1c1917;color:#f6f1ea;font:500 11px/1.3 'Geist Mono',ui-monospace">#ea580c fica só em fill/gráfico — texto laranja usa flare-ink</span>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+        <div style="padding:14px 16px;border-radius:16px;background:#fffdfa;border:1px solid rgba(0,0,0,.10)"><div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#78716c;margin-bottom:8px">Tipografia</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#292524">Geist Sans, sem nova família. Escala fluida clamp() razão 1,20 · 12/14/16/18/22/28/38. Pesos 400·500·600. Corpo 17px, medida 62ch, <span style="font-family:'Geist Mono',ui-monospace">tabular-nums</span> só em números.</div></div>
+        <div style="padding:14px 16px;border-radius:16px;background:#fffdfa;border:1px solid rgba(0,0,0,.10)"><div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#78716c;margin-bottom:8px">Forma</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#292524">Raio mantido: 20 carta · 16 controle · 12 chip. Elevação por tinta + <span style="font-family:'Geist Mono',ui-monospace">--line</span>; uma única sombra (glow laranja 10%) reservada ao foco. Densidade confortável, escala de espaço 4/8/12/16/24/32/48.</div></div>
+        <div style="padding:14px 16px;border-radius:16px;background:#fffdfa;border:1px solid rgba(0,0,0,.10)"><div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#78716c;margin-bottom:8px">Motion</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#292524">“Virar uma página, não abrir um app.” 180ms <span style="font-family:'Geist Mono',ui-monospace">cubic-bezier(.2,0,0,1)</span>; flip 320ms. Reduced-motion: troca de face por cross-fade de 1 frame, sem rotação.</div></div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:24px">
+
+        <!-- 1a carta light -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/estudar · a carta · light · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#f6f1ea;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+            <div style="height:52px;flex:0 0 52px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 4px;border-bottom:1px solid rgba(0,0,0,.10)">
+              <button style="width:44px;height:44px;border:0;background:transparent;color:#1c1917;font:400 20px/1 'Geist',system-ui;border-radius:14px;cursor:pointer">‹</button>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:1px"><span style="font:600 14px/1.1 'Geist',system-ui;color:#1c1917">Essenciais 80/20</span><span style="font:400 11px/1.1 'Geist Mono',ui-monospace;color:#6b6259">Aula 2 · Águas rápidas</span></div>
+              <button style="width:44px;height:44px;border:0;background:transparent;color:#1c1917;font:400 18px/1 'Geist',system-ui;border-radius:14px;cursor:pointer">⋯</button>
+            </div>
+            <div style="padding:16px 16px 0;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font:500 13px/1 'Geist Mono',ui-monospace;color:#1c1917">Carta 7<span style="color:#6b6259"> / 20</span></span><span style="font:500 12px/1 'Geist Mono',ui-monospace;color:#6b6259">restam 13 · 6 min</span></div>
+              <div style="display:flex;gap:3px;height:6px">
+                <div style="flex:6;border-radius:99px;background:#c2410c"></div>
+                <div style="flex:1;border-radius:99px;background:#ea580c"></div>
+                <div style="flex:13;border-radius:99px;background:rgba(28,25,23,.12)"></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:12px;background:#fffdfa;border:1px solid rgba(0,0,0,.10);align-self:flex-start"><span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#c2410c">MÃO DUPLA</span><span style="width:1px;height:12px;background:rgba(0,0,0,.14)"></span><span style="font:500 12px/1 'Geist',system-ui;color:#292524">Pergunta → Resposta</span></div>
+            </div>
+            <div style="padding:14px 16px 0;display:flex;flex-direction:column;gap:12px;flex:1">
+              <div style="background:#fffdfa;border:1px solid rgba(0,0,0,.10);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px;min-height:250px">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+                  <span style="font:600 11px/1.3 'Geist Mono',ui-monospace;letter-spacing:.1em;text-transform:uppercase;color:#6b6259">Frente · Módulo 3</span>
+                  <button aria-label="Ocultar camada de texto" style="width:44px;height:44px;margin:-11px -11px 0 0;flex:0 0 44px;display:flex;align-items:center;justify-content:center;border-radius:14px;border:1px solid rgba(0,0,0,.10);background:#f6f1ea;color:#292524;cursor:pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+                </div>
+                <p style="margin:0;font:600 25px/1.28 'Geist',system-ui;letter-spacing:-.01em;color:#1c1917;text-wrap:pretty">Quais são os três componentes do risco de desastre?</p>
+                <div style="margin-top:auto;display:flex;align-items:center;gap:8px;font:500 13px/1 'Geist',system-ui;color:#6b6259"><span style="width:26px;height:26px;border-radius:9px;border:1px solid rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;font-size:12px">⇵</span>Toque na carta para virar</div>
+              </div>
+              <div style="background:#f6f1ea;border:1px dashed rgba(28,25,23,.22);border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+                <span style="font:600 11px/1.3 'Geist Mono',ui-monospace;letter-spacing:.1em;text-transform:uppercase;color:#6b6259">Verso</span>
+                <p style="margin:0;font:400 17px/1.5 'Geist',system-ui;color:#1c1917;text-wrap:pretty">Ameaça × Exposição × Vulnerabilidade. A capacidade de resposta é o que reduz o risco resultante.</p>
+                <span style="font:400 12px/1.4 'Geist',system-ui;color:#6b6259;font-style:italic">Material teórico · Componentes do risco, p. 12</span>
+              </div>
+            </div>
+            <div style="padding:14px 16px 20px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <button style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:64px;padding:12px 14px;border-radius:16px;border:1px solid rgba(185,28,28,.28);background:#fef2f2;cursor:pointer"><span style="display:flex;align-items:center;gap:7px;font:600 15px/1 'Geist',system-ui;color:#b91c1c">✕ Errei</span><span style="font:500 11px/1 'Geist Mono',ui-monospace;color:#6b6259">volta hoje</span></button>
+                <button style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:64px;padding:12px 14px;border-radius:16px;border:1px solid rgba(180,83,9,.28);background:#fffbeb;cursor:pointer"><span style="display:flex;align-items:center;gap:7px;font:600 15px/1 'Geist',system-ui;color:#b45309">△ Difícil</span><span style="font:500 11px/1 'Geist Mono',ui-monospace;color:#6b6259">em 10 min</span></button>
+                <button style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:64px;padding:12px 14px;border-radius:16px;border:1px solid rgba(4,120,87,.28);background:#ecfdf5;cursor:pointer"><span style="display:flex;align-items:center;gap:7px;font:600 15px/1 'Geist',system-ui;color:#047857">✓ Bom</span><span style="font:500 11px/1 'Geist Mono',ui-monospace;color:#6b6259">em 2 dias</span></button>
+                <button style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:64px;padding:12px 14px;border-radius:16px;border:1px solid rgba(4,120,87,.5);background:#047857;cursor:pointer"><span style="display:flex;align-items:center;gap:7px;font:600 15px/1 'Geist',system-ui;color:#ffffff">✓✓ Fácil</span><span style="font:500 11px/1 'Geist Mono',ui-monospace;color:rgba(255,255,255,.8)">em 5 dias</span></button>
+              </div>
+              <sc-if value="{{ es }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding-top:2px">
+                  <button style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:64px;padding:12px 14px;border-radius:16px;border:1px solid rgba(185,28,28,.28);background:#fef2f2;cursor:pointer"><span style="display:flex;align-items:center;gap:7px;font:600 15px/1 'Geist',system-ui;color:#b91c1c">✕ Me equivoqué</span><span style="font:500 11px/1 'Geist Mono',ui-monospace;color:#6b6259">vuelve hoy</span></button>
+                  <button style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:64px;padding:12px 14px;border-radius:16px;border:1px solid rgba(180,83,9,.28);background:#fffbeb;cursor:pointer"><span style="display:flex;align-items:center;gap:7px;font:600 15px/1 'Geist',system-ui;color:#b45309">△ Difícil</span><span style="font:500 11px/1 'Geist Mono',ui-monospace;color:#6b6259">en 10 min</span></button>
+                </div>
+              </sc-if>
+              <div style="display:flex;align-items:center;justify-content:center;gap:10px;font:500 12px/1 'Geist Mono',ui-monospace;color:#6b6259">arraste ← → ou use as teclas 1–4</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1a carta dark -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/estudar · a carta · dark · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#14110f;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+            <div style="height:52px;flex:0 0 52px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 4px;border-bottom:1px solid rgba(255,255,255,.10)">
+              <button style="width:44px;height:44px;border:0;background:transparent;color:#f4ede4;font:400 20px/1 'Geist',system-ui;border-radius:14px;cursor:pointer">‹</button>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:1px"><span style="font:600 14px/1.1 'Geist',system-ui;color:#f4ede4">Essenciais 80/20</span><span style="font:400 11px/1.1 'Geist Mono',ui-monospace;color:#c4b8ad">Aula 2 · Águas rápidas</span></div>
+              <button style="width:44px;height:44px;border:0;background:transparent;color:#f4ede4;font:400 18px/1 'Geist',system-ui;border-radius:14px;cursor:pointer">⋯</button>
+            </div>
+            <div style="padding:16px 16px 0;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:baseline;justify-content:space-between"><span style="font:500 13px/1 'Geist Mono',ui-monospace;color:#f4ede4">Carta 7<span style="color:#c4b8ad"> / 20</span></span><span style="font:500 12px/1 'Geist Mono',ui-monospace;color:#c4b8ad">restam 13 · 6 min</span></div>
+              <div style="display:flex;gap:3px;height:6px">
+                <div style="flex:6;border-radius:99px;background:#c2410c"></div>
+                <div style="flex:1;border-radius:99px;background:#fb923c"></div>
+                <div style="flex:13;border-radius:99px;background:rgba(244,237,228,.14)"></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:12px;background:#221f1c;border:1px solid rgba(255,255,255,.10);align-self:flex-start"><span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#fb923c">MÃO DUPLA</span><span style="width:1px;height:12px;background:rgba(255,255,255,.16)"></span><span style="font:500 12px/1 'Geist',system-ui;color:#f4ede4">Pergunta → Resposta</span></div>
+            </div>
+            <div style="padding:14px 16px 0;display:flex;flex-direction:column;gap:12px;flex:1">
+              <div style="background:#221f1c;border:1px solid rgba(255,255,255,.10);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px;min-height:250px">
+                <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+                  <span style="font:600 11px/1.3 'Geist Mono',ui-monospace;letter-spacing:.1em;text-transform:uppercase;color:#c4b8ad">Frente · Módulo 3</span>
+                  <button aria-label="Ocultar camada de texto" style="width:44px;height:44px;margin:-11px -11px 0 0;flex:0 0 44px;display:flex;align-items:center;justify-content:center;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:#14110f;color:#f4ede4;cursor:pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+                </div>
+                <p style="margin:0;font:600 25px/1.28 'Geist',system-ui;letter-spacing:-.01em;color:#f4ede4;text-wrap:pretty">Quais são os três componentes do risco de desastre?</p>
+                <div style="margin-top:auto;display:flex;align-items:center;gap:8px;font:500 13px/1 'Geist',system-ui;color:#c4b8ad"><span style="width:26px;height:26px;border-radius:9px;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:12px">⇵</span>Toque na carta para virar</div>
+              </div>
+              <div style="background:#1a1715;border:1px dashed rgba(244,237,228,.24);border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:10px">
+                <span style="font:600 11px/1.3 'Geist Mono',ui-monospace;letter-spacing:.1em;text-transform:uppercase;color:#c4b8ad">Verso</span>
+                <p style="margin:0;font:400 17px/1.5 'Geist',system-ui;color:#f4ede4;text-wrap:pretty">Ameaça × Exposição × Vulnerabilidade. A capacidade de resposta é o que reduz o risco resultante.</p>
+                <span style="font:400 12px/1.4 'Geist',system-ui;color:#c4b8ad;font-style:italic">Material teórico · Componentes do risco, p. 12</span>
+              </div>
+            </div>
+            <div style="padding:14px 16px 20px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <button style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:64px;padding:12px 14px;border-radius:16px;border:1px solid rgba(248,113,113,.34);background:#2a1616;cursor:pointer"><span style="display:flex;align-items:center;gap:7px;font:600 15px/1 'Geist',system-ui;color:#f87171">✕ Errei</span><span style="font:500 11px/1 'Geist Mono',ui-monospace;color:#c4b8ad">volta hoje</span></button>
+                <button style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:64px;padding:12px 14px;border-radius:16px;border:1px solid rgba(251,191,36,.32);background:#2a2010;cursor:pointer"><span style="display:flex;align-items:center;gap:7px;font:600 15px/1 'Geist',system-ui;color:#fbbf24">△ Difícil</span><span style="font:500 11px/1 'Geist Mono',ui-monospace;color:#c4b8ad">em 10 min</span></button>
+                <button style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:64px;padding:12px 14px;border-radius:16px;border:1px solid rgba(52,211,153,.32);background:#10231c;cursor:pointer"><span style="display:flex;align-items:center;gap:7px;font:600 15px/1 'Geist',system-ui;color:#34d399">✓ Bom</span><span style="font:500 11px/1 'Geist Mono',ui-monospace;color:#c4b8ad">em 2 dias</span></button>
+                <button style="display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:64px;padding:12px 14px;border-radius:16px;border:1px solid #34d399;background:#34d399;cursor:pointer"><span style="display:flex;align-items:center;gap:7px;font:600 15px/1 'Geist',system-ui;color:#08221a">✓✓ Fácil</span><span style="font:500 11px/1 'Geist Mono',ui-monospace;color:rgba(8,34,26,.72)">em 5 dias</span></button>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:center;gap:10px;font:500 12px/1 'Geist Mono',ui-monospace;color:#c4b8ad">arraste ← → ou use as teclas 1–4</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1a home light -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/ · herói público · light · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#f6f1ea;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+            <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 16px;border-bottom:1px solid rgba(0,0,0,.08)">
+              <div style="display:flex;align-items:center;gap:9px">
+                <div style="width:26px;height:26px;border-radius:9px;border:2px solid #ea580c;display:flex;align-items:center;justify-content:center"><div style="width:9px;height:9px;border-radius:3px;background:#ea580c"></div></div>
+                <span style="font:600 15px/1 'Geist',system-ui;letter-spacing:-.01em;color:#1c1917">Defesa Civil</span>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button style="height:36px;padding:0 11px;border-radius:12px;border:1px solid rgba(0,0,0,.12);background:#fffdfa;font:600 12px/1 'Geist Mono',ui-monospace;color:#292524;cursor:pointer">PT</button>
+                <button aria-label="Tema" style="width:36px;height:36px;border-radius:12px;border:1px solid rgba(0,0,0,.12);background:#fffdfa;font:400 14px/1 'Geist',system-ui;color:#292524;cursor:pointer">◐</button>
+              </div>
+            </div>
+            <div style="padding:32px 20px 0;display:flex;flex-direction:column;gap:18px;flex:1">
+              <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;text-transform:uppercase;color:#c2410c">Formação de Líderes Humanitários</span>
+              <h1 style="margin:0;font:600 37px/1.08 'Geist',system-ui;letter-spacing:-.025em;color:#1c1917;text-wrap:pretty">Domine o conteúdo do curso em <span style="background:linear-gradient(transparent 66%,rgba(234,88,12,.28) 66%)">15 minutos</span> por noite.</h1>
+              <p style="margin:0;font:400 16px/1.55 'Geist',system-ui;color:#57534e;max-width:38ch;text-wrap:pretty">Flashcards com repetição espaçada, banco de questões e simulados do curso de Defesa Civil e Desastres. Você estuda o que está prestes a esquecer — nada além disso.</p>
+              <div style="display:flex;flex-direction:column;gap:10px;margin-top:2px">
+                <button style="min-height:52px;border-radius:16px;border:0;background:#ea580c;color:#fff;font:600 16px/1 'Geist',system-ui;cursor:pointer;box-shadow:0 0 0 4px rgba(234,88,12,.10)">Pedir acesso</button>
+                <button style="min-height:52px;border-radius:16px;border:1px solid rgba(28,25,23,.22);background:transparent;color:#1c1917;font:600 16px/1 'Geist',system-ui;cursor:pointer">Entrar</button>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(0,0,0,.10);border:1px solid rgba(0,0,0,.10);border-radius:18px;overflow:hidden;margin-top:6px">
+                <div style="background:#fffdfa;padding:14px 16px"><div style="font:600 24px/1 'Geist Mono',ui-monospace;color:#1c1917">51</div><div style="font:400 12px/1.3 'Geist',system-ui;color:#6b6259;margin-top:4px">cartas essenciais</div></div>
+                <div style="background:#fffdfa;padding:14px 16px"><div style="font:600 24px/1 'Geist Mono',ui-monospace;color:#1c1917">184</div><div style="font:400 12px/1.3 'Geist',system-ui;color:#6b6259;margin-top:4px">na trilha completa</div></div>
+                <div style="background:#fffdfa;padding:14px 16px"><div style="font:600 24px/1 'Geist Mono',ui-monospace;color:#1c1917">133</div><div style="font:400 12px/1.3 'Geist',system-ui;color:#6b6259;margin-top:4px">questões</div></div>
+                <div style="background:#fffdfa;padding:14px 16px"><div style="font:600 24px/1 'Geist Mono',ui-monospace;color:#1c1917">6</div><div style="font:400 12px/1.3 'Geist',system-ui;color:#6b6259;margin-top:4px">módulos</div></div>
+              </div>
+              <div style="margin-top:auto;padding:14px 0 18px;border-top:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;gap:6px">
+                <span style="font:500 12px/1.4 'Geist',system-ui;color:#6b6259">Conteúdo de terceiros · acesso por matrícula aprovada</span>
+                <span style="font:500 13px/1.4 'Geist',system-ui;color:#c2410c">Como funciona a repetição espaçada ↓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1a home dark -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/ · herói público · dark · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#14110f;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+            <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 16px;border-bottom:1px solid rgba(255,255,255,.08)">
+              <div style="display:flex;align-items:center;gap:9px">
+                <div style="width:26px;height:26px;border-radius:9px;border:2px solid #fb923c;display:flex;align-items:center;justify-content:center"><div style="width:9px;height:9px;border-radius:3px;background:#fb923c"></div></div>
+                <span style="font:600 15px/1 'Geist',system-ui;letter-spacing:-.01em;color:#f4ede4">Defesa Civil</span>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button style="height:36px;padding:0 11px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#221f1c;font:600 12px/1 'Geist Mono',ui-monospace;color:#f4ede4;cursor:pointer">PT</button>
+                <button aria-label="Tema" style="width:36px;height:36px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:#221f1c;font:400 14px/1 'Geist',system-ui;color:#f4ede4;cursor:pointer">◑</button>
+              </div>
+            </div>
+            <div style="padding:32px 20px 0;display:flex;flex-direction:column;gap:18px;flex:1">
+              <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;text-transform:uppercase;color:#fb923c">Formação de Líderes Humanitários</span>
+              <h1 style="margin:0;font:600 37px/1.08 'Geist',system-ui;letter-spacing:-.025em;color:#f4ede4;text-wrap:pretty">Domine o conteúdo do curso em <span style="background:linear-gradient(transparent 66%,rgba(251,146,60,.30) 66%)">15 minutos</span> por noite.</h1>
+              <p style="margin:0;font:400 16px/1.55 'Geist',system-ui;color:#c4b8ad;max-width:38ch;text-wrap:pretty">Flashcards com repetição espaçada, banco de questões e simulados do curso de Defesa Civil e Desastres. Você estuda o que está prestes a esquecer — nada além disso.</p>
+              <div style="display:flex;flex-direction:column;gap:10px;margin-top:2px">
+                <button style="min-height:52px;border-radius:16px;border:0;background:#fb923c;color:#1c1917;font:600 16px/1 'Geist',system-ui;cursor:pointer;box-shadow:0 0 0 4px rgba(251,146,60,.16)">Pedir acesso</button>
+                <button style="min-height:52px;border-radius:16px;border:1px solid rgba(244,237,228,.24);background:transparent;color:#f4ede4;font:600 16px/1 'Geist',system-ui;cursor:pointer">Entrar</button>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.10);border-radius:18px;overflow:hidden;margin-top:6px">
+                <div style="background:#221f1c;padding:14px 16px"><div style="font:600 24px/1 'Geist Mono',ui-monospace;color:#f4ede4">51</div><div style="font:400 12px/1.3 'Geist',system-ui;color:#c4b8ad;margin-top:4px">cartas essenciais</div></div>
+                <div style="background:#221f1c;padding:14px 16px"><div style="font:600 24px/1 'Geist Mono',ui-monospace;color:#f4ede4">184</div><div style="font:400 12px/1.3 'Geist',system-ui;color:#c4b8ad;margin-top:4px">na trilha completa</div></div>
+                <div style="background:#221f1c;padding:14px 16px"><div style="font:600 24px/1 'Geist Mono',ui-monospace;color:#f4ede4">133</div><div style="font:400 12px/1.3 'Geist',system-ui;color:#c4b8ad;margin-top:4px">questões</div></div>
+                <div style="background:#221f1c;padding:14px 16px"><div style="font:600 24px/1 'Geist Mono',ui-monospace;color:#f4ede4">6</div><div style="font:400 12px/1.3 'Geist',system-ui;color:#c4b8ad;margin-top:4px">módulos</div></div>
+              </div>
+              <div style="margin-top:auto;padding:14px 0 18px;border-top:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:6px">
+                <span style="font:500 12px/1.4 'Geist',system-ui;color:#c4b8ad">Conteúdo de terceiros · acesso por matrícula aprovada</span>
+                <span style="font:500 13px/1.4 'Geist',system-ui;color:#fb923c">Como funciona a repetição espaçada ↓</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="padding:16px 18px;border-radius:16px;background:#fffdfa;border:1px solid rgba(0,0,0,.10)">
+          <div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#047857;margin-bottom:10px">Prós</div>
+          <ul style="margin:0;padding-left:18px;font:400 13px/1.6 'Geist',system-ui;color:#292524">
+            <li>Zero risco de rejeição: quem já estuda não sente troca de produto.</li>
+            <li>Resolve as dívidas 3 e 6 (duas linguagens, estados soltos) sem tocar em layout.</li>
+            <li>Corrige três falhas reais de contraste em light — o maior ganho de acessibilidade por linha alterada.</li>
+            <li>Mais barata das três: cabe quase toda em token.</li>
+          </ul>
+        </div>
+        <div style="padding:16px 18px;border-radius:16px;background:#fffdfa;border:1px solid rgba(0,0,0,.10)">
+          <div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#b91c1c;margin-bottom:10px">Contras — o que ela piora</div>
+          <ul style="margin:0;padding-left:18px;font:400 13px/1.6 'Geist',system-ui;color:#292524">
+            <li>Não muda a percepção do herói público: continua parecendo apostila digital, e é ele que precisa vender acesso.</li>
+            <li>Densidade confortável = menos informação na dobra; o painel de desempenho vai exigir mais rolagem.</li>
+            <li>Sem hierarquia visual nova, a navegação plana (dívida 5) fica só reorganizada, não reposicionada.</li>
+            <li>Se a retenção estiver caindo por falta de sensação de progresso, esta direção não ataca a causa.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;padding:14px 18px;border-radius:16px;background:rgba(28,25,23,.05);border:1px solid rgba(0,0,0,.08)">
+        <div style="font:400 13px/1.6 'Geist',system-ui;color:#292524"><strong style="font-weight:600">Custo:</strong> ~90% em token (<span style="font-family:'Geist Mono',ui-monospace">:root</span>/<span style="font-family:'Geist Mono',ui-monospace">.dark</span>/<span style="font-family:'Geist Mono',ui-monospace">@theme inline</span>) + reescrita de classes cruas em <span style="font-family:'Geist Mono',ui-monospace">/desempenho</span>; componente: só <span style="font-family:'Geist Mono',ui-monospace">button</span> ganha variantes de estado; tela nova: nenhuma além das já previstas (site público, onboarding).</div>
+        <div style="font:400 13px/1.6 'Geist',system-ui;color:#292524"><strong style="font-weight:600">Aderência §2:</strong> total. Nenhuma dependência nova, nenhum ícone fora do lucide, gráficos seguem SVG/CSS, motion em transitions.</div>
+      </div>
+    </div>
+
+    <!-- ============================= 1b — INSTRUMENTO DE TREINO ============================= -->
+    <div id="1b" style="width:844px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:12px;padding-bottom:20px;border-bottom:2px solid rgba(28,25,23,.2)">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#1c1917;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">1b</span>
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#57534e">Ambição: reposicionar</span>
+        </div>
+        <h2 style="margin:0;font:600 32px/1.1 'Geist',system-ui;letter-spacing:-.015em;color:#1c1917">Instrumento de Treino</h2>
+        <p style="margin:0;font:400 16px/1.55 'Geist',system-ui;color:#44403c;max-width:58ch;text-wrap:pretty">Tese: o portal não é material de leitura, é um instrumento que mede sua prontidão. Papel vira <em>suporte</em> de leitura; a moldura vira aparelho — mono nos números, medição sempre à vista, laranja reservado a ação e um azul-aço para dado neutro. Para quem precisa de razão para voltar amanhã.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;text-transform:uppercase;color:#78716c">Paleta · light</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#efece7;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">bg</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#efece7</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#ffffff;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">panel</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#ffffff</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#e5e0d8;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">inset <span style="color:#9a3412">novo</span></div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#e5e0d8</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#171412"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">fg</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#171412</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#5f5952"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">mist</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#5f5952</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#ea580c"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">flare = ação</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#ea580c</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#155e75"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">steel <span style="color:#9a3412">novo</span></div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#155e75</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#047857"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">ok</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#047857</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#b45309"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">learn</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#b45309</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#b91c1c"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">hard</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#b91c1c</div></div>
+        </div>
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;text-transform:uppercase;color:#78716c;margin-top:6px">Paleta · dark (modo primário desta direção)</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#0f1113;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">bg</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#0f1113</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#191c1f;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">panel</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#191c1f</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#0a0c0d;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">inset</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#0a0c0d</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#eceae7;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">fg</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#eceae7</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#a8a29e"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">mist</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#a8a29e</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#fb923c"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">flare</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#fb923c</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#7dd3fc"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">steel</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#7dd3fc</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#34d399"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">ok</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#34d399</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#fbbf24"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">learn</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#fbbf24</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:8px;background:#f87171"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">hard</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#f87171</div></div>
+        </div>
+        <sc-if value="{{ anno }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+            <span style="padding:5px 9px;border-radius:6px;background:#ffffff;border:1px solid rgba(0,0,0,.14);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#171412">fg/bg 15,6:1 · AAA</span>
+            <span style="padding:5px 9px;border-radius:6px;background:#ffffff;border:1px solid rgba(0,0,0,.14);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#171412">mist/bg 5,9:1 · AA+</span>
+            <span style="padding:5px 9px;border-radius:6px;background:#ffffff;border:1px solid rgba(0,0,0,.14);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#171412">steel/bg 6,2:1 · AA+</span>
+            <span style="padding:5px 9px;border-radius:6px;background:#ffffff;border:1px solid rgba(0,0,0,.14);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#171412">dark fg/bg 15,8:1 · AAA</span>
+            <span style="padding:5px 9px;border-radius:6px;background:#ffffff;border:1px solid rgba(0,0,0,.14);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#171412">dark steel/bg 11,4:1 · AAA</span>
+            <span style="padding:5px 9px;border-radius:6px;background:#ffffff;border:1px solid rgba(0,0,0,.14);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#171412">dark flare/bg 8,4:1 · AAA</span>
+            <span style="padding:5px 9px;border-radius:6px;background:#171412;color:#eceae7;font:500 11px/1.3 'Geist Mono',ui-monospace">bg esfria: o papel quente sai do chrome e fica só na carta</span>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+        <div style="padding:14px 16px;border-radius:10px;background:#ffffff;border:1px solid rgba(0,0,0,.12)"><div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#5f5952;margin-bottom:8px">Tipografia</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#292524">Geist Sans + <strong style="font-weight:600">Geist Mono promovida a token</strong>: todo número, intervalo, tempo e rótulo micro em mono tabular. Escala mais curta (razão 1,18), micro-labels 11px <span style="font-family:'Geist Mono',ui-monospace">tracking .12em</span> caixa alta. Corpo 16/1,5.</div></div>
+        <div style="padding:14px 16px;border-radius:10px;background:#ffffff;border:1px solid rgba(0,0,0,.12)"><div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#5f5952;margin-bottom:8px">Forma</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#292524">Raio cai para 10 (chrome) / 14 (carta). Superfície em três níveis: inset ▸ bg ▸ panel. Borda hairline mais presente (14%). Densidade compacta: escala 2/4/8/12/16/24.</div></div>
+        <div style="padding:14px 16px;border-radius:10px;background:#ffffff;border:1px solid rgba(0,0,0,.12)"><div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#5f5952;margin-bottom:8px">Motion</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#292524">“Clique de instrumento: curto, seco, sem elástico.” 140ms <span style="font-family:'Geist Mono',ui-monospace">cubic-bezier(.3,0,.2,1)</span>; contadores animam por <span style="font-family:'Geist Mono',ui-monospace">steps()</span>. Reduced-motion: número troca sem tween, barra sem transição.</div></div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:24px">
+
+        <!-- 1b carta light -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/estudar · a carta · light · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+            <div style="background:#ffffff;border-bottom:1px solid rgba(0,0,0,.14);padding:8px 8px 10px">
+              <div style="height:44px;display:flex;align-items:center;justify-content:space-between">
+                <button style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+                <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#5f5952">Sessão · essenciais</span>
+                <button style="width:44px;height:44px;border:0;background:transparent;color:#171412;font:400 18px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">⋯</button>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,0,0,.12);border:1px solid rgba(0,0,0,.12);border-radius:8px;overflow:hidden">
+                <div style="background:#e5e0d8;padding:8px 10px"><div style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">FILA</div><div style="font:600 17px/1.1 'Geist Mono',ui-monospace;color:#171412;margin-top:3px">07<span style="color:#5f5952">/20</span></div></div>
+                <div style="background:#e5e0d8;padding:8px 10px"><div style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">ACERTO</div><div style="font:600 17px/1.1 'Geist Mono',ui-monospace;color:#047857;margin-top:3px">83%</div></div>
+                <div style="background:#e5e0d8;padding:8px 10px"><div style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">SEQUÊNCIA</div><div style="font:600 17px/1.1 'Geist Mono',ui-monospace;color:#171412;margin-top:3px">6 d</div></div>
+              </div>
+              <div style="display:flex;gap:2px;height:4px;margin-top:8px">
+                <div style="flex:6;background:#155e75"></div><div style="flex:1;background:#ea580c"></div><div style="flex:13;background:rgba(0,0,0,.14)"></div>
+              </div>
+            </div>
+            <div style="padding:14px 14px 0;display:flex;flex-direction:column;gap:10px;flex:1">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                <div style="display:flex;align-items:center;gap:6px;padding:6px 9px;border-radius:8px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28)"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#155e75">SENTIDO</span><span style="font:600 12px/1 'Geist',system-ui;color:#0f4457">P → R</span></div>
+                <div style="display:flex;align-items:center;gap:6px"><span style="padding:6px 9px;border-radius:8px;background:#ffffff;border:1px solid rgba(0,0,0,.14);font:500 11px/1 'Geist Mono',ui-monospace;color:#5f5952">MÓD 3</span><button aria-label="Ocultar camada de texto" style="width:44px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:1px solid rgba(0,0,0,.14);background:#ffffff;color:#171412;cursor:pointer"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
+              </div>
+              <div style="background:#ffffff;border:1px solid rgba(0,0,0,.14);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;min-height:236px">
+                <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#5f5952">FRENTE — PERGUNTA</span>
+                <p style="margin:0;font:600 24px/1.3 'Geist',system-ui;letter-spacing:-.01em;color:#171412;text-wrap:pretty">Na abordagem em águas rápidas, qual é a ordem de prioridade de segurança?</p>
+                <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(0,0,0,.10)"><span style="font:500 12px/1 'Geist Mono',ui-monospace;color:#5f5952">visto 4× · nível BOM</span><span style="font:600 12px/1 'Geist',system-ui;color:#c2410c">Virar ⇵</span></div>
+              </div>
+              <div style="background:#e5e0d8;border:1px solid rgba(0,0,0,.14);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+                <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#5f5952">VERSO — RESPOSTA</span>
+                <p style="margin:0;font:400 16px/1.5 'Geist',system-ui;color:#171412;text-wrap:pretty">Eu → equipe → vítima. A ordem nunca se inverte: socorrista acidentado deixa de socorrer.</p>
+                <span style="font:400 11px/1.4 'Geist Mono',ui-monospace;color:#5f5952">FONTE · Aula 2 — Águas rápidas, bloco 3</span>
+              </div>
+            </div>
+            <div style="padding:12px 14px 18px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+                <button style="min-height:66px;border-radius:10px;border:1px solid rgba(185,28,28,.3);background:#fdeeee;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="font:600 13px/1 'Geist',system-ui;color:#b91c1c">✕ Errei</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">hoje</span><span style="font:500 9px/1 'Geist Mono',ui-monospace;color:#8a827a">[1]</span></button>
+                <button style="min-height:66px;border-radius:10px;border:1px solid rgba(180,83,9,.3);background:#fdf5e6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="font:600 13px/1 'Geist',system-ui;color:#b45309">△ Difícil</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">10 min</span><span style="font:500 9px/1 'Geist Mono',ui-monospace;color:#8a827a">[2]</span></button>
+                <button style="min-height:66px;border-radius:10px;border:1px solid rgba(4,120,87,.3);background:#e8f6f0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="font:600 13px/1 'Geist',system-ui;color:#047857">✓ Bom</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">2 d</span><span style="font:500 9px/1 'Geist Mono',ui-monospace;color:#8a827a">[3]</span></button>
+                <button style="min-height:66px;border-radius:10px;border:1px solid #047857;background:#047857;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="font:600 13px/1 'Geist',system-ui;color:#fff">✓✓ Fácil</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:rgba(255,255,255,.82)">5 d</span><span style="font:500 9px/1 'Geist Mono',ui-monospace;color:rgba(255,255,255,.6)">[4]</span></button>
+              </div>
+              <sc-if value="{{ es }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+                  <button style="min-height:66px;border-radius:10px;border:1px solid rgba(185,28,28,.3);background:#fdeeee;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;overflow:hidden"><span style="font:600 12px/1.1 'Geist',system-ui;color:#b91c1c;text-align:center">✕ Me equivo­qué</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">hoy</span></button>
+                  <button style="min-height:66px;border-radius:10px;border:1px solid rgba(180,83,9,.3);background:#fdf5e6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="font:600 12px/1.1 'Geist',system-ui;color:#b45309;text-align:center">△ Difícil</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">10 min</span></button>
+                  <button style="min-height:66px;border-radius:10px;border:1px solid rgba(4,120,87,.3);background:#e8f6f0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="font:600 12px/1.1 'Geist',system-ui;color:#047857;text-align:center">✓ Bien</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">2 d</span></button>
+                  <button style="min-height:66px;border-radius:10px;border:1px solid #047857;background:#047857;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="font:600 12px/1.1 'Geist',system-ui;color:#fff;text-align:center">✓✓ Fácil</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:rgba(255,255,255,.82)">5 d</span></button>
+                </div>
+                <span style="font:500 11px/1.4 'Geist',system-ui;color:#b91c1c">Risco medido: em es, “Me equivoqué” quebra em duas linhas nos 4 botões lado a lado.</span>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1b carta dark -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/estudar · a carta · dark · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#0f1113;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+            <div style="background:#191c1f;border-bottom:1px solid rgba(255,255,255,.12);padding:8px 8px 10px">
+              <div style="height:44px;display:flex;align-items:center;justify-content:space-between">
+                <button style="width:44px;height:44px;border:0;background:transparent;color:#eceae7;font:400 20px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">‹</button>
+                <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#a8a29e">Sessão · essenciais</span>
+                <button style="width:44px;height:44px;border:0;background:transparent;color:#eceae7;font:400 18px/1 'Geist',system-ui;border-radius:10px;cursor:pointer">⋯</button>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:8px;overflow:hidden">
+                <div style="background:#0a0c0d;padding:8px 10px"><div style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e">FILA</div><div style="font:600 17px/1.1 'Geist Mono',ui-monospace;color:#eceae7;margin-top:3px">07<span style="color:#a8a29e">/20</span></div></div>
+                <div style="background:#0a0c0d;padding:8px 10px"><div style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e">ACERTO</div><div style="font:600 17px/1.1 'Geist Mono',ui-monospace;color:#34d399;margin-top:3px">83%</div></div>
+                <div style="background:#0a0c0d;padding:8px 10px"><div style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e">SEQUÊNCIA</div><div style="font:600 17px/1.1 'Geist Mono',ui-monospace;color:#eceae7;margin-top:3px">6 d</div></div>
+              </div>
+              <div style="display:flex;gap:2px;height:4px;margin-top:8px">
+                <div style="flex:6;background:#7dd3fc"></div><div style="flex:1;background:#fb923c"></div><div style="flex:13;background:rgba(255,255,255,.14)"></div>
+              </div>
+            </div>
+            <div style="padding:14px 14px 0;display:flex;flex-direction:column;gap:10px;flex:1">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                <div style="display:flex;align-items:center;gap:6px;padding:6px 9px;border-radius:8px;background:#10262e;border:1px solid rgba(125,211,252,.3)"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#7dd3fc">SENTIDO</span><span style="font:600 12px/1 'Geist',system-ui;color:#bae6fd">P → R</span></div>
+                <div style="display:flex;align-items:center;gap:6px"><span style="padding:6px 9px;border-radius:8px;background:#191c1f;border:1px solid rgba(255,255,255,.12);font:500 11px/1 'Geist Mono',ui-monospace;color:#a8a29e">MÓD 3</span><button aria-label="Ocultar camada de texto" style="width:44px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:#191c1f;color:#eceae7;cursor:pointer"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div>
+              </div>
+              <div style="background:#191c1f;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;min-height:236px">
+                <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#a8a29e">FRENTE — PERGUNTA</span>
+                <p style="margin:0;font:600 24px/1.3 'Geist',system-ui;letter-spacing:-.01em;color:#eceae7;text-wrap:pretty">Na abordagem em águas rápidas, qual é a ordem de prioridade de segurança?</p>
+                <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(255,255,255,.10)"><span style="font:500 12px/1 'Geist Mono',ui-monospace;color:#a8a29e">visto 4× · nível BOM</span><span style="font:600 12px/1 'Geist',system-ui;color:#fb923c">Virar ⇵</span></div>
+              </div>
+              <div style="background:#0a0c0d;border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+                <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#a8a29e">VERSO — RESPOSTA</span>
+                <p style="margin:0;font:400 16px/1.5 'Geist',system-ui;color:#eceae7;text-wrap:pretty">Eu → equipe → vítima. A ordem nunca se inverte: socorrista acidentado deixa de socorrer.</p>
+                <span style="font:400 11px/1.4 'Geist Mono',ui-monospace;color:#a8a29e">FONTE · Aula 2 — Águas rápidas, bloco 3</span>
+              </div>
+            </div>
+            <div style="padding:12px 14px 18px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+                <button style="min-height:66px;border-radius:10px;border:1px solid rgba(248,113,113,.34);background:#241416;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="font:600 13px/1 'Geist',system-ui;color:#f87171">✕ Errei</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#a8a29e">hoje</span><span style="font:500 9px/1 'Geist Mono',ui-monospace;color:#7a736e">[1]</span></button>
+                <button style="min-height:66px;border-radius:10px;border:1px solid rgba(251,191,36,.32);background:#241d10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="font:600 13px/1 'Geist',system-ui;color:#fbbf24">△ Difícil</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#a8a29e">10 min</span><span style="font:500 9px/1 'Geist Mono',ui-monospace;color:#7a736e">[2]</span></button>
+                <button style="min-height:66px;border-radius:10px;border:1px solid rgba(52,211,153,.32);background:#0d211c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="font:600 13px/1 'Geist',system-ui;color:#34d399">✓ Bom</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#a8a29e">2 d</span><span style="font:500 9px/1 'Geist Mono',ui-monospace;color:#7a736e">[3]</span></button>
+                <button style="min-height:66px;border-radius:10px;border:1px solid #34d399;background:#34d399;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer"><span style="font:600 13px/1 'Geist',system-ui;color:#08221a">✓✓ Fácil</span><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:rgba(8,34,26,.74)">5 d</span><span style="font:500 9px/1 'Geist Mono',ui-monospace;color:rgba(8,34,26,.55)">[4]</span></button>
+              </div>
+              <span style="font:500 11px/1.4 'Geist Mono',ui-monospace;color:#a8a29e;text-align:center">1–4 no teclado · arraste ← → · botões sempre visíveis</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1b home light -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/ · herói público · light · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+            <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 14px;background:#ffffff;border-bottom:1px solid rgba(0,0,0,.14)">
+              <div style="display:flex;align-items:center;gap:9px">
+                <div style="width:28px;height:28px;border-radius:7px;background:#171412;display:flex;align-items:center;justify-content:center;font:600 13px/1 'Geist Mono',ui-monospace;color:#ea580c">DC</div>
+                <div style="display:flex;flex-direction:column"><span style="font:600 13px/1.1 'Geist',system-ui;color:#171412">Defesa Civil</span><span style="font:500 9px/1.1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">LGND SQUAD</span></div>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button style="height:34px;padding:0 10px;border-radius:8px;border:1px solid rgba(0,0,0,.14);background:#efece7;font:600 11px/1 'Geist Mono',ui-monospace;color:#171412;cursor:pointer">PT ▾</button>
+                <button aria-label="Tema" style="width:34px;height:34px;border-radius:8px;border:1px solid rgba(0,0,0,.14);background:#efece7;font:400 13px/1 'Geist',system-ui;color:#171412;cursor:pointer">◐</button>
+              </div>
+            </div>
+            <div style="padding:26px 18px 0;display:flex;flex-direction:column;gap:16px;flex:1">
+              <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#155e75">Treino · Defesa Civil e Desastres</span>
+              <h1 style="margin:0;font:600 34px/1.1 'Geist',system-ui;letter-spacing:-.025em;color:#171412;text-wrap:pretty">Treine até a resposta ficar automática.</h1>
+              <p style="margin:0;font:400 15px/1.55 'Geist',system-ui;color:#5f5952;max-width:40ch;text-wrap:pretty">O portal mede o que você já domina e devolve só o que está prestes a esquecer. Sessões de 15 min, medição a cada carta.</p>
+              <div style="border:1px solid rgba(0,0,0,.14);border-radius:12px;overflow:hidden;background:#ffffff">
+                <div style="padding:10px 12px;border-bottom:1px solid rgba(0,0,0,.12);display:flex;align-items:center;justify-content:space-between"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">COBERTURA DA TRILHA</span><span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#155e75">EXEMPLO</span></div>
+                <div style="padding:12px;display:flex;flex-direction:column;gap:10px">
+                  <div style="display:flex;align-items:center;gap:10px"><span style="width:74px;font:500 11px/1 'Geist Mono',ui-monospace;color:#5f5952">ESSENCIAIS</span><div style="flex:1;height:10px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:62%;height:100%;background:#155e75"></div></div><span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#171412">32/51</span></div>
+                  <div style="display:flex;align-items:center;gap:10px"><span style="width:74px;font:500 11px/1 'Geist Mono',ui-monospace;color:#5f5952">COMPLETO</span><div style="flex:1;height:10px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:17%;height:100%;background:#155e75"></div></div><span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#171412">32/184</span></div>
+                  <div style="display:flex;align-items:center;gap:10px"><span style="width:74px;font:500 11px/1 'Geist Mono',ui-monospace;color:#5f5952">QUESTÕES</span><div style="flex:1;height:10px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:34%;height:100%;background:#155e75"></div></div><span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#171412">45/133</span></div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button style="flex:1;min-height:50px;border-radius:10px;border:0;background:#ea580c;color:#fff;font:600 15px/1 'Geist',system-ui;cursor:pointer">Pedir acesso</button>
+                <button style="flex:0 0 116px;min-height:50px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#ffffff;color:#171412;font:600 15px/1 'Geist',system-ui;cursor:pointer">Entrar</button>
+              </div>
+              <div style="display:flex;gap:16px;padding-top:2px">
+                <div><div style="font:600 20px/1 'Geist Mono',ui-monospace;color:#171412">6</div><div style="font:500 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#5f5952;margin-top:3px">MÓDULOS</div></div>
+                <div><div style="font:600 20px/1 'Geist Mono',ui-monospace;color:#171412">5</div><div style="font:500 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#5f5952;margin-top:3px">BASES</div></div>
+                <div><div style="font:600 20px/1 'Geist Mono',ui-monospace;color:#171412">3</div><div style="font:500 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#5f5952;margin-top:3px">IDIOMAS</div></div>
+              </div>
+              <div style="margin-top:auto;padding:12px 0 16px;border-top:1px solid rgba(0,0,0,.12)"><span style="font:500 11px/1.5 'Geist Mono',ui-monospace;color:#5f5952">MATERIAL DE TERCEIROS · ACESSO POR MATRÍCULA APROVADA</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1b home dark -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/ · herói público · dark · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#0f1113;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+            <div style="height:56px;flex:0 0 56px;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 14px;background:#191c1f;border-bottom:1px solid rgba(255,255,255,.12)">
+              <div style="display:flex;align-items:center;gap:9px">
+                <div style="width:28px;height:28px;border-radius:7px;background:#eceae7;display:flex;align-items:center;justify-content:center;font:600 13px/1 'Geist Mono',ui-monospace;color:#c2410c">DC</div>
+                <div style="display:flex;flex-direction:column"><span style="font:600 13px/1.1 'Geist',system-ui;color:#eceae7">Defesa Civil</span><span style="font:500 9px/1.1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e">LGND SQUAD</span></div>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button style="height:34px;padding:0 10px;border-radius:8px;border:1px solid rgba(255,255,255,.14);background:#0f1113;font:600 11px/1 'Geist Mono',ui-monospace;color:#eceae7;cursor:pointer">PT ▾</button>
+                <button aria-label="Tema" style="width:34px;height:34px;border-radius:8px;border:1px solid rgba(255,255,255,.14);background:#0f1113;font:400 13px/1 'Geist',system-ui;color:#eceae7;cursor:pointer">◑</button>
+              </div>
+            </div>
+            <div style="padding:26px 18px 0;display:flex;flex-direction:column;gap:16px;flex:1">
+              <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#7dd3fc">Treino · Defesa Civil e Desastres</span>
+              <h1 style="margin:0;font:600 34px/1.1 'Geist',system-ui;letter-spacing:-.025em;color:#eceae7;text-wrap:pretty">Treine até a resposta ficar automática.</h1>
+              <p style="margin:0;font:400 15px/1.55 'Geist',system-ui;color:#a8a29e;max-width:40ch;text-wrap:pretty">O portal mede o que você já domina e devolve só o que está prestes a esquecer. Sessões de 15 min, medição a cada carta.</p>
+              <div style="border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;background:#191c1f">
+                <div style="padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e">COBERTURA DA TRILHA</span><span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#7dd3fc">EXEMPLO</span></div>
+                <div style="padding:12px;display:flex;flex-direction:column;gap:10px">
+                  <div style="display:flex;align-items:center;gap:10px"><span style="width:74px;font:500 11px/1 'Geist Mono',ui-monospace;color:#a8a29e">ESSENCIAIS</span><div style="flex:1;height:10px;border-radius:3px;background:#0a0c0d;overflow:hidden"><div style="width:62%;height:100%;background:#7dd3fc"></div></div><span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#eceae7">32/51</span></div>
+                  <div style="display:flex;align-items:center;gap:10px"><span style="width:74px;font:500 11px/1 'Geist Mono',ui-monospace;color:#a8a29e">COMPLETO</span><div style="flex:1;height:10px;border-radius:3px;background:#0a0c0d;overflow:hidden"><div style="width:17%;height:100%;background:#7dd3fc"></div></div><span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#eceae7">32/184</span></div>
+                  <div style="display:flex;align-items:center;gap:10px"><span style="width:74px;font:500 11px/1 'Geist Mono',ui-monospace;color:#a8a29e">QUESTÕES</span><div style="flex:1;height:10px;border-radius:3px;background:#0a0c0d;overflow:hidden"><div style="width:34%;height:100%;background:#7dd3fc"></div></div><span style="font:600 11px/1 'Geist Mono',ui-monospace;color:#eceae7">45/133</span></div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <button style="flex:1;min-height:50px;border-radius:10px;border:0;background:#fb923c;color:#171412;font:600 15px/1 'Geist',system-ui;cursor:pointer">Pedir acesso</button>
+                <button style="flex:0 0 116px;min-height:50px;border-radius:10px;border:1px solid rgba(236,234,231,.24);background:#191c1f;color:#eceae7;font:600 15px/1 'Geist',system-ui;cursor:pointer">Entrar</button>
+              </div>
+              <div style="display:flex;gap:16px;padding-top:2px">
+                <div><div style="font:600 20px/1 'Geist Mono',ui-monospace;color:#eceae7">6</div><div style="font:500 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#a8a29e;margin-top:3px">MÓDULOS</div></div>
+                <div><div style="font:600 20px/1 'Geist Mono',ui-monospace;color:#eceae7">5</div><div style="font:500 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#a8a29e;margin-top:3px">BASES</div></div>
+                <div><div style="font:600 20px/1 'Geist Mono',ui-monospace;color:#eceae7">3</div><div style="font:500 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#a8a29e;margin-top:3px">IDIOMAS</div></div>
+              </div>
+              <div style="margin-top:auto;padding:12px 0 16px;border-top:1px solid rgba(255,255,255,.12)"><span style="font:500 11px/1.5 'Geist Mono',ui-monospace;color:#a8a29e">MATERIAL DE TERCEIROS · ACESSO POR MATRÍCULA APROVADA</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="padding:16px 18px;border-radius:10px;background:#ffffff;border:1px solid rgba(0,0,0,.12)">
+          <div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#047857;margin-bottom:10px">Prós</div>
+          <ul style="margin:0;padding-left:18px;font:400 13px/1.6 'Geist',system-ui;color:#292524">
+            <li>Progresso deixa de ser tela separada e passa a ser moldura: ataca constância (o problema real) em todas as telas.</li>
+            <li>O azul-aço libera o laranja para significar só “ação/atenção” — resolve o semáforo sobrecarregado.</li>
+            <li>Densidade maior favorece <span style="font-family:'Geist Mono',ui-monospace">/questoes</span>, <span style="font-family:'Geist Mono',ui-monospace">/praticar</span> e <span style="font-family:'Geist Mono',ui-monospace">/desempenho</span>, hoje as telas mais sofridas.</li>
+            <li>Herói com painel de exemplo comunica o produto sem abrir conteúdo de terceiros.</li>
+          </ul>
+        </div>
+        <div style="padding:16px 18px;border-radius:10px;background:#ffffff;border:1px solid rgba(0,0,0,.12)">
+          <div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#b91c1c;margin-bottom:10px">Contras — o que ela piora</div>
+          <ul style="margin:0;padding-left:18px;font:400 13px/1.6 'Geist',system-ui;color:#292524">
+            <li>Números à vista o tempo todo pode ansiar quem estuda cansado às 22h — precisa de opção “ocultar métricas”, ou seja, mais uma preferência.</li>
+            <li>Mono em rótulos encurta o espaço útil: os 4 botões lado a lado quebram em espanhol (medido no artboard).</li>
+            <li>Perde parte do calor do papel no chrome; risco de virar “mais um dashboard”.</li>
+            <li>Custo médio: quase todo componente muda de raio, densidade e tipografia de rótulo.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;padding:14px 18px;border-radius:10px;background:rgba(23,20,18,.05);border:1px solid rgba(0,0,0,.10)">
+        <div style="font:400 13px/1.6 'Geist',system-ui;color:#292524"><strong style="font-weight:600">Custo:</strong> token (nova família <span style="font-family:'Geist Mono',ui-monospace">steel</span>, inset, raios, mono como token) + <em>todo</em> componente shadcn existente reescrito em densidade compacta + telas novas: barra de medição da sessão e cabeçalho instrumentado em 4 rotas.</div>
+        <div style="font:400 13px/1.6 'Geist',system-ui;color:#292524"><strong style="font-weight:600">Aderência §2:</strong> total, sem dependência nova — barras e sparklines em <span style="font-family:'Geist Mono',ui-monospace">div</span>+SVG; contadores animados por <span style="font-family:'Geist Mono',ui-monospace">steps()</span> em CSS, desligados sob reduced-motion.</div>
+      </div>
+    </div>
+
+    <!-- ============================= 1c — SALA DE SITUAÇÃO ============================= -->
+    <div id="1c" style="width:844px;display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;flex-direction:column;gap:12px;padding-bottom:20px;border-bottom:2px solid rgba(28,25,23,.2)">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#1c1917;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">1c</span>
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#57534e">Ambição: arriscar</span>
+        </div>
+        <h2 style="margin:0;font:600 32px/1.1 'Geist',system-ui;letter-spacing:-.015em;color:#1c1917">Sala de Situação</h2>
+        <p style="margin:0;font:400 16px/1.55 'Geist',system-ui;color:#44403c;max-width:58ch;text-wrap:pretty">Tese: estudar aqui é plantão. A estética é a da operação — dark como estado natural, retícula de mapa, rótulos em mono caixa-alta como etiqueta de equipamento, laranja de alta visibilidade e amarelo de sinalização usados <em>estruturalmente</em>. Para quem se identifica como agente, não como aluno. É a aposta: cria marca, e pode assustar.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;text-transform:uppercase;color:#78716c">Paleta · dark (modo canônico)</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#0b0d0c;border:1px solid rgba(0,0,0,.2)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">bg</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#0b0d0c</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#141715;border:1px solid rgba(0,0,0,.2)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">panel</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#141715</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#f5f1ea;border:1px solid rgba(0,0,0,.14)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">fg</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#f5f1ea</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#a8a29e"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">mist</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#a8a29e</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#f97316"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">hi-vis</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#f97316</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#facc15"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">alerta <span style="color:#9a3412">novo</span></div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#facc15</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#10b981"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">ok</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#10b981</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#ef4444"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">hard</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#ef4444</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:repeating-linear-gradient(90deg,rgba(245,241,234,.22) 0 1px,transparent 1px 8px),repeating-linear-gradient(0deg,rgba(245,241,234,.22) 0 1px,transparent 1px 8px),#0b0d0c;border:1px solid rgba(0,0,0,.2)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">grid <span style="color:#9a3412">novo</span></div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">8px · 22%</div></div>
+        </div>
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;text-transform:uppercase;color:#78716c;margin-top:6px">Paleta · light (“modo dia / campo”)</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#e9e5dc;border:1px solid rgba(0,0,0,.2)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">bg (lona)</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#e9e5dc</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#f7f4ee;border:1px solid rgba(0,0,0,.2)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">panel</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#f7f4ee</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#14110f"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">fg</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#14110f</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#57534e"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">mist</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#57534e</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#9a3412"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">hi-vis-ink</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#9a3412</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#854d0e"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">alerta-ink</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#854d0e</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#047857"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">ok</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#047857</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:#b91c1c"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">hard</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">#b91c1c</div></div>
+          <div style="width:96px"><div style="height:52px;border-radius:4px;background:repeating-linear-gradient(45deg,#facc15 0 8px,#14110f 8px 16px)"></div><div style="margin-top:6px;font:600 11px/1.3 'Geist Mono',ui-monospace;color:#1c1917">hazard</div><div style="font:400 10px/1.3 'Geist Mono',ui-monospace;color:#78716c">só 4px de faixa</div></div>
+        </div>
+        <sc-if value="{{ anno }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px">
+            <span style="padding:5px 9px;border-radius:4px;background:#f7f4ee;border:1px solid rgba(0,0,0,.16);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#14110f">dark fg/bg 17,3:1 · AAA</span>
+            <span style="padding:5px 9px;border-radius:4px;background:#f7f4ee;border:1px solid rgba(0,0,0,.16);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#14110f">dark hi-vis/bg 7,0:1 · AAA</span>
+            <span style="padding:5px 9px;border-radius:4px;background:#f7f4ee;border:1px solid rgba(0,0,0,.16);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#14110f">dark alerta/bg 12,7:1 · AAA</span>
+            <span style="padding:5px 9px;border-radius:4px;background:#f7f4ee;border:1px solid rgba(0,0,0,.16);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#14110f">light fg/bg 15,0:1 · AAA</span>
+            <span style="padding:5px 9px;border-radius:4px;background:#f7f4ee;border:1px solid rgba(0,0,0,.16);font:500 11px/1.3 'Geist Mono',ui-monospace;color:#14110f">light hi-vis-ink/bg 5,8:1 · AA+</span>
+            <span style="padding:5px 9px;border-radius:4px;background:#7f1d1d;color:#fff;font:500 11px/1.3 'Geist Mono',ui-monospace">#facc15 em light = 1,2:1 — proibido como texto; só fill com texto escuro. Custo real da direção.</span>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+        <div style="padding:14px 16px;border-radius:6px;background:#f7f4ee;border:1px solid rgba(0,0,0,.16)"><div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Tipografia</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#292524">Geist Mono governa todo o chrome (etiquetas, códigos, contadores) em caixa alta <span style="font-family:'Geist Mono',ui-monospace">.14em</span>; Geist Sans só no conteúdo de estudo. Contraste de escala maior: 11 → 40. Nenhuma fonte nova.</div></div>
+        <div style="padding:14px 16px;border-radius:6px;background:#f7f4ee;border:1px solid rgba(0,0,0,.16)"><div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Forma</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#292524">Raio 6 no chrome, 16 só na carta (leitura precisa continuar macia). Borda 1,5–2px, cantos com marcas de registro, retícula de 8px no fundo, zero sombra. Densidade média, blocos encostados.</div></div>
+        <div style="padding:14px 16px;border-radius:6px;background:#f7f4ee;border:1px solid rgba(0,0,0,.16)"><div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Motion</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#292524">“Corte de rádio: liga, não desliza.” 110ms <span style="font-family:'Geist Mono',ui-monospace">cubic-bezier(.2,.8,.2,1)</span>, transições de estado por troca de cor + varredura de 1px. Reduced-motion: só a troca de cor, nenhuma varredura.</div></div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:24px">
+
+        <!-- 1c carta dark -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/estudar · a carta · dark · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:repeating-linear-gradient(90deg,rgba(245,241,234,.045) 0 1px,transparent 1px 8px),repeating-linear-gradient(0deg,rgba(245,241,234,.045) 0 1px,transparent 1px 8px),#0b0d0c;border:1px solid rgba(0,0,0,.5);box-shadow:0 20px 44px -26px rgba(0,0,0,.6);display:flex;flex-direction:column">
+            <div style="height:4px;flex:0 0 4px;background:repeating-linear-gradient(45deg,#f97316 0 8px,#0b0d0c 8px 16px)"></div>
+            <div style="height:50px;flex:0 0 50px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 4px;border-bottom:1.5px solid rgba(245,241,234,.18)">
+              <button style="width:44px;height:44px;border:0;background:transparent;color:#f5f1ea;font:400 20px/1 'Geist',system-ui;border-radius:6px;cursor:pointer">‹</button>
+              <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;color:#f5f1ea">SESSÃO 07 · ESSENCIAIS</span>
+              <button style="width:44px;height:44px;border:0;background:transparent;color:#f5f1ea;font:400 18px/1 'Geist',system-ui;border-radius:6px;cursor:pointer">⋯</button>
+            </div>
+            <div style="padding:12px 14px 0;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:4px;border:1.5px solid #f97316;background:rgba(249,115,22,.12);font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#f97316">▲ MÃO DUPLA · P→R</span>
+                <span style="padding:6px 8px;border-radius:4px;border:1.5px solid rgba(245,241,234,.2);font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e">MÓD 03</span>
+                <button aria-label="Ocultar camada de texto" style="margin-left:auto;width:44px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:4px;border:1.5px solid rgba(245,241,234,.2);background:transparent;color:#f5f1ea;cursor:pointer"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+              </div>
+              <div style="display:flex;align-items:flex-end;gap:2px;height:24px">
+                <div style="width:9px;height:100%;background:#f97316"></div><div style="width:9px;height:100%;background:#f97316"></div><div style="width:9px;height:100%;background:#f97316"></div><div style="width:9px;height:100%;background:#f97316"></div><div style="width:9px;height:100%;background:#f97316"></div><div style="width:9px;height:100%;background:#f97316"></div>
+                <div style="width:9px;height:100%;background:#facc15"></div>
+                <div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div><div style="width:9px;height:60%;background:rgba(245,241,234,.16)"></div>
+                <span style="margin-left:auto;font:600 12px/1 'Geist Mono',ui-monospace;color:#f5f1ea">07/20</span>
+              </div>
+            </div>
+            <div style="padding:12px 14px 0;display:flex;flex-direction:column;gap:10px;flex:1">
+              <div style="background:#141715;border:1.5px solid rgba(245,241,234,.18);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px;min-height:244px;position:relative">
+                <div style="position:absolute;top:8px;left:8px;width:10px;height:10px;border-top:2px solid #f97316;border-left:2px solid #f97316"></div>
+                <div style="position:absolute;top:8px;right:8px;width:10px;height:10px;border-top:2px solid #f97316;border-right:2px solid #f97316"></div>
+                <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.18em;color:#a8a29e;margin-top:4px">FRENTE</span>
+                <p style="margin:0;font:600 26px/1.24 'Geist',system-ui;letter-spacing:-.015em;color:#f5f1ea;text-wrap:pretty">Na abordagem em águas rápidas, qual é a ordem de prioridade de segurança?</p>
+                <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between"><span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e">VISTO 4× · NÍVEL BOM</span><span style="font:600 12px/1 'Geist',system-ui;color:#facc15">VIRAR ⇵</span></div>
+              </div>
+              <div style="background:#0b0d0c;border:1.5px solid rgba(245,241,234,.18);border-left:4px solid #facc15;border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+                <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.18em;color:#facc15">VERSO · RESPOSTA</span>
+                <p style="margin:0;font:400 16px/1.5 'Geist',system-ui;color:#f5f1ea;text-wrap:pretty">Eu → equipe → vítima. A ordem nunca se inverte: socorrista acidentado deixa de socorrer.</p>
+                <span style="font:400 11px/1.4 'Geist Mono',ui-monospace;color:#a8a29e">FONTE · AULA 2 — ÁGUAS RÁPIDAS · BLOCO 3</span>
+              </div>
+            </div>
+            <div style="padding:12px 14px 18px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <button style="min-height:68px;border-radius:6px;border:1.5px solid #ef4444;background:rgba(239,68,68,.12);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:10px 12px;cursor:pointer;overflow:hidden;position:relative"><span style="position:absolute;top:0;left:0;right:0;height:3px;background:repeating-linear-gradient(45deg,#ef4444 0 6px,transparent 6px 12px)"></span><span style="font:600 15px/1 'Geist',system-ui;color:#ef4444">✕ Errei</span><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e">REENTRA HOJE</span></button>
+                <button style="min-height:68px;border-radius:6px;border:1.5px solid #facc15;background:rgba(250,204,21,.10);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:10px 12px;cursor:pointer"><span style="font:600 15px/1 'Geist',system-ui;color:#facc15">△ Difícil</span><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e">+10 MIN</span></button>
+                <button style="min-height:68px;border-radius:6px;border:1.5px solid #10b981;background:rgba(16,185,129,.10);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:10px 12px;cursor:pointer"><span style="font:600 15px/1 'Geist',system-ui;color:#10b981">✓ Bom</span><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e">+2 DIAS</span></button>
+                <button style="min-height:68px;border-radius:6px;border:1.5px solid #10b981;background:#10b981;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:10px 12px;cursor:pointer"><span style="font:600 15px/1 'Geist',system-ui;color:#04160f">✓✓ Fácil</span><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:rgba(4,22,15,.7)">+5 DIAS</span></button>
+              </div>
+              <span style="font:600 10px/1.4 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e;text-align:center">ARRASTE ← → · TECLAS 1–4 · BOTÕES SEMPRE DISPONÍVEIS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1c carta light -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/estudar · a carta · light “dia” · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:repeating-linear-gradient(90deg,rgba(20,17,15,.05) 0 1px,transparent 1px 8px),repeating-linear-gradient(0deg,rgba(20,17,15,.05) 0 1px,transparent 1px 8px),#e9e5dc;border:1px solid rgba(0,0,0,.2);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+            <div style="height:4px;flex:0 0 4px;background:repeating-linear-gradient(45deg,#9a3412 0 8px,#e9e5dc 8px 16px)"></div>
+            <div style="height:50px;flex:0 0 50px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 4px;border-bottom:1.5px solid rgba(20,17,15,.2)">
+              <button style="width:44px;height:44px;border:0;background:transparent;color:#14110f;font:400 20px/1 'Geist',system-ui;border-radius:6px;cursor:pointer">‹</button>
+              <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;color:#14110f">SESSÃO 07 · ESSENCIAIS</span>
+              <button style="width:44px;height:44px;border:0;background:transparent;color:#14110f;font:400 18px/1 'Geist',system-ui;border-radius:6px;cursor:pointer">⋯</button>
+            </div>
+            <div style="padding:12px 14px 0;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:4px;border:1.5px solid #9a3412;background:rgba(154,52,18,.08);font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#9a3412">▲ MÃO DUPLA · P→R</span>
+                <span style="padding:6px 8px;border-radius:4px;border:1.5px solid rgba(20,17,15,.24);font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#57534e">MÓD 03</span>
+                <button aria-label="Ocultar camada de texto" style="margin-left:auto;width:44px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:4px;border:1.5px solid rgba(20,17,15,.24);background:transparent;color:#14110f;cursor:pointer"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg></button>
+              </div>
+              <div style="display:flex;align-items:flex-end;gap:2px;height:24px">
+                <div style="width:9px;height:100%;background:#9a3412"></div><div style="width:9px;height:100%;background:#9a3412"></div><div style="width:9px;height:100%;background:#9a3412"></div><div style="width:9px;height:100%;background:#9a3412"></div><div style="width:9px;height:100%;background:#9a3412"></div><div style="width:9px;height:100%;background:#9a3412"></div>
+                <div style="width:9px;height:100%;background:#854d0e"></div>
+                <div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div><div style="width:9px;height:60%;background:rgba(20,17,15,.18)"></div>
+                <span style="margin-left:auto;font:600 12px/1 'Geist Mono',ui-monospace;color:#14110f">07/20</span>
+              </div>
+            </div>
+            <div style="padding:12px 14px 0;display:flex;flex-direction:column;gap:10px;flex:1">
+              <div style="background:#f7f4ee;border:1.5px solid rgba(20,17,15,.2);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px;min-height:244px;position:relative">
+                <div style="position:absolute;top:8px;left:8px;width:10px;height:10px;border-top:2px solid #9a3412;border-left:2px solid #9a3412"></div>
+                <div style="position:absolute;top:8px;right:8px;width:10px;height:10px;border-top:2px solid #9a3412;border-right:2px solid #9a3412"></div>
+                <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.18em;color:#57534e;margin-top:4px">FRENTE</span>
+                <p style="margin:0;font:600 26px/1.24 'Geist',system-ui;letter-spacing:-.015em;color:#14110f;text-wrap:pretty">Na abordagem em águas rápidas, qual é a ordem de prioridade de segurança?</p>
+                <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between"><span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#57534e">VISTO 4× · NÍVEL BOM</span><span style="font:600 12px/1 'Geist',system-ui;color:#854d0e">VIRAR ⇵</span></div>
+              </div>
+              <div style="background:#e9e5dc;border:1.5px solid rgba(20,17,15,.2);border-left:4px solid #854d0e;border-radius:6px;padding:16px 18px;display:flex;flex-direction:column;gap:8px">
+                <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.18em;color:#854d0e">VERSO · RESPOSTA</span>
+                <p style="margin:0;font:400 16px/1.5 'Geist',system-ui;color:#14110f;text-wrap:pretty">Eu → equipe → vítima. A ordem nunca se inverte: socorrista acidentado deixa de socorrer.</p>
+                <span style="font:400 11px/1.4 'Geist Mono',ui-monospace;color:#57534e">FONTE · AULA 2 — ÁGUAS RÁPIDAS · BLOCO 3</span>
+              </div>
+            </div>
+            <div style="padding:12px 14px 18px;display:flex;flex-direction:column;gap:8px">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                <button style="min-height:68px;border-radius:6px;border:1.5px solid #b91c1c;background:rgba(185,28,28,.07);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:10px 12px;cursor:pointer;overflow:hidden;position:relative"><span style="position:absolute;top:0;left:0;right:0;height:3px;background:repeating-linear-gradient(45deg,#b91c1c 0 6px,transparent 6px 12px)"></span><span style="font:600 15px/1 'Geist',system-ui;color:#b91c1c">✕ Errei</span><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#57534e">REENTRA HOJE</span></button>
+                <button style="min-height:68px;border-radius:6px;border:1.5px solid #854d0e;background:rgba(133,77,14,.07);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:10px 12px;cursor:pointer"><span style="font:600 15px/1 'Geist',system-ui;color:#854d0e">△ Difícil</span><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#57534e">+10 MIN</span></button>
+                <button style="min-height:68px;border-radius:6px;border:1.5px solid #047857;background:rgba(4,120,87,.07);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:10px 12px;cursor:pointer"><span style="font:600 15px/1 'Geist',system-ui;color:#047857">✓ Bom</span><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#57534e">+2 DIAS</span></button>
+                <button style="min-height:68px;border-radius:6px;border:1.5px solid #047857;background:#047857;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:10px 12px;cursor:pointer"><span style="font:600 15px/1 'Geist',system-ui;color:#ffffff">✓✓ Fácil</span><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:rgba(255,255,255,.78)">+5 DIAS</span></button>
+              </div>
+              <span style="font:600 10px/1.4 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#57534e;text-align:center">ARRASTE ← → · TECLAS 1–4 · BOTÕES SEMPRE DISPONÍVEIS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1c home dark -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/ · herói público · dark · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:repeating-linear-gradient(90deg,rgba(245,241,234,.045) 0 1px,transparent 1px 8px),repeating-linear-gradient(0deg,rgba(245,241,234,.045) 0 1px,transparent 1px 8px),#0b0d0c;border:1px solid rgba(0,0,0,.5);box-shadow:0 20px 44px -26px rgba(0,0,0,.6);display:flex;flex-direction:column">
+            <div style="height:4px;flex:0 0 4px;background:repeating-linear-gradient(45deg,#f97316 0 8px,#0b0d0c 8px 16px)"></div>
+            <div style="height:54px;flex:0 0 54px;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 14px;border-bottom:1.5px solid rgba(245,241,234,.18)">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:26px;height:26px;background:#f97316;clip-path:polygon(50% 0,100% 100%,0 100%)"></div>
+                <div style="display:flex;flex-direction:column"><span style="font:600 12px/1.1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#f5f1ea">DEFESA CIVIL</span><span style="font:500 9px/1.1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#a8a29e">LGND SQUAD · FORMAÇÃO</span></div>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button style="height:32px;padding:0 9px;border-radius:4px;border:1.5px solid rgba(245,241,234,.22);background:transparent;font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#f5f1ea;cursor:pointer">PT</button>
+                <button aria-label="Tema" style="width:32px;height:32px;border-radius:4px;border:1.5px solid rgba(245,241,234,.22);background:transparent;font:400 13px/1 'Geist',system-ui;color:#f5f1ea;cursor:pointer">◑</button>
+              </div>
+            </div>
+            <div style="padding:26px 18px 0;display:flex;flex-direction:column;gap:16px;flex:1">
+              <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:6px;padding:6px 9px;border:1.5px solid #facc15;border-radius:4px;font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#facc15">TREINO PERMANENTE · TURMA 2026</span>
+              <h1 style="margin:0;font:600 38px/1.04 'Geist',system-ui;letter-spacing:-.03em;color:#f5f1ea;text-wrap:pretty">Na emergência você não consulta. Você <span style="color:#f97316">lembra</span>.</h1>
+              <p style="margin:0;font:400 15px/1.55 'Geist',system-ui;color:#a8a29e;max-width:40ch;text-wrap:pretty">Treino diário de 15 minutos sobre o material do curso de Defesa Civil e Desastres. A repetição espaçada devolve a carta exatamente no dia em que você ia esquecer.</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:rgba(245,241,234,.18);border:1.5px solid rgba(245,241,234,.18);border-radius:6px;overflow:hidden">
+                <div style="background:#0b0d0c;padding:12px 14px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#f5f1ea">51</div><div style="font:600 9px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e;margin-top:5px">CARTAS ESSENCIAIS</div></div>
+                <div style="background:#0b0d0c;padding:12px 14px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#f5f1ea">184</div><div style="font:600 9px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e;margin-top:5px">TRILHA COMPLETA</div></div>
+                <div style="background:#0b0d0c;padding:12px 14px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#f5f1ea">133</div><div style="font:600 9px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e;margin-top:5px">QUESTÕES</div></div>
+                <div style="background:#0b0d0c;padding:12px 14px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#f5f1ea">06</div><div style="font:600 9px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e;margin-top:5px">MÓDULOS</div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <button style="min-height:54px;border-radius:6px;border:0;background:#f97316;color:#0b0d0c;font:600 15px/1 'Geist',system-ui;letter-spacing:.01em;cursor:pointer">Pedir acesso ao portal</button>
+                <button style="min-height:54px;border-radius:6px;border:1.5px solid rgba(245,241,234,.28);background:transparent;color:#f5f1ea;font:600 15px/1 'Geist',system-ui;cursor:pointer">Entrar</button>
+              </div>
+              <div style="margin-top:auto;padding:12px 0 16px;border-top:1.5px solid rgba(245,241,234,.14)"><span style="font:600 9px/1.6 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e">MATERIAL DE TERCEIROS · ACESSO SOMENTE POR MATRÍCULA APROVADA · NENHUM CONTEÚDO PÚBLICO</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1c home light -->
+        <div style="width:390px">
+          <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">/ · herói público · light “dia” · 390</div>
+          <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:repeating-linear-gradient(90deg,rgba(20,17,15,.05) 0 1px,transparent 1px 8px),repeating-linear-gradient(0deg,rgba(20,17,15,.05) 0 1px,transparent 1px 8px),#e9e5dc;border:1px solid rgba(0,0,0,.2);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+            <div style="height:4px;flex:0 0 4px;background:repeating-linear-gradient(45deg,#9a3412 0 8px,#e9e5dc 8px 16px)"></div>
+            <div style="height:54px;flex:0 0 54px;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 14px;border-bottom:1.5px solid rgba(20,17,15,.2)">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:26px;height:26px;background:#9a3412;clip-path:polygon(50% 0,100% 100%,0 100%)"></div>
+                <div style="display:flex;flex-direction:column"><span style="font:600 12px/1.1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#14110f">DEFESA CIVIL</span><span style="font:500 9px/1.1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#57534e">LGND SQUAD · FORMAÇÃO</span></div>
+              </div>
+              <div style="display:flex;gap:6px">
+                <button style="height:32px;padding:0 9px;border-radius:4px;border:1.5px solid rgba(20,17,15,.24);background:transparent;font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#14110f;cursor:pointer">PT</button>
+                <button aria-label="Tema" style="width:32px;height:32px;border-radius:4px;border:1.5px solid rgba(20,17,15,.24);background:transparent;font:400 13px/1 'Geist',system-ui;color:#14110f;cursor:pointer">◐</button>
+              </div>
+            </div>
+            <div style="padding:26px 18px 0;display:flex;flex-direction:column;gap:16px;flex:1">
+              <span style="display:inline-flex;align-self:flex-start;align-items:center;gap:6px;padding:6px 9px;border:1.5px solid #854d0e;border-radius:4px;font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#854d0e">TREINO PERMANENTE · TURMA 2026</span>
+              <h1 style="margin:0;font:600 38px/1.04 'Geist',system-ui;letter-spacing:-.03em;color:#14110f;text-wrap:pretty">Na emergência você não consulta. Você <span style="color:#9a3412">lembra</span>.</h1>
+              <p style="margin:0;font:400 15px/1.55 'Geist',system-ui;color:#57534e;max-width:40ch;text-wrap:pretty">Treino diário de 15 minutos sobre o material do curso de Defesa Civil e Desastres. A repetição espaçada devolve a carta exatamente no dia em que você ia esquecer.</p>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:rgba(20,17,15,.2);border:1.5px solid rgba(20,17,15,.2);border-radius:6px;overflow:hidden">
+                <div style="background:#f7f4ee;padding:12px 14px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#14110f">51</div><div style="font:600 9px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#57534e;margin-top:5px">CARTAS ESSENCIAIS</div></div>
+                <div style="background:#f7f4ee;padding:12px 14px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#14110f">184</div><div style="font:600 9px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#57534e;margin-top:5px">TRILHA COMPLETA</div></div>
+                <div style="background:#f7f4ee;padding:12px 14px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#14110f">133</div><div style="font:600 9px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#57534e;margin-top:5px">QUESTÕES</div></div>
+                <div style="background:#f7f4ee;padding:12px 14px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#14110f">06</div><div style="font:600 9px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#57534e;margin-top:5px">MÓDULOS</div></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <button style="min-height:54px;border-radius:6px;border:0;background:#9a3412;color:#f7f4ee;font:600 15px/1 'Geist',system-ui;letter-spacing:.01em;cursor:pointer">Pedir acesso ao portal</button>
+                <button style="min-height:54px;border-radius:6px;border:1.5px solid rgba(20,17,15,.3);background:transparent;color:#14110f;font:600 15px/1 'Geist',system-ui;cursor:pointer">Entrar</button>
+              </div>
+              <div style="margin-top:auto;padding:12px 0 16px;border-top:1.5px solid rgba(20,17,15,.16)"><span style="font:600 9px/1.6 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#57534e">MATERIAL DE TERCEIROS · ACESSO SOMENTE POR MATRÍCULA APROVADA · NENHUM CONTEÚDO PÚBLICO</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="padding:16px 18px;border-radius:6px;background:#f7f4ee;border:1px solid rgba(0,0,0,.16)">
+          <div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#047857;margin-bottom:10px">Prós</div>
+          <ul style="margin:0;padding-left:18px;font:400 13px/1.6 'Geist',system-ui;color:#292524">
+            <li>Resolve a dívida 7 de verdade: nasce marca (triângulo/faixa/retícula), favicon e logotipo saem de graça.</li>
+            <li>Herói memorável — é a direção com maior chance de virar pedido de acesso no boca a boca do squad.</li>
+            <li>Dark deixa de ser tema secundário: é o modo canônico, desenhado para estudo noturno.</li>
+            <li>Rótulos-etiqueta em mono absorvem bem o crescimento de 35% do espanhol.</li>
+          </ul>
+        </div>
+        <div style="padding:16px 18px;border-radius:6px;background:#f7f4ee;border:1px solid rgba(0,0,0,.16)">
+          <div style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#b91c1c;margin-bottom:10px">Contras — o que ela piora</div>
+          <ul style="margin:0;padding-left:18px;font:400 13px/1.6 'Geist',system-ui;color:#292524">
+            <li>Vocabulário de urgência num produto de rotina: risco de cansar quem abre isto todas as noites. Faixa hazard e amarelo precisam de disciplina cirúrgica.</li>
+            <li>O amarelo de sinalização não sobrevive em light (1,2:1) — o modo dia fica com outra personalidade, ou seja, dois sistemas para manter.</li>
+            <li>Caixa alta em mono reduz legibilidade para leitores mais velhos e para quem tem baixa visão; obriga corpo em Sans e limite rígido de tamanho.</li>
+            <li>Mais caro: quase nenhum componente shadcn atual serve como está; retícula, marcas de canto e faixas são CSS custom em todo lugar.</li>
+          </ul>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;padding:14px 18px;border-radius:6px;background:rgba(20,17,15,.05);border:1px solid rgba(0,0,0,.14)">
+        <div style="font:400 13px/1.6 'Geist',system-ui;color:#292524"><strong style="font-weight:600">Custo:</strong> token (paleta dupla, raios, grid, faixa) + <em>todos</em> os componentes redesenhados (borda 1,5px, cantos, etiquetas) + telas novas de marca (logo, favicon, herói) e revisão de acessibilidade em todo uso de amarelo.</div>
+        <div style="font:400 13px/1.6 'Geist',system-ui;color:#292524"><strong style="font-weight:600">Aderência §2:</strong> sem dependência nova (retícula e faixas são <span style="font-family:'Geist Mono',ui-monospace">repeating-linear-gradient</span>, marca é SVG local). Fura uma regra de espírito: a “varredura” de estado é animação a mais — sob reduced-motion vira troca de cor seca.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== QUADRO-RESUMO ===================== -->
+  <div style="display:flex;flex-direction:column;gap:16px;padding:28px 32px;border-radius:20px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);max-width:1600px">
+    <h2 style="margin:0;font:600 24px/1.1 'Geist',system-ui;letter-spacing:-.015em;color:#1c1917">Quadro-resumo</h2>
+    <div style="display:grid;grid-template-columns:150px 1fr 1fr 130px 1fr;gap:1px;background:rgba(0,0,0,.12);border:1px solid rgba(0,0,0,.12);border-radius:12px;overflow:hidden">
+      <div style="background:#f6f1ea;padding:10px 14px;font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#57534e">DIREÇÃO</div>
+      <div style="background:#f6f1ea;padding:10px 14px;font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#57534e">TESE</div>
+      <div style="background:#f6f1ea;padding:10px 14px;font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#57534e">CUSTO</div>
+      <div style="background:#f6f1ea;padding:10px 14px;font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#57534e">RISCO</div>
+      <div style="background:#f6f1ea;padding:10px 14px;font:600 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#57534e">GANHA / PERDE</div>
+
+      <div style="background:#fffdfa;padding:14px;font:600 15px/1.3 'Geist',system-ui;color:#1c1917"><a href="#1a">1a</a> Papel Calibrado<div style="font:500 11px/1.3 'Geist Mono',ui-monospace;color:#6b6259;margin-top:4px">REFINAR</div></div>
+      <div style="background:#fffdfa;padding:14px;font:400 13px/1.5 'Geist',system-ui;color:#292524">A identidade está certa; falta rigor. Corrige contraste, escala e estados.</div>
+      <div style="background:#fffdfa;padding:14px;font:400 13px/1.5 'Geist',system-ui;color:#292524">Baixo — ~90% em token; nenhum componente reescrito.</div>
+      <div style="background:#fffdfa;padding:14px"><span style="display:inline-block;padding:5px 9px;border-radius:8px;background:#ecfdf5;border:1px solid rgba(4,120,87,.3);font:600 11px/1 'Geist Mono',ui-monospace;color:#047857">✓ BAIXO</span></div>
+      <div style="background:#fffdfa;padding:14px;font:400 13px/1.5 'Geist',system-ui;color:#292524">Ganha acessibilidade e coerência. Perde a chance de reposicionar o herói público.</div>
+
+      <div style="background:#fffdfa;padding:14px;font:600 15px/1.3 'Geist',system-ui;color:#1c1917"><a href="#1b">1b</a> Instrumento de Treino<div style="font:500 11px/1.3 'Geist Mono',ui-monospace;color:#6b6259;margin-top:4px">REPOSICIONAR</div></div>
+      <div style="background:#fffdfa;padding:14px;font:400 13px/1.5 'Geist',system-ui;color:#292524">Não é apostila, é aparelho de medição da própria prontidão.</div>
+      <div style="background:#fffdfa;padding:14px;font:400 13px/1.5 'Geist',system-ui;color:#292524">Médio — token + densidade nova em todo componente + cabeçalho de medição.</div>
+      <div style="background:#fffdfa;padding:14px"><span style="display:inline-block;padding:5px 9px;border-radius:8px;background:#fffbeb;border:1px solid rgba(180,83,9,.3);font:600 11px/1 'Geist Mono',ui-monospace;color:#b45309">△ MÉDIO</span></div>
+      <div style="background:#fffdfa;padding:14px;font:400 13px/1.5 'Geist',system-ui;color:#292524">Ganha constância e clareza de dado. Perde calor; pode ansiar; aperta rótulos em es.</div>
+
+      <div style="background:#fffdfa;padding:14px;font:600 15px/1.3 'Geist',system-ui;color:#1c1917"><a href="#1c">1c</a> Sala de Situação<div style="font:500 11px/1.3 'Geist Mono',ui-monospace;color:#6b6259;margin-top:4px">ARRISCAR</div></div>
+      <div style="background:#fffdfa;padding:14px;font:400 13px/1.5 'Geist',system-ui;color:#292524">Estudar é plantão: estética de operação, dark canônico, marca de campo.</div>
+      <div style="background:#fffdfa;padding:14px;font:400 13px/1.5 'Geist',system-ui;color:#292524">Alto — dois sistemas de cor, componentes redesenhados, marca nova.</div>
+      <div style="background:#fffdfa;padding:14px"><span style="display:inline-block;padding:5px 9px;border-radius:8px;background:#fef2f2;border:1px solid rgba(185,28,28,.3);font:600 11px/1 'Geist Mono',ui-monospace;color:#b91c1c">✕ ALTO</span></div>
+      <div style="background:#fffdfa;padding:14px;font:400 13px/1.5 'Geist',system-ui;color:#292524">Ganha marca e memorabilidade. Perde neutralidade de rotina e paridade light/dark.</div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:stretch;max-width:1600px">
+    <div style="flex:1 1 620px;padding:28px 32px;border-radius:20px;background:#1c1917;display:flex;flex-direction:column;gap:12px">
+      <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#fb923c">Minha recomendação</span>
+      <h2 style="margin:0;font:600 26px/1.2 'Geist',system-ui;letter-spacing:-.015em;color:#f4ede4">1b — Instrumento de Treino, com a densidade de leitura da 1a na carta.</h2>
+      <ol style="margin:0;padding-left:20px;font:400 15px/1.65 'Geist',system-ui;color:#e7ddd2;max-width:66ch">
+        <li>O problema declarado é constância, e só a 1b transforma progresso em moldura permanente em vez de uma tela que ninguém abre.</li>
+        <li>Separar laranja (ação) de aço (dado) resolve o semáforo sobrecarregado sem depender de cor para significar nível.</li>
+        <li>O herói dela mostra o produto sem abrir conteúdo de terceiros — a 1a não muda a percepção e a 1c promete urgência que o dia a dia não entrega.</li>
+        <li>Custo médio é pagável agora; a 1c custa marca nova + dois sistemas de cor antes de existir site público.</li>
+        <li>Guardaria da 1c só a marca (triângulo + faixa) e da 1a a carta arejada: instrumento por fora, papel por dentro.</li>
+      </ol>
+    </div>
+    <div style="flex:1 1 380px;padding:28px 32px;border-radius:20px;background:#fffdfa;border:2px solid #ea580c;display:flex;flex-direction:column;gap:14px;justify-content:center">
+      <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#c2410c">Fim da Fase 0 — parada obrigatória</span>
+      <h2 style="margin:0;font:600 24px/1.25 'Geist',system-ui;letter-spacing:-.015em;color:#1c1917">Qual direção sigo para a Fase 1: <a href="#1a">1a</a>, <a href="#1b">1b</a> ou <a href="#1c">1c</a>?</h2>
+      <p style="margin:0;font:400 14px/1.6 'Geist',system-ui;color:#57534e">Pode escolher uma inteira, pedir mistura (“paleta da 1b com a densidade da 1a”) ou mandar refazer. Não abro o canvas de artboards da §7 antes da sua resposta.</p>
+    </div>
+  </div>
+
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;annotations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Revisão&quot;},&quot;stressEs&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Revisão&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      anno: this.props.annotations ?? true,
+      es: this.props.stressEs ?? false
+    };
+  }
+}
+</script>
+</body>
+</html>

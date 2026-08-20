@@ -40,7 +40,7 @@ export function LoginForm() {
             {...form.register("email")}
           />
           {form.formState.errors.email ? (
-            <p className="text-sm text-red-600">{t(form.formState.errors.email.message ?? "")}</p>
+            <p className="text-sm text-hard">{t(form.formState.errors.email.message ?? "")}</p>
           ) : null}
         </div>
 
@@ -55,12 +55,12 @@ export function LoginForm() {
             {...form.register("password")}
           />
           {form.formState.errors.password ? (
-            <p className="text-sm text-red-600">{t(form.formState.errors.password.message ?? "")}</p>
+            <p className="text-sm text-hard">{t(form.formState.errors.password.message ?? "")}</p>
           ) : null}
         </div>
 
         {login.isError ? (
-          <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+          <p className="rounded-md bg-hard-surf px-3 py-2 text-sm text-hard">
             {locale === "pt-BR"
               ? getApiErrorMessage(login.error, t("auth.signIn.error"))
               : t("auth.signIn.error")}
@@ -74,7 +74,7 @@ export function LoginForm() {
 
       <p className="mt-4 text-center text-sm text-mist">
         {t("auth.noAccount")}{" "}
-        <Link href="/registro" className="font-medium text-flare underline">
+        <Link href="/registro" className="font-medium text-flare-ink underline">
           {t("auth.requestRegistration")}
         </Link>
       </p>

@@ -28,7 +28,7 @@ export function PracticePanel({
   if (panel.isHistoryLoading) {
     return (
       <Card className={dark ? "border-line bg-panel text-paper" : undefined}>
-        <p className={dark ? "text-sm text-mist" : "text-sm text-slate-500"}>{t("practice.loading")}</p>
+        <p className={dark ? "text-sm text-mist" : "text-sm text-mist"}>{t("practice.loading")}</p>
       </Card>
     );
   }
@@ -48,7 +48,7 @@ export function PracticePanel({
     <Card className={dark ? "space-y-4 border-line bg-panel text-paper" : "space-y-4"}>
       <header className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <p className={dark ? "text-sm font-semibold text-paper" : "text-sm font-semibold text-navy"}>
+          <p className={dark ? "text-sm font-semibold text-paper" : "text-sm font-semibold text-paper"}>
             {panel.phase === "running" && panel.attempt
               ? t("practice.running")
               : panel.phase === "done"
@@ -58,11 +58,11 @@ export function PracticePanel({
                   : t("practice.miniTest")}
           </p>
           {panel.phase === "running" && panel.attempt ? (
-            <p className={dark ? "text-xs text-mist" : "text-xs text-slate-500"}>
+            <p className={dark ? "text-xs text-mist" : "text-xs text-mist"}>
               {t("practice.step", { current: panel.step + 1, total: panel.attempt.total })}
             </p>
           ) : panel.history.length > 0 ? (
-            <p className={dark ? "text-xs text-mist" : "text-xs text-slate-500"}>
+            <p className={dark ? "text-xs text-mist" : "text-xs text-mist"}>
               {t("practice.attemptsOnCard", { count: panel.history.length })}
             </p>
           ) : null}
@@ -73,7 +73,7 @@ export function PracticePanel({
       </header>
 
       {panel.errorMessage ? (
-        <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">{panel.errorMessage}</p>
+        <p className="rounded-md bg-hard-surf px-3 py-2 text-sm text-hard">{panel.errorMessage}</p>
       ) : null}
 
       {panel.phase === "idle" ? (
@@ -107,10 +107,10 @@ export function PracticePanel({
       {panel.phase === "answer_key" ? (
         <div className="space-y-4">
           {panel.isAnswerKeyLoading ? (
-            <p className="text-sm text-slate-500">{t("practice.keyLoading")}</p>
+            <p className="text-sm text-mist">{t("practice.keyLoading")}</p>
           ) : null}
           {panel.isAnswerKeyError ? (
-            <p className="text-sm text-red-600">{t("practice.keyError")}</p>
+            <p className="text-sm text-hard">{t("practice.keyError")}</p>
           ) : null}
           {panel.answerKey.length > 0 ? (
             <PracticeAnswerKey questions={panel.answerKey} />
@@ -120,7 +120,7 @@ export function PracticePanel({
               type="button"
               disabled={panel.isBusy}
               onClick={panel.backToIdle}
-              className="bg-slate-200 text-slate-800 hover:bg-slate-300"
+              className="bg-inset text-paper hover:bg-inset"
             >
               {t("common.back")}
             </Button>

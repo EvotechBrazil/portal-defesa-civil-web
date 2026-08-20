@@ -56,7 +56,7 @@ export function RankingPage() {
           <label className="text-sm">
             <span className="mb-1 block text-mist">{t("admin.ranking.course")}</span>
             <select
-              className="h-10 w-full rounded-md border border-line bg-background px-3 text-sm text-foreground"
+              className="min-h-11 w-full rounded-ctl border border-line bg-background px-3 text-sm text-foreground"
               value={courseId}
               onChange={(event) => {
                 setCourseId(event.target.value);
@@ -74,7 +74,7 @@ export function RankingPage() {
           <label className="text-sm">
             <span className="mb-1 block text-mist">{t("admin.ranking.module")}</span>
             <select
-              className="h-10 w-full rounded-md border border-line bg-background px-3 text-sm text-foreground"
+              className="min-h-11 w-full rounded-ctl border border-line bg-background px-3 text-sm text-foreground"
               value={moduleCode}
               disabled={!courseId}
               onChange={(event) => setModuleCode(event.target.value)}
@@ -90,7 +90,7 @@ export function RankingPage() {
           <label className="text-sm">
             <span className="mb-1 block text-mist">{t("admin.ranking.sortBy")}</span>
             <select
-              className="h-10 w-full rounded-md border border-line bg-background px-3 text-sm text-foreground"
+              className="min-h-11 w-full rounded-ctl border border-line bg-background px-3 text-sm text-foreground"
               value={sortBy}
               onChange={(event) => setSortBy(event.target.value as RankingSortBy)}
             >

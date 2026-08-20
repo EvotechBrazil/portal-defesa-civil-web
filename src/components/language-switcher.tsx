@@ -37,7 +37,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
         aria-expanded={open}
         aria-label={t("language.current", { language: current.label })}
         title={t("language.selector")}
-        className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-line bg-panel px-2.5 text-paper transition duration-200 hover:border-flare/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flare"
+        className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-line bg-panel px-2.5 text-paper transition duration-200 hover:border-flare/50"
       >
         <Image src={current.flag} alt="" width={24} height={16} unoptimized className="h-4 w-6 rounded-[3px] object-cover shadow-sm" />
         <span className="hidden text-xs font-semibold sm:inline">{current.shortLabel}</span>
@@ -64,7 +64,7 @@ export function LanguageSwitcher({ className }: { className?: string }) {
                 }}
                 className={cn(
                   "flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-left text-sm transition duration-150 hover:bg-black/5 dark:hover:bg-white/10",
-                  selected && "bg-flare/10 text-flare",
+                  selected && "bg-flare/10 text-flare-ink",
                 )}
               >
                 <Image src={option.flag} alt="" width={28} height={19} unoptimized className="h-[19px] w-7 rounded-[3px] object-cover shadow-sm" />

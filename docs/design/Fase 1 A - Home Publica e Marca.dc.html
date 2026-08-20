@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<title>Programa de evolução contínua LGND SQUAD</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#dcd8d2;font-family:'Geist',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font-family:inherit;-webkit-tap-highlight-color:transparent}
+a{color:#9a3412;text-decoration:underline;text-underline-offset:2px}
+a:hover{color:#7c2d12}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+</style>
+</helmet>
+
+<section style="padding:64px;display:flex;flex-direction:column;gap:48px;width:max-content">
+
+  <header style="max-width:940px;display:flex;flex-direction:column;gap:14px">
+    <span style="font:600 12px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#155e75">Fase 1 · Grupo A — site público e marca</span>
+    <h1 style="margin:0;font:600 44px/1.05 'Geist',system-ui;letter-spacing:-.02em;color:#171412">Programa de evolução contínua LGND SQUAD</h1>
+    <p style="margin:0;font:400 17px/1.55 'Geist',system-ui;color:#5f5952;max-width:62ch;text-wrap:pretty">Nome completo no herói, no rodapé e no <span style="font-family:'Geist Mono',ui-monospace">&lt;title&gt;</span>; <strong style="font-weight:600">LGND SQUAD</strong> no header e em todo espaço apertado. Os dois são nome próprio: idênticos em pt-BR, es e en, e fora do i18n — nunca passam por chave de tradução.</p>
+  </header>
+
+  <!-- ============ 6a · MARCA ============ -->
+  <div id="6a" style="display:flex;flex-direction:column;gap:18px;padding:28px 32px;border-radius:16px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);max-width:1500px">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">6a</span>
+      <h2 style="margin:0;font:600 24px/1.1 'Geist',system-ui;letter-spacing:-.015em;color:#171412">Marca real · lockup do logo oficial (dívida 7)</h2>
+      <span style="font:500 13px/1.4 'Geist',system-ui;color:#5f5952">Revisão: o wordmark tipográfico foi substituído pelo acervo oficial.</span>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:10px">
+      <span style="padding:6px 10px;border-radius:8px;background:#e8f6f0;border:1px solid rgba(4,120,87,.3);font:500 12px/1.3 'Geist Mono',ui-monospace;color:#047857">✓ brand/lgnd-squad-logo.png · 1080×1080 · AUTHORIZED-FOR-PROJECT</span>
+      <span style="padding:6px 10px;border-radius:8px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);font:500 12px/1.3 'Geist Mono',ui-monospace;color:#854d0e">△ banners FIRE 001/002 · APPROVAL-REQUIRED</span>
+      <span style="padding:6px 10px;border-radius:8px;background:#fdeeee;border:1px solid rgba(185,28,28,.3);font:500 12px/1.3 'Geist Mono',ui-monospace;color:#b91c1c">✕ peças de Instagram · REFERENCE-ONLY · fora do produto</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div style="padding:24px;border-radius:14px;background:#0b0f14;display:flex;flex-direction:column;gap:18px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#ff5a00">LOCKUP · FUNDO ESCURO (uso nativo do logo)</span>
+        <div style="display:flex;align-items:center;gap:18px">
+          <div style="width:88px;height:88px;flex:0 0 88px;border-radius:14px;background:#11161d;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;position:relative">
+            <span style="font:500 9.5px/1.4 'Geist Mono',ui-monospace;color:#8a949f;text-align:center;padding:0 6px">LOGO<br>1080×1080<br>PNG alpha</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <span style="font:600 26px/1 'Geist',system-ui;letter-spacing:.02em;color:#f5f1ea">LGND SQUAD</span>
+            <span style="font:500 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#8a949f">EVOLUÇÃO CONTÍNUA</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="width:56px;height:56px;flex:0 0 56px;border-radius:10px;background:#11161d;border:1px dashed rgba(255,90,0,.5);display:flex;align-items:center;justify-content:center;font:500 8.5px/1.3 'Geist Mono',ui-monospace;color:#8a949f;text-align:center">LOGO</div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+            <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#8a949f">ESPAÇAMENTO MÍNIMO</span>
+            <span style="font:400 12.5px/1.55 'Geist',system-ui;color:#c6ced6">Área livre em volta = <strong style="font-weight:600;color:#f5f1ea">25% da altura do logo</strong> em todos os lados. Entre logo e wordmark: 50% da altura. Nada entra nessa margem — nem borda de card, nem texto.</span>
+          </div>
+        </div>
+        <span style="font:400 12px/1.55 'Geist',system-ui;color:#8a949f">Placeholder no lugar do arquivo real: o acervo vive no repo do produto e não está neste projeto de design — a implementação aponta para <span style="font-family:'Geist Mono',ui-monospace;color:#c6ced6">/media/legend-squad/brand/lgnd-squad-logo.png</span>.</span>
+      </div>
+
+      <div style="padding:24px;border-radius:14px;background:#efece7;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:16px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#5f5952">TEMA CLARO · o logo NÃO flutua sobre papel</span>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:#fff;border:1px solid rgba(0,0,0,.14)">
+            <div style="width:52px;height:52px;flex:0 0 52px;border-radius:12px;background:#0b0f14;display:flex;align-items:center;justify-content:center;font:500 8px/1.3 'Geist Mono',ui-monospace;color:#8a949f;text-align:center">LOGO</div>
+            <div style="flex:1"><div style="font:600 14px/1.25 'Geist',system-ui;color:#171412">A · Chip escuro — recomendado</div><div style="font:400 12.5px/1.45 'Geist',system-ui;color:#5f5952;margin-top:3px">Logo original dentro de um quadrado <span style="font-family:'Geist Mono',ui-monospace">#0b0f14</span>, raio 12. Preserva a cor da marca sem pôr laranja sobre papel.</div></div>
+            <span style="padding:4px 8px;border-radius:5px;background:#e8f6f0;border:1px solid rgba(4,120,87,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#047857">✓ PADRÃO</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:#fff;border:1px solid rgba(0,0,0,.14)">
+            <div style="width:52px;height:52px;flex:0 0 52px;border-radius:12px;background:#e5e0d8;border:1px solid rgba(0,0,0,.14);display:flex;align-items:center;justify-content:center;font:500 8px/1.3 'Geist Mono',ui-monospace;color:#5f5952;text-align:center">LOGO<br>mono</div>
+            <div style="flex:1"><div style="font:600 14px/1.25 'Geist',system-ui;color:#171412">B · Mono <span style="font-family:'Geist Mono',ui-monospace">--fg</span></div><div style="font:400 12.5px/1.45 'Geist',system-ui;color:#5f5952;margin-top:3px">Silhueta em <span style="font-family:'Geist Mono',ui-monospace">#171412</span> para impressão, e-mail e favicon claro. Exige o SVG.</div></div>
+            <span style="padding:4px 8px;border-radius:5px;background:#e0f0f5;border:1px solid rgba(21,94,117,.3);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#155e75">◇ ALTERNATIVA</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:#fdeeee;border:1.5px solid rgba(185,28,28,.35)">
+            <div style="width:52px;height:52px;flex:0 0 52px;border-radius:12px;background:#faf6ef;border:1px dashed rgba(185,28,28,.4);display:flex;align-items:center;justify-content:center;font:500 8px/1.3 'Geist Mono',ui-monospace;color:#b91c1c;text-align:center">LOGO</div>
+            <div style="flex:1"><div style="font:600 14px/1.25 'Geist',system-ui;color:#8f1414">✕ Logo colorido solto no papel</div><div style="font:400 12.5px/1.45 'Geist',system-ui;color:#b91c1c;margin-top:3px">O logo foi feito para fundo escuro: sobre <span style="font-family:'Geist Mono',ui-monospace">#efece7</span> os traços escuros somem e o laranja fica vibrando. Proibido.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:16px">
+      <div style="padding:20px;border-radius:14px;background:#efece7;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:14px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#5f5952">FAVICON · a partir do logo real</span>
+        <div style="display:flex;gap:14px;align-items:flex-end">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:64px;height:64px;border-radius:14px;background:#0b0f14;display:flex;align-items:center;justify-content:center;font:500 8px/1.2 'Geist Mono',ui-monospace;color:#8a949f">LOGO</div><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">64</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:32px;height:32px;border-radius:8px;background:#0b0f14;display:flex;align-items:center;justify-content:center;font:500 6px/1.2 'Geist Mono',ui-monospace;color:#8a949f">LOGO</div><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">32</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:16px;height:16px;border-radius:5px;background:#0b0f14"></div><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">16</span></div>
+        </div>
+        <span style="font:400 12.5px/1.55 'Geist',system-ui;color:#5f5952">Do arquivo oficial, não das iniciais. Em 16px o logo precisa de uma versão simplificada — <strong style="font-weight:600;color:#171412">pedido no handoff</strong>: recorte de símbolo que sobreviva a 16px, com o fundo <span style="font-family:'Geist Mono',ui-monospace">#0b0f14</span> embutido.</span>
+      </div>
+
+      <div style="padding:20px;border-radius:14px;background:#fdf5e6;border:1px solid rgba(180,83,9,.3);display:flex;flex-direction:column;gap:10px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#854d0e">O QUE NÃO FAZER</span>
+        <ul style="margin:0;padding-left:17px;font:400 12.5px/1.65 'Geist',system-ui;color:#7c3d06">
+          <li>Pôr o logo colorido direto sobre <span style="font-family:'Geist Mono',ui-monospace">--bg</span> claro.</li>
+          <li>Recolorir o logo com <span style="font-family:'Geist Mono',ui-monospace">--primary</span> para “combinar”.</li>
+          <li>Usar <span style="font-family:'Geist Mono',ui-monospace">#ff5a00</span> em texto, botão ou borda de estado.</li>
+          <li>Traduzir qualquer parte do nome, ou usar a forma longa em header/nav/botão.</li>
+          <li>Publicar peça de Instagram ou banner FIRE sem aprovação registrada.</li>
+        </ul>
+      </div>
+
+      <div style="padding:20px;border-radius:14px;background:#171412;display:flex;flex-direction:column;gap:10px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#fdba74">PEDIDO NO HANDOFF · ASSETS</span>
+        <ul style="margin:0;padding-left:17px;font:400 12.5px/1.7 'Geist',system-ui;color:#e7ddd2">
+          <li><strong style="font-weight:600">SVG do logo</strong> (ou AI/EPS de origem). É o que viabiliza a versão mono, o favicon nítido e o header sem peso.</li>
+          <li>Se o SVG não existir: <strong style="font-weight:600">PNG otimizado em 3 tamanhos</strong> — 96, 192 e 512px, alpha preservado. 1080×1080 no header é peso desnecessário.</li>
+          <li><span style="font-family:'Geist Mono',ui-monospace;color:#fdba74">next/image</span> com <span style="font-family:'Geist Mono',ui-monospace;color:#fdba74">width</span>/<span style="font-family:'Geist Mono',ui-monospace;color:#fdba74">height</span> fixos + <span style="font-family:'Geist Mono',ui-monospace;color:#fdba74">priority</span> no header; 34px no desktop, 30px no mobile.</li>
+          <li><span style="font-family:'Geist Mono',ui-monospace;color:#fdba74">alt=""</span> no header (o wordmark ao lado já diz o nome) — evita leitura duplicada.</li>
+          <li>Manter <span style="font-family:'Geist Mono',ui-monospace;color:#fdba74">manifest.json</span> como fonte de verdade dos direitos; nenhum asset entra no produto sem estar <span style="font-family:'Geist Mono',ui-monospace;color:#fdba74">authorized-for-project</span>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1.1fr 1fr;gap:20px">
+      <div style="padding:24px;border-radius:14px;background:#efece7;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:22px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#5f5952">FORMA LONGA · herói, rodapé, title, e-mail</span>
+          <div style="font:600 34px/1.1 'Geist',system-ui;letter-spacing:-.028em;color:#171412;max-width:22ch;text-wrap:balance">Programa de evolução contínua <span style="font-weight:600;letter-spacing:.02em">LGND SQUAD</span></div>
+        <div style="height:1px;background:rgba(0,0,0,.12)"></div>
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#5f5952">FORMA CURTA · header, nav, favicon, qualquer aperto</span>
+        <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end">
+          <div style="font:600 30px/1 'Geist',system-ui;letter-spacing:.02em;color:#171412">LGND SQUAD</div>
+          <div style="font:600 19px/1 'Geist',system-ui;letter-spacing:.03em;color:#171412">LGND SQUAD</div>
+          <div style="font:600 14px/1 'Geist',system-ui;letter-spacing:.05em;color:#171412">LGND SQUAD</div>
+        </div>
+        <span style="font:400 13px/1.6 'Geist',system-ui;color:#5f5952">Regra de tracking: quanto menor, mais aberto (.02 → .05em). Caixa alta sempre; nunca “Lgnd Squad”, nunca “LGND Squad”.</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="padding:20px;border-radius:14px;background:#171412;display:flex;flex-direction:column;gap:16px">
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#fdba74">MONOCROMÁTICO · fundo escuro e sobre foto</span>
+          <div style="font:600 26px/1 'Geist',system-ui;letter-spacing:.02em;color:#f5f1ea">LGND SQUAD</div>
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="width:120px;height:56px;border-radius:8px;background:repeating-linear-gradient(135deg,#5d564e 0 10px,#4c463f 10px 20px);display:flex;align-items:center;justify-content:center"><span style="font:600 13px/1 'Geist',system-ui;letter-spacing:.05em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6)">LGND SQUAD</span></div>
+            <span style="font:400 12.5px/1.5 'Geist',system-ui;color:#c4b8ad">Sobre fotografia: branco puro + sombra de 1px. Nunca laranja sobre foto.</span>
+          </div>
+        </div>
+        <div style="padding:20px;border-radius:14px;background:#efece7;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:14px">
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#5f5952">FAVICON · letra, não símbolo</span>
+          <div style="display:flex;gap:14px;align-items:flex-end">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:64px;height:64px;border-radius:14px;background:#9a3412;display:flex;align-items:center;justify-content:center;font:600 30px/1 'Geist',system-ui;letter-spacing:-.02em;color:#fff">LS</div><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">64</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:32px;height:32px;border-radius:8px;background:#9a3412;display:flex;align-items:center;justify-content:center;font:600 15px/1 'Geist',system-ui;letter-spacing:-.02em;color:#fff">LS</div><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">32</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:16px;height:16px;border-radius:5px;background:#9a3412;display:flex;align-items:center;justify-content:center;font:600 8px/1 'Geist',system-ui;color:#fff">LS</div><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">16</span></div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="width:32px;height:32px;border-radius:8px;background:#f5f1ea;border:1px solid rgba(0,0,0,.14);display:flex;align-items:center;justify-content:center;font:600 15px/1 'Geist',system-ui;letter-spacing:-.02em;color:#171412">LS</div><span style="font:500 10px/1 'Geist Mono',ui-monospace;color:#5f5952">mono</span></div>
+          </div>
+          <span style="font:400 12.5px/1.55 'Geist',system-ui;color:#5f5952">SVG local, monocromático + versão colorida. “LS” em 16px porque “LGND” some — testado no tamanho real, não no zoom.</span>
+        </div>
+        <div style="padding:16px 18px;border-radius:14px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);font:400 13px/1.6 'Geist',system-ui;color:#0f4457"><strong style="font-weight:600">Fora do i18n:</strong> as duas formas ficam em constante (<span style="font-family:'Geist Mono',ui-monospace">BRAND.long</span> / <span style="font-family:'Geist Mono',ui-monospace">BRAND.short</span>), não em <span style="font-family:'Geist Mono',ui-monospace">pt.json</span>. Se virasse chave, alguém traduziria “Programa” em algum idioma e a marca rachava.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:12px">
+      <div style="flex:1 1 300px;padding:16px 18px;border-radius:12px;background:#efece7;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:10px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#5f5952">HEADER · como o nome aparece</span>
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:#fff;border:1px solid rgba(0,0,0,.14)">
+          <div style="width:30px;height:30px;border-radius:8px;background:#0b0f14;display:flex;align-items:center;justify-content:center;font:500 6px/1.2 'Geist Mono',ui-monospace;color:#8a949f">LOGO</div>
+          <div style="display:flex;flex-direction:column"><span style="font:600 14px/1.15 'Geist',system-ui;letter-spacing:.03em;color:#171412">LGND SQUAD</span><span style="font:500 9px/1.15 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">EVOLUÇÃO CONTÍNUA</span></div>
+        </div>
+        <span style="font:400 12.5px/1.5 'Geist',system-ui;color:#5f5952">Lockup do header: logo em chip escuro + forma curta + descritor micro. O descritor é a única parte que pode sumir abaixo de 360px.</span>
+      </div>
+      <div style="flex:1 1 300px;padding:16px 18px;border-radius:12px;background:#efece7;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:10px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#5f5952">TESTE NOS TRÊS IDIOMAS</span>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:9px"><span style="width:26px;font:600 10px/1 'Geist Mono',ui-monospace;color:#5f5952">PT</span><span style="font:600 13px/1.3 'Geist',system-ui;letter-spacing:.03em;color:#171412">LGND SQUAD</span></div>
+          <div style="display:flex;align-items:center;gap:9px"><span style="width:26px;font:600 10px/1 'Geist Mono',ui-monospace;color:#5f5952">ES</span><span style="font:600 13px/1.3 'Geist',system-ui;letter-spacing:.03em;color:#171412">LGND SQUAD</span></div>
+          <div style="display:flex;align-items:center;gap:9px"><span style="width:26px;font:600 10px/1 'Geist Mono',ui-monospace;color:#5f5952">EN</span><span style="font:600 13px/1.3 'Geist',system-ui;letter-spacing:.03em;color:#171412">LGND SQUAD</span></div>
+        </div>
+        <span style="font:400 12.5px/1.5 'Geist',system-ui;color:#5f5952">Idênticos por definição: o header nunca muda de largura ao trocar de idioma — só o resto da interface cresce.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 6b · HOME 1280 ============ -->
+  <div id="6b" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">6b</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">A1 · Home pública · 1280 light (dívida 1)</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:74ch">Hoje <span style="font-family:'Geist Mono',ui-monospace">/</span> só redireciona para <span style="font-family:'Geist Mono',ui-monospace">/login</span>. Agora existe página: o que a pessoa vai conseguir fazer, as duas trilhas, como funciona a repetição em 3 passos, os números reais, CTA duplo, idioma e tema no header, rodapé com o aviso de material de terceiros. Nenhum conteúdo do curso é exposto — o painel do herói é exemplo, não material.</p>
+      </div>
+    </div>
+
+    <div style="width:1280px;border-radius:16px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+      <div style="height:68px;flex:0 0 68px;background:#fff;border-bottom:1px solid rgba(0,0,0,.14);display:flex;align-items:center;justify-content:space-between;padding:0 28px">
+        <div style="display:flex;align-items:center;gap:11px">
+          <div style="width:34px;height:34px;border-radius:9px;background:#0b0f14;display:flex;align-items:center;justify-content:center;font:500 6.5px/1.2 'Geist Mono',ui-monospace;color:#8a949f">LOGO</div>
+          <div style="display:flex;flex-direction:column"><span style="font:600 15px/1.15 'Geist',system-ui;letter-spacing:.03em;color:#171412">LGND SQUAD</span><span style="font:500 9.5px/1.15 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">EVOLUÇÃO CONTÍNUA</span></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <a href="#6b" style="min-height:44px;display:flex;align-items:center;padding:0 10px;font:500 14px/1 'Geist',system-ui;text-decoration:none;color:#5f5952">Como funciona</a>
+          <a href="#6b" style="min-height:44px;display:flex;align-items:center;padding:0 10px;font:500 14px/1 'Geist',system-ui;text-decoration:none;color:#5f5952">Trilhas</a>
+          <span style="width:1px;height:24px;background:rgba(0,0,0,.12)"></span>
+          <button style="min-width:44px;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid rgba(0,0,0,.16);background:#efece7;font:600 12px/1 'Geist Mono',ui-monospace;color:#171412;cursor:pointer">PT ▾</button>
+          <button aria-label="Tema" style="width:44px;height:44px;border-radius:10px;border:1px solid rgba(0,0,0,.16);background:#efece7;font:400 14px/1 'Geist',system-ui;color:#171412;cursor:pointer">◐</button>
+          <button style="min-height:44px;padding:0 16px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;font:600 14.5px/1 'Geist',system-ui;color:#171412;cursor:pointer">Entrar</button>
+          <button style="min-height:44px;padding:0 16px;border-radius:10px;border:0;background:#9a3412;font:600 14.5px/1 'Geist',system-ui;color:#fff;cursor:pointer">Pedir acesso</button>
+        </div>
+      </div>
+
+      <div style="padding:56px 56px 44px;display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#155e75">Programa de evolução contínua LGND SQUAD</span>
+          <h1 style="margin:0;font:600 52px/1.04 'Geist',system-ui;letter-spacing:-.032em;color:#171412;max-width:20ch;text-wrap:balance">Domine o conteúdo do curso em 15 minutos por noite.</h1>
+          <p style="margin:0;font:400 18px/1.6 'Geist',system-ui;color:#5f5952;max-width:52ch;text-wrap:pretty">Formação de Líderes Humanitários — Defesa Civil e Desastres. Flashcards com repetição espaçada, banco de questões e simulados: você estuda o que está prestes a esquecer, não o que já sabe.</p>
+          <div style="display:flex;gap:12px;margin-top:4px">
+            <button style="min-height:56px;padding:0 26px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer">Pedir acesso</button>
+            <button style="min-height:56px;padding:0 26px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;color:#171412;font:600 17px/1 'Geist',system-ui;cursor:pointer">Já tenho conta</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:9px;padding:12px 14px;border-radius:10px;background:#e5e0d8;border:1px solid rgba(0,0,0,.12);align-self:flex-start"><span style="font:600 13px/1 'Geist',system-ui;color:#5f5952">🔒</span><span style="font:500 13px/1.4 'Geist',system-ui;color:#5f5952">Acesso por matrícula aprovada · lista da turma no WhatsApp</span></div>
+        </div>
+
+        <div style="border:1px solid rgba(0,0,0,.14);border-radius:14px;overflow:hidden;background:#fff">
+          <div style="padding:12px 16px;border-bottom:1px solid rgba(0,0,0,.12);display:flex;align-items:center;justify-content:space-between"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">SEU PAINEL DEPOIS DE UMA SEMANA</span><span style="padding:4px 8px;border-radius:5px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#155e75">EXEMPLO</span></div>
+          <div style="padding:18px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <div style="display:flex;align-items:center;gap:10px"><span style="width:84px;font:500 11px/1 'Geist Mono',ui-monospace;color:#5f5952">ESSENCIAIS</span><div style="flex:1;height:12px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:62%;height:100%;background:#155e75"></div></div><span style="width:52px;text-align:right;font:600 11.5px/1 'Geist Mono',ui-monospace;color:#171412">32/51</span></div>
+              <div style="display:flex;align-items:center;gap:10px"><span style="width:84px;font:500 11px/1 'Geist Mono',ui-monospace;color:#5f5952">COMPLETO</span><div style="flex:1;height:12px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:17%;height:100%;background:#155e75"></div></div><span style="width:52px;text-align:right;font:600 11.5px/1 'Geist Mono',ui-monospace;color:#171412">32/184</span></div>
+              <div style="display:flex;align-items:center;gap:10px"><span style="width:84px;font:500 11px/1 'Geist Mono',ui-monospace;color:#5f5952">QUESTÕES</span><div style="flex:1;height:12px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:34%;height:100%;background:#155e75"></div></div><span style="width:52px;text-align:right;font:600 11.5px/1 'Geist Mono',ui-monospace;color:#171412">45/133</span></div>
+            </div>
+            <div style="height:1px;background:rgba(0,0,0,.1)"></div>
+            <div style="display:flex;gap:10px">
+              <div style="flex:1;padding:12px;border-radius:10px;background:#efece7"><div style="font:600 20px/1 'Geist Mono',ui-monospace;color:#047857">83%</div><div style="font:500 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#5f5952;margin-top:5px">ACERTO</div></div>
+              <div style="flex:1;padding:12px;border-radius:10px;background:#efece7"><div style="font:600 20px/1 'Geist Mono',ui-monospace;color:#171412">6 d</div><div style="font:500 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#5f5952;margin-top:5px">SEQUÊNCIA</div></div>
+              <div style="flex:1;padding:12px;border-radius:10px;background:#efece7"><div style="font:600 20px/1 'Geist Mono',ui-monospace;color:#171412">9 min</div><div style="font:500 10px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#5f5952;margin-top:5px">POR NOITE</div></div>
+            </div>
+            <span style="font:400 11.5px/1.5 'Geist',system-ui;color:#5f5952">Números ilustrativos de um estudo típico. Nenhuma carta ou questão do curso aparece nesta página.</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:0 56px 48px;display:flex;flex-direction:column;gap:16px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#5f5952">O QUE VOCÊ VAI CONSEGUIR FAZER</span>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+          <div style="padding:20px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:8px"><span style="font:600 17px/1.3 'Geist',system-ui;color:#171412">Responder sem consultar</span><span style="font:400 14px/1.55 'Geist',system-ui;color:#5f5952">Componentes do risco, ciclo de cinco fases, nove passos do PLANCON — na ponta da língua, não no caderno.</span></div>
+          <div style="padding:20px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:8px"><span style="font:600 17px/1.3 'Geist',system-ui;color:#171412">Saber onde você está fraco</span><span style="font:400 14px/1.55 'Geist',system-ui;color:#5f5952">Acurácia por módulo e cartas travadas, para o estudo ir onde dói em vez de repetir o que já entrou.</span></div>
+          <div style="padding:20px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:8px"><span style="font:600 17px/1.3 'Geist',system-ui;color:#171412">Chegar pronto no simulado</span><span style="font:400 14px/1.55 'Geist',system-ui;color:#5f5952">133 questões com gabarito comentado e evolução de nota a cada tentativa.</span></div>
+        </div>
+      </div>
+
+      <div style="padding:44px 56px;background:#fff;border-top:1px solid rgba(0,0,0,.12);border-bottom:1px solid rgba(0,0,0,.12);display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between"><h2 style="margin:0;font:600 30px/1.15 'Geist',system-ui;letter-spacing:-.022em;color:#171412">Como funciona a repetição espaçada</h2><span style="font:500 13px/1.4 'Geist',system-ui;color:#5f5952">Três passos, e o portal cuida do resto</span></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+          <div style="padding:22px;border-radius:14px;background:#efece7;border:1px solid rgba(0,0,0,.12);display:flex;flex-direction:column;gap:10px"><span style="width:32px;height:32px;border-radius:9px;background:#171412;display:flex;align-items:center;justify-content:center;font:600 14px/1 'Geist Mono',ui-monospace;color:#f5f1ea">1</span><span style="font:600 18px/1.25 'Geist',system-ui;color:#171412">Você responde de cabeça</span><span style="font:400 14px/1.55 'Geist',system-ui;color:#5f5952">A carta mostra a pergunta. Você tenta lembrar antes de virar — o esforço é o que fixa.</span></div>
+          <div style="padding:22px;border-radius:14px;background:#efece7;border:1px solid rgba(0,0,0,.12);display:flex;flex-direction:column;gap:10px"><span style="width:32px;height:32px;border-radius:9px;background:#171412;display:flex;align-items:center;justify-content:center;font:600 14px/1 'Geist Mono',ui-monospace;color:#f5f1ea">2</span><span style="font:600 18px/1.25 'Geist',system-ui;color:#171412">Diz o quanto foi difícil</span><span style="font:400 14px/1.55 'Geist',system-ui;color:#5f5952">Errei, Difícil, Bom ou Fácil. Quatro botões, nenhuma nota, nenhum ranking.</span></div>
+          <div style="padding:22px;border-radius:14px;background:#efece7;border:1px solid rgba(0,0,0,.12);display:flex;flex-direction:column;gap:10px"><span style="width:32px;height:32px;border-radius:9px;background:#9a3412;display:flex;align-items:center;justify-content:center;font:600 14px/1 'Geist Mono',ui-monospace;color:#fff">3</span><span style="font:600 18px/1.25 'Geist',system-ui;color:#171412">A carta volta na hora certa</span><span style="font:400 14px/1.55 'Geist',system-ui;color:#5f5952">O que você errou volta hoje; o que ficou fácil volta em dias. Assim 51 cartas não viram 51 revisões por noite.</span></div>
+        </div>
+      </div>
+
+      <div style="padding:44px 56px;display:flex;flex-direction:column;gap:18px">
+        <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.14em;color:#5f5952">DUAS TRILHAS</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div style="padding:26px;border-radius:20px;background:#faf6ef;border:1.5px solid #9a3412;display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:600 22px/1.2 'Geist',system-ui;color:#171412">Essenciais 80/20</span><span style="padding:5px 10px;border-radius:6px;background:#9a3412;font:600 10px/1.2 'Geist Mono',ui-monospace;color:#fff">RECOMENDADA</span></div>
+            <span style="font:600 40px/1 'Geist Mono',ui-monospace;color:#171412">51 <span style="font-size:16px;font-weight:500;color:#5f5952">cartas</span></span>
+            <span style="font:400 15px/1.6 'Geist',system-ui;color:#5f5952">O núcleo que aparece mais. Fecha o primeiro ciclo em cerca de uma semana estudando 15 min por noite.</span>
+          </div>
+          <div style="padding:26px;border-radius:20px;background:#fff;border:1px solid rgba(0,0,0,.14);display:flex;flex-direction:column;gap:12px">
+            <span style="font:600 22px/1.2 'Geist',system-ui;color:#171412">Conteúdo completo</span>
+            <span style="font:600 40px/1 'Geist Mono',ui-monospace;color:#171412">184 <span style="font-size:16px;font-weight:500;color:#5f5952">cartas</span></span>
+            <span style="font:400 15px/1.6 'Geist',system-ui;color:#5f5952">Todo o material das 5 bases. Cerca de três semanas para o primeiro ciclo — para quem quer profundidade.</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(0,0,0,.12);border:1px solid rgba(0,0,0,.12);border-radius:14px;overflow:hidden;margin-top:4px">
+          <div style="background:#fff;padding:20px 22px"><div style="font:600 30px/1 'Geist Mono',ui-monospace;color:#171412">51</div><div style="font:400 13px/1.4 'Geist',system-ui;color:#5f5952;margin-top:6px">cartas essenciais</div></div>
+          <div style="background:#fff;padding:20px 22px"><div style="font:600 30px/1 'Geist Mono',ui-monospace;color:#171412">184</div><div style="font:400 13px/1.4 'Geist',system-ui;color:#5f5952;margin-top:6px">na trilha completa</div></div>
+          <div style="background:#fff;padding:20px 22px"><div style="font:600 30px/1 'Geist Mono',ui-monospace;color:#171412">133</div><div style="font:400 13px/1.4 'Geist',system-ui;color:#5f5952;margin-top:6px">questões com comentário</div></div>
+          <div style="background:#fff;padding:20px 22px"><div style="font:600 30px/1 'Geist Mono',ui-monospace;color:#171412">6</div><div style="font:400 13px/1.4 'Geist',system-ui;color:#5f5952;margin-top:6px">módulos · 5 bases de conteúdo</div></div>
+        </div>
+      </div>
+
+      <div style="padding:40px 56px;background:#171412;display:flex;align-items:center;justify-content:space-between;gap:32px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <h2 style="margin:0;font:600 28px/1.2 'Geist',system-ui;letter-spacing:-.022em;color:#f5f1ea">Pronto para começar hoje à noite?</h2>
+          <span style="font:400 15px/1.55 'Geist',system-ui;color:#c4b8ad">O acesso é liberado pela lista da turma. Conferimos seu WhatsApp e você já cai na primeira sessão.</span>
+        </div>
+        <div style="display:flex;gap:12px;flex:0 0 auto">
+          <button style="min-height:56px;padding:0 26px;border-radius:10px;border:0;background:#fb923c;color:#171412;font:600 17px/1 'Geist',system-ui;cursor:pointer">Pedir acesso</button>
+          <button style="min-height:56px;padding:0 26px;border-radius:10px;border:1px solid rgba(245,241,234,.26);background:transparent;color:#f5f1ea;font:600 17px/1 'Geist',system-ui;cursor:pointer">Entrar</button>
+        </div>
+      </div>
+
+      <div style="padding:32px 56px 36px;background:#e5e0d8;display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:32px">
+          <div style="display:flex;flex-direction:column;gap:7px;max-width:46ch">
+            <span style="font:600 15px/1.3 'Geist',system-ui;letter-spacing:-.005em;color:#171412">Programa de evolução contínua LGND SQUAD</span>
+            <span style="font:400 13px/1.55 'Geist',system-ui;color:#5f5952">Formação de Líderes Humanitários — Defesa Civil e Desastres. Disponível em português, espanhol e inglês.</span>
+          </div>
+          <div style="display:flex;gap:36px">
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">PORTAL</span><a href="#6b" style="font:400 13.5px/1.4 'Geist',system-ui">Entrar</a><a href="#6b" style="font:400 13.5px/1.4 'Geist',system-ui">Pedir acesso</a><a href="#6b" style="font:400 13.5px/1.4 'Geist',system-ui">Como funciona</a></div>
+            <div style="display:flex;flex-direction:column;gap:8px"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">IDIOMA</span><a href="#6b" style="font:400 13.5px/1.4 'Geist',system-ui">Português</a><a href="#6b" style="font:400 13.5px/1.4 'Geist',system-ui">Español</a><a href="#6b" style="font:400 13.5px/1.4 'Geist',system-ui">English</a></div>
+          </div>
+        </div>
+        <div style="padding:14px 16px;border-radius:10px;background:#efece7;border:1px solid rgba(0,0,0,.12);font:400 12.5px/1.6 'Geist',system-ui;color:#5f5952;max-width:96ch"><strong style="font-weight:600;color:#171412">Material de terceiros.</strong> O conteúdo de estudo pertence aos autores do curso Formação de Líderes Humanitários e é disponibilizado apenas a pessoas matriculadas. O acesso depende de matrícula aprovada e não é vendido nesta página. Nenhum conteúdo do curso é exibido publicamente.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 6c · HOME MOBILE + DARK ============ -->
+  <div id="6c" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">6c</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">A2 · Variante mobile · 390 light e dark</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:74ch">Duas telas: o herói (primeira dobra) e a rolagem com os 3 passos, trilhas, números e rodapé. CTA principal fica na zona do polegar; “Pedir acesso” também vira barra fixa no rodapé quando o herói sai da tela.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Herói · 390 · light</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+          <div style="height:60px;flex:0 0 60px;background:#fff;border-bottom:1px solid rgba(0,0,0,.14);display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 14px">
+            <div style="display:flex;align-items:center;gap:9px">
+              <div style="width:30px;height:30px;border-radius:8px;background:#0b0f14;display:flex;align-items:center;justify-content:center;font:500 6px/1.2 'Geist Mono',ui-monospace;color:#8a949f">LOGO</div>
+              <div style="display:flex;flex-direction:column"><span style="font:600 13.5px/1.15 'Geist',system-ui;letter-spacing:.03em;color:#171412">LGND SQUAD</span><span style="font:500 8.5px/1.15 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#5f5952">EVOLUÇÃO CONTÍNUA</span></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button style="min-width:44px;min-height:44px;padding:0 10px;border-radius:10px;border:1px solid rgba(0,0,0,.16);background:#efece7;font:600 11.5px/1 'Geist Mono',ui-monospace;color:#171412;cursor:pointer">PT</button>
+              <button aria-label="Tema" style="width:44px;height:44px;border-radius:10px;border:1px solid rgba(0,0,0,.16);background:#efece7;font:400 13px/1 'Geist',system-ui;color:#171412;cursor:pointer">◐</button>
+            </div>
+          </div>
+          <div style="flex:1;padding:26px 20px 0;display:flex;flex-direction:column;gap:16px">
+            <span style="font:600 10.5px/1.4 'Geist Mono',ui-monospace;letter-spacing:.14em;text-transform:uppercase;color:#155e75">Programa de evolução contínua LGND SQUAD</span>
+            <h1 style="margin:0;font:600 36px/1.06 'Geist',system-ui;letter-spacing:-.028em;color:#171412;text-wrap:pretty">Domine o conteúdo do curso em 15 minutos por noite.</h1>
+            <p style="margin:0;font:400 15.5px/1.55 'Geist',system-ui;color:#5f5952;text-wrap:pretty">Defesa Civil e Desastres. Flashcards com repetição espaçada, banco de questões e simulados — você estuda o que está prestes a esquecer.</p>
+            <div style="border:1px solid rgba(0,0,0,.14);border-radius:12px;overflow:hidden;background:#fff">
+              <div style="padding:9px 12px;border-bottom:1px solid rgba(0,0,0,.12);display:flex;align-items:center;justify-content:space-between"><span style="font:600 9.5px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">SEU PAINEL EM UMA SEMANA</span><span style="padding:3px 7px;border-radius:5px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);font:600 9px/1.2 'Geist Mono',ui-monospace;color:#155e75">EXEMPLO</span></div>
+              <div style="padding:12px;display:flex;flex-direction:column;gap:9px">
+                <div style="display:flex;align-items:center;gap:9px"><span style="width:74px;font:500 10.5px/1 'Geist Mono',ui-monospace;color:#5f5952">ESSENCIAIS</span><div style="flex:1;height:10px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:62%;height:100%;background:#155e75"></div></div><span style="font:600 10.5px/1 'Geist Mono',ui-monospace;color:#171412">32/51</span></div>
+                <div style="display:flex;align-items:center;gap:9px"><span style="width:74px;font:500 10.5px/1 'Geist Mono',ui-monospace;color:#5f5952">QUESTÕES</span><div style="flex:1;height:10px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:34%;height:100%;background:#155e75"></div></div><span style="font:600 10.5px/1 'Geist Mono',ui-monospace;color:#171412">45/133</span></div>
+              </div>
+            </div>
+            <div style="margin-top:auto;padding-bottom:18px;display:flex;flex-direction:column;gap:10px">
+              <button style="min-height:56px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer">Pedir acesso</button>
+              <button style="min-height:52px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;color:#171412;font:600 16px/1 'Geist',system-ui;cursor:pointer">Já tenho conta</button>
+              <span style="font:500 12px/1.45 'Geist',system-ui;color:#5f5952;text-align:center">Acesso por matrícula aprovada · lista da turma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Rolagem · 3 passos, trilhas, rodapé · 390 light</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45);display:flex;flex-direction:column">
+          <div style="height:52px;flex:0 0 52px;background:#fff;border-bottom:1px solid rgba(0,0,0,.14);display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 14px">
+            <span style="font:600 13px/1 'Geist',system-ui;letter-spacing:.03em;color:#171412">LGND SQUAD</span>
+            <button style="min-height:44px;padding:0 12px;border-radius:8px;border:0;background:#9a3412;font:600 13px/1 'Geist',system-ui;color:#fff;cursor:pointer">Pedir acesso</button>
+          </div>
+          <div style="flex:1;padding:18px 16px;display:flex;flex-direction:column;gap:12px;overflow:hidden">
+            <span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">COMO FUNCIONA</span>
+            <div style="display:flex;gap:11px;padding:14px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.14)"><span style="width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:#171412;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#f5f1ea">1</span><div><div style="font:600 15px/1.25 'Geist',system-ui;color:#171412">Você responde de cabeça</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#5f5952;margin-top:3px">Tenta lembrar antes de virar a carta.</div></div></div>
+            <div style="display:flex;gap:11px;padding:14px;border-radius:14px;background:#fff;border:1px solid rgba(0,0,0,.14)"><span style="width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:#171412;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#f5f1ea">2</span><div><div style="font:600 15px/1.25 'Geist',system-ui;color:#171412">Diz o quanto foi difícil</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#5f5952;margin-top:3px">Errei, Difícil, Bom ou Fácil.</div></div></div>
+            <div style="display:flex;gap:11px;padding:14px;border-radius:14px;background:#faf6ef;border:1.5px solid #9a3412"><span style="width:28px;height:28px;flex:0 0 28px;border-radius:8px;background:#9a3412;display:flex;align-items:center;justify-content:center;font:600 12px/1 'Geist Mono',ui-monospace;color:#fff">3</span><div><div style="font:600 15px/1.25 'Geist',system-ui;color:#171412">A carta volta na hora certa</div><div style="font:400 13px/1.5 'Geist',system-ui;color:#5f5952;margin-top:3px">O que errou volta hoje; o fácil volta em dias.</div></div></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(0,0,0,.12);border:1px solid rgba(0,0,0,.12);border-radius:12px;overflow:hidden;margin-top:2px">
+              <div style="background:#fff;padding:13px 15px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#171412">51</div><div style="font:400 11.5px/1.3 'Geist',system-ui;color:#5f5952;margin-top:4px">essenciais</div></div>
+              <div style="background:#fff;padding:13px 15px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#171412">184</div><div style="font:400 11.5px/1.3 'Geist',system-ui;color:#5f5952;margin-top:4px">no completo</div></div>
+              <div style="background:#fff;padding:13px 15px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#171412">133</div><div style="font:400 11.5px/1.3 'Geist',system-ui;color:#5f5952;margin-top:4px">questões</div></div>
+              <div style="background:#fff;padding:13px 15px"><div style="font:600 22px/1 'Geist Mono',ui-monospace;color:#171412">6</div><div style="font:400 11.5px/1.3 'Geist',system-ui;color:#5f5952;margin-top:4px">módulos · 5 bases</div></div>
+            </div>
+            <div style="padding:13px 15px;border-radius:10px;background:#e5e0d8;border:1px solid rgba(0,0,0,.12);font:400 11.5px/1.55 'Geist',system-ui;color:#5f5952"><strong style="font-weight:600;color:#171412">Material de terceiros.</strong> Conteúdo dos autores do curso, restrito a matriculados. Acesso por matrícula aprovada; nada é vendido aqui.</div>
+            <span style="font:400 11.5px/1.5 'Geist',system-ui;color:#5f5952">Programa de evolução contínua LGND SQUAD · pt · es · en</span>
+          </div>
+          <div style="flex:0 0 auto;padding:10px 16px 16px;background:#fff;border-top:1px solid rgba(0,0,0,.14);display:flex;gap:10px">
+            <button style="flex:1;min-height:52px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 16px/1 'Geist',system-ui;cursor:pointer">Pedir acesso</button>
+            <button style="flex:0 0 118px;min-height:52px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;color:#171412;font:600 16px/1 'Geist',system-ui;cursor:pointer">Entrar</button>
+          </div>
+        </div>
+        <div style="margin-top:8px;max-width:390px;font:400 12px/1.5 'Geist',system-ui;color:#5f5952">Barra fixa aparece quando o herói sai da tela: <span style="font-family:'Geist Mono',ui-monospace">position:sticky</span> + <span style="font-family:'Geist Mono',ui-monospace">IntersectionObserver</span>, entrada por opacidade. Sob reduced-motion, aparece sem transição.</div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Herói · 390 · dark</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#0f1113;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+          <div style="height:60px;flex:0 0 60px;background:#191c1f;border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 14px">
+            <div style="display:flex;align-items:center;gap:9px">
+              <div style="width:30px;height:30px;border-radius:8px;background:#0b0f14;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font:500 6px/1.2 'Geist Mono',ui-monospace;color:#8a949f">LOGO</div>
+              <div style="display:flex;flex-direction:column"><span style="font:600 13.5px/1.15 'Geist',system-ui;letter-spacing:.03em;color:#eceae7">LGND SQUAD</span><span style="font:500 8.5px/1.15 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e">EVOLUÇÃO CONTÍNUA</span></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button style="min-width:44px;min-height:44px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:#0f1113;font:600 11.5px/1 'Geist Mono',ui-monospace;color:#eceae7;cursor:pointer">PT</button>
+              <button aria-label="Tema" style="width:44px;height:44px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:#0f1113;font:400 13px/1 'Geist',system-ui;color:#eceae7;cursor:pointer">◑</button>
+            </div>
+          </div>
+          <div style="flex:1;padding:26px 20px 0;display:flex;flex-direction:column;gap:16px">
+            <span style="font:600 10.5px/1.4 'Geist Mono',ui-monospace;letter-spacing:.14em;text-transform:uppercase;color:#7dd3fc">Programa de evolução contínua LGND SQUAD</span>
+            <h1 style="margin:0;font:600 36px/1.06 'Geist',system-ui;letter-spacing:-.028em;color:#f4ede4;text-wrap:pretty">Domine o conteúdo do curso em 15 minutos por noite.</h1>
+            <p style="margin:0;font:400 15.5px/1.55 'Geist',system-ui;color:#a8a29e;text-wrap:pretty">Defesa Civil e Desastres. Flashcards com repetição espaçada, banco de questões e simulados — você estuda o que está prestes a esquecer.</p>
+            <div style="border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;background:#191c1f">
+              <div style="padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between"><span style="font:600 9.5px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#a8a29e">SEU PAINEL EM UMA SEMANA</span><span style="padding:3px 7px;border-radius:5px;background:#10262e;border:1px solid rgba(125,211,252,.3);font:600 9px/1.2 'Geist Mono',ui-monospace;color:#7dd3fc">EXEMPLO</span></div>
+              <div style="padding:12px;display:flex;flex-direction:column;gap:9px">
+                <div style="display:flex;align-items:center;gap:9px"><span style="width:74px;font:500 10.5px/1 'Geist Mono',ui-monospace;color:#a8a29e">ESSENCIAIS</span><div style="flex:1;height:10px;border-radius:3px;background:#0a0c0d;overflow:hidden"><div style="width:62%;height:100%;background:#7dd3fc"></div></div><span style="font:600 10.5px/1 'Geist Mono',ui-monospace;color:#eceae7">32/51</span></div>
+                <div style="display:flex;align-items:center;gap:9px"><span style="width:74px;font:500 10.5px/1 'Geist Mono',ui-monospace;color:#a8a29e">QUESTÕES</span><div style="flex:1;height:10px;border-radius:3px;background:#0a0c0d;overflow:hidden"><div style="width:34%;height:100%;background:#7dd3fc"></div></div><span style="font:600 10.5px/1 'Geist Mono',ui-monospace;color:#eceae7">45/133</span></div>
+              </div>
+            </div>
+            <div style="margin-top:auto;padding-bottom:18px;display:flex;flex-direction:column;gap:10px">
+              <button style="min-height:56px;border-radius:10px;border:0;background:#fb923c;color:#171412;font:600 17px/1 'Geist',system-ui;cursor:pointer">Pedir acesso</button>
+              <button style="min-height:52px;border-radius:10px;border:1px solid rgba(244,237,228,.24);background:transparent;color:#f4ede4;font:600 16px/1 'Geist',system-ui;cursor:pointer">Já tenho conta</button>
+              <span style="font:500 12px/1.45 'Geist',system-ui;color:#a8a29e;text-align:center">Acesso por matrícula aprovada · lista da turma</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font:600 11px/1.4 'Geist Mono',ui-monospace;letter-spacing:.12em;text-transform:uppercase;color:#57534e;margin-bottom:8px">Herói · 390 · dark · rótulo em espanhol (o mais longo)</div>
+        <div style="width:390px;height:844px;border-radius:26px;overflow:hidden;background:#0f1113;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55);display:flex;flex-direction:column">
+          <div style="height:60px;flex:0 0 60px;background:#191c1f;border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 14px">
+            <div style="display:flex;align-items:center;gap:9px">
+              <div style="width:30px;height:30px;border-radius:8px;background:#0b0f14;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font:500 6px/1.2 'Geist Mono',ui-monospace;color:#8a949f">LOGO</div>
+              <div style="display:flex;flex-direction:column"><span style="font:600 13.5px/1.15 'Geist',system-ui;letter-spacing:.03em;color:#eceae7">LGND SQUAD</span><span style="font:500 8.5px/1.15 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e">EVOLUÇÃO CONTÍNUA</span></div>
+            </div>
+            <div style="display:flex;gap:6px">
+              <button style="min-width:44px;min-height:44px;padding:0 10px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:#0f1113;font:600 11.5px/1 'Geist Mono',ui-monospace;color:#eceae7;cursor:pointer">ES</button>
+              <button aria-label="Tema" style="width:44px;height:44px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:#0f1113;font:400 13px/1 'Geist',system-ui;color:#eceae7;cursor:pointer">◑</button>
+            </div>
+          </div>
+          <div style="flex:1;padding:26px 20px 0;display:flex;flex-direction:column;gap:16px">
+            <span style="font:600 10.5px/1.4 'Geist Mono',ui-monospace;letter-spacing:.14em;text-transform:uppercase;color:#7dd3fc">Programa de evolução contínua LGND SQUAD</span>
+            <h1 style="margin:0;font:600 33px/1.08 'Geist',system-ui;letter-spacing:-.028em;color:#f4ede4;text-wrap:pretty">Domina el contenido del curso en 15 minutos por noche.</h1>
+            <p style="margin:0;font:400 15px/1.55 'Geist',system-ui;color:#a8a29e;text-wrap:pretty">Protección Civil y Desastres. Tarjetas con repetición espaciada, banco de preguntas y simulacros — estudias justo lo que estás por olvidar.</p>
+            <div style="border:1px solid rgba(255,255,255,.12);border-radius:12px;overflow:hidden;background:#191c1f">
+              <div style="padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font:600 9.5px/1.3 'Geist Mono',ui-monospace;letter-spacing:.1em;color:#a8a29e">TU PANEL EN UNA SEMANA</span><span style="padding:3px 7px;border-radius:5px;background:#10262e;border:1px solid rgba(125,211,252,.3);font:600 9px/1.2 'Geist Mono',ui-monospace;color:#7dd3fc">EJEMPLO</span></div>
+              <div style="padding:12px;display:flex;flex-direction:column;gap:9px">
+                <div style="display:flex;align-items:center;gap:9px"><span style="width:82px;font:500 10px/1.2 'Geist Mono',ui-monospace;color:#a8a29e">ESENCIALES</span><div style="flex:1;height:10px;border-radius:3px;background:#0a0c0d;overflow:hidden"><div style="width:62%;height:100%;background:#7dd3fc"></div></div><span style="font:600 10.5px/1 'Geist Mono',ui-monospace;color:#eceae7">32/51</span></div>
+                <div style="display:flex;align-items:center;gap:9px"><span style="width:82px;font:500 10px/1.2 'Geist Mono',ui-monospace;color:#a8a29e">PREGUNTAS</span><div style="flex:1;height:10px;border-radius:3px;background:#0a0c0d;overflow:hidden"><div style="width:34%;height:100%;background:#7dd3fc"></div></div><span style="font:600 10.5px/1 'Geist Mono',ui-monospace;color:#eceae7">45/133</span></div>
+              </div>
+            </div>
+            <div style="margin-top:auto;padding-bottom:18px;display:flex;flex-direction:column;gap:10px">
+              <button style="min-height:56px;border-radius:10px;border:0;background:#fb923c;color:#171412;font:600 16.5px/1.15 'Geist',system-ui;cursor:pointer">Solicitar acceso</button>
+              <button style="min-height:52px;border-radius:10px;border:1px solid rgba(244,237,228,.24);background:transparent;color:#f4ede4;font:600 15.5px/1.15 'Geist',system-ui;cursor:pointer">Ya tengo cuenta</button>
+              <span style="font:500 11.5px/1.45 'Geist',system-ui;color:#a8a29e;text-align:center">Acceso por matrícula aprobada · lista del grupo</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:8px;max-width:390px;font:400 12px/1.5 'Geist',system-ui;color:#5f5952">Rótulos crescem ~28% aqui e nada aperta: h1 cai de 36 para 33px por clamp, botões usam line-height 1.15 para aceitar duas linhas, e o wordmark do header não muda — é nome próprio.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 6d · HERÓI COM E SEM FOTOGRAFIA ============ -->
+  <div id="6d" style="display:flex;flex-direction:column;gap:16px">
+    <div style="display:flex;align-items:flex-start;gap:12px;max-width:1400px">
+      <span style="display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;background:#171412;color:#f6f1ea;font:600 13px/1 'Geist Mono',ui-monospace">6d</span>
+      <div>
+        <h2 style="margin:0;font:600 24px/1.15 'Geist',system-ui;letter-spacing:-.015em;color:#171412">Herói com e sem fotografia · 1280</h2>
+        <p style="margin:4px 0 0;font:400 14px/1.55 'Geist',system-ui;color:#5f5952;max-width:74ch">O banner recomendado para herói é o <span style="font-family:'Geist Mono',ui-monospace">FIRE 002</span> em 1140×400 (o 001 fica reservado para arquivo e linha do tempo). Os dois são <em>approval-required</em>, então a versão <strong style="font-weight:600">sem foto</strong> é a canônica — se a aprovação não sair, é ela que vai ao ar, e ela precisa se sustentar sozinha. A versão com foto é uma camada opcional: mesma estrutura, mesma hierarquia, foto entrando como fundo à direita com véu <span style="font-family:'Geist Mono',ui-monospace">--scrim</span>.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="width:1280px;border-radius:16px;overflow:hidden;background:#efece7;border:1px solid rgba(0,0,0,.18);box-shadow:0 20px 44px -26px rgba(0,0,0,.45)">
+        <div style="padding:10px 16px;background:#e8f6f0;border-bottom:1px solid rgba(4,120,87,.28);display:flex;align-items:center;gap:9px"><span style="padding:4px 8px;border-radius:5px;background:#047857;font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#fff">CANÔNICA</span><span style="font:500 12.5px/1.4 'Geist',system-ui;color:#03533c">Sem fotografia · não depende de aprovação de direitos</span></div>
+        <div style="padding:52px 56px;display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:center">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <span style="font:600 11px/1 'Geist Mono',ui-monospace;letter-spacing:.16em;text-transform:uppercase;color:#155e75">Programa de evolução contínua LGND SQUAD</span>
+            <h1 style="margin:0;font:600 50px/1.05 'Geist',system-ui;letter-spacing:-.032em;color:#171412;max-width:20ch;text-wrap:balance">Domine o conteúdo do curso em 15 minutos por noite.</h1>
+            <p style="margin:0;font:400 17.5px/1.6 'Geist',system-ui;color:#5f5952;max-width:50ch;text-wrap:pretty">Formação de Líderes Humanitários — Defesa Civil e Desastres. Você estuda o que está prestes a esquecer, não o que já sabe.</p>
+            <div style="display:flex;gap:12px"><button style="min-height:56px;padding:0 26px;border-radius:10px;border:0;background:#9a3412;color:#fff;font:600 17px/1 'Geist',system-ui;cursor:pointer">Pedir acesso</button><button style="min-height:56px;padding:0 26px;border-radius:10px;border:1px solid rgba(23,20,18,.24);background:#fff;color:#171412;font:600 17px/1 'Geist',system-ui;cursor:pointer">Já tenho conta</button></div>
+          </div>
+          <div style="border:1px solid rgba(0,0,0,.14);border-radius:14px;overflow:hidden;background:#fff">
+            <div style="padding:11px 15px;border-bottom:1px solid rgba(0,0,0,.12);display:flex;align-items:center;justify-content:space-between"><span style="font:600 10px/1 'Geist Mono',ui-monospace;letter-spacing:.12em;color:#5f5952">SEU PAINEL DEPOIS DE UMA SEMANA</span><span style="padding:4px 8px;border-radius:5px;background:#e0f0f5;border:1px solid rgba(21,94,117,.28);font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#155e75">EXEMPLO</span></div>
+            <div style="padding:18px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;gap:10px"><span style="width:84px;font:500 11px/1 'Geist Mono',ui-monospace;color:#5f5952">ESSENCIAIS</span><div style="flex:1;height:12px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:62%;height:100%;background:#155e75"></div></div><span style="width:52px;text-align:right;font:600 11.5px/1 'Geist Mono',ui-monospace;color:#171412">32/51</span></div>
+              <div style="display:flex;align-items:center;gap:10px"><span style="width:84px;font:500 11px/1 'Geist Mono',ui-monospace;color:#5f5952">QUESTÕES</span><div style="flex:1;height:12px;border-radius:3px;background:#e5e0d8;overflow:hidden"><div style="width:34%;height:100%;background:#155e75"></div></div><span style="width:52px;text-align:right;font:600 11.5px/1 'Geist Mono',ui-monospace;color:#171412">45/133</span></div>
+              <div style="display:flex;gap:10px;padding-top:4px"><div style="flex:1;padding:11px;border-radius:10px;background:#efece7"><div style="font:600 19px/1 'Geist Mono',ui-monospace;color:#047857">83%</div><div style="font:500 9.5px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#5f5952;margin-top:5px">ACERTO</div></div><div style="flex:1;padding:11px;border-radius:10px;background:#efece7"><div style="font:600 19px/1 'Geist Mono',ui-monospace;color:#171412">6 d</div><div style="font:500 9.5px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#5f5952;margin-top:5px">SEQUÊNCIA</div></div><div style="flex:1;padding:11px;border-radius:10px;background:#efece7"><div style="font:600 19px/1 'Geist Mono',ui-monospace;color:#171412">9 min</div><div style="font:500 9.5px/1.2 'Geist Mono',ui-monospace;letter-spacing:.08em;color:#5f5952;margin-top:5px">POR NOITE</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width:1280px;border-radius:16px;overflow:hidden;background:#0b0f14;border:1px solid rgba(0,0,0,.4);box-shadow:0 20px 44px -26px rgba(0,0,0,.55)">
+        <div style="padding:10px 16px;background:#241d10;border-bottom:1px solid rgba(251,191,36,.3);display:flex;align-items:center;gap:9px"><span style="padding:4px 8px;border-radius:5px;background:#fbbf24;font:600 9.5px/1.2 'Geist Mono',ui-monospace;color:#241d10">OPCIONAL</span><span style="font:500 12.5px/1.4 'Geist',system-ui;color:#fde9b6">Com fotografia FIRE 002 (1140×400, recomendada para herói) · só publica com aprovação registrada no manifest</span></div>
+        <div style="display:grid;grid-template-columns:1.05fr 1fr;min-height:420px">
+          <div style="padding:52px 48px;display:flex;flex-direction:column;gap:18px;justify-content:center">
+            <div style="display:flex;align-items:center;gap:11px">
+              <div style="width:34px;height:34px;border-radius:9px;background:#11161d;border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font:500 6.5px/1.2 'Geist Mono',ui-monospace;color:#8a949f">LOGO</div>
+              <span style="font:600 14px/1 'Geist',system-ui;letter-spacing:.03em;color:#f5f1ea">LGND SQUAD</span>
+            </div>
+            <h1 style="margin:0;font:600 50px/1.05 'Geist',system-ui;letter-spacing:-.032em;color:#f5f1ea;max-width:20ch;text-wrap:balance">Domine o conteúdo do curso em 15 minutos por noite.</h1>
+            <p style="margin:0;font:400 17.5px/1.6 'Geist',system-ui;color:#c6ced6;max-width:48ch;text-wrap:pretty">Formação de Líderes Humanitários — Defesa Civil e Desastres. Você estuda o que está prestes a esquecer, não o que já sabe.</p>
+            <div style="display:flex;gap:12px"><button style="min-height:56px;padding:0 26px;border-radius:10px;border:0;background:#fb923c;color:#171412;font:600 17px/1 'Geist',system-ui;cursor:pointer">Pedir acesso</button><button style="min-height:56px;padding:0 26px;border-radius:10px;border:1px solid rgba(245,241,234,.26);background:transparent;color:#f5f1ea;font:600 17px/1 'Geist',system-ui;cursor:pointer">Já tenho conta</button></div>
+            <span style="font:500 12.5px/1.45 'Geist',system-ui;color:#8a949f">Botão segue <span style="font-family:'Geist Mono',ui-monospace">--primary</span> do tema escuro. O <span style="font-family:'Geist Mono',ui-monospace">#ff5a00</span> da marca não aparece fora do logo.</span>
+          </div>
+          <div style="position:relative;background:repeating-linear-gradient(135deg,#1b2530 0 14px,#141c25 14px 28px);display:flex;align-items:flex-end;padding:20px">
+            <div style="position:absolute;inset:0;background:linear-gradient(90deg,#0b0f14 0%,rgba(11,15,20,.72) 42%,rgba(11,15,20,.35) 100%)"></div>
+            <div style="position:relative;display:flex;flex-direction:column;gap:7px">
+              <span style="padding:5px 9px;border-radius:6px;background:rgba(11,15,20,.8);border:1px solid rgba(255,255,255,.16);font:500 10.5px/1.4 'Geist Mono',ui-monospace;color:#c6ced6;align-self:flex-start">/media/legend-squad/events/fire-002-ticketandgo-banner.webp</span>
+              <span style="padding:5px 9px;border-radius:6px;background:#fbbf24;font:600 9.5px/1.2 'Geist Mono',ui-monospace;letter-spacing:.06em;color:#241d10;align-self:flex-start">△ APPROVAL-REQUIRED</span>
+              <span style="font:400 11.5px/1.5 'Geist',system-ui;color:#8a949f;max-width:36ch">Véu <span style="font-family:'Geist Mono',ui-monospace">--scrim</span> em gradiente para o texto manter 15:1 sobre qualquer região da foto.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="max-width:1280px;padding:16px 18px;border-radius:12px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);font:400 13.5px/1.65 'Geist',system-ui;color:#292524"><strong style="font-weight:600">Regra de troca:</strong> a foto é uma camada, não uma dependência — mesma grade, mesma ordem de leitura, mesmos CTAs nas mesmas posições. Trocar de uma versão para a outra é editar um bloco, não redesenhar o herói. Em mobile a foto nunca entra: 390px não tem largura para foto + texto legível, e o herói mobile já é o sem-foto.</div>
+    </div>
+  </div>
+
+  <div style="padding:24px 28px;border-radius:16px;background:#fffdfa;border:1px solid rgba(0,0,0,.12);max-width:1100px;display:flex;flex-direction:column;gap:12px">
+    <h2 style="margin:0;font:600 20px/1.3 'Geist',system-ui;letter-spacing:-.015em;color:#171412">Notas do grupo A</h2>
+    <ul style="margin:0;padding-left:18px;font:400 14px/1.7 'Geist',system-ui;color:#292524">
+      <li><strong style="font-weight:600">Dívida 1 endereçada:</strong> <span style="font-family:'Geist Mono',ui-monospace">/</span> deixa de redirecionar. Quem recebe o link agora entende o produto, vê as duas trilhas e os números reais antes de decidir pedir acesso.</li>
+      <li><strong style="font-weight:600">Dívida 7 endereçada com a marca real</strong> (revisão): lockup do logo oficial + forma curta, espaçamento mínimo de 25% da altura, tratamento definido para tema claro (chip escuro padrão, mono como alternativa, colorido sobre papel proibido), favicon a partir do logo, e o pedido de SVG/PNG otimizado no handoff. O wordmark tipográfico saiu.</li>
+      <li><strong style="font-weight:600">Conteúdo do curso não aparece:</strong> o painel do herói é rotulado <em>exemplo</em>, os 3 passos explicam o método sem citar carta, e o rodapé declara material de terceiros e acesso por matrícula. Nenhuma pergunta ou resposta real é exibida.</li>
+      <li><strong style="font-weight:600">Copy real em pt-BR</strong> e o herói também em es para provar o crescimento de rótulo. Chaves i18n novas: <span style="font-family:'Geist Mono',ui-monospace">home.hero.title|sub|badge</span>, <span style="font-family:'Geist Mono',ui-monospace">home.cta.request|login</span>, <span style="font-family:'Geist Mono',ui-monospace">home.outcomes.1|2|3</span>, <span style="font-family:'Geist Mono',ui-monospace">home.how.step1|2|3</span>, <span style="font-family:'Geist Mono',ui-monospace">home.tracks.essential|full</span>, <span style="font-family:'Geist Mono',ui-monospace">home.stats.*</span>, <span style="font-family:'Geist Mono',ui-monospace">home.footer.thirdParty|enrollment</span>. <span style="font-family:'Geist Mono',ui-monospace">BRAND.long</span> e <span style="font-family:'Geist Mono',ui-monospace">BRAND.short</span> ficam <em>fora</em> do i18n, em constante.</li>
+      <li><strong style="font-weight:600">Direitos:</strong> só o logo (<span style="font-family:'Geist Mono',ui-monospace">authorized-for-project</span>) entra no produto. O herói opcional usa <span style="font-family:'Geist Mono',ui-monospace">events/fire-002-ticketandgo-banner.webp</span> (1140×400); os banners FIRE são <em>approval-required</em> e as peças de Instagram <em>reference-only</em> — por isso o herói foi desenhado nas duas versões, com e sem fotografia, e a versão sem foto é a que se sustenta sozinha.</li>
+      <li><strong style="font-weight:600">Paleta:</strong> <span style="font-family:'Geist Mono',ui-monospace">#ff5a00</span> da marca não entra na UI (2,65:1 como texto, 3,13:1 como fill) — fica dentro do logo e em preenchimento decorativo grande. Regra registrada na página de sistema.</li>
+      <li><strong style="font-weight:600">Sem dependência nova:</strong> zero ilustração, zero foto de banco, zero gradiente de dashboard. As barras são div; o único bitmap é o logo.</li>
+      <li><strong style="font-weight:600">Com A fechado, as sete dívidas da §4 estão endereçadas.</strong> Falta pintar os artboards de <span style="font-family:'Geist Mono',ui-monospace">/biblioteca</span> (catálogo, detalhe e markdown longo com os três diagramas SVG) e a página de componentes em nível de especificação — diga se quer que eu abra isso na sequência.</li>
+    </ul>
+  </div>
+
+</section>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Revisão&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return { notes: this.props.showNotes ?? true };
+  }
+}
+</script>
+</body>
+</html>

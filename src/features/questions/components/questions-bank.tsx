@@ -61,8 +61,8 @@ export function QuestionsBank() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-10">
       <header className="mb-6">
-        <h1 className="text-2xl font-semibold text-navy">{t("questions.title")}</h1>
-        <p className="mt-2 text-slate-600">
+        <h1 className="text-2xl font-semibold text-paper">{t("questions.title")}</h1>
+        <p className="mt-2 text-mist">
           {t("questions.description", { count: meta?.total ?? "…" })}
         </p>
       </header>
@@ -79,12 +79,12 @@ export function QuestionsBank() {
       />
 
       <div className="mt-6">
-        {questionsQuery.isLoading ? <p className="text-slate-600">{t("questions.loading")}</p> : null}
+        {questionsQuery.isLoading ? <p className="text-mist">{t("questions.loading")}</p> : null}
         {questionsQuery.isError ? (
-          <p className="text-red-600">{t("questions.error")}</p>
+          <p className="text-hard">{t("questions.error")}</p>
         ) : null}
         {!questionsQuery.isLoading && questions.length === 0 ? (
-          <p className="text-slate-600">{t("questions.empty")}</p>
+          <p className="text-mist">{t("questions.empty")}</p>
         ) : null}
 
         <div className="space-y-4">
@@ -105,11 +105,11 @@ export function QuestionsBank() {
             type="button"
             disabled={page <= 1}
             onClick={() => setPage((current) => Math.max(1, current - 1))}
-            className="bg-slate-700 hover:bg-slate-700/90"
+            className="bg-paper hover:bg-paper/90"
           >
             {t("common.previous")}
           </Button>
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-mist">
             {t("questions.pagination", {
               page: meta.page ?? page,
               pageCount: meta.pageCount ?? 1,
@@ -120,13 +120,13 @@ export function QuestionsBank() {
             type="button"
             disabled={page >= (meta.pageCount ?? 1)}
             onClick={() => setPage((current) => current + 1)}
-            className="bg-slate-700 hover:bg-slate-700/90"
+            className="bg-paper hover:bg-paper/90"
           >
             {t("common.next")}
           </Button>
         </div>
       ) : meta ? (
-        <p className="mt-6 text-center text-sm text-slate-600">
+        <p className="mt-6 text-center text-sm text-mist">
           {t("questions.total", { total: meta.total ?? questions.length })}
         </p>
       ) : null}

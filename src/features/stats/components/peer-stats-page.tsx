@@ -13,7 +13,7 @@ export function PeerStatsPage({ userId }: { userId: string }) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-8">
       <p className="text-sm">
-        <Link href="/desempenho" className="text-flare hover:underline">
+        <Link href="/desempenho" className="text-flare-ink hover:underline">
           {t("common.back")}
         </Link>
       </p>
@@ -24,16 +24,16 @@ export function PeerStatsPage({ userId }: { userId: string }) {
       {data ? (
         <>
           <header className="mt-4 mb-6">
-            <p className="text-sm font-medium uppercase tracking-wide text-amber">
+            <p className="text-sm font-medium uppercase tracking-wide text-flare-ink">
               {t("pack.profile.eyebrow")}
             </p>
-            <h1 className="mt-1 text-2xl font-semibold text-navy">{data.profile.name}</h1>
-            <p className="mt-2 text-sm text-slate-600">
+            <h1 className="mt-1 text-2xl font-semibold text-paper">{data.profile.name}</h1>
+            <p className="mt-2 text-sm text-mist">
               {[data.profile.lgndNumber, data.profile.squad, data.profile.manada?.name]
                 .filter(Boolean)
                 .join(" · ") || t("pack.profile.noMeta")}
             </p>
-            <p className="mt-3 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-950">
+            <p className="mt-3 rounded-xl border border-learn bg-learn-surf px-4 py-3 text-sm text-learn">
               {data.disclaimer}
             </p>
           </header>

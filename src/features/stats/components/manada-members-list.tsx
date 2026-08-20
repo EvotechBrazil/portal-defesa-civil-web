@@ -14,8 +14,8 @@ export function ManadaMembersList() {
 
   return (
     <section className="mt-10">
-      <h2 className="text-lg font-semibold text-navy">{t("pack.members.title")}</h2>
-      <p className="mt-1 text-sm text-slate-600">{t("pack.members.description")}</p>
+      <h2 className="text-lg font-semibold text-paper">{t("pack.members.title")}</h2>
+      <p className="mt-1 text-sm text-mist">{t("pack.members.description")}</p>
 
       {isLoading ? <p className="mt-4 text-sm text-mist">{t("common.loading")}</p> : null}
       {isError ? <p className="mt-4 text-sm text-hard">{t("pack.members.error")}</p> : null}
@@ -62,7 +62,7 @@ function MemberCard({
               {member.squad ? ` · ${member.squad}` : ""}
             </p>
           </div>
-          <p className="text-lg font-semibold tabular-nums text-navy">{member.practiceAccuracyPct}%</p>
+          <p className="text-lg font-semibold tabular-nums text-paper">{member.practiceAccuracyPct}%</p>
         </div>
         <p className="mt-3 text-xs text-mist">
           {t("pack.members.meta", {

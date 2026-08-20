@@ -13,9 +13,9 @@ export function StatsPage({ courseId }: { courseId?: string }) {
   return (
     <section className="mx-auto max-w-6xl px-4 py-8">
       <header className="mb-6">
-        <p className="text-sm font-medium uppercase tracking-wide text-amber">{t("stats.eyebrow")}</p>
-        <h1 className="mt-1 text-2xl font-semibold text-navy">{t("stats.title")}</h1>
-        <p className="mt-2 max-w-2xl text-sm text-slate-600">{t("stats.description")}</p>
+        <p className="text-sm font-medium uppercase tracking-wide text-flare-ink">{t("stats.eyebrow")}</p>
+        <h1 className="mt-1 text-2xl font-semibold text-paper">{t("stats.title")}</h1>
+        <p className="mt-2 max-w-2xl text-sm text-mist">{t("stats.description")}</p>
       </header>
 
       {isLoading ? <StatsLoading /> : null}
@@ -24,7 +24,7 @@ export function StatsPage({ courseId }: { courseId?: string }) {
       {data && hasStatsData(data) ? (
         <div className="space-y-4">
           <StatsPanels data={data} />
-          {isFetching ? <p className="text-xs text-slate-400">{t("stats.updating")}</p> : null}
+          {isFetching ? <p className="text-xs text-mist">{t("stats.updating")}</p> : null}
         </div>
       ) : null}
 

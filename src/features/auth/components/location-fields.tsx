@@ -6,7 +6,7 @@ import { useBrazilCities, useBrazilStates } from "../hooks/use-location-options"
 import { COUNTRY_OPTIONS } from "../lib/locations";
 
 const selectClassName =
-  "h-10 w-full rounded-md border border-line bg-background px-3 text-sm text-foreground outline-none ring-flare focus:ring-2";
+  "min-h-11 w-full rounded-ctl border border-line bg-background px-3 text-sm text-foreground outline-none";
 
 export interface LocationValue {
   country: string;
@@ -140,7 +140,7 @@ function Field({
         {label}
       </label>
       {children}
-      {error ? <p className="text-sm text-red-600">{error}</p> : null}
+      {error ? <p className="text-sm text-hard">{error}</p> : null}
     </div>
   );
 }

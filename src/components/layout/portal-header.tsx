@@ -53,7 +53,7 @@ export function PortalHeader() {
                 className={cn(
                   "flex min-h-11 cursor-pointer items-center gap-1.5 rounded-xl px-3 py-2 transition duration-200",
                   active
-                    ? "bg-flare text-white"
+                    ? "bg-primary text-primary-ink"
                     : "text-mist hover:bg-black/5 hover:text-paper dark:hover:bg-white/10",
                 )}
               >

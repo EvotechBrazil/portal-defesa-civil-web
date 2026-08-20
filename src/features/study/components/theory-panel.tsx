@@ -14,7 +14,7 @@ export function TheoryPanel({ card }: TheoryPanelProps) {
   return (
     <div className="space-y-5">
       <section className="rounded-2xl border border-line bg-panel px-4 py-4">
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-flare">
+        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-flare-ink">
           {t("study.theory")}
         </p>
         <MarkdownView
@@ -29,7 +29,7 @@ export function TheoryPanel({ card }: TheoryPanelProps) {
         ) : null}
       </section>
       <section>
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-flare">
+        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-flare-ink">
           {t("study.cardAssessment")}
         </p>
         <PracticePanel cardId={card.id} variant="onDark" autoResume={false} />

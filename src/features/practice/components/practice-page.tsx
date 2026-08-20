@@ -39,8 +39,8 @@ export function PracticePage() {
   return (
     <section className="mx-auto max-w-5xl space-y-6 px-4 py-8">
       <header>
-        <h1 className="text-2xl font-semibold text-navy">{title}</h1>
-        <p className="mt-1 text-sm text-slate-600">
+        <h1 className="text-2xl font-semibold text-paper">{title}</h1>
+        <p className="mt-1 text-sm text-mist">
           {t("practice.description")}
         </p>
       </header>
@@ -50,7 +50,7 @@ export function PracticePage() {
           <Button
             type="button"
             onClick={() => router.replace("/praticar")}
-            className="bg-slate-200 text-slate-800 hover:bg-slate-300"
+            className="bg-inset text-paper hover:bg-inset"
           >
             {t("practice.changeCard")}
           </Button>
@@ -59,29 +59,29 @@ export function PracticePage() {
       ) : (
         <>
           <Card className="space-y-3">
-            <h2 className="text-sm font-semibold text-navy">{t("practice.recent")}</h2>
+            <h2 className="text-sm font-semibold text-paper">{t("practice.recent")}</h2>
             {recentQuery.isLoading ? (
-              <p className="text-sm text-slate-500">{t("practice.recentLoading")}</p>
+              <p className="text-sm text-mist">{t("practice.recentLoading")}</p>
             ) : null}
             {recentQuery.isError ? (
-              <p className="text-sm text-red-600">{t("practice.recentError")}</p>
+              <p className="text-sm text-hard">{t("practice.recentError")}</p>
             ) : null}
             {recentQuery.data && recentQuery.data.length === 0 ? (
-              <p className="text-sm text-slate-500">{t("practice.recentEmpty")}</p>
+              <p className="text-sm text-mist">{t("practice.recentEmpty")}</p>
             ) : null}
-            <ul className="divide-y divide-slate-100">
+            <ul className="divide-y divide-line">
               {recentQuery.data?.map((item) => (
                 <li key={item.attemptId}>
                   <button
                     type="button"
                     onClick={() => selectCard(item.cardId)}
-                    className="flex w-full cursor-pointer items-center justify-between gap-3 py-2 text-left hover:bg-slate-50"
+                    className="flex w-full cursor-pointer items-center justify-between gap-3 py-2 text-left hover:bg-inset"
                   >
                     <span className="text-sm">
-                      <span className="font-medium text-navy">{item.cardCode}</span>{" "}
-                      <span className="text-slate-600">{translateContent(item.cardFront)}</span>
+                      <span className="font-medium text-paper">{item.cardCode}</span>{" "}
+                      <span className="text-mist">{translateContent(item.cardFront)}</span>
                     </span>
-                    <span className="text-xs text-slate-500">
+                    <span className="text-xs text-mist">
                       {item.correctCount}/{item.totalCount} · {item.scorePct}%
                     </span>
                   </button>
@@ -104,13 +104,13 @@ export function PracticePage() {
             </form>
 
             {cardsQuery.isLoading ? (
-              <p className="text-sm text-slate-500">{t("practice.cardsLoading")}</p>
+              <p className="text-sm text-mist">{t("practice.cardsLoading")}</p>
             ) : null}
             {cardsQuery.isError ? (
-              <p className="text-sm text-red-600">{t("practice.cardsError")}</p>
+              <p className="text-sm text-hard">{t("practice.cardsError")}</p>
             ) : null}
             {cardsQuery.data && cardsQuery.data.items.length === 0 ? (
-              <p className="text-sm text-slate-500">{t("practice.cardsEmpty")}</p>
+              <p className="text-sm text-mist">{t("practice.cardsEmpty")}</p>
             ) : null}
 
             <ul className="grid gap-2 sm:grid-cols-2">
@@ -119,13 +119,13 @@ export function PracticePage() {
                   <button
                     type="button"
                     onClick={() => selectCard(card.id)}
-                    className="flex h-full w-full cursor-pointer flex-col rounded-lg border border-slate-200 px-3 py-3 text-left transition hover:border-amber-400 hover:bg-amber-50/40"
+                    className="flex h-full w-full cursor-pointer flex-col rounded-lg border border-line px-3 py-3 text-left transition hover:border-flare hover:bg-learn-surf/40"
                   >
-                    <span className="text-xs uppercase tracking-wide text-slate-500">
+                    <span className="text-xs uppercase tracking-wide text-mist">
                       {card.deckKind === "ESSENTIAL" ? t("practice.essential") : t("practice.exam")} · {card.code}
                     </span>
-                    <span className="mt-1 font-medium text-navy">{translateContent(card.front)}</span>
-                    <span className="mt-1 text-xs text-slate-500">
+                    <span className="mt-1 font-medium text-paper">{translateContent(card.front)}</span>
+                    <span className="mt-1 text-xs text-mist">
                       {t("practice.questionCount", { count: card.questionCount })}
                     </span>
                   </button>
@@ -139,18 +139,18 @@ export function PracticePage() {
                   type="button"
                   disabled={page <= 1 || cardsQuery.isFetching}
                   onClick={() => setPage((current) => Math.max(1, current - 1))}
-                  className="bg-slate-200 text-slate-800 hover:bg-slate-300"
+                  className="bg-inset text-paper hover:bg-inset"
                 >
                   {t("common.previous")}
                 </Button>
-                <span className="text-slate-500">
+                <span className="text-mist">
                   {t("common.pageOf", { page: cardsQuery.data.page, pageCount: cardsQuery.data.pageCount })}
                 </span>
                 <Button
                   type="button"
                   disabled={page >= cardsQuery.data.pageCount || cardsQuery.isFetching}
                   onClick={() => setPage((current) => current + 1)}
-                  className="bg-slate-200 text-slate-800 hover:bg-slate-300"
+                  className="bg-inset text-paper hover:bg-inset"
                 >
                   {t("common.next")}
                 </Button>

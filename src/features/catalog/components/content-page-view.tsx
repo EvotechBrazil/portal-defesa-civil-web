@@ -17,15 +17,15 @@ export function ContentPageView() {
   return (
     <article className="mx-auto max-w-3xl px-4 py-10">
       <p className="text-sm">
-        <Link href={`/curso/${slug}`} className="cursor-pointer text-amber hover:underline">
+        <Link href={`/curso/${slug}`} className="cursor-pointer text-flare-ink hover:underline">
           ← {t("course.back")}
         </Link>
       </p>
-      {isLoading ? <p className="mt-4 text-slate-600">{t("course.pageLoading")}</p> : null}
-      {isError ? <p className="mt-4 text-red-600">{t("course.pageNotFound")}</p> : null}
+      {isLoading ? <p className="mt-4 text-mist">{t("course.pageLoading")}</p> : null}
+      {isError ? <p className="mt-4 text-hard">{t("course.pageNotFound")}</p> : null}
       {page ? (
         <>
-          <h1 className="mt-3 text-2xl font-semibold text-navy">{translateContent(page.title)}</h1>
+          <h1 className="mt-3 text-2xl font-semibold text-paper">{translateContent(page.title)}</h1>
           <MarkdownView className="mt-6" markdown={translateContent(page.bodyMd)} />
         </>
       ) : null}

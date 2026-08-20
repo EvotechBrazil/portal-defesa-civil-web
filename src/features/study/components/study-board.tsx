@@ -191,7 +191,7 @@ export function StudyBoard({ sessionId }: StudyBoardProps) {
           <button
             type="button"
             onClick={() => changeFocus(null)}
-            className="mt-3 min-h-11 cursor-pointer rounded-2xl border border-flare px-4 py-2 text-sm font-semibold text-flare transition duration-200 hover:bg-flare/10"
+            className="mt-3 min-h-11 cursor-pointer rounded-2xl border border-flare px-4 py-2 text-sm font-semibold text-flare-ink transition duration-200 hover:bg-flare/10"
           >
             {t("study.backFullQueue")}
           </button>

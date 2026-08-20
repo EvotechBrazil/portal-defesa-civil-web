@@ -19,12 +19,12 @@ export function QuestionItem({ question, index, mode }: QuestionItemProps) {
   const hasAnswered = isAnswerKey || selectedId !== null;
 
   return (
-    <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-      <p className="text-xs tracking-wide text-slate-500 uppercase">
+    <article className="rounded-card border border-line bg-panel p-5">
+      <p className="text-xs tracking-wide text-mist uppercase">
         {question.moduleCode} · Quiz {question.quizCode}
         {question.sourceRef ? ` · ${translateContent(question.sourceRef)}` : ""}
       </p>
-      <h2 className="mt-2 text-base font-medium text-navy">
+      <h2 className="mt-2 text-base font-medium text-paper">
         {index}. {translateContent(question.stem)}
       </h2>
       <ul className="mt-4 space-y-2">
@@ -40,10 +40,10 @@ export function QuestionItem({ question, index, mode }: QuestionItemProps) {
                 onClick={() => setSelectedId(option.id)}
                 className={cn(
                   "flex w-full cursor-pointer items-start rounded-lg border px-3 py-2 text-left text-sm transition",
-                  "hover:border-amber/60 hover:bg-amber/5 disabled:cursor-default",
-                  showCorrect && "border-emerald-500 bg-emerald-50 text-emerald-900",
-                  showWrong && "border-red-400 bg-red-50 text-red-900",
-                  !showCorrect && !showWrong && "border-slate-200 bg-white",
+                  "hover:border-flare/60 hover:bg-flare/5 disabled:cursor-default",
+                  showCorrect && "border-ok bg-ok-surf text-ok",
+                  showWrong && "border-hard bg-hard-surf text-hard",
+                  !showCorrect && !showWrong && "border-line bg-panel",
                 )}
               >
                 <span className="mr-2 font-semibold">
@@ -56,7 +56,7 @@ export function QuestionItem({ question, index, mode }: QuestionItemProps) {
         })}
       </ul>
       {hasAnswered && question.explanationMd ? (
-        <div className="mt-4 rounded-lg bg-slate-50 px-3 py-2 text-sm">
+        <div className="mt-4 rounded-lg bg-inset px-3 py-2 text-sm">
           <MarkdownView markdown={translateContent(question.explanationMd)} />
         </div>
       ) : null}

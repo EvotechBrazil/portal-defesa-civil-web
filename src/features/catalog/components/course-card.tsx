@@ -18,24 +18,24 @@ export function CourseCard({ course }: CourseCardProps) {
   return (
     <Card className="flex flex-col gap-4">
       <div>
-        <p className="text-xs font-medium tracking-wide text-amber uppercase">
+        <p className="text-xs font-medium tracking-wide text-flare-ink uppercase">
           {course.sourcePlatform ?? t("catalog.label")}
         </p>
-        <h2 className="mt-1 text-xl font-semibold text-navy">{translateContent(course.title)}</h2>
+        <h2 className="mt-1 text-xl font-semibold text-paper">{translateContent(course.title)}</h2>
         {course.description ? (
-          <p className="mt-2 text-sm leading-relaxed text-slate-600">
+          <p className="mt-2 text-sm leading-relaxed text-mist">
             {translateContent(course.description)}
           </p>
         ) : null}
       </div>
 
-      <div className="rounded-lg bg-slate-50 px-3 py-2">
-        <div className="mb-1 flex items-center justify-between text-xs text-slate-500">
+      <div className="rounded-lg bg-inset px-3 py-2">
+        <div className="mb-1 flex items-center justify-between text-xs text-mist">
           <span>{t("catalog.progress")}</span>
           <span>{course.isEnrolled ? t("catalog.soon") : t("catalog.enrollToTrack")}</span>
         </div>
-        <div className="h-2 overflow-hidden rounded-full bg-slate-200">
-          <div className="h-full w-0 rounded-full bg-amber" />
+        <div className="h-2 overflow-hidden rounded-full bg-inset">
+          <div className="h-full w-0 rounded-full bg-primary" />
         </div>
       </div>
 
@@ -54,13 +54,13 @@ export function CourseCard({ course }: CourseCardProps) {
           </Button>
         )}
         <Link href={`/curso/${course.slug}`}>
-          <Button type="button" className="bg-slate-700 hover:bg-slate-700/90">
+          <Button type="button" className="bg-paper hover:bg-paper/90">
             {t("catalog.viewModules")}
           </Button>
         </Link>
       </div>
       {enroll.isError ? (
-        <p className="text-sm text-red-600">{t("catalog.enrollError")}</p>
+        <p className="text-sm text-hard">{t("catalog.enrollError")}</p>
       ) : null}
     </Card>
   );

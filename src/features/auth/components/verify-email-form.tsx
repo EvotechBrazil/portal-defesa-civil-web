@@ -50,8 +50,8 @@ export function VerifyEmailForm() {
 
   return (
     <Card>
-      <h1 className="text-2xl font-semibold text-navy">{t("auth.verify.title")}</h1>
-      <p className="mt-1 text-sm text-slate-600">
+      <h1 className="text-2xl font-semibold text-paper">{t("auth.verify.title")}</h1>
+      <p className="mt-1 text-sm text-mist">
         {emailFromUrl
           ? t("auth.verify.sent", { email: emailFromUrl })
           : t("auth.verify.instructions")}
@@ -59,12 +59,12 @@ export function VerifyEmailForm() {
 
       {isVerified ? (
         <div className="mt-6 space-y-4">
-          <p className="rounded-md bg-emerald-50 px-3 py-2 text-sm text-emerald-800">
+          <p className="rounded-md bg-ok-surf px-3 py-2 text-sm text-ok">
             {t("auth.verify.success")}
           </p>
           <Link
             href="/login"
-            className="inline-flex w-full cursor-pointer items-center justify-center rounded-md bg-navy px-4 py-2 text-sm font-medium text-white transition hover:bg-navy/90"
+            className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center rounded-ctl bg-paper px-4 py-2 text-sm font-medium text-ink transition hover:bg-paper/90"
           >
             {t("auth.verify.goLogin")}
           </Link>
@@ -76,17 +76,17 @@ export function VerifyEmailForm() {
           noValidate
         >
           <div className="space-y-1">
-            <label htmlFor="token" className="text-sm font-medium text-slate-700">
+            <label htmlFor="token" className="text-sm font-medium text-paper">
               {t("auth.verify.token")}
             </label>
             <Input id="token" autoComplete="off" {...tokenForm.register("token")} />
             {tokenForm.formState.errors.token ? (
-              <p className="text-sm text-red-600">{t(tokenForm.formState.errors.token.message ?? "")}</p>
+              <p className="text-sm text-hard">{t(tokenForm.formState.errors.token.message ?? "")}</p>
             ) : null}
           </div>
 
           {verify.isError ? (
-            <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">
+            <p className="rounded-md bg-hard-surf px-3 py-2 text-sm text-hard">
               {locale === "pt-BR"
                 ? getApiErrorMessage(verify.error, t("auth.verify.invalid"))
                 : t("auth.verify.invalid")}
@@ -101,13 +101,13 @@ export function VerifyEmailForm() {
 
       {!isVerified ? (
         <form
-          className="mt-8 space-y-3 border-t border-slate-200 pt-6"
+          className="mt-8 space-y-3 border-t border-line pt-6"
           onSubmit={resendForm.handleSubmit((values) => resend.mutate(values.email))}
           noValidate
         >
-          <p className="text-sm text-slate-600">{t("auth.verify.resendPrompt")}</p>
+          <p className="text-sm text-mist">{t("auth.verify.resendPrompt")}</p>
           <div className="space-y-1">
-            <label htmlFor="resend-email" className="text-sm font-medium text-slate-700">
+            <label htmlFor="resend-email" className="text-sm font-medium text-paper">
               {t("auth.email")}
             </label>
             <Input
@@ -117,16 +117,16 @@ export function VerifyEmailForm() {
               {...resendForm.register("email")}
             />
             {resendForm.formState.errors.email ? (
-              <p className="text-sm text-red-600">{t(resendForm.formState.errors.email.message ?? "")}</p>
+              <p className="text-sm text-hard">{t(resendForm.formState.errors.email.message ?? "")}</p>
             ) : null}
           </div>
           {resend.isSuccess ? (
-            <p className="text-sm text-emerald-700">
+            <p className="text-sm text-ok">
               {t("auth.verify.resendSuccess")}
             </p>
           ) : null}
           {resend.isError ? (
-            <p className="text-sm text-red-600">
+            <p className="text-sm text-hard">
               {locale === "pt-BR"
                 ? getApiErrorMessage(resend.error, t("auth.verify.resendError"))
                 : t("auth.verify.resendError")}
@@ -138,8 +138,8 @@ export function VerifyEmailForm() {
         </form>
       ) : null}
 
-      <p className="mt-4 text-center text-sm text-slate-600">
-        <Link href="/login" className="font-medium text-navy underline">
+      <p className="mt-4 text-center text-sm text-mist">
+        <Link href="/login" className="font-medium text-paper underline">
           {t("auth.verify.backLogin")}
         </Link>
       </p>

@@ -2,50 +2,119 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Colável do artboard "Sistema - Tokens e Componentes" · Tailwind v4.
+   Aliases de compatibilidade mantêm válidos os usos atuais de
+   line / background / foreground / paper / ink. */
 :root {
-  --bg: #f6f1ea;
-  --fg: #1c1917;
-  --ink: #fffaf6;
+  --bg: #efece7;
   --panel: #ffffff;
-  --paper: #1c1917;
-  --mist: #78716c;
-  --line: rgb(28 25 23 / 0.12);
+  --inset: #e5e0d8;
+  --card: #faf6ef;
+  --fg: #171412;
+  --mist: #5f5952;
+  --line: rgb(0 0 0 / 0.14);
+  --flare: #ea580c;
+  --flare-ink: #9a3412;
+  --primary: #9a3412;
+  --primary-hover: #7c2d12;
+  --primary-ink: #ffffff;
   --glow: rgb(234 88 12 / 0.1);
-  --ok: #059669;
-  --hard: #dc2626;
-  --learn: #d97706;
+  --scrim: rgb(0 0 0 / 0.72);
+  --steel: #155e75;
+  --steel-surf: #e0f0f5;
+  --ok: #047857;
+  --ok-surf: #e8f6f0;
+  --learn: #854d0e;
+  --learn-surf: #fdf5e6;
+  --hard: #b91c1c;
+  --hard-surf: #fdeeee;
+  --r-1: 6px;
+  --r-2: 10px;
+  --r-3: 14px;
+  --r-4: 20px;
+  /* e0 (inset) e e1 (painel) são SEM sombra: tinta + 1px de --line. Só e2/e3 têm sombra. */
+  --e-2: 0 8px 24px -18px rgb(0 0 0 / 0.5);
+  --e-3: 0 24px 48px -24px rgb(0 0 0 / 0.55);
+  --ring: var(--flare);
+  --ring-w: 2px;
+  --ring-offset: 2px;
+  --dur-1: 120ms;
+  --dur-2: 180ms;
+  --dur-3: 320ms;
+  --ease: cubic-bezier(0.3, 0, 0.2, 1);
+  --measure: 62ch;
 }
 
 .dark {
-  --bg: #14110f;
-  --fg: #f4ede4;
-  --ink: #1c1917;
-  --panel: #262321;
-  --paper: #f4ede4;
-  --mist: #c4b8ad;
-  --line: rgb(255 255 255 / 0.1);
+  --bg: #0f1113;
+  --panel: #191c1f;
+  --inset: #0a0c0d;
+  --card: #221f1c;
+  --fg: #eceae7;
+  --mist: #a8a29e;
+  --line: rgb(255 255 255 / 0.12);
+  --flare: #fb923c;
+  --flare-ink: #fdba74;
+  --primary: #fb923c;
+  --primary-hover: #fdba74;
+  --primary-ink: #171412;
   --glow: rgb(234 88 12 / 0.16);
+  --scrim: rgb(0 0 0 / 0.72);
+  --steel: #7dd3fc;
+  --steel-surf: #10262e;
   --ok: #34d399;
-  --hard: #f87171;
+  --ok-surf: #0d211c;
   --learn: #fbbf24;
+  --learn-surf: #241d10;
+  --hard: #f87171;
+  --hard-surf: #241416;
 }
 
 @theme inline {
-  --color-navy: var(--paper);
-  --color-amber: #ea580c;
-  --color-flare: #ea580c;
-  --color-ink: var(--ink);
+  --color-bg: var(--bg);
   --color-panel: var(--panel);
-  --color-paper: var(--paper);
+  --color-inset: var(--inset);
+  --color-card: var(--card);
+  --color-fg: var(--fg);
   --color-mist: var(--mist);
-  --color-line: var(--line);
+  --color-flare: var(--flare);
+  --color-flare-ink: var(--flare-ink);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-ink: var(--primary-ink);
+  --color-glow: var(--glow);
+  --color-scrim: var(--scrim);
+  --color-steel: var(--steel);
+  --color-steel-surf: var(--steel-surf);
   --color-ok: var(--ok);
-  --color-hard: var(--hard);
+  --color-ok-surf: var(--ok-surf);
   --color-learn: var(--learn);
-  --color-background: var(--bg);
-  --color-foreground: var(--fg);
+  --color-learn-surf: var(--learn-surf);
+  --color-hard: var(--hard);
+  --color-hard-surf: var(--hard-surf);
+  --color-ring: var(--ring);
+  --radius-chip: var(--r-1);
+  --radius-ctl: var(--r-2);
+  --radius-panel: var(--r-3);
+  --radius-card: var(--r-4);
+  --shadow-e2: var(--e-2);
+  --shadow-e3: var(--e-3);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --text-micro: 0.6875rem;
+  --text-sm: 0.84375rem;
+  --text-base: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+  --text-lg: 1.1875rem;
+  --text-xl: clamp(1.3125rem, 1.15rem + 0.55vw, 1.5625rem);
+  --text-2xl: clamp(1.625rem, 1.35rem + 1.1vw, 2rem);
+  --text-3xl: clamp(1.9375rem, 1.5rem + 2vw, 2.625rem);
+  --ease-instrument: var(--ease);
+  /* aliases de compatibilidade — 76 usos atuais continuam válidos */
+  --color-line: var(--line);
+  --color-background: var(--bg);
+  --color-foreground: var(--fg);
+  --color-paper: var(--fg);
+  --color-ink: var(--panel); /* --ink é SUPERFÍCIE, não texto: bg-ink/90 text-paper */
 }
 
 body {
@@ -60,10 +129,31 @@ a,
   cursor: pointer;
 }
 
+/*
+  Anel de foco estrutural. O laranja --flare (#ea580c) contra o fill do
+  primário (#9a3412) é só 2,05:1 — sem o offset de 2px em --panel o botão
+  principal perde o foco visível. Nunca outline:none sem este substituto.
+*/
+:where(a, button, [role="button"], input, textarea, select, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--ring-offset) var(--panel),
+    0 0 0 calc(var(--ring-offset) + var(--ring-w)) var(--ring);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .flashcard-inner,
   .flashcard-drag {
     transition: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -89,8 +179,8 @@ a,
   min-height: 320px;
   transform-style: preserve-3d;
   transition:
-    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.28s ease;
+    transform var(--dur-3) var(--ease),
+    opacity var(--dur-3) ease;
 }
 
 .flashcard-inner {
@@ -98,7 +188,7 @@ a,
   width: 100%;
   min-height: 320px;
   transform-style: preserve-3d;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform var(--dur-3) var(--ease);
 }
 
 .flashcard-inner.is-flipped {
@@ -113,14 +203,14 @@ a,
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border-radius: 20px;
+  border-radius: var(--r-4);
   border: 1px solid var(--line);
   background: var(--panel);
 }
 
 .flashcard-back {
   transform: rotateY(180deg);
-  border-color: #ea580c;
+  border-color: var(--flare);
 }
 
 /* Parágrafo que é só ênfase é legenda, não título. É o caso da referência de
