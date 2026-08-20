@@ -10,7 +10,7 @@ import { usePracticeCards, useRecentAttempts } from "../hooks/use-practice-queri
 import { PracticePanel } from "./practice-panel";
 
 export function PracticePage() {
-  const { t } = useI18n();
+  const { t, translateContent } = useI18n();
   const router = useRouter();
   const searchParams = useSearchParams();
   const selectedId = searchParams.get("card") ?? "";
@@ -23,8 +23,8 @@ export function PracticePage() {
 
   const title = useMemo(() => {
     const selected = cardsQuery.data?.items.find((card) => card.id === selectedId);
-    return selected ? `${selected.code} · ${selected.front}` : t("practice.title");
-  }, [cardsQuery.data, selectedId, t]);
+    return selected ? `${selected.code} · ${translateContent(selected.front)}` : t("practice.title");
+  }, [cardsQuery.data, selectedId, t, translateContent]);
 
   function selectCard(cardId: string) {
     router.replace(`/praticar?card=${encodeURIComponent(cardId)}`);
@@ -79,7 +79,7 @@ export function PracticePage() {
                   >
                     <span className="text-sm">
                       <span className="font-medium text-navy">{item.cardCode}</span>{" "}
-                      <span className="text-slate-600">{item.cardFront}</span>
+                      <span className="text-slate-600">{translateContent(item.cardFront)}</span>
                     </span>
                     <span className="text-xs text-slate-500">
                       {item.correctCount}/{item.totalCount} · {item.scorePct}%
@@ -124,7 +124,7 @@ export function PracticePage() {
                     <span className="text-xs uppercase tracking-wide text-slate-500">
                       {card.deckKind === "ESSENTIAL" ? t("practice.essential") : t("practice.exam")} · {card.code}
                     </span>
-                    <span className="mt-1 font-medium text-navy">{card.front}</span>
+                    <span className="mt-1 font-medium text-navy">{translateContent(card.front)}</span>
                     <span className="mt-1 text-xs text-slate-500">
                       {t("practice.questionCount", { count: card.questionCount })}
                     </span>

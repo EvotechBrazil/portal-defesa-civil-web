@@ -9,7 +9,7 @@ import { useCourse } from "../hooks/use-course";
 import { useEnroll } from "../hooks/use-enroll";
 
 export function CourseDetail() {
-  const { t } = useI18n();
+  const { t, translateContent } = useI18n();
   const params = useParams<{ slug: string }>();
   const slug = params.slug ?? "";
   const { data, isLoading, isError } = useCourse(slug);
@@ -29,9 +29,11 @@ export function CourseDetail() {
           </p>
           <header className="mt-3 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
             <div>
-              <h1 className="text-2xl font-semibold text-navy">{course.title}</h1>
+              <h1 className="text-2xl font-semibold text-navy">{translateContent(course.title)}</h1>
               {course.description ? (
-                <p className="mt-2 max-w-3xl text-slate-600">{course.description}</p>
+                <p className="mt-2 max-w-3xl text-slate-600">
+                  {translateContent(course.description)}
+                </p>
               ) : null}
             </div>
             {course.isEnrolled ? (
@@ -60,7 +62,7 @@ export function CourseDetail() {
                   <p className="text-xs tracking-wide text-amber uppercase">
                     {t("course.page", { number: page.ord })}
                   </p>
-                  <p className="mt-1 font-medium text-navy">{page.title}</p>
+                  <p className="mt-1 font-medium text-navy">{translateContent(page.title)}</p>
                 </Card>
               </Link>
             ))}
@@ -72,7 +74,7 @@ export function CourseDetail() {
               <Card key={module.id} className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p className="text-sm font-semibold text-navy">
-                    {module.code} — {module.title}
+                    {module.code} — {translateContent(module.title)}
                   </p>
                   <p className="text-sm text-slate-600">
                     {t("course.counts", { quizzes: module.quizCount, questions: module.questionCount })}

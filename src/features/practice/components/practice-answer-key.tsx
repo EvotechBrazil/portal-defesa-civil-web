@@ -8,7 +8,7 @@ import type { AnswerKeyQuestion } from "../types/practice.types";
 const KEYS = ["A", "B", "C", "D", "E"];
 
 export function PracticeAnswerKey({ questions }: { questions: AnswerKeyQuestion[] }) {
-  const { t } = useI18n();
+  const { t, translateContent } = useI18n();
   return (
     <div className="space-y-4">
       <h3 className="text-[11px] font-semibold uppercase tracking-[0.13em] text-amber-700">
@@ -16,7 +16,9 @@ export function PracticeAnswerKey({ questions }: { questions: AnswerKeyQuestion[
       </h3>
       {questions.map((question) => (
         <article key={question.questionId} className="rounded-lg border border-slate-200 p-3">
-          {question.stem ? <p className="font-medium text-slate-900">{question.stem}</p> : null}
+          {question.stem ? (
+            <p className="font-medium text-slate-900">{translateContent(question.stem)}</p>
+          ) : null}
           <ul className="mt-2 space-y-1.5">
             {question.options.map((option, index) => {
               const isChosenWrong =
@@ -35,7 +37,7 @@ export function PracticeAnswerKey({ questions }: { questions: AnswerKeyQuestion[
                   )}
                 >
                   <span className="w-4 font-semibold">{KEYS[index] ?? String(index + 1)}</span>
-                  <span>{option.text}</span>
+                  <span>{translateContent(option.text)}</span>
                 </li>
               );
             })}
@@ -43,14 +45,16 @@ export function PracticeAnswerKey({ questions }: { questions: AnswerKeyQuestion[
           {question.chosenOptionId && !question.isCorrect ? (
             <p className="mt-2 text-xs text-slate-500">
               {t("practice.youChose")}{" "}
-              {question.options.find((option) => option.optionId === question.chosenOptionId)
-                ?.text ?? t("practice.invalidOption")}
+              {translateContent(
+                question.options.find((option) => option.optionId === question.chosenOptionId)
+                  ?.text ?? t("practice.invalidOption"),
+              )}
             </p>
           ) : null}
           {question.explanationMd ? (
             <MarkdownView
               className="mt-2 text-sm leading-relaxed text-slate-600"
-              markdown={question.explanationMd}
+              markdown={translateContent(question.explanationMd)}
             />
           ) : null}
         </article>

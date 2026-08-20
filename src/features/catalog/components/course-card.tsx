@@ -12,7 +12,7 @@ export interface CourseCardProps {
 }
 
 export function CourseCard({ course }: CourseCardProps) {
-  const { t } = useI18n();
+  const { t, translateContent } = useI18n();
   const enroll = useEnroll();
 
   return (
@@ -21,9 +21,11 @@ export function CourseCard({ course }: CourseCardProps) {
         <p className="text-xs font-medium tracking-wide text-amber uppercase">
           {course.sourcePlatform ?? t("catalog.label")}
         </p>
-        <h2 className="mt-1 text-xl font-semibold text-navy">{course.title}</h2>
+        <h2 className="mt-1 text-xl font-semibold text-navy">{translateContent(course.title)}</h2>
         {course.description ? (
-          <p className="mt-2 text-sm leading-relaxed text-slate-600">{course.description}</p>
+          <p className="mt-2 text-sm leading-relaxed text-slate-600">
+            {translateContent(course.description)}
+          </p>
         ) : null}
       </div>
 

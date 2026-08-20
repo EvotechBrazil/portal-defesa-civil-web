@@ -7,7 +7,7 @@ import { useI18n } from "@/i18n/i18n-provider";
 import { useCoursePage } from "../hooks/use-course-page";
 
 export function ContentPageView() {
-  const { t } = useI18n();
+  const { t, translateContent } = useI18n();
   const params = useParams<{ slug: string; pageSlug: string }>();
   const slug = params.slug ?? "";
   const pageSlug = params.pageSlug ?? "";
@@ -25,8 +25,8 @@ export function ContentPageView() {
       {isError ? <p className="mt-4 text-red-600">{t("course.pageNotFound")}</p> : null}
       {page ? (
         <>
-          <h1 className="mt-3 text-2xl font-semibold text-navy">{page.title}</h1>
-          <MarkdownView className="mt-6" markdown={page.bodyMd} />
+          <h1 className="mt-3 text-2xl font-semibold text-navy">{translateContent(page.title)}</h1>
+          <MarkdownView className="mt-6" markdown={translateContent(page.bodyMd)} />
         </>
       ) : null}
     </article>

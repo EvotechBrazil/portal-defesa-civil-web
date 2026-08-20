@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { MarkdownView } from "@/components/shared/markdown-view";
+import { useI18n } from "@/i18n/i18n-provider";
 import { cn } from "@/lib/utils";
 import type { Question, QuestionBankMode } from "../types/questions.types";
 
@@ -12,6 +13,7 @@ export interface QuestionItemProps {
 }
 
 export function QuestionItem({ question, index, mode }: QuestionItemProps) {
+  const { translateContent } = useI18n();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const isAnswerKey = mode === "answer-key";
   const hasAnswered = isAnswerKey || selectedId !== null;
@@ -20,10 +22,10 @@ export function QuestionItem({ question, index, mode }: QuestionItemProps) {
     <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
       <p className="text-xs tracking-wide text-slate-500 uppercase">
         {question.moduleCode} · Quiz {question.quizCode}
-        {question.sourceRef ? ` · ${question.sourceRef}` : ""}
+        {question.sourceRef ? ` · ${translateContent(question.sourceRef)}` : ""}
       </p>
       <h2 className="mt-2 text-base font-medium text-navy">
-        {index}. {question.stem}
+        {index}. {translateContent(question.stem)}
       </h2>
       <ul className="mt-4 space-y-2">
         {question.options.map((option) => {
@@ -47,7 +49,7 @@ export function QuestionItem({ question, index, mode }: QuestionItemProps) {
                 <span className="mr-2 font-semibold">
                   {String.fromCharCode(65 + option.ord)}.
                 </span>
-                <span>{option.text}</span>
+                <span>{translateContent(option.text)}</span>
               </button>
             </li>
           );
@@ -55,7 +57,7 @@ export function QuestionItem({ question, index, mode }: QuestionItemProps) {
       </ul>
       {hasAnswered && question.explanationMd ? (
         <div className="mt-4 rounded-lg bg-slate-50 px-3 py-2 text-sm">
-          <MarkdownView markdown={question.explanationMd} />
+          <MarkdownView markdown={translateContent(question.explanationMd)} />
         </div>
       ) : null}
     </article>

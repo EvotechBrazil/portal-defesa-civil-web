@@ -5,7 +5,7 @@ import { useI18n } from "@/i18n/i18n-provider";
 import type { ModuleAccuracy } from "../types/stats.types";
 
 export function ModuleAccuracyHeat({ modules }: { modules: ModuleAccuracy[] }) {
-  const { t } = useI18n();
+  const { t, translateContent } = useI18n();
   if (modules.length === 0) {
     return (
       <Card>
@@ -28,7 +28,9 @@ export function ModuleAccuracyHeat({ modules }: { modules: ModuleAccuracy[] }) {
             className={`rounded-lg border p-3 ${heatClass(module.accuracyPct, module.attempts)}`}
           >
             <p className="text-xs font-semibold uppercase tracking-wide">{module.code}</p>
-            <p className="mt-1 line-clamp-2 text-sm font-medium">{module.title}</p>
+            <p className="mt-1 line-clamp-2 text-sm font-medium">
+              {translateContent(module.title)}
+            </p>
             <p className="mt-3 text-2xl font-semibold tabular-nums">
               {module.attempts === 0 ? "—" : `${module.accuracyPct}%`}
             </p>

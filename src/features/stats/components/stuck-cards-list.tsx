@@ -6,7 +6,7 @@ import { useI18n } from "@/i18n/i18n-provider";
 import type { StuckCard } from "../types/stats.types";
 
 export function StuckCardsList({ cards }: { cards: StuckCard[] }) {
-  const { formatDate, t } = useI18n();
+  const { formatDate, t, translateContent } = useI18n();
   return (
     <Card>
       <div className="flex items-start justify-between gap-3">
@@ -34,7 +34,7 @@ export function StuckCardsList({ cards }: { cards: StuckCard[] }) {
               <p className="text-sm font-semibold text-navy">
                 {card.code}
                 <span className="ml-2 font-normal text-slate-700">
-                  {previewMarkdown(card.frontMd)}
+                  {previewMarkdown(translateContent(card.frontMd))}
                 </span>
               </p>
               <p className="mt-1 text-xs text-slate-500">
