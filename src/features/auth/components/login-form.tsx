@@ -3,13 +3,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { Banner } from "@/components/ui/banner";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useI18n } from "@/i18n/i18n-provider";
 import { useLogin } from "../hooks/use-login";
 import { loginSchema, type LoginFormValues } from "../schemas/login.schema";
-export function LoginForm() {
+
+export function LoginForm({ registered = false }: { registered?: boolean }) {
   const { t } = useI18n();
   const login = useLogin();
   const form = useForm<LoginFormValues>({
@@ -25,6 +27,11 @@ export function LoginForm() {
     <Card>
       <h1 className="text-2xl font-semibold text-paper">{t("auth.signIn.title")}</h1>
       <p className="mt-1 text-sm text-mist">{t("auth.signIn.description")}</p>
+      {registered ? (
+        <Banner tone="ok" className="mt-4">
+          {t("auth.signIn.registered")}
+        </Banner>
+      ) : null}
 
       <form className="mt-6 space-y-4" onSubmit={form.handleSubmit(handleSubmit)} noValidate>
         <div className="space-y-1">
