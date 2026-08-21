@@ -41,10 +41,10 @@ export const CONTENT_BASES: ContentBase[] = [
   },
   {
     id: "aula-4",
-    courseSlug: null,
+    courseSlug: "aula-4-primeiros-socorros",
     title: "Aula 4",
-    subtitle: "Quinta 20/08 · 20h",
-    status: "soon",
+    subtitle: "Primeiros socorros · quinta 20/08",
+    status: "open",
   },
 ];
 
