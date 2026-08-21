@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/ui/password-input";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar } from "@/components/ui/avatar";
 import { useI18n } from "@/i18n/i18n-provider";
@@ -60,7 +61,6 @@ export function RegisterForm() {
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [registerPack, setRegisterPack] = useState<ManadaView | null>(null);
   const [requestPack, setRequestPack] = useState<ManadaView | null>(null);
-  const [showPassword, setShowPassword] = useState(false);
 
   const check = useCheckWhatsapp();
   const registerAccount = useRegister();
@@ -125,7 +125,6 @@ export function RegisterForm() {
     setPhotoWarning(false);
     setRegisterPack(null);
     setRequestPack(null);
-    setShowPassword(false);
     gateForm.reset();
     registerForm.reset();
     requestForm.reset();
@@ -380,26 +379,20 @@ export function RegisterForm() {
                 <Input id="confirmEmail" type="email" autoComplete="off" autoCapitalize="none" autoCorrect="off" {...registerForm.register("confirmEmail")} />
               </Field>
               <Field id="password" label={t("auth.password")} error={err(registerForm, "password", t)}>
-                <Input
+                <PasswordInput
                   id="password"
-                  type={showPassword ? "text" : "password"}
                   autoComplete="new-password"
+                  showLabel={t("auth.showPassword")}
+                  hideLabel={t("auth.hidePassword")}
                   {...registerForm.register("password")}
                 />
-                <button
-                  type="button"
-                  className="text-sm font-medium text-flare-ink underline"
-                  aria-pressed={showPassword}
-                  onClick={() => setShowPassword((current) => !current)}
-                >
-                  {showPassword ? t("auth.hidePassword") : t("auth.showPassword")}
-                </button>
               </Field>
               <Field id="confirmPassword" label={t("auth.confirmPassword")} error={err(registerForm, "confirmPassword", t)}>
-                <Input
+                <PasswordInput
                   id="confirmPassword"
-                  type={showPassword ? "text" : "password"}
                   autoComplete="new-password"
+                  showLabel={t("auth.showPassword")}
+                  hideLabel={t("auth.hidePassword")}
                   {...registerForm.register("confirmPassword")}
                 />
               </Field>

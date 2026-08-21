@@ -1,7 +1,10 @@
+import { isPlausibleWhatsapp } from "../lib/whatsapp-rules";
 import { z } from "zod";
 
 export const checkWhatsappSchema = z.object({
-  whatsapp: z.string().regex(/^\d{8,15}$/, "validation.whatsapp"),
+  whatsapp: z
+    .string()
+    .refine(isPlausibleWhatsapp, "validation.whatsappImplausivel"),
 });
 
 export type CheckWhatsappFormValues = z.infer<typeof checkWhatsappSchema>;
