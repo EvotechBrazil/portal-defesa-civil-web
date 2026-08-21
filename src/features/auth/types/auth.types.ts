@@ -31,6 +31,7 @@ export interface RegisterResult {
   id: string;
   email: string;
   name: string;
+  emailVerified: boolean;
 }
 
 export interface AccessRequestInput {

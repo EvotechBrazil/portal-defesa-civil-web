@@ -10,7 +10,14 @@ export function useRegister() {
 
   return useMutation({
     mutationFn: (input: RegisterInput) => registerAccount(input),
-    onSuccess: (_data, variables) => {
+    onSuccess: (data, variables) => {
+      // Quando a conta ja nasce verificada, nenhum e-mail de verificacao foi
+      // enviado — mandar para a tela de token seria pedir um codigo que nunca
+      // foi gerado. So vai para /verificar-email quem tem o que provar.
+      if (data.emailVerified) {
+        router.push("/login?cadastro=ok");
+        return;
+      }
       const params = new URLSearchParams({ email: variables.email });
       router.push(`/verificar-email?${params.toString()}`);
     },
