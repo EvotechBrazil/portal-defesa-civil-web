@@ -51,13 +51,19 @@ export function RoleChangeLog() {
                   </td>
                   <td className="px-4 py-3 text-paper">{row.target.name}</td>
                   <td className="px-4 py-3">
-                    <span className="inline-flex items-center gap-2">
-                      <RoleBadge role={row.fromRole} />
-                      <span aria-hidden className="text-mist">
-                        &rarr;
+                    {row.fromRole && row.toRole ? (
+                      <span className="inline-flex items-center gap-2">
+                        <RoleBadge role={row.fromRole} />
+                        <span aria-hidden className="text-mist">
+                          &rarr;
+                        </span>
+                        <RoleBadge role={row.toRole} />
                       </span>
-                      <RoleBadge role={row.toRole} />
-                    </span>
+                    ) : (
+                      <span className="text-paper">
+                        {t(`admin.audit.event.${row.event}`)}
+                      </span>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-mist">{row.actor.name}</td>
                 </tr>

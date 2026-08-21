@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useAuthUser } from "@/features/auth/hooks/use-auth-user";
 import { getApiErrorMessage } from "@/features/auth/services/get-api-error-message";
 import { useI18n } from "@/i18n/i18n-provider";
-import { hasAtLeast } from "@/lib/authz";
+import { canManageRole, hasAtLeast } from "@/lib/authz";
 import type { Role } from "@/types/api.types";
 import { useAdminUsers, useChangeUserRole } from "../hooks/use-admin-users";
 import { PasswordResetAction } from "./password-reset-action";
@@ -121,16 +121,20 @@ export function AdminUsersPage() {
                     {canChangeRoles && user ? (
                       row.id === user.id ? (
                         <span className="text-xs text-mist">{t("admin.users.itsYou")}</span>
+                      ) : canManageRole(user.role, row.role) ? (
+                        <div className="flex flex-col gap-2">
+                          <UserRoleSelect
+                            actorRole={user.role}
+                            targetRole={row.role}
+                            disabled={changeRole.isPending}
+                            onConfirm={(role) => changeRole.mutate({ id: row.id, role })}
+                          />
+                          <PasswordResetAction userId={row.id} userName={row.name} />
+                        </div>
                       ) : (
-                        <UserRoleSelect
-                          actorRole={user.role}
-                          targetRole={row.role}
-                          disabled={changeRole.isPending}
-                          onConfirm={(role) => changeRole.mutate({ id: row.id, role })}
-                        />
+                        <span className="text-xs text-mist">{t("admin.users.notManageable")}</span>
                       )
                     ) : null}
-                    <PasswordResetAction userId={row.id} userName={row.name} />
                   </td>
                 </tr>
               ))}

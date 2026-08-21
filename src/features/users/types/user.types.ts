@@ -13,10 +13,11 @@ export interface AdminUserView {
 
 export interface RoleChangeView {
   id: string;
+  event: string;
   actor: { id: string; name: string };
   target: { id: string; name: string };
-  fromRole: Role;
-  toRole: Role;
+  fromRole: Role | null;
+  toRole: Role | null;
   createdAt: string;
 }
 
