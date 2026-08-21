@@ -62,6 +62,7 @@ const CardFace = memo(function CardFace({
   const showArt = isBack && art;
   return (
     <div className={cn("flashcard-face", isBack && "flashcard-back")}>
+      <div className="flashcard-face-clip">
       {showArt ? (
         <Image
           src={art.src}
@@ -119,6 +120,7 @@ const CardFace = memo(function CardFace({
           </span>
         </>
       ) : null}
+      </div>
     </div>
   );
 });
@@ -169,7 +171,7 @@ export function Flashcard({
     if (!drag || !overlay) {
       return;
     }
-    drag.style.transform = `rotateZ(${dx / 28}deg) translateX(${dx}px)`;
+    drag.style.transform = `translate3d(${dx}px, 0, 0) rotateZ(${dx / 28}deg)`;
 
     const t = Math.max(-1, Math.min(1, dx / SWIPE_PX));
     const strength = Math.abs(t);
@@ -289,9 +291,9 @@ export function Flashcard({
     flying.current = true;
     if (drag) {
       drag.style.transition = `transform ${FLY_MS}ms ease-out, opacity ${FLY_MS}ms ease-out`;
-      drag.style.transform = `rotateZ(${side === "left" ? -18 : 18}deg) translateX(${
-        side === "left" ? -140 : 140
-      }%)`;
+      drag.style.transform = `translate3d(${
+        side === "left" ? "-140%" : "140%"
+      }, 0, 0) rotateZ(${side === "left" ? -18 : 18}deg)`;
       drag.style.opacity = "0";
     }
     flyTimer.current = setTimeout(() => onRate(SWIPE_RATING[side]), FLY_MS);

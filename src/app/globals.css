@@ -215,17 +215,22 @@ a,
 
 .flashcard-scene {
   perspective: 1400px;
+  -webkit-perspective: 1400px;
   min-height: 320px;
   touch-action: pan-y;
 }
 
 /* Camada do arrasto: fica FORA do giro para que translateX siga o dedo
-   mesmo com a carta virada (rotateY(180deg) espelha o eixo X de dentro). */
+   mesmo com a carta virada (rotateY(180deg) espelha o eixo X de dentro).
+   Transform 3D no repouso: um rotateZ/translateX 2D achatava o preserve-3d
+   e as duas faces pintavam juntas (pergunta espelhada em cima da resposta). */
 .flashcard-drag {
   position: relative;
   width: 100%;
   min-height: 320px;
+  transform: translate3d(0, 0, 0);
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition:
     transform var(--dur-3) var(--ease),
     opacity var(--dur-3) ease;
@@ -235,7 +240,9 @@ a,
   position: relative;
   width: 100%;
   min-height: 320px;
+  transform: rotateY(0deg);
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: transform var(--dur-3) var(--ease);
 }
 
@@ -248,17 +255,31 @@ a,
   inset: 0;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  /* overflow:hidden no mesmo nó do backface-visibility quebra o esconder
+     da face de trás no WebKit (Safari/iOS e Chrome no celular). */
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  transform: rotateY(0deg) translateZ(0.5px);
+  -webkit-transform: rotateY(0deg) translateZ(0.5px);
   border-radius: var(--r-4);
   border: 1px solid var(--line);
   background: var(--panel);
 }
 
 .flashcard-back {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(0.5px);
+  -webkit-transform: rotateY(180deg) translateZ(0.5px);
   border-color: var(--flare);
+}
+
+.flashcard-face-clip {
+  position: relative;
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: inherit;
 }
 
 /* Parágrafo que é só ênfase é legenda, não título. É o caso da referência de
